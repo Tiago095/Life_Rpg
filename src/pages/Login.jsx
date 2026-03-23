@@ -92,7 +92,7 @@ export default function Login() {
           </div>
 
           {/* Submit */}
-          <button className="lo-submit-btn">
+          <button className="lo-submit-btn" onClick={() => navigate('/Dashboard')}>
             Sync & Enter
             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>bolt</span>
           </button>

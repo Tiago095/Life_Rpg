@@ -1,0 +1,67 @@
+/* ===== TEMA PADRÃO: Cyberpunk Blue ===== */
+:root {
+  --color-primary:        #3b82f6;
+  --color-primary-dark:   #2563eb;
+  --color-primary-glow:   rgba(59, 130, 246, 0.15);
+  --color-primary-subtle: rgba(59, 130, 246, 0.08);
+  --color-bg:             #0b0f19;
+  --color-bg-deep:        #080d18;
+  --color-bg-card:        #111827;
+  --color-bg-card-deep:   #0f172a;
+  --color-border:         #1f2937;
+  --color-border-muted:   #1e293b;
+  --color-text:           #f1f5f9;
+  --color-text-muted:     #64748b;
+  --color-text-dim:       #475569;
+}
+
+/* ===== NEON GREEN ===== */
+.theme-neon-green {
+  --color-primary:        #22c55e;
+  --color-primary-dark:   #16a34a;
+  --color-primary-glow:   rgba(34, 197, 94, 0.15);
+  --color-primary-subtle: rgba(34, 197, 94, 0.08);
+  --color-bg:             #071510;
+  --color-bg-deep:        #040e09;
+  --color-bg-card:        #0d1f18;
+  --color-bg-card-deep:   #0a1a13;
+  --color-border:         #14532d;
+  --color-border-muted:   #0f3d22;
+  --color-text:           #f0fdf4;
+  --color-text-muted:     #4ade80;
+  --color-text-dim:       #166534;
+}
+
+/* ===== BLOOD RED ===== */
+.theme-blood-red {
+  --color-primary:        #ef4444;
+  --color-primary-dark:   #dc2626;
+  --color-primary-glow:   rgba(239, 68, 68, 0.15);
+  --color-primary-subtle: rgba(239, 68, 68, 0.08);
+  --color-bg:             #0f0a0a;
+  --color-bg-deep:        #0a0606;
+  --color-bg-card:        #1c0f0f;
+  --color-bg-card-deep:   #170b0b;
+  --color-border:         #450a0a;
+  --color-border-muted:   #3b0808;
+  --color-text:           #fef2f2;
+  --color-text-muted:     #f87171;
+  --color-text-dim:       #7f1d1d;
+}
+
+/* ===== VOID BLACK ===== */
+.theme-void-black {
+  --color-primary:        #a855f7;
+  --color-primary-dark:   #9333ea;
+  --color-primary-glow:   rgba(168, 85, 247, 0.15);
+  --color-primary-subtle: rgba(168, 85, 247, 0.08);
+  --color-bg:             #050505;
+  --color-bg-deep:        #020202;
+  --color-bg-card:        #0f0f0f;
+  --color-bg-card-deep:   #0a0a0a;
+  --color-border:         #1a1a1a;
+  --color-border-muted:   #141414;
+  --color-text:           #fafafa;
+  --color-text-muted:     #a3a3a3;
+  --color-text-dim:       #525252;
+}

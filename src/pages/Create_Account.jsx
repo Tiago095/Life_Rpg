@@ -104,7 +104,7 @@ export default function Create_Account() {
           </div>
 
           {/* Submit */}
-          <button className="ca-submit-btn">
+          <button className="ca-submit-btn" onClick={() => navigate('/Preferences')}>
             Begin Your Journey
             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>bolt</span>
           </button>

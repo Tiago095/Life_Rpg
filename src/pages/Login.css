@@ -278,12 +278,12 @@ body {
   transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
-.submit-btn:hover {
+.lo-submit-btn:hover {
   background: #1a6aff;
   box-shadow: 0px 15px 25px -4px rgba(13, 89, 242, 0.45);
 }
 
-.submit-btn:active {
+.lo-submit-btn:active {
   transform: translateY(1px);
 }
 

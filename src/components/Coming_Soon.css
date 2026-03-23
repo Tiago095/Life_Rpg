@@ -1,0 +1,228 @@
+/* ===== LAYOUT ===== */
+.cs-layout {
+  display: flex;
+  height: 100vh;
+  background-color: var(--color-bg);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.cs-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== BACKGROUND ===== */
+.cs-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--color-primary-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-primary-subtle) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cs-bg-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--color-primary-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== CONTENT ===== */
+.cs-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  position: relative;
+  z-index: 1;
+  padding: 40px;
+}
+
+/* ===== BADGE ===== */
+.cs-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  animation: fadeSlideDown 0.5s ease forwards;
+  opacity: 0;
+}
+
+.cs-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ===== ICON ===== */
+.cs-icon-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeSlideUp 0.5s ease 0.1s forwards;
+  opacity: 0;
+}
+
+.cs-icon-outer {
+  width: 130px;
+  height: 130px;
+  border: 1px solid var(--color-primary-glow);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-subtle);
+  transform: rotate(0deg);
+  animation: rotateSlow 12s linear infinite;
+}
+
+.cs-icon-inner {
+  width: 90px;
+  height: 90px;
+  border: 1px solid var(--color-primary-glow);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-glow);
+  animation: rotateSlow 12s linear infinite reverse;
+}
+
+.cs-icon-box {
+  width: 60px;
+  height: 60px;
+  background: var(--color-primary-glow);
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-icon {
+  font-size: 28px !important;
+  color: var(--color-primary);
+  font-variation-settings: 'FILL' 0;
+}
+
+.cs-icon-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--color-primary-subtle);
+  pointer-events: none;
+}
+
+.cs-ring-1 {
+  width: 180px;
+  height: 180px;
+  animation: ringPulse 3s ease infinite;
+}
+
+.cs-ring-2 {
+  width: 220px;
+  height: 220px;
+  animation: ringPulse 3s ease 0.5s infinite;
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes ringPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.08; transform: scale(1.05); }
+}
+
+/* ===== TITLE ===== */
+.cs-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  color: var(--color-text);
+  letter-spacing: 4px;
+  text-align: center;
+  margin: 0;
+  animation: fadeSlideUp 0.5s ease 0.2s forwards;
+  opacity: 0;
+}
+
+/* ===== DESC ===== */
+.cs-desc {
+  font-size: 15px;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.7;
+  max-width: 420px;
+  margin: 0;
+  animation: fadeSlideUp 0.5s ease 0.3s forwards;
+  opacity: 0;
+}
+
+.cs-desc-accent { color: var(--color-primary); font-weight: 600; }
+
+/* ===== FOOTER ===== */
+.cs-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  border-top: 1px solid var(--color-border);
+  animation: fadeSlideUp 0.5s ease 0.4s forwards;
+  opacity: 0;
+}
+
+.cs-footer-text { font-size: 10px; font-family: monospace; color: var(--color-text-dim); letter-spacing: 1px; text-transform: uppercase; }
+.cs-footer-links { display: flex; gap: 24px; }
+
+.cs-footer-link {
+  font-size: 10px;
+  font-family: monospace;
+  color: var(--color-text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.cs-footer-link:hover { color: var(--color-primary); }
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

@@ -275,12 +275,12 @@ body {
   margin-top: 16px;
 }
 
-.submit-btn:hover {
+.ca-submit-btn:hover {
   background: #1a6aff;
   box-shadow: 0px 15px 25px -4px rgba(13, 89, 242, 0.45);
 }
 
-.submit-btn:active {
+.ca-submit-btn:active {
   transform: translateY(1px);
 }
 
