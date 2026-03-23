@@ -8,7 +8,7 @@
   overflow: hidden;
 }
 
-.st-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.st-main { position:relative; flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
 .st-bg-grid {
   position: absolute;

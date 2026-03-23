@@ -63,7 +63,7 @@ export default function Settings() {
               <div className="st-avatar-wrapper">
                 <div className="st-avatar">
                   <img
-                    src="https://i.pravatar.cc/150?img=47"
+                    src="./vite.svg"
                     alt="avatar"
                     className="st-avatar-img"
                   />
