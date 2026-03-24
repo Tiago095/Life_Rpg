@@ -4,7 +4,28 @@ import './Create_Account.css'
 
 export default function Create_Account() {
   const [showPassword, setShowPassword] = useState(false)
+  const [formData, setFormData] = useState({ username: '', email: '', password: '' })
+  const [error, setError] = useState('')
   const navigate = useNavigate()
+
+  const handleSubmit = async () => {
+    setError('')
+
+    const res = await fetch('http://localhost:3000/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      setError(data.error)
+      return
+    }
+
+    navigate('/Preferences')
+  }
 
   return (
     <div className="page-wrapper">
@@ -22,7 +43,6 @@ export default function Create_Account() {
             </div>
           </div>
 
-          {/* Brand */}
           <div className="left-top">
             <div className="brand-row">
               <span className="material-symbols-outlined" style={{ color: '#0D59F2', fontSize: '28px' }}>terminal</span>
@@ -30,7 +50,6 @@ export default function Create_Account() {
             </div>
           </div>
 
-          {/* Bottom text */}
           <div className="left-bottom">
             <h2 className="left-heading">THE WORLD IS YOUR <span className="left-heading-accent">BATTLEFIELD.</span></h2>
             <p className="left-desc">Level up your real-life skills, complete daily missions, and unlock legendary rewards. Your evolution begins here.</p>
@@ -40,7 +59,6 @@ export default function Create_Account() {
         {/* RIGHT SIDE */}
         <div className="right-side">
 
-          {/* Form Header */}
           <div className="form-header">
             <h1 className="form-title">
               Create Your <span className="form-title-accent">Operador</span> Profile
@@ -48,7 +66,6 @@ export default function Create_Account() {
             <p className="form-subtitle">Initialize your neural link to begin the simulation.</p>
           </div>
 
-          {/* Fields */}
           <div className="form-fields">
 
             {/* Username */}
@@ -61,6 +78,8 @@ export default function Create_Account() {
                 className="field-input"
                 type="text"
                 placeholder="Enter unique identifier"
+                value={formData.username}
+                onChange={e => setFormData({ ...formData, username: e.target.value })}
               />
             </div>
 
@@ -74,6 +93,8 @@ export default function Create_Account() {
                 className="field-input"
                 type="email"
                 placeholder="name@network.com"
+                value={formData.email}
+                onChange={e => setFormData({ ...formData, email: e.target.value })}
               />
             </div>
 
@@ -88,6 +109,8 @@ export default function Create_Account() {
                   className="field-input"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Secure access sequence"
+                  value={formData.password}
+                  onChange={e => setFormData({ ...formData, password: e.target.value })}
                 />
                 <button
                   className="toggle-password"
@@ -103,13 +126,15 @@ export default function Create_Account() {
 
           </div>
 
+          {/* Erro */}
+          {error && <p className="error-message">{error}</p>}
+
           {/* Submit */}
-          <button className="ca-submit-btn" onClick={() => navigate('/Preferences')}>
+          <button className="ca-submit-btn" onClick={handleSubmit}>
             Begin Your Journey
             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>bolt</span>
           </button>
 
-          {/* Footer */}
           <div className="ca-footer-links">
             <div className="footer-text-row">
               <span className="footer-text">Already registered in the system?</span>
