@@ -4,7 +4,7 @@ import './Choose_Preferences.css'
 
 const attributes = [
   {
-    id: 'exercise',
+    id: 1,
     category: 'STRENGTH',
     categoryIcon: 'fitness_center',
     title: 'Exercise',
@@ -14,7 +14,7 @@ const attributes = [
     active: false,
   },
   {
-    id: 'studies',
+    id: 2,
     category: 'INTELLECT',
     categoryIcon: 'school',
     title: 'Studies',
@@ -24,7 +24,7 @@ const attributes = [
     active: false,
   },
   {
-    id: 'organization',
+    id: 3,
     category: 'STRUCTURE',
     categoryIcon: 'grid_view',
     title: 'Organization',
@@ -34,7 +34,7 @@ const attributes = [
     active: false,
   },
   {
-    id: 'social',
+    id: 4,
     category: 'CHARISMA',
     categoryIcon: 'groups',
     title: 'Social',
@@ -44,7 +44,7 @@ const attributes = [
     active: false,
   },
   {
-    id: 'mindfulness',
+    id: 5,
     category: 'FOCUS',
     categoryIcon: 'self_improvement',
     title: 'Mindfulness',
@@ -54,7 +54,7 @@ const attributes = [
     active: false,
   },
   {
-    id: 'creativity',
+    id: 6,
     category: 'INNOVATION',
     categoryIcon: 'lightbulb',
     title: 'Creativity',
@@ -64,7 +64,7 @@ const attributes = [
     active: false,
   },
   {
-    id: 'finance',
+    id: 7,
     category: 'RESOURCE MGMT',
     categoryIcon: 'account_balance',
     title: 'Finance',
@@ -74,7 +74,7 @@ const attributes = [
     active: false,
   },
   {
-    id: 'health',
+    id: 8,
     category: 'SUSTAINABILITY',
     categoryIcon: 'favorite',
     title: 'Health',
@@ -84,7 +84,7 @@ const attributes = [
     active: false,
   },
   {
-    id: 'technical',
+    id: 9,
     category: 'HARD SKILLS',
     categoryIcon: 'code',
     title: 'Technical',
@@ -100,6 +100,7 @@ export default function AttributeSelection() {
   const [toggles, setToggles] = useState(
     Object.fromEntries(attributes.map(a => [a.id, a.active]))
   )
+  const [error, setError] = useState('')  // ✅ novo
 
   const handleToggle = (id) => {
     setToggles(prev => ({ ...prev, [id]: !prev[id] }))
@@ -109,8 +110,33 @@ export default function AttributeSelection() {
     setToggles(Object.fromEntries(attributes.map(a => [a.id, a.active])))
   }
 
-  const handleConfirm = () => {
-    navigate('/Sidebar')
+// ✅ Substituído: agora valida e envia para o backend
+  const handleConfirm = async () => {
+    setError('')
+    const selectedIds = Object.entries(toggles)
+      .filter(([, active]) => active)
+      .map(([id]) => id)
+
+    if (selectedIds.length < 3) {
+      setError('Tens de selecionar pelo menos 3 skills.')
+      return
+    }
+
+    const res = await fetch('http://localhost:3000/api/preferences', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',  // envia o cookie de sessão
+      body: JSON.stringify({ skillIds: selectedIds })
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      setError(data.error)
+      return
+    }
+
+    navigate('/Dashboard')
   }
 
   const activeCount = Object.values(toggles).filter(Boolean).length
@@ -197,6 +223,12 @@ export default function AttributeSelection() {
               </div>
             ))}
           </div>
+
+          {error && (
+        <p style={{ color: '#ef4444', textAlign: 'center', marginBottom: '1rem' }}>
+          {error}
+        </p>
+      )}
 
           {/* BOTTOM BAR */}
           <div className="as-bottom-bar">
