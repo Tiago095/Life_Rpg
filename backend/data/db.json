@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": "99088202-ac62-4743-bf5d-5467c7c99c2c",
+      "username": "IThrapy",
+      "email": "afmarques122@gmail.com",
+      "password": "$2b$10$SJ2UuU9Hew9gUszaQ6LkcO4JkC5/XuxCh4Cfu7TyYS5W1JdaolkbO",
+      "level": 1,
+      "xp": 0,
+      "maxXp": 1000
+    }
+  ]
+}

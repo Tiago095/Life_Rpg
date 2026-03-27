@@ -1,11 +1,59 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useUser } from '../context/UserContext'
 import './Login.css'
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false)
-  const navigate = useNavigate()
 
+  const [showPassword, setShowPassword] = useState(false)
+  const [email, setEmail]               = useState('')
+  const [password, setPassword]         = useState('')
+  const [error, setError]               = useState('')
+  const [loading, setLoading]           = useState(false)
+  const navigate = useNavigate()
+  const { updateUser } = useUser()
+
+  const handleLogin = async () => {
+    setError('')
+    setLoading(true)
+
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        sessionStorage.setItem('userId',   data.user.id)
+        sessionStorage.setItem('username', data.user.username)
+        sessionStorage.setItem('email',    data.user.email)
+        sessionStorage.setItem('level',    data.user.level)
+        sessionStorage.setItem('xp',       data.user.xp)
+        sessionStorage.setItem('maxxp',    data.user.maxxp)
+
+         updateUser({
+          id: data.user.id,
+          username: data.user.username,
+          email: data.user.email,
+          level: data.user.level,
+          xp: data.user.xp,
+          maxXp: data.user.maxXp
+        })
+        
+        navigate('/Dashboard')
+      } 
+      else {
+        setError(data.message)
+      }
+    } catch (err) {
+      setError('Error connecting to the server.')
+    } finally {
+      setLoading(false)
+    }
+  }
   return (
     <div className="page-wrapper">
       <div className="bg-grid" />
@@ -57,6 +105,8 @@ export default function Login() {
                 className="field-input"
                 type="email"
                 placeholder="email@simulation.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -71,6 +121,8 @@ export default function Login() {
                   className="field-input"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
                   className="toggle-password"
@@ -91,9 +143,15 @@ export default function Login() {
             <a className="forgot-link" href="#">Forgot your encryption key?</a>
           </div>
 
+          {error && <p className="lo-error">{error}</p>}
+
           {/* Submit */}
-          <button className="lo-submit-btn" onClick={() => navigate('/Dashboard')}>
-            Sync & Enter
+          <button
+            className="lo-submit-btn"
+            onClick={handleLogin}
+            disabled={loading}
+          >
+            {loading ? 'Syncing...' : 'Sync & Enter'}
             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>bolt</span>
           </button>
 

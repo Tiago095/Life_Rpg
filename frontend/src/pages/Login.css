@@ -392,3 +392,13 @@ body {
   animation: fadeSlideUp 0.5s ease 0.4s forwards;
   opacity: 0;
 }
+
+.lo-error {
+  color: #ef4444;
+  font-size: 13px;
+  text-align: center;
+  padding: 8px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 6px;
+}
