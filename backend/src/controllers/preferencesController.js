@@ -18,7 +18,7 @@ export const savePreferences = async (req, res) => {
       return res.status(400).json({ error: 'Uma ou mais skills são inválidas.' })
     }
 
-    const user = db.data.users.find(u => u.id === req.session.userId)
+    const user = db.data.users.find(u => u.id === req.userId)
     if (!user) {
       return res.status(404).json({ error: 'Utilizador não encontrado.' })
     }

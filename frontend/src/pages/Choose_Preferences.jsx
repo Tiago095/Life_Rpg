@@ -110,34 +110,38 @@ export default function AttributeSelection() {
     setToggles(Object.fromEntries(attributes.map(a => [a.id, a.active])))
   }
 
-// ✅ Substituído: agora valida e envia para o backend
-  const handleConfirm = async () => {
-    setError('')
-    const selectedIds = Object.entries(toggles)
-      .filter(([, active]) => active)
-      .map(([id]) => id)
+const handleConfirm = async () => {
+  setError('')
+  const selectedIds = Object.entries(toggles)
+    .filter(([, active]) => active)
+    .map(([id]) => id)
 
-    if (selectedIds.length < 3) {
-      setError('Tens de selecionar pelo menos 3 skills.')
-      return
-    }
-
-    const res = await fetch('http://localhost:3000/api/preferences', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',  // envia o cookie de sessão
-      body: JSON.stringify({ skillIds: selectedIds })
-    })
-
-    const data = await res.json()
-
-    if (!res.ok) {
-      setError(data.error)
-      return
-    }
-
-    navigate('/Dashboard')
+  if (selectedIds.length < 3) {
+    setError('Tens de selecionar pelo menos 3 skills.')
+    return
   }
+
+  const token = localStorage.getItem('token') // busca o token
+
+  const res = await fetch('http://localhost:3000/api/preferences', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}` // envia no header
+    },
+    // Remove credentials: 'include'
+    body: JSON.stringify({ skillIds: selectedIds })
+  })
+
+  const data = await res.json()
+
+  if (!res.ok) {
+    setError(data.error)
+    return
+  }
+
+  navigate('/Dashboard')
+}
 
   const activeCount = Object.values(toggles).filter(Boolean).length
 

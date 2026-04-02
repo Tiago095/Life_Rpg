@@ -8,25 +8,26 @@ export default function Create_Account() {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = async () => {
-    setError('')
+const handleSubmit = async () => {
+  setError('')
 
-    const res = await fetch('http://localhost:3000/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify(formData)
-    })
+  const res = await fetch('http://localhost:3000/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    // Remove credentials: 'include'
+    body: JSON.stringify(formData)
+  })
 
-    const data = await res.json()
+  const data = await res.json()
 
-    if (!res.ok) {
-      setError(data.error)
-      return
-    }
-
-    navigate('/Preferences')
+  if (!res.ok) {
+    setError(data.error)
+    return
   }
+
+  localStorage.setItem('token', data.token) // guarda o token
+  navigate('/Preferences')
+}
 
   return (
     <div className="page-wrapper">

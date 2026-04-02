@@ -1,5 +1,8 @@
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import db from '../db.js'
+
+const JWT_SECRET = 'liferpg-secret-key' // usa process.env.JWT_SECRET em produção
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body
@@ -32,12 +35,7 @@ export const register = async (req, res) => {
   db.data.users.push(newUser)
   await db.write()
 
-  req.session.userId = newUser.id
-  req.session.save((err) => {
-    if (err) {
-      return res.status(500).json({ error: 'Erro ao iniciar sessão.' })
-    }
-    const { password: _, ...userSafe } = newUser
-    res.status(201).json({ message: 'Conta criada com sucesso!', user: userSafe })
-  })
+ const token = jwt.sign({ userId: newUser.id }, JWT_SECRET, { expiresIn: '7d' })
+ const { password: _, ...userSafe } = newUser
+  res.status(201).json({ message: 'Conta criada com sucesso!', user: userSafe, token })
 }
