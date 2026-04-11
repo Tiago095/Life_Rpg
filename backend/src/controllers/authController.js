@@ -17,14 +17,18 @@ export const login = async (req, res) => {
     return res.status(400).json({ message: 'Invalid Credentials' })
 
   res.json({
-    message: 'Login successfully',
+    message: 'Login com sucesso',
     user: {
-      id: user.id,
+      id:       user.id,
       username: user.username,
-      email: user.email,
-      level: user.level,
-      xp: user.xp,
-      maxXp: user.maxXp
+      email:    user.email,
+      level:    user.level,
+      xp:       user.xp,
+      maxXp:    user.maxXp,
+      avatar:   user.avatar   || null,
+      language: user.language || 'English [EN-US]',
+      theme:    user.theme    || 'Cyberpunk Blue (Default)',
+      highContrast: user.highContrast ?? false
     }
   })
 }

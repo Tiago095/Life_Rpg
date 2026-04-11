@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Initial_Page from './pages/Initial_Page'
 import Create_Account from './pages/Create_Account'
@@ -10,6 +11,22 @@ import ComingSoon from './components/Coming_Soon'
 import Settings from './pages/Settings'
 
 function App() {
+
+    useEffect(() => {
+    const theme = sessionStorage.getItem('theme')
+    const themeMap = {
+      'Neon Green': 'theme-neon-green',
+      'Blood Red':  'theme-blood-red',
+      'Void Black': 'theme-void-black',
+    }
+    if (theme && themeMap[theme]) {
+      document.body.classList.add(themeMap[theme])
+    }
+    if (sessionStorage.getItem('highContrast') === 'true') {
+      document.body.classList.add('high-contrast')
+    }
+  }, [])
+
   return (
     <BrowserRouter>
       <Routes>
@@ -25,6 +42,7 @@ function App() {
         <Route path="/Trophy"     element={<ComingSoon />} />
         <Route path="/MarketPlace"  element={<ComingSoon />} />
         <Route path="/Settings"   element={<Settings />} />
+        <Route path="/Friends"    element={<ComingSoon />} />
       </Routes>
     </BrowserRouter>
   )

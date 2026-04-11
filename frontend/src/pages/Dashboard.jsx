@@ -2,11 +2,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import './Dashboard.css'
+import { useTranslation } from '../context/UserContext'
 
-// =============================================
-// MOCK DATA — substituir por chamadas à API
-// quando o backend estiver pronto
-// =============================================
 const mockUser = {
   gold: 4250,
   skills: [
@@ -74,6 +71,7 @@ function getCalendarDays(year, month) {
 // =============================================
 export default function Dashboard() {
   const [chatInput, setChatInput] = useState('')
+  const {t} = useTranslation()
 
   // --- data state (swap useState mock → useEffect fetch later) ---
   const [gold,       setGold]       = useState(mockUser.gold)
@@ -123,8 +121,8 @@ export default function Dashboard() {
         {/* HEADER */}
         <div className="db-header">
           <div className="db-header-left">
-            <h1 className="db-title">QUEST JOURNAL</h1>
-            <p className="db-subtitle">Welcome back, Hero! Your next adventure awaits in the digital realm.</p>
+            <h1 className="db-title">{t.questJournal}</h1>
+            <p className="db-subtitle">{t.welcomeBack}</p>
           </div>
           <div className="db-header-right">
             <button className="db-icon-btn" onClick={() => navigate('/MarketPlace')}>
@@ -142,9 +140,9 @@ export default function Dashboard() {
           <div className="db-section-header">
             <div className="db-section-title-row">
               <span className="material-symbols-outlined db-section-icon">pentagon</span>
-              <h2 className="db-section-title">Core Attributes</h2>
+              <h2 className="db-section-title">{t.coreAttributes}</h2>
             </div>
-            <button className="db-view-all" onClick={() => navigate('/Skills')}>VIEW ALL SKILLS</button>
+            <button className="db-view-all" onClick={() => navigate('/Skills')}>{t.viewAllSkills}</button>
           </div>
 
           <div className="db-attributes-grid">
@@ -162,7 +160,7 @@ export default function Dashboard() {
                   </span>
                 </div>
                 <h3 className="db-attribute-label">{attr.name}</h3>
-                <p className="db-attribute-rank">RANK {attr.rank}</p>
+                <p className="db-attribute-rank"> {t.rank} {attr.rank}</p>
               </div>
             ))}
           </div>
@@ -173,7 +171,7 @@ export default function Dashboard() {
           <div className="db-section-header">
             <div className="db-section-title-row">
               <span className="material-symbols-outlined db-section-icon">list_alt</span>
-              <h2 className="db-section-title">Active Quests</h2>
+              <h2 className="db-section-title">{t.activeQuests}</h2>
             </div>
           </div>
 
@@ -198,21 +196,21 @@ export default function Dashboard() {
                   <p className="db-quest-desc">{quest.description}</p>
                 </div>
                 <div className="db-quest-rewards">
-                  <span className="db-rewards-label">REWARDS</span>
+                  <span className="db-rewards-label">{t.rewards}</span>
                   <span className="db-rewards-value">{quest.rewards}</span>
                 </div>
                 <button
                   className="db-embark-btn"
                   style={{ background: quest.tagColor === '#6d28d9' ? '#7c3aed' : '#3b82f6' }}
                 >
-                  EMBARK
+                  {t.embark}
                 </button>
               </div>
             ))}
 
             <button className="db-forge-card" onClick={() => navigate('/Quests')}>
               <span className="material-symbols-outlined db-forge-icon">add_circle</span>
-              <span className="db-forge-label">FORGE NEW QUEST</span>
+              <span className="db-forge-label">{t.forgeNewQuest}</span>
             </button>
           </div>
         </div>
@@ -226,7 +224,7 @@ export default function Dashboard() {
         <div className="db-panel-card">
           <div className="db-panel-header">
             <span className="material-symbols-outlined db-panel-icon">calendar_view_week</span>
-            <h3 className="db-panel-title">WORLD CALENDAR</h3>
+            <h3 className="db-panel-title">{t.worldCalendar}</h3>
           </div>
 
           <div className="db-calendar">
@@ -259,7 +257,7 @@ export default function Dashboard() {
             <div className="db-cal-event">
               <span className="db-cal-event-dot" />
               <div>
-                <p className="db-cal-event-label">MAIN EVENT TODAY</p>
+                <p className="db-cal-event-label">{t.mainEventToday}</p>
                 <p className="db-cal-event-name">Cardio Raid - 18:00 UTC</p>
               </div>
             </div>
@@ -270,7 +268,7 @@ export default function Dashboard() {
         <div className="db-panel-card">
           <div className="db-panel-header">
             <span className="material-symbols-outlined db-panel-icon">group_add</span>
-            <h3 className="db-panel-title">PARTY FINDER</h3>
+            <h3 className="db-panel-title">{t.partyFinder}</h3>
           </div>
           <div className="db-party-body">
             <div className="db-party-avatar">
@@ -279,11 +277,11 @@ export default function Dashboard() {
               </span>
             </div>
             <p className="db-party-text">
-              Adventuring is better with allies. Form a party to share XP bonuses.
+              {t.partyText}
             </p>
-            <button className="db-invite-btn">
+            <button className="db-invite-btn" onClick={() => navigate('/Friends')}>
               <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>share</span>
-              INVITE FRIENDS
+              {t.inviteFriends}
             </button>
           </div>
         </div>
@@ -291,7 +289,7 @@ export default function Dashboard() {
         {/* GLOBAL TAVERN CHAT */}
         <div className="db-panel-card db-chat-card">
           <div className="db-panel-header">
-            <h3 className="db-panel-title">GLOBAL TAVERN CHAT</h3>
+            <h3 className="db-panel-title">{t.globalChat}</h3>
             <span className="db-chat-online" />
           </div>
           <div className="db-chat-messages">
@@ -304,7 +302,7 @@ export default function Dashboard() {
           </div>
           <input
             className="db-chat-input"
-            placeholder="Send message..."
+            placeholder={t.sendMessage}
             value={chatInput}
             onChange={(e) => setChatInput(e.target.value)}
           />

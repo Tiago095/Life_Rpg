@@ -65,3 +65,13 @@
   --color-text-muted:     #a3a3a3;
   --color-text-dim:       #525252;
 }
+
+.high-contrast {
+  --color-border:         color-mix(in srgb, var(--color-primary) 35%, transparent);
+  --color-border-muted:   color-mix(in srgb, var(--color-primary) 20%, transparent);
+  --color-text:           #ffffff;
+  --color-text-muted:     #e2e8f0;
+  --color-text-dim:       #94a3b8;
+  --color-primary-glow:   color-mix(in srgb, var(--color-primary) 30%, transparent);
+  --color-primary-subtle: color-mix(in srgb, var(--color-primary) 15%, transparent);
+}

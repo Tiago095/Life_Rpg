@@ -32,7 +32,11 @@ export default function Login() {
         sessionStorage.setItem('email',    data.user.email)
         sessionStorage.setItem('level',    data.user.level)
         sessionStorage.setItem('xp',       data.user.xp)
-        sessionStorage.setItem('maxxp',    data.user.maxxp)
+        sessionStorage.setItem('maxXp',    data.user.maxXp)
+        sessionStorage.setItem('avatar',   data.user.avatar)
+        sessionStorage.setItem('language', data.user.language || 'English [EN-US]')
+        sessionStorage.setItem('theme',    data.user.theme    || 'Cyberpunk Blue (Default)')
+        sessionStorage.setItem('highContrast', data.user.highContrast)
 
          updateUser({
           id: data.user.id,
@@ -40,8 +44,24 @@ export default function Login() {
           email: data.user.email,
           level: data.user.level,
           xp: data.user.xp,
-          maxXp: data.user.maxXp
+          maxXp: data.user.maxXp,
+          avatar: data.user.avatar,
+          language: sessionStorage.getItem('language') || 'English [EN-US]',
+          theme:    sessionStorage.getItem('theme')    || 'Cyberpunk Blue (Default)',
         })
+
+        const themeMap = {
+          'Neon Green': 'theme-neon-green',
+          'Blood Red':  'theme-blood-red',
+          'Void Black': 'theme-void-black',
+        }
+        const theme = data.user.theme
+        if (theme && themeMap[theme]) {
+          document.body.classList.add(themeMap[theme])
+        }
+        if (data.user.highContrast) {
+          document.body.classList.add('high-contrast')
+        }
         
         navigate('/Dashboard')
       } 
@@ -54,6 +74,7 @@ export default function Login() {
       setLoading(false)
     }
   }
+  
   return (
     <div className="page-wrapper">
       <div className="bg-grid" />
