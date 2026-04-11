@@ -65,6 +65,9 @@ export const translations = {
       CONNECTION_ERROR:    'Error: Connection to the server failed.',
       UNKNOWN_ERROR:       'An unexpected error occurred.',
     },
+    en: 'English [EN-US]',
+    pt: 'Portuguese [PT-PT]',
+    es: 'Spanish [ES]',
 
 
     // QUESTS
@@ -152,6 +155,9 @@ export const translations = {
       CONNECTION_ERROR:    'Erro: Falha na ligação ao servidor.',
       UNKNOWN_ERROR:       'Ocorreu um erro inesperado.',
     },
+    en: 'Inglês [EN-US]',
+    pt: 'Português [PT-PT]',
+    es: 'Espanhol [ES]',
 
     // QUESTS
     questCommandCenter:  'Centro de Comando de Missões',
@@ -236,6 +242,10 @@ export const translations = {
       CONNECTION_ERROR:    'Error: Fallo en la conexión al servidor.',
       UNKNOWN_ERROR:       'Ocurrió un error inesperado.',
     },
+  en: 'Inglés [EN-US]',
+  pt: 'Portugués [PT-PT]',
+  es: 'Español [ES]',
+
 
     questCommandCenter:  'Centro de Comando de Misiones',
     searchQuest:         'Buscar Misión...',

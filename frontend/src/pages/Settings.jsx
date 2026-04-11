@@ -359,9 +359,9 @@ export default function Settings() {
                 <label className="st-label">{t.systemLanguage}</label>
                 <div className="st-select-wrapper">
                   <select className="st-select" value={language} onChange={(e) => setLanguage(e.target.value)}>
-                    <option>English [EN-US]</option>
-                    <option>Portuguese [PT-PT]</option>
-                    <option>Spanish [ES]</option>
+                      <option value="English [EN-US]">{t.en}</option>
+                      <option value="Portuguese [PT-PT]">{t.pt}</option>
+                      <option value="Spanish [ES]">{t.es}</option>  
                   </select>
                   <span className="material-symbols-outlined st-select-icon">expand_more</span>
                 </div>
