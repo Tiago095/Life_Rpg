@@ -1,23 +1,10 @@
 {
   "users": [
     {
-      "id": "466bef3c-60ff-4fb0-917d-4ad1eb2eb217",
+      "id": "10d0f414-a0c4-4d0d-822a-5f6217dbd2e5",
       "username": "Patudo",
       "email": "teste@gmail.com",
-      "password": "$2b$10$78ssOp0PJHXoiKXtDVW8sOG4j20D3jl0xZWQ.HwN.kTYT.QvMnX0S",
-      "level": 1,
-      "xp": 0,
-      "skills": [
-        1,
-        2,
-        3
-      ]
-    },
-    {
-      "id": "769d615a-d389-4da3-b166-302781e4f994",
-      "username": "Pirolito",
-      "email": "qwer@gmail.com",
-      "password": "$2b$10$VMruJBt7JdD7tFYZ9ogPDuaxyFYHWjH8CQXy8N5yJ5sw2.w3vVNnS",
+      "password": "$2b$10$lfglz3UGiTKYi6H2N4Hwo.hcLlB4LGk8xMFsOOPT3LLQJLQAxm6Wy",
       "level": 1,
       "xp": 0,
       "skills": [
@@ -63,6 +50,20 @@
     {
       "id": 9,
       "name": "Technical"
+    }
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "xp_required": 0
+    },
+    {
+      "level": 2,
+      "xp_required": 100
+    },
+    {
+      "level": 3,
+      "xp_required": 250
     }
   ]
 }

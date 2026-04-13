@@ -11,10 +11,9 @@ export default function Create_Account() {
 const handleSubmit = async () => {
   setError('')
 
-  const res = await fetch('http://localhost:3000/api/auth/register', {
+  const res = await fetch('http://localhost:3000/api/reg/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    // Remove credentials: 'include'
     body: JSON.stringify(formData)
   })
 
