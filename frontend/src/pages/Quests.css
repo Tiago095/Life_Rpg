@@ -385,3 +385,42 @@
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* XP Earned box (completed) */
+.qs-xp-earned {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.qs-xp-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #10b981;
+  display: block;
+}
+
+/* Req box (locked) */
+.qs-req-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.qs-req-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f59e0b;
+  letter-spacing: 0.8px;
+  display: block;
+  margin-bottom: 4px;
+}
+.qs-req-sub {
+  font-size: 12px;
+  color: var(--color-text-dim);
+}

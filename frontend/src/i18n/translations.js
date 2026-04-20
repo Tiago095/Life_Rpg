@@ -88,6 +88,35 @@ export const translations = {
     comingSoon:          'COMING SOON',
     comingSoonDesc:      'LifeRPG is undergoing final neural synchronization. Prepare for',
     realityTransform:    'reality transformation',
+
+  // MISSION POPUP — SUCCESS
+  statusCompleted:      'STATUS: COMPLETED',
+  missionSuccessful:    'MISSION SUCCESSFUL',
+  neuralProgression:    'NEURAL PROGRESSION',
+  rankUp:               'RANK UP!',
+  fromLevel:            'FROM LEVEL',
+  xpTotal:              'XP TOTAL',
+  nextGoal:             'NEXT GOAL',
+  credits:              'CREDITS',
+  skillPoints:          'SKILL POINTS',
+  lootDrop:             'LOOT DROP',
+  missionLogs:          'MISSION LOGS',
+  confirmExit:          'CONFIRM & EXIT',
+  neuralLink:           'NEURAL LINK',
+  startMission:         'START MISSION',
+  retryMission:         'RETRY MISSION',
+  returnToHub:          'RETURN TO HUB',
+
+  // MISSION POPUP — FAILED
+  statusCriticalFailure:   'STATUS: CRITICAL FAILURE',
+  signalDropping:          '// SIGNAL DROPPING BELOW THRESHOLD //',
+  missionFailed:           'MISSION FAILED',
+  neuralLinkInterrupted:   'NEURAL LINK INTERRUPTED',
+  signalLost:              'SIGNAL LOST',
+  errorCode:               'ERROR CODE',
+  failedObjectives:        'FAILED OBJECTIVES',
+  penalties:               'PENALTIES',
+  creditsDeducted:         'CREDITS DEDUCTED',
   },
 
   'Portuguese [PT-PT]': {
@@ -177,6 +206,35 @@ export const translations = {
     comingSoon:          'EM BREVE',
     comingSoonDesc:      'LifeRPG está a passar pela sincronização neural final. Prepara-te para a',
     realityTransform:    'transformação da realidade',
+
+     // MISSION POPUP — SUCCESS
+  statusCompleted:      'STATUS: CONCLUÍDO',
+  missionSuccessful:    'MISSÃO CONCLUÍDA',
+  neuralProgression:    'PROGRESSÃO NEURAL',
+  rankUp:               'RANK UP!',
+  fromLevel:            'DO NÍVEL',
+  xpTotal:              'XP TOTAL',
+  nextGoal:             'PRÓXIMO OBJETIVO',
+  credits:              'CRÉDITOS',
+  skillPoints:          'PONTOS DE HABILIDADE',
+  lootDrop:             'ITEM OBTIDO',
+  missionLogs:          'REGISTOS DA MISSÃO',
+  confirmExit:          'CONFIRMAR & SAIR',
+  neuralLink:           'LIGAÇÃO NEURAL',
+  startMission:         'INICIAR MISSÃO',
+  retryMission:         'REPETIR MISSÃO',
+  returnToHub:          'REGRESSAR AO HUB',
+
+  // MISSION POPUP — FAILED
+  statusCriticalFailure:   'STATUS: FALHA CRÍTICA',
+  signalDropping:          '// SINAL ABAIXO DO LIMITE //',
+  missionFailed:           'MISSÃO FALHADA',
+  neuralLinkInterrupted:   'LIGAÇÃO NEURAL INTERROMPIDA',
+  signalLost:              'SINAL PERDIDO',
+  errorCode:               'CÓDIGO DE ERRO',
+  failedObjectives:        'OBJETIVOS FALHADOS',
+  penalties:               'PENALIZAÇÕES',
+  creditsDeducted:         'CRÉDITOS DEDUZIDOS',
   },
 
   'Spanish [ES]': {
@@ -263,6 +321,36 @@ export const translations = {
     comingSoon:          'PRÓXIMAMENTE',
     comingSoonDesc:      'LifeRPG está en sincronización neural final. Prepárate para la',
     realityTransform:    'transformación de la realidad',
+    
+
+  // MISSION POPUP — SUCCESS
+  statusCompleted:      'ESTADO: COMPLETADO',
+  missionSuccessful:    'MISIÓN EXITOSA',
+  neuralProgression:    'PROGRESIÓN NEURAL',
+  rankUp:               '¡RANK UP!',
+  fromLevel:            'DESDE NIVEL',
+  xpTotal:              'XP TOTAL',
+  nextGoal:             'PRÓXIMA META',
+  credits:              'CRÉDITOS',
+  skillPoints:          'PUNTOS DE HABILIDAD',
+  lootDrop:             'OBJETO OBTENIDO',
+  missionLogs:          'REGISTROS DE MISIÓN',
+  confirmExit:          'CONFIRMAR & SALIR',
+  neuralLink:           'ENLACE NEURAL',
+  startMission:         'INICIAR MISIÓN',
+  retryMission:         'REINTENTAR MISIÓN',
+  returnToHub:          'VOLVER AL HUB',
+
+  // MISSION POPUP — FAILED
+  statusCriticalFailure:   'ESTADO: FALLO CRÍTICO',
+  signalDropping:          '// SEÑAL POR DEBAJO DEL UMBRAL //',
+  missionFailed:           'MISIÓN FALLIDA',
+  neuralLinkInterrupted:   'ENLACE NEURAL INTERRUMPIDO',
+  signalLost:              'SEÑAL PERDIDA',
+  errorCode:               'CÓDIGO DE ERROR',
+  failedObjectives:        'OBJETIVOS FALLIDOS',
+  penalties:               'PENALIZACIONES',
+  creditsDeducted:         'CRÉDITOS DEDUCIDOS',
   }
 }
 
