@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import './Quests.css'
+import { useTranslation } from '../context/UserContext'
 
 const questsData = {
   inProgress: [
@@ -79,10 +80,12 @@ export default function Quests() {
   const [selectedQuest, setSelectedQuest] = useState(null)
   const [search, setSearch]             = useState('')
 
+  const {t} = useTranslation()
+
   const tabs = [
-    { id: 'inProgress', label: 'In Progress', count: questsData.inProgress.length },
-    { id: 'available',  label: 'Available',   count: null },
-    { id: 'completed',  label: 'Completed',   count: null },
+    { id: 'inProgress', label: t.inProgress ,   count: questsData.inProgress.length },
+    { id: 'available',  label: t.available  ,   count: null },
+    { id: 'completed',  label: t.completed  ,   count: null },
   ]
 
   const currentQuests = questsData[activeTab] || []
@@ -108,14 +111,14 @@ export default function Quests() {
             <div className="qs-topbar-icon">
               <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '26px' }}>history_edu</span>
             </div>
-            <h1 className="qs-topbar-title">Quest Command Center</h1>
+            <h1 className="qs-topbar-title">{t.questCommandCenter}</h1>
           </div>
           <div className="qs-search-wrapper">
             <span className="material-symbols-outlined qs-search-icon">search</span>
             <input
               className="qs-search-input"
               type="text"
-              placeholder="Search Quest ..."
+              placeholder= {t.searchQuest}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -249,11 +252,11 @@ export default function Quests() {
               {selectedQuest.time && (
                 <div className="qs-stats-row">
                   <div className="qs-stat-box">
-                    <span className="qs-stat-label">ESTIMATED TIME</span>
+                    <span className="qs-stat-label">{t.estimatedTime}</span>
                     <span className="qs-stat-value">{selectedQuest.time}</span>
                   </div>
                   <div className="qs-stat-box">
-                    <span className="qs-stat-label">SUCCESS RATE</span>
+                    <span className="qs-stat-label">{t.successRate}</span>
                     <span className="qs-stat-value">{selectedQuest.successRate}</span>
                   </div>
                 </div>
@@ -262,7 +265,7 @@ export default function Quests() {
               <div className="qs-objectives">
                 <div className="qs-objectives-header">
                   <span className="material-symbols-outlined" style={{ fontSize: '16px', color: '#64748b' }}>alt_route</span>
-                  <span className="qs-objectives-label">MISSION OBJECTIVES</span>
+                  <span className="qs-objectives-label">{t.missionObjectives}</span>
                 </div>
                 {selectedQuest.objectives.map(obj => (
                   <div key={obj.id} className={`qs-objective ${obj.active ? 'qs-objective-active' : ''}`}>
@@ -280,10 +283,10 @@ export default function Quests() {
 
               <button className="qs-btn-primary">
                 <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>play_arrow</span>
-                Continue Mission
+                {t.continueMission}
               </button>
               <button className="qs-btn-secondary" onClick={() => setSelectedQuest(null)}>
-                Abort Protocol
+                {t.abortProtocol}
               </button>
 
               <div className="qs-assets-box">
@@ -291,7 +294,7 @@ export default function Quests() {
                   <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#64748b' }}>attach_file</span>
                 </div>
                 <div className="qs-assets-text">
-                  <span className="qs-assets-title">Supplemental Assets</span>
+                  <span className="qs-assets-title"> Assets</span>
                   <span className="qs-assets-sub">2 FILES ATTACHED</span>
                 </div>
               </div>

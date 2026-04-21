@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Create_Account.css'
+import { useUser } from '../context/UserContext'
 
 export default function Create_Account() {
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({ username: '', email: '', password: '' })
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const { updateUser } = useUser()
 
 const handleSubmit = async () => {
   setError('')
@@ -25,6 +27,8 @@ const handleSubmit = async () => {
   }
 
   localStorage.setItem('token', data.token) // guarda o token
+  updateUser(data.user) // atualiza o contexto com os dados do user
+
   navigate('/Preferences')
 }
 

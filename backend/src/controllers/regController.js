@@ -29,6 +29,10 @@ export const register = async (req, res) => {
     password: hashedPassword,
     level: 1,
     xp: 0,
+    "avatar":"avatar1",
+    "language": "English [EN-US]",
+    "theme": "Cyberpunk Blue (Default)",
+    "highContrast": true,
     skills: []
   }
 

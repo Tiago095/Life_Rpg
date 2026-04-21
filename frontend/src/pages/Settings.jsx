@@ -1,31 +1,190 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef  } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
+import AvatarModal from '../components/AvatarModal'
+import { useUser, useTranslation, getErrorMessage } from '../context/UserContext'
 import './Settings.css'
 
+import avatar1 from '../assets/avatars/avatar1.png'
+import avatar2 from '../assets/avatars/avatar2.png'
+import avatar3 from '../assets/avatars/avatar3.png'
+import avatar4 from '../assets/avatars/avatar4.png'
+import avatar5 from '../assets/avatars/avatar5.png'
+
+const avatarMap = { avatar1, avatar2, avatar3, avatar4, avatar5 }
+
+const getAvatarKey = (avatar) => {
+  if (!avatar) return 'avatar1'
+  if (avatar.includes('/')) return avatar.split('/').pop().replace('.png', '')
+  return avatar
+}
+
 export default function Settings() {
-  const [alias, setAlias]                 = useState('ITHRAPY')
-  const [editingAlias, setEditingAlias]   = useState(false)
-  const [showPassword, setShowPassword]   = useState(false)
+  const navigate = useNavigate()
+  const { user, updateUser, logout } = useUser()
+  const { t } = useTranslation()
+
+  if (!user) return null
+
+  const originalUsername     = user?.username     || ''
+  const originalEmail        = user?.email        || ''
+  const originalAvatarKey    = getAvatarKey(user.avatar)
+  const originalLanguage     = user?.language     || 'English [EN-US]'
+  const originalTheme        = user?.theme        || 'Cyberpunk Blue (Default)'
+  const originalHighContrast = useRef(user?.highContrast ?? false)
+
+  const [alias, setAlias]               = useState(originalUsername)
+  const [editingAlias, setEditingAlias] = useState(false)
+  const [aliasError, setAliasError]     = useState('')
+
+  const [newEmail, setNewEmail]         = useState(originalEmail)
+  const [newPassword, setNewPassword]   = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+
+  const [avatarName, setAvatarName]     = useState(originalAvatarKey)
+  const [avatarSrc, setAvatarSrc]       = useState(avatarMap[originalAvatarKey] || null)
+  const [showAvatarModal, setShowAvatarModal] = useState(false)
+
   const [notifications, setNotifications] = useState(true)
-  const [highContrast, setHighContrast]   = useState(false)
-  const [theme, setTheme]                 = useState('Cyberpunk Blue (Default)')
-  const [language, setLanguage]           = useState('English [EN-US]')
+  const [highContrast, setHighContrast]     = useState(
+    sessionStorage.getItem('highContrast') === 'true'
+  )
+  const [theme, setTheme] = useState(originalTheme)
+  const [language, setLanguage] = useState(originalLanguage) 
+
+  const [saveError, setSaveError]         = useState('')
+  const [saveSuccess, setSaveSuccess]     = useState('')
+  const [loading, setLoading]             = useState(false)
+
+useEffect(() => {
+    if (user?.theme) applyTheme(user.theme)
+  }, [])
 
   const applyTheme = (themeName) => {
-  document.body.classList.remove(
-    'theme-neon-green',
-    'theme-blood-red',
-    'theme-void-black'
-  )
-  const themeMap = {
-    'Neon Green':  'theme-neon-green',
-    'Blood Red':   'theme-blood-red',
-    'Void Black':  'theme-void-black',
+    document.body.classList.remove('theme-neon-green', 'theme-blood-red', 'theme-void-black')
+    const themeMap = {
+      'Neon Green': 'theme-neon-green',
+      'Blood Red':  'theme-blood-red',
+      'Void Black': 'theme-void-black',
+    }
+    if (themeMap[themeName]) document.body.classList.add(themeMap[themeName])
+    setTheme(themeName)
   }
-  if (themeMap[themeName]) {
-    document.body.classList.add(themeMap[themeName])
+
+  const handleHighContrast = (val) => {
+    document.body.classList.toggle('high-contrast', val)
+    setHighContrast(val)
   }
-  setTheme(themeName)
+
+  const handleAliasConfirm = () => {
+    if (!editingAlias) {
+      setEditingAlias(true)
+    } else {
+      setEditingAlias(false)
+      setAliasError('')
+    }
+  }
+
+  const handleAvatarConfirm = (name, src) => {
+    setAvatarName(name)
+    setAvatarSrc(src)
+    updateUser({ avatar: name })
+  }
+
+  const handleSave = async () => {
+    setSaveError('')
+    setSaveSuccess('')
+    setLoading(true)
+
+    const token = localStorage.getItem('token')
+    const body = {}
+
+    if (highContrast !== originalHighContrast) 
+      body.highContrast = highContrast
+
+    if (language !== originalLanguage) body.language = language
+     if (theme !== originalTheme) {
+      body.theme = theme
+      applyTheme(theme) 
+    }
+    if (alias !== originalUsername)   body.username = alias
+    if (newEmail !== originalEmail)   body.email    = newEmail
+    if (newPassword)                  body.password = newPassword
+    if (highContrast !== originalHighContrast.current) body.highContrast = highContrast
+
+    if (Object.keys(body).length === 0) {
+      setSaveError(t.noChanges)
+      setLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch(`http://localhost:3000/api/user/${user.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify(body)
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        if (typeof data.user.highContrast === 'boolean')
+          originalHighContrast.current = data.user.highContrast
+
+        updateUser(data.user)
+
+        if (body.theme) applyTheme(body.theme)
+
+        setNewPassword('')
+        setEditingAlias(false)
+        setSaveSuccess(t.saved)
+      } else {
+        setSaveError(getErrorMessage(data.code, language))
+      }
+    } catch (err) {
+      setSaveError(getErrorMessage('CONNECTION_ERROR', language))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleDiscard = () => {
+    setAlias(originalUsername)
+    setNewEmail(originalEmail)
+    setNewPassword('')
+    setEditingAlias(false)
+    setAliasError('')
+    setSaveError('')
+    setSaveSuccess('')
+    setTheme(originalTheme)
+    applyTheme(originalTheme) 
+  }
+
+  const handleDelete = async () => {
+    const confirm = window.confirm(t.terminateMsg)
+    if (!confirm) return
+
+    const token = localStorage.getItem('token')
+
+    try {
+      const response = await fetch(`http://localhost:3000/api/user/${user.id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+
+      if (response.ok) {
+        logout()
+        navigate('/')
+      }
+    } catch (err) {
+      setSaveError('Erro ao eliminar conta')
+    }
+  }
+
+  const handleLogout = () => {
+  logout()
+  document.body.classList.remove('theme-neon-green', 'theme-blood-red', 'theme-void-black')
+  navigate('/')
 }
 
   return (
@@ -33,7 +192,7 @@ export default function Settings() {
       <Sidebar />
 
       <div className="st-main">
-        <div className='st-bg-grid'/>
+        <div className="st-bg-grid" />
 
         {/* TOP BAR */}
         <div className="st-topbar">
@@ -41,42 +200,43 @@ export default function Settings() {
             <div className="st-topbar-icon">
               <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '22px' }}>terminal</span>
             </div>
-            <h1 className="st-topbar-title">Profile & System Settings</h1>
+            <h1 className="st-topbar-title">{t.profileSettings}</h1>
           </div>
           <button className="st-notif-btn">
             <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#64748b' }}>notifications</span>
           </button>
         </div>
 
-        {/* SCROLLABLE CONTENT */}
         <div className="st-scroll">
 
           {/* ===== OPERADOR IDENTITY ===== */}
           <section className="st-section">
             <div className="st-section-header">
               <span className="material-symbols-outlined st-section-icon">fingerprint</span>
-              <h2 className="st-section-title">Operador Identity</h2>
+              <h2 className="st-section-title">{t.operadorIdentity}</h2>
             </div>
 
             <div className="st-identity-row">
-              {/* Avatar */}
               <div className="st-avatar-wrapper">
-                <div className="st-avatar">
+                <div className="st-avatar" style={{ cursor: 'pointer' }} onClick={() => setShowAvatarModal(true)}>
                   <img
-                    src="./vite.svg"
+                    src={avatarSrc || avatar1}
                     alt="avatar"
                     className="st-avatar-img"
                   />
-                  <button className="st-avatar-edit">
+                  <button
+                    className="st-avatar-edit"
+                    onClick={(e) => { e.stopPropagation(); setShowAvatarModal(true) }}
+                  >
                     <span className="material-symbols-outlined" style={{ fontSize: '16px', color: '#fff' }}>photo_camera</span>
                   </button>
                 </div>
-                <span className="st-avatar-label">AVATAR MATRIX SYNC: 100%</span>
+                <span className="st-avatar-label">{t.avatarSync}</span>
               </div>
 
               {/* Alias */}
               <div className="st-alias-block">
-                <label className="st-label">Operador Alias</label>
+                <label className="st-label">{t.operadorAlias}</label>
                 <div className="st-input-wrapper">
                   <input
                     className="st-input"
@@ -85,14 +245,14 @@ export default function Settings() {
                     onChange={(e) => setAlias(e.target.value)}
                     readOnly={!editingAlias}
                   />
-                  <button className="st-input-icon-btn" onClick={() => setEditingAlias(!editingAlias)}>
+                  <button className="st-input-icon-btn" onClick={handleAliasConfirm}>
                     <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#64748b' }}>
                       {editingAlias ? 'check' : 'edit'}
                     </span>
                   </button>
                 </div>
-                <p className="st-hint">This is your public identifier across the neural network.</p>
-                <button className="st-outline-btn">Request Alias Reset</button>
+                {aliasError && <p className="st-field-error">{aliasError}</p>}
+                <p className="st-hint">{t.aliasHint}</p>
               </div>
             </div>
           </section>
@@ -103,46 +263,46 @@ export default function Settings() {
           <section className="st-section">
             <div className="st-section-header">
               <span className="material-symbols-outlined st-section-icon">security</span>
-              <h2 className="st-section-title">Neural Link Security</h2>
+              <h2 className="st-section-title">{t.neuralSecurity}</h2>
             </div>
 
             <div className="st-two-col">
-              {/* Email */}
               <div className="st-field">
-                <label className="st-label">Registered Email</label>
+                <label className="st-label">{t.registeredEmail}</label>
                 <div className="st-input-wrapper">
                   <input
                     className="st-input"
                     type="email"
-                    defaultValue="operator@neural-link.net"
+                    value={newEmail}
+                    onChange={(e) => setNewEmail(e.target.value)}
                   />
                 </div>
               </div>
 
-              {/* Password */}
               <div className="st-field">
-                <label className="st-label">Encryption Key (Password)</label>
+                <label className="st-label">{t.encryptionKey}</label>
                 <div className="st-input-wrapper">
                   <input
                     className="st-input"
                     type={showPassword ? 'text' : 'password'}
-                    defaultValue="password123"
+                    placeholder={t.newEncryptionKey}
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
                   />
                   <button className="st-input-icon-btn" onClick={() => setShowPassword(!showPassword)}>
                     <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#64748b' }}>
-                      {showPassword ? 'visibility_off' : 'history'}
+                      {showPassword ? 'visibility_off' : 'visibility'}
                     </span>
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* 2FA */}
             <div className="st-2fa-box">
               <span className="material-symbols-outlined" style={{ fontSize: '20px', color: 'var(--color-primary)' }}>verified_user</span>
               <div>
-                <p className="st-2fa-title">Two-Factor Auth Enabled</p>
-                <p className="st-2fa-sub">Biometric scan required for all major transactions.</p>
+                <p className="st-2fa-title">{t.twoFactorTitle}</p>
+                <p className="st-2fa-sub">{t.twoFactorSub}</p>
               </div>
             </div>
           </section>
@@ -153,47 +313,34 @@ export default function Settings() {
           <section className="st-section">
             <div className="st-section-header">
               <span className="material-symbols-outlined st-section-icon">tune</span>
-              <h2 className="st-section-title">User Preferences</h2>
+              <h2 className="st-section-title">{t.userPreferences}</h2>
             </div>
 
-            {/* Toggle: Neural Notifications */}
             <div className="st-toggle-row">
               <div>
-                <p className="st-toggle-title">Neural Notifications</p>
-                <p className="st-toggle-sub">Direct-to-mind HUD alerts for quest updates.</p>
+                <p className="st-toggle-title">{t.neuralNotif}</p>
+                <p className="st-toggle-sub">{t.neuralNotifSub}</p>
               </div>
-              <button
-                className={`st-toggle ${notifications ? 'st-toggle-on' : ''}`}
-                onClick={() => setNotifications(!notifications)}
-              >
+              <button className={`st-toggle ${notifications ? 'st-toggle-on' : ''}`} onClick={() => setNotifications(!notifications)}>
                 <div className="st-toggle-thumb" />
               </button>
             </div>
 
-            {/* Toggle: High Contrast */}
             <div className="st-toggle-row">
               <div>
-                <p className="st-toggle-title">High Contrast HUD</p>
-                <p className="st-toggle-sub">Enhanced visibility for combat scenarios.</p>
+                <p className="st-toggle-title">{t.highContrast}</p>
+                <p className="st-toggle-sub">{t.highContrastSub}</p>
               </div>
-              <button
-                className={`st-toggle ${highContrast ? 'st-toggle-on' : ''}`}
-                onClick={() => setHighContrast(!highContrast)}
-              >
+              <button className={`st-toggle ${highContrast ? 'st-toggle-on' : ''}`} onClick={() => handleHighContrast(!highContrast)}>
                 <div className="st-toggle-thumb" />
               </button>
             </div>
 
-            {/* Selects */}
             <div className="st-two-col" style={{ marginTop: '24px' }}>
               <div className="st-field">
-                <label className="st-label">UI Theme Override</label>
+                <label className="st-label">{t.uiTheme}</label>
                 <div className="st-select-wrapper">
-                  <select
-                    className="st-select"
-                    value={theme}
-                    onChange={(e) => applyTheme(e.target.value)}
-                  >
+                  <select className="st-select" value={theme} onChange={(e) => setTheme(e.target.value)}>
                     <option>Cyberpunk Blue (Default)</option>
                     <option>Neon Green</option>
                     <option>Blood Red</option>
@@ -204,17 +351,12 @@ export default function Settings() {
               </div>
 
               <div className="st-field">
-                <label className="st-label">System Language</label>
+                <label className="st-label">{t.systemLanguage}</label>
                 <div className="st-select-wrapper">
-                  <select
-                    className="st-select"
-                    value={language}
-                    onChange={(e) => setLanguage(e.target.value)}
-                  >
-                    <option>English [EN-US]</option>
-                    <option>Portuguese [PT-PT]</option>
-                    <option>Spanish [ES]</option>
-                    <option>Japanese [JA]</option>
+                  <select className="st-select" value={language} onChange={(e) => setLanguage(e.target.value)}>
+                      <option value="English [EN-US]">{t.en}</option>
+                      <option value="Portuguese [PT-PT]">{t.pt}</option>
+                      <option value="Spanish [ES]">{t.es}</option>  
                   </select>
                   <span className="material-symbols-outlined st-select-icon">expand_more</span>
                 </div>
@@ -229,29 +371,43 @@ export default function Settings() {
             <div className="st-danger-box">
               <div className="st-danger-header">
                 <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#ef4444' }}>warning</span>
-                <h2 className="st-danger-title">Danger Zone</h2>
+                <h2 className="st-danger-title">{t.dangerZone}</h2>
               </div>
               <div className="st-danger-row">
                 <div>
-                  <p className="st-danger-item-title">Terminate Operador Profile</p>
-                  <p className="st-danger-item-sub">This will permanently delete all skills, items, and quest history. This action is irreversible.</p>
+                  <p className="st-danger-item-title">{t.terminateProfile}</p>
+                  <p className="st-danger-item-sub">{t.terminateSub}</p>
                 </div>
-                <button className="st-delete-btn">Delete Account</button>
+                <button className="st-delete-btn" onClick={handleDelete}>{t.deleteAccount}</button>
               </div>
             </div>
           </section>
 
-          {/* ===== SAVE / DISCARD ===== */}
+          {/* ===== SAVE / DISCARD / LOGOUT ===== */}
           <div className="st-actions">
-            <button className="st-discard-btn">Discard</button>
-            <button className="st-save-btn">
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>save</span>
-              Save Changes
+            {saveError   && <p className="st-save-error">{saveError}</p>}
+            {saveSuccess && <p className="st-save-success">{saveSuccess}</p>}
+            <button className="st-logout-btn" onClick={handleLogout}>
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>logout</span>
+              {t.logout}
+            </button>
+            <button className="st-discard-btn" onClick={handleDiscard}>{t.discard}</button>
+            <button className="st-save-btn" onClick={handleSave} disabled={loading}>
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>Save</span>
+              {loading ? t.saving : t.saveChanges}
             </button>
           </div>
 
         </div>
       </div>
+      
+      {showAvatarModal && (
+        <AvatarModal
+          currentAvatar={avatarName}
+          onConfirm={handleAvatarConfirm}
+          onClose={() => setShowAvatarModal(false)}
+        />
+      )}
     </div>
   )
 }

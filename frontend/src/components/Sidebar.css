@@ -38,11 +38,11 @@
   overflow: hidden;
 }
 
-.sb-avatar-placeholder {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #d1d5db;
+.sb-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .sb-level-badge {

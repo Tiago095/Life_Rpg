@@ -1,7 +1,10 @@
 import Sidebar from './Sidebar'
 import './Coming_Soon.css'
+import { useTranslation } from '../context/UserContext'
 
 export default function ComingSoon({ pageName = 'This Module' }) {
+  const { t } = useTranslation()
+
   return (
     <div className="cs-layout">
       <Sidebar />
@@ -17,7 +20,7 @@ export default function ComingSoon({ pageName = 'This Module' }) {
           {/* Badge */}
           <div className="cs-badge">
             <span className="cs-badge-dot" />
-            SYSTEM INITIALIZING
+            {t.systemInitializing}
           </div>
 
           {/* Icon Box */}
@@ -34,10 +37,9 @@ export default function ComingSoon({ pageName = 'This Module' }) {
           </div>
 
           {/* Text */}
-          <h1 className="cs-title">COMING SOON</h1>
+          <h1 className="cs-title">{t.comingSoon}</h1>
           <p className="cs-desc">
-            LifeRPG is undergoing final neural synchronization.<br />
-            Prepare for <span className="cs-desc-accent">reality transformation</span>.
+            {t.comingSoonDesc}<span className="cs-desc-accent">{t.realityTransform}</span>.
           </p>
 
         </div>

@@ -12,6 +12,79 @@
         2,
         3
       ]
+    },
+    {
+      "id": "99088202-ac62-4743-bf5d-5467c7c99c2c",
+      "username": "IThrapyyyy",
+      "email": "afmarques222@gmail.com",
+      "password": "$2b$10$SJ2UuU9Hew9gUszaQ6LkcO4JkC5/XuxCh4Cfu7TyYS5W1JdaolkbO",
+      "level": 1,
+      "xp": 0,
+      "maxXp": 1000,
+      "avatar": "avatar3",
+      "language": "Spanish [ES]",
+      "theme": "Cyberpunk Blue (Default)",
+      "highContrast": false
+    },
+    {
+      "id": "1",
+      "username": "IThrapy",
+      "email": "afmarques122@gmail.com",
+      "password": "$2b$10$3aO5JHOf3.yejv0rv4pXhu5NSO7hqBUpSJaYqCPici8I8WLh7vMoG",
+      "level": 1,
+      "xp": 0,
+      "maxXp": 1000,
+      "avatar": "avatar2",
+      "language": "English [EN-US]",
+      "theme": "Void Black",
+      "highContrast": true
+    },
+    {
+      "id": "23f15b20-564c-4f15-b7de-95e86027102f",
+      "username": "Chico",
+      "email": "gay@gmail.com",
+      "password": "$2b$10$JoDr0S65902jO2HoxbvG7eKS3k/oIykdGh6AVhVllzJw8zvjfAtg.",
+      "level": 1,
+      "xp": 0,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Void Black",
+      "highContrast": true,
+      "skills": []
+    },
+    {
+      "id": "bd5c6ae2-733e-414a-9d00-852d41b9f34d",
+      "username": "LOCOPA",
+      "email": "gay1@gmail.com",
+      "password": "$2b$10$NPaGBIlUyW.asamrX3g4ZOanoZrPMxsDcMl171n9runp0ZjdgIdOe",
+      "level": 1,
+      "xp": 0,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Void Black",
+      "highContrast": true,
+      "skills": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "username": "Bazuca123",
+      "email": "gay2@gmail.com",
+      "password": "$2b$10$NS2iJRgFOa6xgFmC9VhXZeiaMkclpLWpYCNtVzpJLSAQ9cdByI0aC",
+      "level": 1,
+      "xp": 0,
+      "avatar": "avatar5",
+      "language": "English [EN-US]",
+      "theme": "Cyberpunk Blue (Default)",
+      "highContrast": false,
+      "skills": [
+        1,
+        2,
+        6
+      ]
     }
   ],
   "skills": [
@@ -64,6 +137,136 @@
     {
       "level": 3,
       "xp_required": 250
+    }
+  ],
+
+   "missions": [
+    {
+      "id": 1,
+      "title": "Morning Warrior",
+      "description": "Build a powerful morning routine to start your days with energy.",
+      "skill_id": 1,
+      "xp_reward": 150,
+      "objectives": [
+        { "id": 1, "description": "Exercise for 20 minutes"},
+        { "id": 2, "description": "Drink 2L of water"},
+        { "id": 3, "description": "Sleep before midnight" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Knowledge Seeker",
+      "description": "Dedicate yourself to learning something new every day.",
+      "skill_id": 2,
+      "xp_reward": 200,
+      "objectives": [
+        { "id": 1, "description": "Study for at least 1 hour" },
+        { "id": 2, "description": "Complete a practice exercise"},
+        { "id": 3, "description": "Review yesterday's notes" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Master of Order",
+      "description": "Get your life organized and keep it that way.",
+      "skill_id": 3,
+      "xp_reward": 100,
+      "objectives": [
+        { "id": 1, "description": "Write a to-do list for the day"},
+        { "id": 2, "description": "Clean and tidy your workspace"},
+        { "id": 3, "description": "Plan the upcoming week"}
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Social Butterfly",
+      "description": "Step out of your comfort zone and connect with others.",
+      "skill_id": 4,
+      "xp_reward": 120,
+      "objectives": [
+        { "id": 1, "description": "Start a conversation with someone new"},
+        { "id": 2, "description": "Reach out to an old friend"},
+        { "id": 3, "description": "Attend a social event or group activity"}
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Inner Peace",
+      "description": "Train your mind to stay calm and present.",
+      "skill_id": 5,
+      "xp_reward": 130,
+      "objectives": [
+        { "id": 1, "description": "Meditate for 10 minutes"},
+        { "id": 2, "description": "Write in a gratitude journal"},
+        { "id": 3, "description": "Take a 20-minute walk without your phone"}
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Creative Spark",
+      "description": "Unleash your creativity and express yourself.",
+      "skill_id": 6,
+      "xp_reward": 110,
+      "objectives": [
+        { "id": 1, "description": "Spend 30 minutes on a creative hobby"},
+        { "id": 2, "description": "Share your work with someone"},
+        { "id": 3, "description": "Try a new creative activity" }
+      ]
+    }
+  ],
+
+  "user_missions": [
+    {
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "user_id": "bd5c6ae2-733e-414a-9d00-852d41b9f34d",
+      "mission_id": 1,
+      "status": "active",
+      "accepted_at": "2025-04-18T08:00:00Z",
+      "completed_at": null,
+      "objectives_progress": [
+        { "objective_id": 1, "completed": true },
+        { "objective_id": 2, "completed": false },
+        { "objective_id": 3, "completed": false }
+      ]
+    },
+    {
+      "id": "a1b2c3d4-0001-4000-8000-000000000002",
+      "user_id": "bd5c6ae2-733e-414a-9d00-852d41b9f34d",
+      "mission_id": 3,
+      "status": "completed",
+      "accepted_at": "2025-04-10T09:00:00Z",
+      "completed_at": "2025-04-17T21:00:00Z",
+      "objectives_progress": [
+        { "objective_id": 1, "completed": true },
+        { "objective_id": 2, "completed": true },
+        { "objective_id": 3, "completed": true }
+      ]
+    },
+    {
+      "id": "a1b2c3d4-0001-4000-8000-000000000003",
+      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "mission_id": 2,
+      "status": "active",
+      "accepted_at": "2025-04-19T10:00:00Z",
+      "completed_at": null,
+      "objectives_progress": [
+        { "objective_id": 1, "completed": false },
+        { "objective_id": 2, "completed": false },
+        { "objective_id": 3, "completed": false }
+      ]
+    },
+    {
+      "id": "a1b2c3d4-0001-4000-8000-000000000004",
+      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "mission_id": 6,
+      "status": "abandoned",
+      "accepted_at": "2025-04-05T14:00:00Z",
+      "completed_at": null,
+      "objectives_progress": [
+        { "objective_id": 1, "completed": false },
+        { "objective_id": 2, "completed": false },
+        { "objective_id": 3, "completed": false }
+      ]
     }
   ]
 }
