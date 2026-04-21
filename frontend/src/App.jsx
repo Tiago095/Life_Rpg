@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard'
 import Quests from './pages/Quests'
 import ComingSoon from './components/Coming_Soon'
 import Settings from './pages/Settings'
+import MissionCompletePopup from './components/MissionCompletePopup'
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="/MarketPlace"  element={<ComingSoon />} />
         <Route path="/Settings"   element={<Settings />} />
         <Route path="/Friends"    element={<ComingSoon />} />
+        <Route path="/MC" element={<MissionCompletePopup/>}/>
       </Routes>
     </BrowserRouter>
   )
