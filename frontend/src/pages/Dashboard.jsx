@@ -2,41 +2,19 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import './Dashboard.css'
-import { useTranslation } from '../context/UserContext'
+import { useTranslation, useUser } from '../context/UserContext'
+import { useQuests } from '../hooks/useQuests'
 
-const mockUser = {
-  gold: 4250,
-  skills: [
-    { id: 1, name: 'STRENGTH',   rank: 5, icon: 'fitness_center', color: '#3b82f6' },
-    { id: 2, name: 'INTELLECT',  rank: 3, icon: 'auto_stories',   color: '#8b5cf6' },
-    { id: 3, name: 'STRUCTURE',  rank: 8, icon: 'calendar_month', color: '#ef4444' },
-    { id: 4, name: 'ENDURANCE',  rank: 2, icon: 'directions_run', color: '#22c55e' },
-    { id: 5, name: 'FOCUS',      rank: 6, icon: 'center_focus_strong', color: '#f59e0b' },
-  ],
-  quests: [
-    {
-      id: 1,
-      title: '30-minute Cardio Raid',
-      description: 'Slay the sloth monster with inte...',
-      tag: 'ELITE',
-      tagColor: '#ef4444',
-      rewards: '+250 XP / +50 G',
-      icon: 'directions_run',
-      iconBg: '#1e3a5f',
-      active: true
-    },
-    {
-      id: 2,
-      title: 'The Library Grimo...',
-      description: 'Absorb knowledge from the anci...',
-      tag: 'SIDE QUEST',
-      tagColor: '#6d28d9',
-      rewards: '+150 XP / +20 G',
-      icon: 'menu_book',
-      iconBg: '#2d1b69',
-      active: true
-    }
-  ]
+const SKILL_VISUAL = {
+  'Exercise':     { icon: 'fitness_center',       color: '#3b82f6' },
+  'Studies':      { icon: 'auto_stories',          color: '#8b5cf6' },
+  'Organization': { icon: 'calendar_month',        color: '#ef4444' },
+  'Social':       { icon: 'groups',                color: '#22c55e' },
+  'Mindfulness':  { icon: 'self_improvement',      color: '#f59e0b' },
+  'Creativity':   { icon: 'palette',               color: '#ec4899' },
+  'Finance':      { icon: 'savings',               color: '#14b8a6' },
+  'Health':       { icon: 'favorite',              color: '#f43f5e' },
+  'Technical':    { icon: 'code',                  color: '#6366f1' },
 }
 
 const mockChatMessages = [
@@ -71,18 +49,17 @@ function getCalendarDays(year, month) {
 // =============================================
 export default function Dashboard() {
   const [chatInput, setChatInput] = useState('')
-  const {t} = useTranslation()
+  const { t } = useTranslation()
+  const { user } = useUser()
+  const { quests } = useQuests()
+  const navigate = useNavigate()
 
-  // --- data state (swap useState mock → useEffect fetch later) ---
-  const [gold,       setGold]       = useState(mockUser.gold)
-  const [attributes, setAttributes] = useState([])
-  const [quests,     setQuests]     = useState([])
+  const [userSkills, setUserSkills] = useState([])
 
-  // --- calendar state ---
-  const today      = new Date()
+  const today = new Date()
   const [calYear,  setCalYear]  = useState(today.getFullYear())
-  const [calMonth, setCalMonth] = useState(today.getMonth())   // 0-indexed
-  const calDays    = getCalendarDays(calYear, calMonth)
+  const [calMonth, setCalMonth] = useState(today.getMonth())
+  const calDays = getCalendarDays(calYear, calMonth)
 
   const prevMonth = () => {
     if (calMonth === 0) { setCalMonth(11); setCalYear(y => y - 1) }
@@ -92,24 +69,42 @@ export default function Dashboard() {
     if (calMonth === 11) { setCalMonth(0); setCalYear(y => y + 1) }
     else setCalMonth(m => m + 1)
   }
-
   const isToday = (dayObj) =>
     dayObj.current &&
     dayObj.day === today.getDate() &&
     calMonth === today.getMonth() &&
     calYear  === today.getFullYear()
 
+  const activeQuests = quests.inProgress.slice(0, 3)
+  const gold = user?.xp ?? 0
 
-  useEffect(() => {
-    // top 3 skills por rank
-    const top3 = [...mockUser.skills]
-      .sort((a, b) => b.rank - a.rank)
-      .slice(0, 3)
-    setAttributes(top3)
-    setQuests(mockUser.quests.filter(q => q.active))
-  }, [])
+ useEffect(() => {
+    if (!user) return
+    const token = localStorage.getItem('token')
 
-  const navigate = useNavigate()  
+    // Busca todas as skills para fazer o join com os IDs do utilizador
+    fetch('http://localhost:3000/api/missions', {  // reutiliza o endpoint que já tenho
+      headers: { Authorization: `Bearer ${token}` }
+    })
+
+    // Busca as skills
+    fetch('http://localhost:3000/api/skills', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(r => r.json())
+      .then(allSkills => {
+        const userSkillIds = user.skills || []
+        const matched = allSkills
+          .filter(s => userSkillIds.includes(s.id))
+          .map(s => ({
+            id: s.id,
+            name: s.name,
+            ...(SKILL_VISUAL[s.name] || { icon: 'star', color: '#64748b' })
+          }))
+        setUserSkills(matched)
+      })
+      .catch(err => console.error('Erro ao buscar skills:', err))
+  }, [user])
 
   return (
     <div className="db-layout">
@@ -144,25 +139,22 @@ export default function Dashboard() {
             </div>
             <button className="db-view-all" onClick={() => navigate('/Skills')}>{t.viewAllSkills}</button>
           </div>
-
           <div className="db-attributes-grid">
-            {attributes.map((attr) => (
+            {userSkills.length > 0 ? userSkills.map((attr) => (
               <div key={attr.id} className="db-attribute-card">
                 <div
                   className="db-attribute-icon-wrap"
                   style={{ background: `${attr.color}22`, border: `1px solid ${attr.color}44` }}
                 >
-                  <span
-                    className="material-symbols-outlined"
-                    style={{ color: attr.color, fontSize: '32px' }}
-                  >
+                  <span className="material-symbols-outlined" style={{ color: attr.color, fontSize: '32px' }}>
                     {attr.icon}
                   </span>
                 </div>
-                <h3 className="db-attribute-label">{attr.name}</h3>
-                <p className="db-attribute-rank"> {t.rank} {attr.rank}</p>
+                <h3 className="db-attribute-label">{attr.name.toUpperCase()}</h3>
               </div>
-            ))}
+            )) : (
+              <p style={{ color: '#64748b', fontSize: '14px' }}>No skills selected yet.</p>
+            )}
           </div>
         </div>
 
@@ -175,44 +167,48 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="db-quests-list">
-            {quests.map((quest) => (
-              <div key={quest.id} className="db-quest-card">
-                <div className="db-quest-icon-wrap" style={{ background: quest.iconBg }}>
-                  <span
-                    className="material-symbols-outlined"
-                    style={{ color: '#93c5fd', fontSize: '22px' }}
-                  >
-                    {quest.icon}
-                  </span>
-                </div>
-                <div className="db-quest-info">
-                  <div className="db-quest-title-row">
-                    <span className="db-quest-title">{quest.title}</span>
-                    <span className="db-quest-tag" style={{ background: quest.tagColor }}>
-                      {quest.tag}
-                    </span>
-                  </div>
-                  <p className="db-quest-desc">{quest.description}</p>
-                </div>
-                <div className="db-quest-rewards">
-                  <span className="db-rewards-label">{t.rewards}</span>
-                  <span className="db-rewards-value">{quest.rewards}</span>
-                </div>
-                <button
-                  className="db-embark-btn"
-                  style={{ background: quest.tagColor === '#6d28d9' ? '#7c3aed' : '#3b82f6' }}
-                >
-                  {t.embark}
-                </button>
-              </div>
-            ))}
+<div className="db-quests-list">
+  {activeQuests.length > 0 ? activeQuests.map((quest) => (
+    <div key={quest.id} className="db-quest-card">
+      <div className="db-quest-icon-wrap" style={{ background: '#1e3a5f' }}>
+        <span className="material-symbols-outlined" style={{ color: '#93c5fd', fontSize: '22px' }}>
+          task_alt
+        </span>
+      </div>
+      <div className="db-quest-info">
+        <div className="db-quest-title-row">
+          <span className="db-quest-title">{quest.title}</span>
+          <span className="db-quest-tag" style={{ background: quest.rankColor }}>
+            RANK {quest.rank}
+          </span>
+        </div>
+        <p className="db-quest-desc">{quest.description}</p>
+      </div>
+      <div className="db-quest-rewards">
+        <span className="db-rewards-label">{t.rewards}</span>
+        <span className="db-rewards-value">+{quest.xp} XP</span>
+      </div>
+      <button
+      className="db-embark-btn"
+      style={{
+        background: 'var(--color-primary)',
+        color: 'var(--color-bg)',
+        boxShadow: '0 0 12px var(--color-primary-glow)'
+      }}
+      onClick={() => navigate('/Quests')}
+    >
+      {t.embark}
+    </button>
+    </div>
+  )) : (
+    <p style={{ color: '#64748b', fontSize: '14px' }}>No active quests.</p>
+  )}
 
-            <button className="db-forge-card" onClick={() => navigate('/Quests')}>
-              <span className="material-symbols-outlined db-forge-icon">add_circle</span>
-              <span className="db-forge-label">{t.forgeNewQuest}</span>
-            </button>
-          </div>
+  <button className="db-forge-card" onClick={() => navigate('/Quests', { state: { tab: 'available' } })}>
+    <span className="material-symbols-outlined db-forge-icon">add_circle</span>
+    <span className="db-forge-label">{t.forgeNewQuest}</span>
+  </button>
+</div>
         </div>
 
       </main>

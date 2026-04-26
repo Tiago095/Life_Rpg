@@ -65,6 +65,10 @@
   font-weight: 700;
   margin: 0;
   letter-spacing: 0.5px;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sb-xp-container { margin-top: 8px; }

@@ -24,6 +24,44 @@ export default function Settings() {
   const { user, updateUser, logout } = useUser()
   const { t } = useTranslation()
 
+  const originalHighContrast = useRef(user?.highContrast ?? false)
+
+  const [alias, setAlias]               = useState('')
+  const [editingAlias, setEditingAlias] = useState(false)
+  const [aliasError, setAliasError]     = useState('')
+
+  const [newEmail, setNewEmail]         = useState('')
+  const [newPassword, setNewPassword]   = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+
+  const [avatarName, setAvatarName]     = useState('')
+  const [avatarSrc, setAvatarSrc]       = useState(null)
+  const [showAvatarModal, setShowAvatarModal] = useState(false)
+
+  const [notifications, setNotifications] = useState(true)
+  const [highContrast, setHighContrast]     = useState(false)
+  const [theme, setTheme] = useState('Cyberpunk Blue (Default)')
+  const [language, setLanguage] = useState('English [EN-US]') 
+
+  const [saveError, setSaveError]         = useState('')
+  const [saveSuccess, setSaveSuccess]     = useState('')
+  const [loading, setLoading]             = useState(false)
+
+  useEffect(() => {
+    if (!user) return
+    // Inicializa os valores quando o user carrega
+    setAlias(user.username || '')
+    setNewEmail(user.email || '')
+    const key = getAvatarKey(user.avatar)
+    setAvatarName(key)
+    setAvatarSrc(avatarMap[key] || null)
+    setHighContrast(user.highContrast ?? false)
+    setTheme(user.theme || 'Cyberpunk Blue (Default)')
+    setLanguage(user.language || 'English [EN-US]')
+    originalHighContrast.current = user.highContrast ?? false
+    if (user.theme) applyTheme(user.theme)
+  }, [user])
+
   if (!user) return null
 
   const originalUsername     = user?.username     || ''
@@ -31,34 +69,6 @@ export default function Settings() {
   const originalAvatarKey    = getAvatarKey(user.avatar)
   const originalLanguage     = user?.language     || 'English [EN-US]'
   const originalTheme        = user?.theme        || 'Cyberpunk Blue (Default)'
-  const originalHighContrast = useRef(user?.highContrast ?? false)
-
-  const [alias, setAlias]               = useState(originalUsername)
-  const [editingAlias, setEditingAlias] = useState(false)
-  const [aliasError, setAliasError]     = useState('')
-
-  const [newEmail, setNewEmail]         = useState(originalEmail)
-  const [newPassword, setNewPassword]   = useState('')
-  const [showPassword, setShowPassword] = useState(false)
-
-  const [avatarName, setAvatarName]     = useState(originalAvatarKey)
-  const [avatarSrc, setAvatarSrc]       = useState(avatarMap[originalAvatarKey] || null)
-  const [showAvatarModal, setShowAvatarModal] = useState(false)
-
-  const [notifications, setNotifications] = useState(true)
-  const [highContrast, setHighContrast]     = useState(
-    sessionStorage.getItem('highContrast') === 'true'
-  )
-  const [theme, setTheme] = useState(originalTheme)
-  const [language, setLanguage] = useState(originalLanguage) 
-
-  const [saveError, setSaveError]         = useState('')
-  const [saveSuccess, setSaveSuccess]     = useState('')
-  const [loading, setLoading]             = useState(false)
-
-useEffect(() => {
-    if (user?.theme) applyTheme(user.theme)
-  }, [])
 
   const applyTheme = (themeName) => {
     document.body.classList.remove('theme-neon-green', 'theme-blood-red', 'theme-void-black')

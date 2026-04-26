@@ -40,43 +40,13 @@
       "highContrast": true
     },
     {
-      "id": "23f15b20-564c-4f15-b7de-95e86027102f",
-      "username": "Chico",
-      "email": "gay@gmail.com",
-      "password": "$2b$10$JoDr0S65902jO2HoxbvG7eKS3k/oIykdGh6AVhVllzJw8zvjfAtg.",
-      "level": 1,
-      "xp": 0,
-      "avatar": "avatar1",
-      "language": "English [EN-US]",
-      "theme": "Void Black",
-      "highContrast": true,
-      "skills": []
-    },
-    {
-      "id": "bd5c6ae2-733e-414a-9d00-852d41b9f34d",
-      "username": "LOCOPA",
-      "email": "gay1@gmail.com",
-      "password": "$2b$10$NPaGBIlUyW.asamrX3g4ZOanoZrPMxsDcMl171n9runp0ZjdgIdOe",
-      "level": 1,
-      "xp": 0,
-      "avatar": "avatar1",
-      "language": "English [EN-US]",
-      "theme": "Void Black",
-      "highContrast": true,
-      "skills": [
-        1,
-        2,
-        3
-      ]
-    },
-    {
       "id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
-      "username": "Bazuca123",
-      "email": "gay2@gmail.com",
+      "username": "Tiago_\"OGRANDE\"",
+      "email": "ogrande@gmail.com",
       "password": "$2b$10$NS2iJRgFOa6xgFmC9VhXZeiaMkclpLWpYCNtVzpJLSAQ9cdByI0aC",
-      "level": 1,
-      "xp": 0,
-      "avatar": "avatar5",
+      "level": 4,
+      "xp": 570,
+      "avatar": "avatar2",
       "language": "English [EN-US]",
       "theme": "Cyberpunk Blue (Default)",
       "highContrast": false,
@@ -127,20 +97,31 @@
   ],
   "levels": [
     {
-      "level": 1,
-      "xp_required": 0
+      "level": 6,
+      "xp_required": 1400
+    },
+    {
+      "level": 5,
+      "xp_required": 900
+    },
+    {
+      "level": 4,
+      "xp_required": 500
+    },
+    {
+      "level": 3,
+      "xp_required": 250
     },
     {
       "level": 2,
       "xp_required": 100
     },
     {
-      "level": 3,
-      "xp_required": 250
+      "level": 1,
+      "xp_required": 0
     }
   ],
-
-   "missions": [
+  "missions": [
     {
       "id": 1,
       "title": "Morning Warrior",
@@ -148,9 +129,18 @@
       "skill_id": 1,
       "xp_reward": 150,
       "objectives": [
-        { "id": 1, "description": "Exercise for 20 minutes"},
-        { "id": 2, "description": "Drink 2L of water"},
-        { "id": 3, "description": "Sleep before midnight" }
+        {
+          "id": 1,
+          "description": "Exercise for 20 minutes"
+        },
+        {
+          "id": 2,
+          "description": "Drink 2L of water"
+        },
+        {
+          "id": 3,
+          "description": "Sleep before midnight"
+        }
       ]
     },
     {
@@ -160,9 +150,18 @@
       "skill_id": 2,
       "xp_reward": 200,
       "objectives": [
-        { "id": 1, "description": "Study for at least 1 hour" },
-        { "id": 2, "description": "Complete a practice exercise"},
-        { "id": 3, "description": "Review yesterday's notes" }
+        {
+          "id": 1,
+          "description": "Study for at least 1 hour"
+        },
+        {
+          "id": 2,
+          "description": "Complete a practice exercise"
+        },
+        {
+          "id": 3,
+          "description": "Review yesterday's notes"
+        }
       ]
     },
     {
@@ -172,9 +171,18 @@
       "skill_id": 3,
       "xp_reward": 100,
       "objectives": [
-        { "id": 1, "description": "Write a to-do list for the day"},
-        { "id": 2, "description": "Clean and tidy your workspace"},
-        { "id": 3, "description": "Plan the upcoming week"}
+        {
+          "id": 1,
+          "description": "Write a to-do list for the day"
+        },
+        {
+          "id": 2,
+          "description": "Clean and tidy your workspace"
+        },
+        {
+          "id": 3,
+          "description": "Plan the upcoming week"
+        }
       ]
     },
     {
@@ -184,9 +192,18 @@
       "skill_id": 4,
       "xp_reward": 120,
       "objectives": [
-        { "id": 1, "description": "Start a conversation with someone new"},
-        { "id": 2, "description": "Reach out to an old friend"},
-        { "id": 3, "description": "Attend a social event or group activity"}
+        {
+          "id": 1,
+          "description": "Start a conversation with someone new"
+        },
+        {
+          "id": 2,
+          "description": "Reach out to an old friend"
+        },
+        {
+          "id": 3,
+          "description": "Attend a social event or group activity"
+        }
       ]
     },
     {
@@ -196,9 +213,18 @@
       "skill_id": 5,
       "xp_reward": 130,
       "objectives": [
-        { "id": 1, "description": "Meditate for 10 minutes"},
-        { "id": 2, "description": "Write in a gratitude journal"},
-        { "id": 3, "description": "Take a 20-minute walk without your phone"}
+        {
+          "id": 1,
+          "description": "Meditate for 10 minutes"
+        },
+        {
+          "id": 2,
+          "description": "Write in a gratitude journal"
+        },
+        {
+          "id": 3,
+          "description": "Take a 20-minute walk without your phone"
+        }
       ]
     },
     {
@@ -208,13 +234,21 @@
       "skill_id": 6,
       "xp_reward": 110,
       "objectives": [
-        { "id": 1, "description": "Spend 30 minutes on a creative hobby"},
-        { "id": 2, "description": "Share your work with someone"},
-        { "id": 3, "description": "Try a new creative activity" }
+        {
+          "id": 1,
+          "description": "Spend 30 minutes on a creative hobby"
+        },
+        {
+          "id": 2,
+          "description": "Share your work with someone"
+        },
+        {
+          "id": 3,
+          "description": "Try a new creative activity"
+        }
       ]
     }
   ],
-
   "user_missions": [
     {
       "id": "a1b2c3d4-0001-4000-8000-000000000001",
@@ -224,9 +258,18 @@
       "accepted_at": "2025-04-18T08:00:00Z",
       "completed_at": null,
       "objectives_progress": [
-        { "objective_id": 1, "completed": true },
-        { "objective_id": 2, "completed": false },
-        { "objective_id": 3, "completed": false }
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
       ]
     },
     {
@@ -237,22 +280,40 @@
       "accepted_at": "2025-04-10T09:00:00Z",
       "completed_at": "2025-04-17T21:00:00Z",
       "objectives_progress": [
-        { "objective_id": 1, "completed": true },
-        { "objective_id": 2, "completed": true },
-        { "objective_id": 3, "completed": true }
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
       ]
     },
     {
       "id": "a1b2c3d4-0001-4000-8000-000000000003",
       "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
       "mission_id": 2,
-      "status": "active",
+      "status": "completed",
       "accepted_at": "2025-04-19T10:00:00Z",
-      "completed_at": null,
+      "completed_at": "2026-04-21T19:34:07.530Z",
       "objectives_progress": [
-        { "objective_id": 1, "completed": false },
-        { "objective_id": 2, "completed": false },
-        { "objective_id": 3, "completed": false }
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
       ]
     },
     {
@@ -263,9 +324,106 @@
       "accepted_at": "2025-04-05T14:00:00Z",
       "completed_at": null,
       "objectives_progress": [
-        { "objective_id": 1, "completed": false },
-        { "objective_id": 2, "completed": false },
-        { "objective_id": 3, "completed": false }
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "f8ee546d-321e-46d9-83fa-fb1e4623a7cc",
+      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "mission_id": 1,
+      "status": "completed",
+      "accepted_at": "2026-04-21T13:39:48.879Z",
+      "completed_at": "2026-04-21T19:52:01.777Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "50912978-47d5-4820-a890-c5cd6311cbcf",
+      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "mission_id": 3,
+      "status": "completed",
+      "accepted_at": "2026-04-21T13:40:09.883Z",
+      "completed_at": "2026-04-21T20:10:48.358Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "349712f8-383d-4c09-bc56-7f26e9b03a19",
+      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "mission_id": 4,
+      "status": "completed",
+      "accepted_at": "2026-04-21T20:11:02.232Z",
+      "completed_at": "2026-04-22T14:05:44.362Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "f63bcfa6-1c22-4739-a611-afa2f450055d",
+      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "mission_id": 5,
+      "status": "active",
+      "accepted_at": "2026-04-22T14:05:54.028Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
       ]
     }
   ]

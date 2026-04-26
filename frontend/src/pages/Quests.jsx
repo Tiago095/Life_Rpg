@@ -3,187 +3,9 @@ import Sidebar from '../components/Sidebar'
 import './Quests.css'
 import { useTranslation } from '../context/UserContext'
 import MissionCompletePopup from '../components/MissionCompletePopup'
-
-const questsData = {
-  inProgress: [
-    {
-      id: 1,
-      rank: 'A',
-      rankColor: '#f59e0b',
-      category: 'Physical Skill Protocol',
-      title: 'Morning Workout Protocol',
-      xp: 850,
-      cr: 120,
-      progress: 45,
-      progressLabel: 'COMPLETION',
-      image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80',
-      time: '30:00',
-      successRate: '78%',
-      objectives: [
-        { id: 1, done: true,  label: 'Complete warm-up routine', sub: '10 minutes of stretching' },
-        { id: 2, done: true,  label: 'Main workout session',     sub: 'Complete all sets', active: true },
-        { id: 3, done: false, label: 'Cool down protocol',       sub: 'Log recovery metrics' },
-      ]
-    },
-    {
-      id: 2,
-      rank: 'S',
-      rankColor: 'var(--color-primary)',
-      category: 'Mental Fortitude',
-      title: 'Daily Focus Session',
-      xp: 1200,
-      intelligence: '+2 Skill Points',
-      progress: 12,
-      progressMax: 25,
-      progressLabel: 'DEEP WORK PHASE',
-      image: 'https://images.unsplash.com/photo-1614854262318-831574f15f1f?w=400&q=80',
-      time: '25:00',
-      successRate: '94%',
-      objectives: [
-        { id: 1, done: true,  label: 'Silence communications',      sub: 'Enable DND mode on all tactical devices' },
-        { id: 2, done: false, label: 'Execution Phase: Pomodoro 1', sub: 'Complete the first 25-minute cycle without interruption', active: true },
-        { id: 3, done: false, label: 'Debrief Protocol',            sub: 'Log 3 key learnings from the session' },
-      ]
-    },
-    {
-      id: 3,
-      rank: 'B',
-      rankColor: '#10b981',
-      category: 'Knowledge Acquisition',
-      title: 'Library Research Deep Dive',
-      xp: 450,
-      accessPerms: true,
-      progress: 5,
-      progressLabel: 'PROGRESS',
-      image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&q=80',
-      time: '60:00',
-      successRate: '65%',
-      objectives: [
-        { id: 1, done: false, label: 'Select research topic', sub: 'Define scope and objectives' },
-        { id: 2, done: false, label: 'Gather sources',        sub: 'Minimum 5 credible sources' },
-        { id: 3, done: false, label: 'Compile findings',      sub: 'Write summary report' },
-      ]
-    },
-  ],
-
-  available: [
-    {
-      id: 10,
-      rank: 'S', rankColor: 'var(--color-primary)',
-      category: 'Combat Training',
-      title: 'Advanced Combat Drills',
-      xp: 2000, cr: 300,
-      progress: 0, progressLabel: 'NOT STARTED',
-      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80',
-      time: '45:00', successRate: '61%',
-      locked: false, req: null,
-      objectives: [
-        { id: 1, done: false, label: 'Warm-up sequence',   sub: 'Dynamic stretching protocol' },
-        { id: 2, done: false, label: 'Sparring rounds x5', sub: 'Full contact simulation' },
-        { id: 3, done: false, label: 'Recovery debrief',   sub: 'Log performance metrics' },
-      ]
-    },
-    {
-      id: 11,
-      rank: 'A', rankColor: '#f59e0b',
-      category: 'Mental Fortitude',
-      title: 'Meditation Mastery Protocol',
-      xp: 750, cr: 80,
-      progress: 0, progressLabel: 'NOT STARTED',
-      image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80',
-      time: '20:00', successRate: '85%',
-      locked: false, req: null,
-      objectives: [
-        { id: 1, done: false, label: 'Breathing calibration',  sub: 'Box breathing 4x4' },
-        { id: 2, done: false, label: 'Visualization phase',    sub: '10-minute mindscape session' },
-        { id: 3, done: false, label: 'Journaling debrief',     sub: 'Record 3 mental patterns' },
-      ]
-    },
-    {
-      id: 12,
-      rank: 'B', rankColor: '#10b981',
-      category: 'Knowledge Acquisition',
-      title: 'System Architecture Study',
-      xp: 500, cr: 60,
-      progress: 0, progressLabel: 'LOCKED',
-      image: 'https://images.unsplash.com/photo-1518432031352-d6fc5734595a?w=400&q=80',
-      time: '90:00', successRate: '72%',
-      locked: true, req: 'Requires: Library Research Deep Dive',
-      objectives: [
-        { id: 1, done: false, label: 'Read chapters 1–3',  sub: 'System design fundamentals' },
-        { id: 2, done: false, label: 'Diagram architecture', sub: 'Draw 2 system diagrams' },
-        { id: 3, done: false, label: 'Quiz yourself',       sub: 'Pass with 80%+ score' },
-      ]
-    },
-    {
-      id: 13,
-      rank: 'C', rankColor: '#64748b',
-      category: 'Organization',
-      title: 'Weekly Planning Sprint',
-      xp: 300, cr: 40,
-      progress: 0, progressLabel: 'NOT STARTED',
-      image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&q=80',
-      time: '15:00', successRate: '91%',
-      locked: false, req: null,
-      objectives: [
-        { id: 1, done: false, label: 'Review last week',       sub: 'Identify blockers and wins' },
-        { id: 2, done: false, label: 'Set top 3 priorities',   sub: 'Tag by urgency and impact' },
-        { id: 3, done: false, label: 'Block time on calendar', sub: 'Minimum 2 deep work blocks' },
-      ]
-    },
-  ],
-
-  completed: [
-    {
-      id: 20,
-      rank: 'B', rankColor: '#10b981',
-      category: 'Physical Skill Protocol',
-      title: 'Endurance Run — 5km',
-      xp: 400, cr: 50,
-      completedAt: '2 days ago',
-      progress: 100, progressLabel: 'COMPLETED',
-      image: 'https://images.unsplash.com/photo-1461897104016-0b3b00cc81ee?w=400&q=80',
-      time: '28:42', successRate: '100%',
-      objectives: [
-        { id: 1, done: true, label: 'Warm-up 5 min',   sub: 'Light jog + dynamic stretch' },
-        { id: 2, done: true, label: 'Run 5km',          sub: 'Target pace maintained' },
-        { id: 3, done: true, label: 'Cool down',        sub: 'Stretching logged' },
-      ]
-    },
-    {
-      id: 21,
-      rank: 'A', rankColor: '#f59e0b',
-      category: 'Mental Fortitude',
-      title: 'Deep Work Block — 4h',
-      xp: 900, intelligence: '+3 Skill Points',
-      completedAt: '3 days ago',
-      progress: 100, progressLabel: 'COMPLETED',
-      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=80',
-      time: '4:00:00', successRate: '100%',
-      objectives: [
-        { id: 1, done: true, label: 'Isolation protocol', sub: 'All notifications disabled' },
-        { id: 2, done: true, label: '4 Pomodoro cycles',  sub: 'Zero interruptions' },
-        { id: 3, done: true, label: 'Output logged',      sub: '3 deliverables completed' },
-      ]
-    },
-    {
-      id: 22,
-      rank: 'C', rankColor: '#64748b',
-      category: 'Organization',
-      title: 'Inbox Zero Mission',
-      xp: 200, cr: 25,
-      completedAt: '5 days ago',
-      progress: 100, progressLabel: 'COMPLETED',
-      image: 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=400&q=80',
-      time: '22:15', successRate: '100%',
-      objectives: [
-        { id: 1, done: true, label: 'Triage all emails', sub: 'Archive / act / delegate' },
-        { id: 2, done: true, label: 'Unsubscribe x10',   sub: 'Reduce noise pipeline' },
-        { id: 3, done: true, label: 'Set filters',       sub: 'Auto-label rules created' },
-      ]
-    },
-  ],
-}
+import { useQuests } from '../hooks/useQuests'
+import { useUser } from '../context/UserContext'
+import { useLocation } from 'react-router-dom'
 
 const filterTags = [
   { id: 'Physical',     icon: 'fitness_center' },
@@ -192,20 +14,16 @@ const filterTags = [
 ]
 
 export default function Quests() {
-  const [activeTab, setActiveTab]       = useState('inProgress')
+  const location = useLocation()
+  const { user } = useUser() 
+  const [activeTab, setActiveTab]       = useState(location.state?.tab || 'inProgress')
   const [activeFilter, setActiveFilter] = useState('Rank S')
-  const [selectedQuest, setSelectedQuest] = useState(null)
+  const [selectedQuestId, setSelectedQuestId] = useState(null)
   const [search, setSearch]             = useState('')
-  const [missionResult, setMissionResult] = useState({
-  questTitle:    'Morning Workout Protocol',
-  xpGained:      2500,
-  creditsGained: 1250,
-  skillPoints:   2,
-  lootDrop:      { name: 'Neuro-Sync Module', rarity: 'rare' },
-  rankedUp:      true,
-  newLevel:      12,
-  fromLevel:     11 
-})
+  const { quests: questsData, loading, acceptMission, toggleObjective } = useQuests()
+  const [missionResult, setMissionResult] = useState(null)
+
+  const selectedQuest = questsData[activeTab]?.find(q => q.id === selectedQuestId) ?? null
 
   const {t} = useTranslation()
 
@@ -217,14 +35,15 @@ export default function Quests() {
 
   const currentQuests = questsData[activeTab] || []
 
-  const handleQuestClick = (quest) => {
-    if (selectedQuest?.id === quest.id) {
-      setSelectedQuest(null)
-    } else {
-      setSelectedQuest(quest)
-    }
+const handleQuestClick = (quest) => {
+  if (selectedQuestId === quest.id) {
+    setSelectedQuestId(null)
+  } else {
+    setSelectedQuestId(quest.id)
   }
-
+}
+if (loading) 
+  return <div className="qs-layout"><Sidebar /><p>Loading...</p></div>
   return (
     <div className="qs-layout">
       <Sidebar />
@@ -265,7 +84,7 @@ export default function Quests() {
                   className={`qs-tab ${activeTab === tab.id ? 'qs-tab-active' : ''}`}
                   onClick={() => {
                     setActiveTab(tab.id)
-                    setSelectedQuest(null)
+                    setSelectedQuestId(null)
                     }}
                 >
                   {tab.label}
@@ -428,17 +247,36 @@ export default function Quests() {
         <span className="material-symbols-outlined" style={{ fontSize: '16px', color: '#64748b' }}>alt_route</span>
         <span className="qs-objectives-label">{t.missionObjectives}</span>
       </div>
-      {selectedQuest.objectives.map(obj => (
-        <div key={obj.id} className="qs-objective">
-          <div className={`qs-obj-check ${obj.done ? 'qs-obj-done' : ''}`}>
-            {obj.done && <span className="material-symbols-outlined" style={{ fontSize: '14px', color: '#fff' }}>check</span>}
-          </div>
-          <div className="qs-obj-text">
-            <span className={`qs-obj-label ${obj.done ? 'qs-obj-label-done' : ''}`}>{obj.label}</span>
-            <span className="qs-obj-sub">{obj.sub}</span>
-          </div>
-        </div>
-      ))}
+{selectedQuest.objectives.map(obj => (
+  <div
+    key={obj.id}
+    className="qs-objective"
+    style={{ cursor: activeTab === 'inProgress' ? 'pointer' : 'default' }}
+onClick={async () => {
+  if (activeTab === 'inProgress') {
+    const result = await toggleObjective(selectedQuest.id, obj.id)
+    if (result?.completed) {
+      setMissionResult({
+        questTitle: selectedQuest.title,
+        xpGained:   selectedQuest.xp,
+      })
+    }
+  }
+}}
+  >
+    <div className={`qs-obj-check ${obj.done ? 'qs-obj-done' : ''}`}>
+      {obj.done && (
+        <span className="material-symbols-outlined" style={{ fontSize: '14px', color: '#fff' }}>
+          check
+        </span>
+      )}
+    </div>
+    <div className="qs-obj-text">
+      <span className={`qs-obj-label ${obj.done ? 'qs-obj-label-done' : ''}`}>{obj.label}</span>
+      <span className="qs-obj-sub">{obj.sub}</span>
+    </div>
+  </div>
+))}
     </div>
     {activeTab === 'inProgress' && (
     <button className="qs-btn-primary">
@@ -447,15 +285,24 @@ export default function Quests() {
     </button>
   )}
 
-  {activeTab === 'available' && (
-    <button className="qs-btn-primary">
-      <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>play_arrow</span>
-      {t.startMission ?? 'Start Mission'}
-    </button>
-  )}
+{activeTab === 'available' && (
+  <button
+    className="qs-btn-primary"
+    onClick={async () => {
+      const success = await acceptMission(selectedQuest.mission_id)
+      if (success) {
+        setSelectedQuestId(null)  // fecha o painel lateral
+        setActiveTab('inProgress')  // vai para a tab de ativas
+      }
+    }}
+  >
+    <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>play_arrow</span>
+    {t.startMission ?? 'Start Mission'}
+  </button>
+)}
 
   {activeTab === 'inProgress' && (
-    <button className="qs-btn-secondary" onClick={() => setSelectedQuest(null)}>
+    <button className="qs-btn-secondary" onClick={() => setSelectedQuestId(null)}>
       {t.abortProtocol}
     </button>
   )}
