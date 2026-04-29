@@ -10,6 +10,39 @@ import Quests from './pages/Quests'
 import ComingSoon from './components/Coming_Soon'
 import Settings from './pages/Settings'
 import MissionCompletePopup from './components/MissionCompletePopup'
+import { useDailyMissions } from './hooks/useDailyMissions'
+import { useUser } from './context/UserContext'
+
+function DailyMissionsManager() {
+  const { user } = useUser()
+  const { status, progress } = useDailyMissions(user)
+
+  // Mostra loading overlay enquanto gera
+  if (status === 'loading-model' || status === 'generating') {
+    return (
+      <div style={{
+        position: 'fixed', bottom: '24px', right: '24px', zIndex: 9999,
+        background: 'var(--color-bg-card)',
+        border: '1px solid var(--color-border)',
+        borderRadius: '12px', padding: '16px 20px',
+        maxWidth: '300px',
+        boxShadow: '0 4px 24px rgba(0,0,0,0.4)'
+      }}>
+        <p style={{ color: 'var(--color-primary)', margin: 0, fontSize: '13px', fontWeight: 600 }}>
+          ⚔️ {status === 'loading-model' ? 'Loading AI...' : 'Generating daily quests...'}
+        </p>
+        {progress && (
+          <p style={{ color: 'var(--color-text-muted)', margin: '6px 0 0', fontSize: '12px' }}>
+            {progress}
+          </p>
+        )}
+      </div>
+    )
+  }
+
+  return null
+}
+
 
 function App() {
 
@@ -28,8 +61,11 @@ function App() {
     }
   }, [])
 
+
+
   return (
     <BrowserRouter>
+      <DailyMissionsManager />
       <Routes>
         <Route path="/" element={<Initial_Page />} />
         <Route path="/Create_Account" element={<Create_Account />} />

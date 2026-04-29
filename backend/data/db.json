@@ -123,205 +123,153 @@
   ],
   "missions": [
     {
-      "id": 1,
-      "title": "Morning Warrior",
-      "description": "Build a powerful morning routine to start your days with energy.",
+      "id": 1777498913603,
+      "title": "Transformative Challenge",
+      "description": "Reach peak physical fitness in 3 months by exercising 3 times a week",
       "skill_id": 1,
       "xp_reward": 150,
       "objectives": [
         {
           "id": 1,
-          "description": "Exercise for 20 minutes"
+          "description": "Exercise for 30 minutes, 3 times a week, for 1 week"
         },
         {
           "id": 2,
-          "description": "Drink 2L of water"
+          "description": "Increase exercise duration by 10 minutes each week for 6 weeks"
         },
         {
           "id": 3,
-          "description": "Sleep before midnight"
+          "description": "Maintain a balanced diet and drink at least 8 glasses of water daily"
         }
-      ]
+      ],
+      "daily": true,
+      "created_by": "8af35343-d66a-458b-a1a6-e047fd46a58e"
     },
     {
-      "id": 2,
-      "title": "Knowledge Seeker",
-      "description": "Dedicate yourself to learning something new every day.",
+      "id": 1777498914801,
+      "title": "Unlock the Secrets of the Ancients",
+      "description": "Decipher the mysteries of forgotten civilizations and unlock new knowledge",
       "skill_id": 2,
-      "xp_reward": 200,
+      "xp_reward": 150,
       "objectives": [
         {
           "id": 1,
-          "description": "Study for at least 1 hour"
+          "description": "Study the astronomy of the ancient Mayans for 10 hours"
         },
         {
           "id": 2,
-          "description": "Complete a practice exercise"
+          "description": "Complete 5 in-depth essays on the history of science within the next week"
         },
         {
           "id": 3,
-          "description": "Review yesterday's notes"
+          "description": "Solve 10 challenging puzzles from a classic math textbook"
         }
-      ]
+      ],
+      "daily": true,
+      "created_by": "8af35343-d66a-458b-a1a6-e047fd46a58e"
     },
     {
-      "id": 3,
-      "title": "Master of Order",
-      "description": "Get your life organized and keep it that way.",
-      "skill_id": 3,
-      "xp_reward": 100,
-      "objectives": [
-        {
-          "id": 1,
-          "description": "Write a to-do list for the day"
-        },
-        {
-          "id": 2,
-          "description": "Clean and tidy your workspace"
-        },
-        {
-          "id": 3,
-          "description": "Plan the upcoming week"
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "title": "Social Butterfly",
-      "description": "Step out of your comfort zone and connect with others.",
-      "skill_id": 4,
+      "id": 1777498919483,
+      "title": "Uncovering Hidden Truths",
+      "description": "Delve into the world of academia to uncover hidden truths and strengthen your Studies skill.",
+      "skill_id": 2,
       "xp_reward": 120,
       "objectives": [
         {
           "id": 1,
-          "description": "Start a conversation with someone new"
+          "description": "Read 5 classic texts on philosophy and psychology within the next week."
         },
         {
           "id": 2,
-          "description": "Reach out to an old friend"
+          "description": "Conduct 3 in-depth research papers on a topic of your choice, using at least 3 credible sources."
         },
         {
           "id": 3,
-          "description": "Attend a social event or group activity"
+          "description": "Create a comprehensive study guide on a subject of your choice, including at least 5 key concepts and 10 practice questions."
         }
-      ]
+      ],
+      "daily": true,
+      "created_by": "8af35343-d66a-458b-a1a6-e047fd46a58e"
     },
     {
-      "id": 5,
-      "title": "Inner Peace",
-      "description": "Train your mind to stay calm and present.",
-      "skill_id": 5,
-      "xp_reward": 130,
+      "id": 1777498912468,
+      "title": "Morning Stretches",
+      "description": "Loosen up and get moving in just 10 minutes",
+      "skill_id": 1,
+      "xp_reward": 100,
       "objectives": [
         {
           "id": 1,
-          "description": "Meditate for 10 minutes"
+          "description": "Do 10 jumping jacks"
         },
         {
           "id": 2,
-          "description": "Write in a gratitude journal"
+          "description": "Stretch for 30 seconds"
         },
         {
           "id": 3,
-          "description": "Take a 20-minute walk without your phone"
+          "description": "Drink 1 glass of water"
         }
-      ]
+      ],
+      "daily": true,
+      "created_by": "8af35343-d66a-458b-a1a6-e047fd46a58e"
     },
     {
-      "id": 6,
-      "title": "Creative Spark",
-      "description": "Unleash your creativity and express yourself.",
+      "id": 1777498917239,
+      "title": "Study Buddy",
+      "description": "Help a friend with their studies and get a boost in your own skills",
+      "skill_id": 2,
+      "xp_reward": 150,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Study with the friend for 10 minutes"
+        },
+        {
+          "id": 2,
+          "description": "Assist your friend in completing 3 problems"
+        },
+        {
+          "id": 3,
+          "description": "Discuss a topic your friend is struggling with for 5 minutes"
+        }
+      ],
+      "daily": true,
+      "created_by": "8af35343-d66a-458b-a1a6-e047fd46a58e"
+    },
+    {
+      "id": 1777498911877,
+      "title": "Artistic Interlude",
+      "description": "Find 3 unique items in the world that spark creativity and inspire art.",
       "skill_id": 6,
-      "xp_reward": 110,
+      "xp_reward": 100,
       "objectives": [
         {
           "id": 1,
-          "description": "Spend 30 minutes on a creative hobby"
+          "description": "Find a vintage typewriter"
         },
         {
           "id": 2,
-          "description": "Share your work with someone"
+          "description": "Discover a hidden garden with colorful flowers"
         },
         {
           "id": 3,
-          "description": "Try a new creative activity"
+          "description": "Observe a street performer's artistry"
         }
-      ]
+      ],
+      "daily": true,
+      "created_by": "8af35343-d66a-458b-a1a6-e047fd46a58e"
     }
   ],
   "user_missions": [
     {
-      "id": "a1b2c3d4-0001-4000-8000-000000000001",
-      "user_id": "bd5c6ae2-733e-414a-9d00-852d41b9f34d",
-      "mission_id": 1,
+      "id": "cac86f91-39e8-4349-9140-c6348964fb8d",
+      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "mission_id": 1777498913603,
+      "type": "main",
+      "daily_date": "2026-04-29",
       "status": "active",
-      "accepted_at": "2025-04-18T08:00:00Z",
-      "completed_at": null,
-      "objectives_progress": [
-        {
-          "objective_id": 1,
-          "completed": true
-        },
-        {
-          "objective_id": 2,
-          "completed": false
-        },
-        {
-          "objective_id": 3,
-          "completed": false
-        }
-      ]
-    },
-    {
-      "id": "a1b2c3d4-0001-4000-8000-000000000002",
-      "user_id": "bd5c6ae2-733e-414a-9d00-852d41b9f34d",
-      "mission_id": 3,
-      "status": "completed",
-      "accepted_at": "2025-04-10T09:00:00Z",
-      "completed_at": "2025-04-17T21:00:00Z",
-      "objectives_progress": [
-        {
-          "objective_id": 1,
-          "completed": true
-        },
-        {
-          "objective_id": 2,
-          "completed": true
-        },
-        {
-          "objective_id": 3,
-          "completed": true
-        }
-      ]
-    },
-    {
-      "id": "a1b2c3d4-0001-4000-8000-000000000003",
-      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
-      "mission_id": 2,
-      "status": "completed",
-      "accepted_at": "2025-04-19T10:00:00Z",
-      "completed_at": "2026-04-21T19:34:07.530Z",
-      "objectives_progress": [
-        {
-          "objective_id": 1,
-          "completed": true
-        },
-        {
-          "objective_id": 2,
-          "completed": true
-        },
-        {
-          "objective_id": 3,
-          "completed": true
-        }
-      ]
-    },
-    {
-      "id": "a1b2c3d4-0001-4000-8000-000000000004",
-      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
-      "mission_id": 6,
-      "status": "abandoned",
-      "accepted_at": "2025-04-05T14:00:00Z",
+      "accepted_at": "2026-04-29T21:41:49.878Z",
       "completed_at": null,
       "objectives_progress": [
         {
@@ -339,77 +287,109 @@
       ]
     },
     {
-      "id": "f8ee546d-321e-46d9-83fa-fb1e4623a7cc",
+      "id": "91cbad22-775d-45e1-9c04-ef80168d1660",
       "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
-      "mission_id": 1,
-      "status": "completed",
-      "accepted_at": "2026-04-21T13:39:48.879Z",
-      "completed_at": "2026-04-21T19:52:01.777Z",
-      "objectives_progress": [
-        {
-          "objective_id": 1,
-          "completed": true
-        },
-        {
-          "objective_id": 2,
-          "completed": true
-        },
-        {
-          "objective_id": 3,
-          "completed": true
-        }
-      ]
-    },
-    {
-      "id": "50912978-47d5-4820-a890-c5cd6311cbcf",
-      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
-      "mission_id": 3,
-      "status": "completed",
-      "accepted_at": "2026-04-21T13:40:09.883Z",
-      "completed_at": "2026-04-21T20:10:48.358Z",
-      "objectives_progress": [
-        {
-          "objective_id": 1,
-          "completed": true
-        },
-        {
-          "objective_id": 2,
-          "completed": true
-        },
-        {
-          "objective_id": 3,
-          "completed": true
-        }
-      ]
-    },
-    {
-      "id": "349712f8-383d-4c09-bc56-7f26e9b03a19",
-      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
-      "mission_id": 4,
-      "status": "completed",
-      "accepted_at": "2026-04-21T20:11:02.232Z",
-      "completed_at": "2026-04-22T14:05:44.362Z",
-      "objectives_progress": [
-        {
-          "objective_id": 1,
-          "completed": true
-        },
-        {
-          "objective_id": 2,
-          "completed": true
-        },
-        {
-          "objective_id": 3,
-          "completed": true
-        }
-      ]
-    },
-    {
-      "id": "f63bcfa6-1c22-4739-a611-afa2f450055d",
-      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
-      "mission_id": 5,
+      "mission_id": 1777498914801,
+      "type": "main",
+      "daily_date": "2026-04-29",
       "status": "active",
-      "accepted_at": "2026-04-22T14:05:54.028Z",
+      "accepted_at": "2026-04-29T21:41:49.878Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "53f38e78-fa00-47b4-a946-3a06a041d6d4",
+      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "mission_id": 1777498919483,
+      "type": "main",
+      "daily_date": "2026-04-29",
+      "status": "active",
+      "accepted_at": "2026-04-29T21:41:49.878Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "394da777-ac50-4424-ace4-6f215db5eb02",
+      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "mission_id": 1777498912468,
+      "type": "secondary",
+      "daily_date": "2026-04-29",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "4898bb59-fea9-4ccc-b322-a587920d7336",
+      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "mission_id": 1777498917239,
+      "type": "secondary",
+      "daily_date": "2026-04-29",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "7a76193e-f2bc-44e5-8787-2d38c8fe653d",
+      "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
+      "mission_id": 1777498911877,
+      "type": "secondary",
+      "daily_date": "2026-04-29",
+      "status": "available",
+      "accepted_at": null,
       "completed_at": null,
       "objectives_progress": [
         {

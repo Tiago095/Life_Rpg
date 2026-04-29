@@ -69,18 +69,27 @@ export function useQuests() {
 
       setQuests({
         inProgress: userMissions
-          .filter(um => um.status === 'active')
-          .map(um => transform(um.mission, um))
-          .filter(Boolean),
+        .filter(um => um.status === 'active')
+        .map(um => transform(um.mission, um))
+        .filter(Boolean),
 
-        completed: userMissions
-          .filter(um => um.status === 'completed')
-          .map(um => transform(um.mission, um))
-          .filter(Boolean),
+      completed: userMissions
+        .filter(um => um.status === 'completed')
+        .map(um => transform(um.mission, um))
+        .filter(Boolean),
 
-        available: missions
+      available: [
+        // Missões globais que o utilizador nunca aceitou
+        ...missions
           .filter(m => !acceptedMissionIds.has(m.id))
           .map(m => transform(m, null)),
+
+        // ← Missões diárias secundárias à espera de ser aceites
+        ...userMissions
+          .filter(um => um.status === 'available')
+          .map(um => transform(um.mission, um))
+          .filter(Boolean)
+        ]
       })
     })
     .catch(err => console.error('useQuests error:', err))
@@ -131,5 +140,5 @@ export function useQuests() {
   return data
 }
 
-  return { quests, loading, acceptMission, toggleObjective }
+  return { quests, loading, acceptMission, toggleObjective, fetchQuests }
 }

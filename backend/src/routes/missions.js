@@ -6,6 +6,8 @@ import {
   acceptMission,
   toggleObjective,
   abandonMission,
+  getDailyStatus, 
+  saveDailyMissions
 } from '../controllers/missionsController.js'
 
 const router = Router()
@@ -15,5 +17,7 @@ router.get('/user',                                    requireAuth, getUserMissi
 router.post('/:missionId/accept',                      requireAuth, acceptMission)
 router.patch('/:userMissionId/objective/:objectiveId', requireAuth, toggleObjective)
 router.patch('/:userMissionId/abandon',                requireAuth, abandonMission)
+router.get('/daily/status', requireAuth, getDailyStatus)
+router.post('/daily',       requireAuth, saveDailyMissions)
 
 export default router
