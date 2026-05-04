@@ -307,14 +307,6 @@ export default function Settings() {
                 </div>
               </div>
             </div>
-
-            <div className="st-2fa-box">
-              <span className="material-symbols-outlined" style={{ fontSize: '20px', color: 'var(--color-primary)' }}>verified_user</span>
-              <div>
-                <p className="st-2fa-title">{t.twoFactorTitle}</p>
-                <p className="st-2fa-sub">{t.twoFactorSub}</p>
-              </div>
-            </div>
           </section>
 
           <div className="st-divider" />
@@ -365,8 +357,8 @@ export default function Settings() {
                 <div className="st-select-wrapper">
                   <select className="st-select" value={language} onChange={(e) => setLanguage(e.target.value)}>
                       <option value="English [EN-US]">{t.en}</option>
-                      <option value="Portuguese [PT-PT]">{t.pt}</option>
-                      <option value="Spanish [ES]">{t.es}</option>  
+                      {/*<option value="Portuguese [PT-PT]">{t.pt}</option>*/}
+                      {/*<option value="Spanish [ES]">{t.es}</option> */ }
                   </select>
                   <span className="material-symbols-outlined st-select-icon">expand_more</span>
                 </div>
