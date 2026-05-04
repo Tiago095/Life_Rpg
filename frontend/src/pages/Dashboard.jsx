@@ -123,10 +123,10 @@ export default function Dashboard() {
             <button className="db-icon-btn" onClick={() => navigate('/MarketPlace')}>
               <span className="material-symbols-outlined">shopping_cart</span>
             </button>
-            <div className="db-currency">
+           {/* <div className="db-currency">
               <span className="material-symbols-outlined db-currency-icon">toll</span>
-              <span className="db-currency-amount">{gold.toLocaleString()} Cr</span>
-            </div>
+              <span className="db-currency-amount">{gold.toLocaleString()} Cr</span> 
+            </div> */}
           </div>
         </div>
 
@@ -249,18 +249,10 @@ export default function Dashboard() {
                 </span>
               ))}
             </div>
-
-            <div className="db-cal-event">
-              <span className="db-cal-event-dot" />
-              <div>
-                <p className="db-cal-event-label">{t.mainEventToday}</p>
-                <p className="db-cal-event-name">Cardio Raid - 18:00 UTC</p>
-              </div>
-            </div>
           </div>
         </div>
 
-        {/* PARTY FINDER */}
+        {/* PARTY FINDER 
         <div className="db-panel-card">
           <div className="db-panel-header">
             <span className="material-symbols-outlined db-panel-icon">group_add</span>
@@ -280,9 +272,9 @@ export default function Dashboard() {
               {t.inviteFriends}
             </button>
           </div>
-        </div>
+        </div> 
 
-        {/* GLOBAL TAVERN CHAT */}
+        {/* GLOBAL TAVERN CHAT 
         <div className="db-panel-card db-chat-card">
           <div className="db-panel-header">
             <h3 className="db-panel-title">{t.globalChat}</h3>
@@ -303,6 +295,8 @@ export default function Dashboard() {
             onChange={(e) => setChatInput(e.target.value)}
           />
         </div>
+        */}
+        
 
       </aside>
     </div>

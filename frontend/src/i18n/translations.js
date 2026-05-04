@@ -37,8 +37,6 @@ export const translations = {
     registeredEmail:     'Registered Email',
     encryptionKey:       'Encryption Key (Password)',
     newEncryptionKey:    'New encryption key...',
-    twoFactorTitle:      'Two-Factor Auth Enabled',
-    twoFactorSub:        'Biometric scan required for all major transactions.',
     userPreferences:     'User Preferences',
     neuralNotif:         'Neural Notifications',
     neuralNotifSub:      'Direct-to-mind HUD alerts for quest updates.',
@@ -86,7 +84,7 @@ export const translations = {
     // COMING SOON
     systemInitializing:  'SYSTEM INITIALIZING',
     comingSoon:          'COMING SOON',
-    comingSoonDesc:      'LifeRPG is undergoing final neural synchronization. Prepare for',
+    comingSoonDesc:      'LifeRPG is undergoing final neural synchronization. Prepare for ',
     realityTransform:    'reality transformation',
 
   // MISSION POPUP — SUCCESS
@@ -156,8 +154,6 @@ export const translations = {
     registeredEmail:     'Email Registado',
     encryptionKey:       'Chave de Encriptação (Password)',
     newEncryptionKey:    'Nova chave de encriptação...',
-    twoFactorTitle:      'Autenticação de Dois Fatores Ativa',
-    twoFactorSub:        'Verificação biométrica obrigatória para todas as transações.',
     userPreferences:     'Preferências do Utilizador',
     neuralNotif:         'Notificações Neurais',
     neuralNotifSub:      'Alertas HUD diretos para atualizações de missões.',
@@ -204,7 +200,7 @@ export const translations = {
     // COMING SOON
     systemInitializing:  'SISTEMA A INICIALIZAR',
     comingSoon:          'EM BREVE',
-    comingSoonDesc:      'LifeRPG está a passar pela sincronização neural final. Prepara-te para a',
+    comingSoonDesc:      'LifeRPG está a passar pela sincronização neural final. Prepara-te para a ',
     realityTransform:    'transformação da realidade',
 
      // MISSION POPUP — SUCCESS
@@ -272,8 +268,6 @@ export const translations = {
     registeredEmail:     'Email Registrado',
     encryptionKey:       'Clave de Encriptación (Contraseña)',
     newEncryptionKey:    'Nueva clave de encriptación...',
-    twoFactorTitle:      'Autenticación de Dos Factores Activa',
-    twoFactorSub:        'Escaneo biométrico requerido para todas las transacciones.',
     userPreferences:     'Preferencias del Usuario',
     neuralNotif:         'Notificaciones Neurales',
     neuralNotifSub:      'Alertas HUD directas para actualizaciones de misiones.',
@@ -319,7 +313,7 @@ export const translations = {
 
     systemInitializing:  'SISTEMA INICIALIZANDO',
     comingSoon:          'PRÓXIMAMENTE',
-    comingSoonDesc:      'LifeRPG está en sincronización neural final. Prepárate para la',
+    comingSoonDesc:      'LifeRPG está en sincronización neural final. Prepárate para la ',
     realityTransform:    'transformación de la realidad',
     
 
