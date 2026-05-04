@@ -15,22 +15,27 @@ const VISUAL_DEFAULTS = {
 }
 
 export function useQuests() {
-  const { updateUser } = useUser()
+  const { user, updateUser } = useUser()
   const [quests, setQuests] = useState({ inProgress: [], available: [], completed: [] })
   const [loading, setLoading] = useState(true)
 
   const fetchQuests = () => {
     const token = localStorage.getItem('token')
-    if (!token) { setLoading(false); return }
+    if (!token || !user?.skills?.length) { setLoading(false); return }
 
     const headers = { Authorization: `Bearer ${token}` }
 
     Promise.all([
       fetch('http://localhost:3000/api/missions',      { headers }).then(r => r.json()),
       fetch('http://localhost:3000/api/missions/user', { headers }).then(r => r.json()),
-    ]).then(([missions, userMissions]) => {
+      fetch('http://localhost:3000/api/skills',        { headers }).then(r => r.json()),
+    ]).then(([missions, userMissions, skills]) => {
 
+      const skillMap = Object.fromEntries(skills.map(s => [s.id, s.name]))
       const acceptedMissionIds = new Set(userMissions.map(um => um.mission_id))
+      const availableTemplates = missions
+        .filter(m => !m.daily)
+        .filter(m => user.skills.includes(m.skill_id))
 
       const transform = (mission, userMission = null) => {
         const progress = userMission
@@ -44,7 +49,7 @@ export function useQuests() {
           id:          userMission?.id ?? `available-${mission.id}`,
           mission_id:  mission.id,
           ...RANK_BY_XP(mission.xp_reward),
-          category:    userMission?.skill?.name ?? mission.skill_id,
+          category:    userMission?.skill?.name ?? skillMap[mission.skill_id] ?? mission.skill_id,
           title:       mission.title,
           description: mission.description,
           xp:          mission.xp_reward,
@@ -69,26 +74,26 @@ export function useQuests() {
 
       setQuests({
         inProgress: userMissions
-        .filter(um => um.status === 'active')
-        .map(um => transform(um.mission, um))
-        .filter(Boolean),
-
-      completed: userMissions
-        .filter(um => um.status === 'completed')
-        .map(um => transform(um.mission, um))
-        .filter(Boolean),
-
-      available: [
-        // Missões globais que o utilizador nunca aceitou
-        ...missions
-          .filter(m => !acceptedMissionIds.has(m.id))
-          .map(m => transform(m, null)),
-
-        // ← Missões diárias secundárias à espera de ser aceites
-        ...userMissions
-          .filter(um => um.status === 'available')
+          .filter(um => um.status === 'active')
           .map(um => transform(um.mission, um))
-          .filter(Boolean)
+          .filter(Boolean),
+
+        completed: userMissions
+          .filter(um => um.status === 'completed')
+          .map(um => transform(um.mission, um))
+          .filter(Boolean),
+
+        available: [
+          // Missões globais que o utilizador nunca aceitou e que correspondem às suas skills
+          ...availableTemplates
+            .filter(m => !acceptedMissionIds.has(m.id))
+            .map(m => transform(m, null)),
+
+          // ← Missões diárias secundárias à espera de ser aceites
+          ...userMissions
+            .filter(um => um.status === 'available')
+            .map(um => transform(um.mission, um))
+            .filter(Boolean)
         ]
       })
     })
@@ -96,7 +101,9 @@ export function useQuests() {
     .finally(() => setLoading(false))
   }
 
-  useEffect(() => { fetchQuests() }, [])
+  useEffect(() => {
+    if (user) fetchQuests()
+  }, [user])
 
   const acceptMission = async (missionId) => {
     const token = localStorage.getItem('token')

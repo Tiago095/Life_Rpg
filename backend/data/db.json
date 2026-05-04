@@ -123,6 +123,204 @@
   ],
   "missions": [
     {
+      "id": 1,
+      "title": "Morning Warrior",
+      "description": "Build a powerful morning routine to start your days with energy.",
+      "skill_id": 1,
+      "xp_reward": 150,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Exercise for 20 minutes"
+        },
+        {
+          "id": 2,
+          "description": "Drink 2L of water"
+        },
+        {
+          "id": 3,
+          "description": "Sleep before midnight"
+        }
+      ],
+      "daily": false
+    },
+    {
+      "id": 2,
+      "title": "Knowledge Seeker",
+      "description": "Dedicate yourself to learning something new every day.",
+      "skill_id": 2,
+      "xp_reward": 200,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Study for at least 1 hour"
+        },
+        {
+          "id": 2,
+          "description": "Complete a practice exercise"
+        },
+        {
+          "id": 3,
+          "description": "Review yesterday's notes"
+        }
+      ],
+      "daily": false
+    },
+    {
+      "id": 3,
+      "title": "Master of Order",
+      "description": "Get your life organized and keep it that way.",
+      "skill_id": 3,
+      "xp_reward": 100,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Write a to-do list for the day"
+        },
+        {
+          "id": 2,
+          "description": "Clean and tidy your workspace"
+        },
+        {
+          "id": 3,
+          "description": "Plan the upcoming week"
+        }
+      ],
+      "daily": false
+    },
+    {
+      "id": 4,
+      "title": "Social Butterfly",
+      "description": "Step out of your comfort zone and connect with others.",
+      "skill_id": 4,
+      "xp_reward": 120,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Start a conversation with someone new"
+        },
+        {
+          "id": 2,
+          "description": "Reach out to an old friend"
+        },
+        {
+          "id": 3,
+          "description": "Attend a social event or group activity"
+        }
+      ],
+      "daily": false
+    },
+    {
+      "id": 5,
+      "title": "Inner Peace",
+      "description": "Train your mind to stay calm and present.",
+      "skill_id": 5,
+      "xp_reward": 130,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Meditate for 10 minutes"
+        },
+        {
+          "id": 2,
+          "description": "Write in a gratitude journal"
+        },
+        {
+          "id": 3,
+          "description": "Take a 20-minute walk without your phone"
+        }
+      ],
+      "daily": false
+    },
+    {
+      "id": 6,
+      "title": "Creative Spark",
+      "description": "Unleash your creativity and express yourself.",
+      "skill_id": 6,
+      "xp_reward": 110,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Spend 30 minutes on a creative hobby"
+        },
+        {
+          "id": 2,
+          "description": "Share your work with someone"
+        },
+        {
+          "id": 3,
+          "description": "Try a new creative activity"
+        }
+      ],
+      "daily": false
+    },
+    {
+      "id": 7,
+      "title": "Money Mindset",
+      "description": "Take control of your finances and build healthy money habits.",
+      "skill_id": 7,
+      "xp_reward": 140,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Track all expenses for the day"
+        },
+        {
+          "id": 2,
+          "description": "Set a weekly budget"
+        },
+        {
+          "id": 3,
+          "description": "Read 30 minutes about personal finance"
+        }
+      ],
+      "daily": false
+    },
+    {
+      "id": 8,
+      "title": "Body Temple",
+      "description": "Take care of your body with healthy habits every day.",
+      "skill_id": 8,
+      "xp_reward": 130,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Sleep at least 7 hours"
+        },
+        {
+          "id": 2,
+          "description": "Eat a balanced meal with vegetables"
+        },
+        {
+          "id": 3,
+          "description": "Drink 2L of water throughout the day"
+        }
+      ],
+      "daily": false
+    },
+    {
+      "id": 9,
+      "title": "Code Breaker",
+      "description": "Level up your technical skills with daily practice.",
+      "skill_id": 9,
+      "xp_reward": 160,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Solve a coding challenge"
+        },
+        {
+          "id": 2,
+          "description": "Read documentation for 20 minutes"
+        },
+        {
+          "id": 3,
+          "description": "Build or improve a small personal project"
+        }
+      ],
+      "daily": false
+    },
+    {
       "id": 1777498913603,
       "title": "Transformative Challenge",
       "description": "Reach peak physical fitness in 3 months by exercising 3 times a week",
@@ -192,69 +390,69 @@
       "created_by": "8af35343-d66a-458b-a1a6-e047fd46a58e"
     },
     {
-      "id": 1777498912468,
-      "title": "Morning Stretches",
-      "description": "Loosen up and get moving in just 10 minutes",
+      "id": 1777907586522,
+      "title": "Morning Stretch",
+      "description": "Get moving and shake off morning grogginess",
       "skill_id": 1,
-      "xp_reward": 100,
+      "xp_reward": 75,
       "objectives": [
         {
           "id": 1,
-          "description": "Do 10 jumping jacks"
+          "description": "Do 5 minutes of light cardio"
         },
         {
           "id": 2,
-          "description": "Stretch for 30 seconds"
+          "description": "Stretch for 3 minutes"
         },
         {
           "id": 3,
-          "description": "Drink 1 glass of water"
+          "description": "Take a 2-minute walk outside"
         }
       ],
       "daily": true,
       "created_by": "8af35343-d66a-458b-a1a6-e047fd46a58e"
     },
     {
-      "id": 1777498917239,
-      "title": "Study Buddy",
-      "description": "Help a friend with their studies and get a boost in your own skills",
+      "id": 1777907591703,
+      "title": "Quick Study Session",
+      "description": "Review notes for 30 minutes to boost your Studies skill",
       "skill_id": 2,
+      "xp_reward": 75,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Review notes on a topic you've studied before"
+        },
+        {
+          "id": 2,
+          "description": "Summarize a complex concept in 1 minute or less"
+        },
+        {
+          "id": 3,
+          "description": "Answer 3 trivia questions on a subject you're familiar with"
+        }
+      ],
+      "daily": true,
+      "created_by": "8af35343-d66a-458b-a1a6-e047fd46a58e"
+    },
+    {
+      "id": 1777907590500,
+      "title": "Doodle Dash",
+      "description": "Sketch 5 unique items in 15 minutes",
+      "skill_id": 6,
       "xp_reward": 150,
       "objectives": [
         {
           "id": 1,
-          "description": "Study with the friend for 10 minutes"
+          "description": "Sketch 5 new items"
         },
         {
           "id": 2,
-          "description": "Assist your friend in completing 3 problems"
+          "description": "Use all colors in your palette"
         },
         {
           "id": 3,
-          "description": "Discuss a topic your friend is struggling with for 5 minutes"
-        }
-      ],
-      "daily": true,
-      "created_by": "8af35343-d66a-458b-a1a6-e047fd46a58e"
-    },
-    {
-      "id": 1777498911877,
-      "title": "Artistic Interlude",
-      "description": "Find 3 unique items in the world that spark creativity and inspire art.",
-      "skill_id": 6,
-      "xp_reward": 100,
-      "objectives": [
-        {
-          "id": 1,
-          "description": "Find a vintage typewriter"
-        },
-        {
-          "id": 2,
-          "description": "Discover a hidden garden with colorful flowers"
-        },
-        {
-          "id": 3,
-          "description": "Observe a street performer's artistry"
+          "description": "Create 3 different compositions"
         }
       ],
       "daily": true,
@@ -335,11 +533,11 @@
       ]
     },
     {
-      "id": "394da777-ac50-4424-ace4-6f215db5eb02",
+      "id": "c0ff5621-2a01-44bf-80a7-d813fb3af673",
       "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
-      "mission_id": 1777498912468,
+      "mission_id": 1777907586522,
       "type": "secondary",
-      "daily_date": "2026-04-29",
+      "daily_date": "2026-05-04",
       "status": "available",
       "accepted_at": null,
       "completed_at": null,
@@ -359,11 +557,11 @@
       ]
     },
     {
-      "id": "4898bb59-fea9-4ccc-b322-a587920d7336",
+      "id": "81e5eeb5-0ddb-4c0a-9d63-2e7457aa3705",
       "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
-      "mission_id": 1777498917239,
+      "mission_id": 1777907591703,
       "type": "secondary",
-      "daily_date": "2026-04-29",
+      "daily_date": "2026-05-04",
       "status": "available",
       "accepted_at": null,
       "completed_at": null,
@@ -383,11 +581,11 @@
       ]
     },
     {
-      "id": "7a76193e-f2bc-44e5-8787-2d38c8fe653d",
+      "id": "e02e0140-8cdc-4218-ada6-df5481d64629",
       "user_id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
-      "mission_id": 1777498911877,
+      "mission_id": 1777907590500,
       "type": "secondary",
-      "daily_date": "2026-04-29",
+      "daily_date": "2026-05-04",
       "status": "available",
       "accepted_at": null,
       "completed_at": null,
