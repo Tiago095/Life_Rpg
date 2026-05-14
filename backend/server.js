@@ -13,7 +13,6 @@ const app = express()
 
 app.use(cors({
   origin: 'http://localhost:5173'
-  // credentials já não é necessário
 }))
 app.use(express.json())
 

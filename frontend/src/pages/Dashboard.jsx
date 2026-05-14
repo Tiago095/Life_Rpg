@@ -78,33 +78,33 @@ export default function Dashboard() {
   const activeQuests = quests.inProgress.slice(0, 3)
   const gold = user?.xp ?? 0
 
- useEffect(() => {
-    if (!user) return
-    const token = localStorage.getItem('token')
+useEffect(() => {
+  if (!user) return
+  const token = localStorage.getItem('token')
 
-    // Busca todas as skills para fazer o join com os IDs do utilizador
-    fetch('http://localhost:3000/api/missions', {  // reutiliza o endpoint que já tenho
-      headers: { Authorization: `Bearer ${token}` }
-    })
+  fetch('http://localhost:3000/api/skills', {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+    .then(r => r.json())
+    .then(allSkills => {
+      const userSkillsData = user.skills || []  // agora é array de { skillId, rank }
 
-    // Busca as skills
-    fetch('http://localhost:3000/api/skills', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(r => r.json())
-      .then(allSkills => {
-        const userSkillIds = user.skills || []
-        const matched = allSkills
-          .filter(s => userSkillIds.includes(s.id))
-          .map(s => ({
+      const matched = allSkills
+        .filter(s => userSkillsData.some(us => us.skillId === s.id))
+        .map(s => {
+          const userSkill = userSkillsData.find(us => us.skillId === s.id)
+          return {
             id: s.id,
             name: s.name,
+            rank: userSkill?.rank ?? 0,
             ...(SKILL_VISUAL[s.name] || { icon: 'star', color: '#64748b' })
-          }))
-        setUserSkills(matched)
-      })
-      .catch(err => console.error('Erro ao buscar skills:', err))
-  }, [user])
+          }
+        })
+
+      setUserSkills(matched)
+    })
+    .catch(err => console.error('Erro ao buscar skills:', err))
+}, [user])
 
   return (
     <div className="db-layout">

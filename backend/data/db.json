@@ -36,7 +36,7 @@
       "maxXp": 1000,
       "avatar": "avatar2",
       "language": "English [EN-US]",
-      "theme": "Void Black",
+      "theme": "Cyberpunk Blue (Default)",
       "highContrast": true
     },
     {
@@ -46,6 +46,7 @@
       "password": "$2b$10$NS2iJRgFOa6xgFmC9VhXZeiaMkclpLWpYCNtVzpJLSAQ9cdByI0aC",
       "level": 4,
       "xp": 570,
+      "skillPoints": 0,
       "avatar": "avatar2",
       "language": "English [EN-US]",
       "theme": "Cyberpunk Blue (Default)",
@@ -55,6 +56,57 @@
         2,
         6
       ]
+    },
+    {
+      "id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "username": "Toko",
+      "email": "t@gmail.com",
+      "password": "$2b$10$oSQnwsByyc2QHPNp30ydseOuIgkJenrKtJjndRPmbwrIbt4W3qOOi",
+      "level": 2,
+      "xp": 150,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Void Black",
+      "highContrast": true,
+      "skills": [
+        {
+          "skillId": 1,
+          "rank": 4
+        },
+        {
+          "skillId": 2,
+          "rank": 6
+        },
+        {
+          "skillId": 3,
+          "rank": 1
+        },
+        {
+          "skillId": 4,
+          "rank": 2
+        },
+        {
+          "skillId": 5,
+          "rank": 6
+        },
+        {
+          "skillId": 6,
+          "rank": 1
+        },
+        {
+          "skillId": 7,
+          "rank": 6
+        },
+        {
+          "skillId": 8,
+          "rank": 2
+        },
+        {
+          "skillId": 9,
+          "rank": 32
+        }
+      ],
+      "skillPoints": 7
     }
   ],
   "skills": [
@@ -93,6 +145,260 @@
     {
       "id": 9,
       "name": "Technical"
+    }
+  ],
+  "skillPerks": [
+    {
+      "id": "xp_ex1",
+      "skillId": 1,
+      "effectType": "xp_percent",
+      "value": 15,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_ex2",
+      "skillId": 1,
+      "effectType": "xp_flat",
+      "value": 25,
+      "requiredRank": 3
+    },
+    {
+      "id": "credits_ex",
+      "skillId": 1,
+      "effectType": "credits_percent",
+      "value": 10,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_ex",
+      "skillId": 1,
+      "effectType": "drop_percent",
+      "value": 5,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_std1",
+      "skillId": 2,
+      "effectType": "xp_percent",
+      "value": 20,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_std2",
+      "skillId": 2,
+      "effectType": "xp_flat",
+      "value": 30,
+      "requiredRank": 3
+    },
+    {
+      "id": "credist_std",
+      "skillId": 2,
+      "effectType": "credits_percent",
+      "value": 12,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_std",
+      "skillId": 2,
+      "effectType": "drop_percent",
+      "value": 6,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_org1",
+      "skillId": 3,
+      "effectType": "xp_percent",
+      "value": 15,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_org2",
+      "skillId": 3,
+      "effectType": "xp_flat",
+      "value": 25,
+      "requiredRank": 3
+    },
+    {
+      "id": "credist_org",
+      "skillId": 3,
+      "effectType": "credits_percent",
+      "value": 10,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_org",
+      "skillId": 3,
+      "effectType": "drop_percent",
+      "value": 4,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_soc1",
+      "skillId": 4,
+      "effectType": "xp_percent",
+      "value": 18,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_soc2",
+      "skillId": 4,
+      "effectType": "xp_flat",
+      "value": 20,
+      "requiredRank": 3
+    },
+    {
+      "id": "credist_soc",
+      "skillId": 4,
+      "effectType": "credits_percent",
+      "value": 15,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_soc",
+      "skillId": 4,
+      "effectType": "drop_percent",
+      "value": 5,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_md1",
+      "skillId": 5,
+      "effectType": "xp_percent",
+      "value": 20,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_md2",
+      "skillId": 5,
+      "effectType": "xp_flat",
+      "value": 30,
+      "requiredRank": 3
+    },
+    {
+      "id": "credist_md",
+      "skillId": 5,
+      "effectType": "credits_percent",
+      "value": 8,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_md",
+      "skillId": 5,
+      "effectType": "drop_percent",
+      "value": 7,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_cr1",
+      "skillId": 6,
+      "effectType": "xp_percent",
+      "value": 22,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_cr2",
+      "skillId": 6,
+      "effectType": "xp_flat",
+      "value": 35,
+      "requiredRank": 3
+    },
+    {
+      "id": "credits_cr",
+      "skillId": 6,
+      "effectType": "credits_percent",
+      "value": 12,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_cr",
+      "skillId": 6,
+      "effectType": "drop_percent",
+      "value": 6,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_fin1",
+      "skillId": 7,
+      "effectType": "xp_percent",
+      "value": 15,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_fin2",
+      "skillId": 7,
+      "effectType": "xp_flat",
+      "value": 25,
+      "requiredRank": 3
+    },
+    {
+      "id": "credits_fin",
+      "skillId": 7,
+      "effectType": "credits_percent",
+      "value": 20,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_fin",
+      "skillId": 7,
+      "effectType": "drop_percent",
+      "value": 5,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_hlt1",
+      "skillId": 8,
+      "effectType": "xp_percent",
+      "value": 18,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_hlt2",
+      "skillId": 8,
+      "effectType": "xp_flat",
+      "value": 20,
+      "requiredRank": 3
+    },
+    {
+      "id": "credits_hlt",
+      "skillId": 8,
+      "effectType": "credits_percent",
+      "value": 10,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_hlt",
+      "skillId": 8,
+      "effectType": "drop_percent",
+      "value": 5,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_tec1",
+      "skillId": 9,
+      "effectType": "xp_percent",
+      "value": 25,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_tec2",
+      "skillId": 9,
+      "effectType": "xp_flat",
+      "value": 40,
+      "requiredRank": 3
+    },
+    {
+      "id": "credist_tec",
+      "skillId": 9,
+      "effectType": "credits_percent",
+      "value": 15,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_tec",
+      "skillId": 9,
+      "effectType": "drop_percent",
+      "value": 8,
+      "requiredRank": 8
     }
   ],
   "levels": [
@@ -423,6 +729,50 @@
         {
           "objective_id": 3,
           "completed": false
+        }
+      ]
+    },
+    {
+      "id": "f752cb27-e524-46a1-8334-ab94cb87d685",
+      "user_id": "1",
+      "mission_id": 1,
+      "status": "active",
+      "accepted_at": "2026-05-11T19:43:27.859Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "e2e6ac74-f688-4e51-9fc7-9bb13d5791df",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1,
+      "status": "completed",
+      "accepted_at": "2026-05-11T20:44:42.556Z",
+      "completed_at": "2026-05-12T22:05:16.314Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
         }
       ]
     }

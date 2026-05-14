@@ -78,6 +78,7 @@ export default function Settings() {
       'Void Black': 'theme-void-black',
     }
     if (themeMap[themeName]) document.body.classList.add(themeMap[themeName])
+    localStorage.setItem('theme', themeName)
     setTheme(themeName)
   }
 

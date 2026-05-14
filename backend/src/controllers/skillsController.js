@@ -1,40 +1,33 @@
-import { Router } from 'express'
-import { requireAuth } from '../middleware/auth.js'
 import db from '../db.js'
 
-const router = Router()
-
-/* ─── GET skills (igual ao que tinhas) ─── */
-router.get('/', requireAuth, async (req, res) => {
-  await db.read()
-  res.json(db.data.skills)
-})
-
-/* ─── GET skill points ─── */
-router.get('/points', requireAuth, async (req, res) => {
-  await db.read()
-  const user = db.data.users.find(u => u.id === req.userId)
-  if (!user) return res.status(404).json({ error: 'User not found' })
-
-  if (user.skillPoints === undefined) {
-    user.skillPoints = 0
-    await db.write()
-  }
-
-  res.json({ skillPoints: user.skillPoints })
-})
-
-/* ─── PUT update user skills ─── */
-router.put('/', requireAuth, async (req, res) => {
+export const getSkillPoints = async (req, res) => {
   try {
-    await db.read()
+    const userId = req.userId
+    const user = db.data.users.find(u => u.id === userId)
+    if (!user) return res.status(404).json({ error: 'User not found' })
 
+    if (user.skillPoints === undefined) {
+      user.skillPoints = 4
+      await db.write()
+    }
+
+    return res.json({ skillPoints: user.skillPoints })
+  } catch (err) {
+    console.error(err)
+    return res.status(500).json({ error: 'Server error' })
+  }
+}
+
+export const updateUserSkills = async (req, res) => {
+  try {
     const userId = req.userId
     const { skills } = req.body
 
+    if (!userId) return res.status(401).json({ error: 'No user' })
+    if (!Array.isArray(skills)) return res.status(400).json({ error: 'Invalid skills format' })
+
     const user = db.data.users.find(u => u.id === userId)
     if (!user) return res.status(404).json({ error: 'User not found' })
-    if (!Array.isArray(skills)) return res.status(400).json({ error: 'Invalid skills format' })
 
     if (user.skillPoints === undefined) user.skillPoints = 4
 
@@ -51,17 +44,14 @@ router.put('/', requireAuth, async (req, res) => {
     user.skillPoints -= spGasto
     user.skills = skills.map(s => ({
       skillId: s.skillId,
-      rank: Number(s.rank) || 0
+      rank: Number(s.rank) || 0,
     }))
 
     await db.write()
 
     return res.json({ success: true, skills: user.skills, skillPoints: user.skillPoints })
-
   } catch (err) {
     console.error(err)
     return res.status(500).json({ error: 'Server error' })
   }
-})
-
-export default router
+}

@@ -10,23 +10,24 @@ import Quests from './pages/Quests'
 import ComingSoon from './components/Coming_Soon'
 import Settings from './pages/Settings'
 import MissionCompletePopup from './components/MissionCompletePopup'
+import Skills from './pages/Skills'
 
 function App() {
 
     useEffect(() => {
-    const theme = sessionStorage.getItem('theme')
-    const themeMap = {
-      'Neon Green': 'theme-neon-green',
-      'Blood Red':  'theme-blood-red',
-      'Void Black': 'theme-void-black',
-    }
-    if (theme && themeMap[theme]) {
-      document.body.classList.add(themeMap[theme])
-    }
-    if (sessionStorage.getItem('highContrast') === 'true') {
-      document.body.classList.add('high-contrast')
-    }
-  }, [])
+  const theme = localStorage.getItem('theme')
+  const themeMap = {
+    'Neon Green': 'theme-neon-green',
+    'Blood Red':  'theme-blood-red',
+    'Void Black': 'theme-void-black',
+  }
+  if (theme && themeMap[theme]) {
+    document.body.classList.add(themeMap[theme])
+  }
+  if (localStorage.getItem('highContrast') === 'true') { 
+    document.body.classList.add('high-contrast')
+  }
+}, [])
 
   return (
     <BrowserRouter>
@@ -38,7 +39,7 @@ function App() {
         <Route path="/Preferences" element={<Preferences />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Quests" element={<Quests />} />
-        <Route path="/Skills"     element={<ComingSoon />} />
+        <Route path="/Skills"     element={<Skills />} />
         <Route path="/Inventory"  element={<ComingSoon />} />
         <Route path="/Trophy"     element={<ComingSoon />} />
         <Route path="/MarketPlace"  element={<ComingSoon />} />
