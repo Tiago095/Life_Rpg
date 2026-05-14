@@ -776,5 +776,241 @@
         }
       ]
     }
+  ],
+  "items": [
+    {
+      "id": "focus-helm",
+      "name": "Focus Helm",
+      "slot": "headgear",
+      "category": "gear",
+      "rarity": "uncommon",
+      "icon": "face",
+
+      "description": "A lightweight neural helm tuned for uninterrupted concentration.",
+
+      "realWorldBenefit": "+5% bonus XP when completing study sessions without distractions.",
+
+      "effects": [
+        {
+          "type": "focus_exp_bonus",
+          "value": 5
+        }
+      ]
+    },
+
+    {
+      "id": "mind-crown",
+      "name": "Mind Crown",
+      "slot": "headgear",
+      "category": "gear",
+      "rarity": "epic",
+      "icon": "psychology",
+
+      "description": "An experimental cognitive enhancer worn by elite strategists.",
+
+      "realWorldBenefit": "+15% XP from deep work tasks lasting over 45 minutes.",
+
+      "effects": [
+        {
+          "type": "focus_exp_bonus",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "id": "iron-resolve",
+      "name": "Iron Resolve",
+      "slot": "bodygear",
+      "category": "gear",
+      "rarity": "rare",
+      "icon": "security",
+
+      "description": "A reinforced combat vest forged through discipline.",
+
+      "realWorldBenefit": "+10% strength XP after completing physical workouts.",
+
+      "effects": [
+        {
+          "type": "strength_exp_bonus",
+          "value": 10
+        }
+      ]
+    },
+
+    {
+      "id": "masters-plate",
+      "name": "Master's Plate",
+      "slot": "bodygear",
+      "category": "gear",
+      "rarity": "epic",
+      "icon": "shield",
+
+      "description": "A relic from the ancient Kitchen Wars.",
+
+      "realWorldBenefit": "Prevents the 'Late Night Takeout' debuff.",
+
+      "effects": [
+        {
+          "type": "discipline_bonus",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "id": "swift-gloves",
+      "name": "Swift Gloves",
+      "slot": "gloves",
+      "category": "gear",
+      "rarity": "common",
+      "icon": "back_hand",
+
+      "description": "Light gloves optimized for speed and precision.",
+
+      "realWorldBenefit": "+5% XP from quick task completion streaks.",
+
+      "effects": [
+        {
+          "type": "speed_bonus",
+          "value": 5
+        }
+      ]
+    },
+
+    {
+      "id": "data-gauntlet",
+      "name": "Data Gauntlet",
+      "slot": "gloves",
+      "category": "gear",
+      "rarity": "rare",
+      "icon": "back_hand",
+
+      "description": "A cybernetic glove infused with processing cores.",
+
+      "realWorldBenefit": "+10% technical XP from coding tasks.",
+
+      "effects": [
+        {
+          "type": "technical_exp_bonus",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "id": "pathrunners",
+      "name": "Pathrunners",
+      "slot": "boots",
+      "category": "gear",
+      "rarity": "uncommon",
+      "icon": "hiking",
+
+      "description": "Adaptive boots designed for relentless movement.",
+
+      "realWorldBenefit": "+5 energy regeneration daily.",
+
+      "effects": [
+        {
+          "type": "energy_regen",
+          "value": 5
+        }
+      ]
+    },
+
+    {
+      "id": "void-striders",
+      "name": "Void Striders",
+      "slot": "boots",
+      "category": "gear",
+      "rarity": "epic",
+      "icon": "directions_run",
+
+      "description": "Boots engineered for silent traversal through the unknown.",
+
+      "realWorldBenefit": "+15% XP from outdoor activities and walks.",
+
+      "effects": [
+        {
+          "type": "movement_exp_bonus",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "id": "watch-of-hours",
+      "name": "Watch of Hours",
+      "slot": "utility",
+      "category": "gear",
+      "rarity": "rare",
+      "icon": "watch",
+
+      "description": "A tactical chronometer used by productivity tacticians.",
+
+      "realWorldBenefit": "+10% XP from scheduled tasks completed on time.",
+
+      "effects": [
+        {
+          "type": "organization_bonus",
+          "value": 10
+        }
+      ]
+    },
+
+    {
+      "id": "chrono-module",
+      "name": "Chrono Module",
+      "slot": "utility",
+      "category": "gear",
+      "rarity": "legendary",
+      "icon": "timer",
+
+      "description": "An unstable temporal core synced to human discipline.",
+
+      "realWorldBenefit": "Reduces cooldown between focus sessions.",
+
+      "effects": [
+        {
+          "type": "cooldown_reduction",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "xp-boost",
+      "name": "XP Boost",
+      "slot": "consumable",
+      "category": "consumable",
+      "rarity": "uncommon",
+      "icon": "rocket_launch",
+
+      "description": "A temporary enhancer that accelerates progression.",
+
+      "realWorldBenefit": "+20% XP gain for 1 hour.",
+
+      "effects": [
+        {
+          "type": "xp_multiplier",
+          "value": 20
+        }
+      ]
+    },
+
+    {
+      "id": "energy-drink",
+      "name": "Energy Drink",
+      "slot": "consumable",
+      "category": "consumable",
+      "rarity": "common",
+      "icon": "bolt",
+
+      "description": "A caffeinated stimulant favored by night grinders.",
+
+      "realWorldBenefit": "Restores 5 energy instantly.",
+
+      "effects": [
+        {
+          "type": "energy_restore",
+          "value": 5
+        }
+      ]
+    }
   ]
 }

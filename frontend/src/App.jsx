@@ -11,6 +11,7 @@ import ComingSoon from './components/Coming_Soon'
 import Settings from './pages/Settings'
 import MissionCompletePopup from './components/MissionCompletePopup'
 import Skills from './pages/Skills'
+import InventoryPage from './pages/Inventory'
 
 function App() {
 
@@ -40,7 +41,7 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Quests" element={<Quests />} />
         <Route path="/Skills"     element={<Skills />} />
-        <Route path="/Inventory"  element={<ComingSoon />} />
+        <Route path="/Inventory"  element={<InventoryPage />} />
         <Route path="/Trophy"     element={<ComingSoon />} />
         <Route path="/MarketPlace"  element={<ComingSoon />} />
         <Route path="/Settings"   element={<Settings />} />
