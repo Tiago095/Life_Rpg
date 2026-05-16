@@ -426,18 +426,20 @@ useEffect(() => {
   })
     .then(r => r.json())
     .then(allSkills => {
-      const userSkillsData = user.skills || []
-      const matched = allSkills
-        .filter(skill => userSkillsData.some(us => us.skillId === skill.id))
-        .map(skill => {
-          const userSkill = userSkillsData.find(us => us.skillId === skill.id)
-          return {
-            id: skill.id,
-            name: skill.name,
-            rank: userSkill?.rank || 0,
-            ...(SKILL_VISUAL[skill.name] || { icon: 'star', color: '#64748b' }),
-          }
-        })
+  const userSkillsData = user.skills || []
+
+  // suporta ambos os formatos: [2, 5, 8] ou [{ skillId: 2, rank: 0 }]
+  const matched = allSkills
+    .filter(skill => userSkillsData.some(us => us.skillId === skill.id))
+    .map(skill => {
+      const userSkill = userSkillsData.find(us => us.skillId === skill.id)
+      return {
+        id: skill.id,
+        name: skill.name,
+        rank: userSkill?.rank ?? 0,
+        ...(SKILL_VISUAL[skill.name] || { icon: 'star', color: '#64748b' }),
+      }
+    })
 
       setUserSkills(matched)
       const initDraft = {}

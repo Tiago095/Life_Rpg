@@ -1,9 +1,14 @@
 import db from '../db.js'
 
+export const getSkills = async (req, res) => {
+  await db.read()
+  res.json(db.data.skills)
+}
+
 export const getSkillPoints = async (req, res) => {
   try {
-    const userId = req.userId
-    const user = db.data.users.find(u => u.id === userId)
+    await db.read()
+    const user = db.data.users.find(u => u.id === req.userId)
     if (!user) return res.status(404).json({ error: 'User not found' })
 
     if (user.skillPoints === undefined) {
@@ -20,14 +25,12 @@ export const getSkillPoints = async (req, res) => {
 
 export const updateUserSkills = async (req, res) => {
   try {
-    const userId = req.userId
+    await db.read()
     const { skills } = req.body
 
-    if (!userId) return res.status(401).json({ error: 'No user' })
-    if (!Array.isArray(skills)) return res.status(400).json({ error: 'Invalid skills format' })
-
-    const user = db.data.users.find(u => u.id === userId)
+    const user = db.data.users.find(u => u.id === req.userId)
     if (!user) return res.status(404).json({ error: 'User not found' })
+    if (!Array.isArray(skills)) return res.status(400).json({ error: 'Invalid skills format' })
 
     if (user.skillPoints === undefined) user.skillPoints = 4
 

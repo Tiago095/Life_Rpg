@@ -23,7 +23,8 @@ export const savePreferences = async (req, res) => {
       return res.status(404).json({ error: 'Utilizador não encontrado.' })
     }
 
-    user.skills = numericSkillIds
+    user.skills = numericSkillIds.map(id => ({ skillId: id, rank: 0 }))
+    user.skillPoints = 1
     await db.write()
 
     res.json({ message: 'Preferências guardadas com sucesso!', skills: numericSkillIds })
@@ -32,9 +33,4 @@ export const savePreferences = async (req, res) => {
     console.error('Erro em POST /preferences:', err)
     res.status(500).json({ error: 'Erro interno do servidor.' })
   }
-}
-
-export const getSkills = async (req, res) => {
-  await db.read()
-  res.json(db.data.skills)
 }

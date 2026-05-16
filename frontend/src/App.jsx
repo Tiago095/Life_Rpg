@@ -15,21 +15,6 @@ import InventoryPage from './pages/Inventory'
 
 function App() {
 
-    useEffect(() => {
-  const theme = localStorage.getItem('theme')
-  const themeMap = {
-    'Neon Green': 'theme-neon-green',
-    'Blood Red':  'theme-blood-red',
-    'Void Black': 'theme-void-black',
-  }
-  if (theme && themeMap[theme]) {
-    document.body.classList.add(themeMap[theme])
-  }
-  if (localStorage.getItem('highContrast') === 'true') { 
-    document.body.classList.add('high-contrast')
-  }
-}, [])
-
   return (
     <BrowserRouter>
       <Routes>

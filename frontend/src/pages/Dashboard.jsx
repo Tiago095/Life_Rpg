@@ -78,33 +78,35 @@ export default function Dashboard() {
   const activeQuests = quests.inProgress.slice(0, 3)
   const gold = user?.xp ?? 0
 
-useEffect(() => {
-  if (!user) return
-  const token = localStorage.getItem('token')
+  useEffect(() => {
+    if (!user?.id) return
+    const token = localStorage.getItem('token')
 
-  fetch('http://localhost:3000/api/skills', {
-    headers: { Authorization: `Bearer ${token}` }
-  })
-    .then(r => r.json())
-    .then(allSkills => {
-      const userSkillsData = user.skills || []  // agora é array de { skillId, rank }
-
-      const matched = allSkills
-        .filter(s => userSkillsData.some(us => us.skillId === s.id))
-        .map(s => {
-          const userSkill = userSkillsData.find(us => us.skillId === s.id)
-          return {
-            id: s.id,
-            name: s.name,
-            rank: userSkill?.rank ?? 0,
-            ...(SKILL_VISUAL[s.name] || { icon: 'star', color: '#64748b' })
-          }
-        })
-
-      setUserSkills(matched)
-    })
-    .catch(err => console.error('Erro ao buscar skills:', err))
-}, [user])
+    Promise.all([
+      fetch('http://localhost:3000/api/skills', {
+        headers: { Authorization: `Bearer ${token}` }
+      }).then(r => r.json()),
+      fetch('http://localhost:3000/api/me', {
+        headers: { Authorization: `Bearer ${token}` }
+      }).then(r => r.json())
+    ])
+      .then(([allSkills, meData]) => {
+        const userSkillsData = meData.user.skills || []
+        const matched = allSkills
+          .filter(s => userSkillsData.some(us => us.skillId === s.id))
+          .map(s => {
+            const us = userSkillsData.find(u => u.skillId === s.id)
+            return {
+              id: s.id,
+              name: s.name,
+              rank: us?.rank ?? 0,
+              ...(SKILL_VISUAL[s.name] || { icon: 'star', color: '#64748b' })
+            }
+          })
+        setUserSkills(matched)
+      })
+      .catch(err => console.error('Erro:', err))
+  }, [user?.id])
 
   return (
     <div className="db-layout">
