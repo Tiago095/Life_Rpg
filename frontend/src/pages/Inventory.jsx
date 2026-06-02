@@ -1,369 +1,488 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import './Inventory.css'
+import { useNavigate } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
-
-// ─── Sidebar (inline, uses same props pattern) ───────────────────────────────
-
-const avatarMap = {}
-const getAvatarKey = (avatar) => {
-  if (!avatar) return 'avatar1'
-  if (avatar.includes('/')) return avatar.split('/').pop().replace('.png', '')
-  return avatar
-}
+import { useUser } from '../context/UserContext'
+import './Inventory.css'
 
 const SKILL_VISUAL = {
-  'Exercise':     { icon: 'fitness_center',  color: '#3b82f6' },
-  'Studies':      { icon: 'auto_stories',    color: '#8b5cf6' },
-  'Organization': { icon: 'calendar_month',  color: '#ef4444' },
-  'Social':       { icon: 'groups',          color: '#22c55e' },
-  'Mindfulness':  { icon: 'self_improvement',color: '#f59e0b' },
-  'Creativity':   { icon: 'palette',         color: '#ec4899' },
-  'Finance':      { icon: 'savings',         color: '#14b8a6' },
-  'Health':       { icon: 'favorite',        color: '#f43f5e' },
-  'Technical':    { icon: 'code',            color: '#6366f1' },
+  'Exercise':     { icon: 'fitness_center',   color: '#3b82f6' },
+  'Studies':      { icon: 'auto_stories',     color: '#8b5cf6' },
+  'Organization': { icon: 'calendar_month',   color: '#ef4444' },
+  'Social':       { icon: 'groups',           color: '#22c55e' },
+  'Mindfulness':  { icon: 'self_improvement', color: '#f59e0b' },
+  'Creativity':   { icon: 'palette',          color: '#ec4899' },
+  'Finance':      { icon: 'savings',          color: '#14b8a6' },
+  'Health':       { icon: 'favorite',         color: '#f43f5e' },
+  'Technical':    { icon: 'code',             color: '#6366f1' },
 }
 
-// ─── Gear Slot Icon mapping ────────────────────────────────────────────────────
-
-const SLOT_ICON = {
-  headgear:  'face',
-  bodygear:  'security',
-  gloves_l:  'back_hand',
-  gloves_r:  'back_hand',
-  utility:   'watch',
-  boots:     'downhill_skiing',
-  weapon:    'bolt',
-  offhand:   'headset_mic',
-  accessory: 'keyboard',
+const SKILL_PREFERENCE = {
+  'Exercise':     'STRENGTH',
+  'Studies':      'INTELLECT',
+  'Organization': 'DISCIPLINE',
+  'Social':       'CHARISMA',
+  'Mindfulness':  'FOCUS',
+  'Creativity':   'CREATIVITY',
+  'Finance':      'WISDOM',
+  'Health':       'VITALITY',
+  'Technical':    'LOGIC',
 }
 
-const RARITY_COLOR = {
-  common:    '#64748b',
-  uncommon:  '#22c55e',
-  rare:      '#3b82f6',
-  epic:      '#8b5cf6',
-  legendary: '#f59e0b',
+const GEAR_SLOTS = [
+  { id: 'headgear', label: 'HEADGEAR', icon: 'face',            top: '4%',  left: '50%', transform: 'translateX(-50%)' },
+  { id: 'bodygear', label: 'BODY',     icon: 'shield',          top: '32%', left: '50%', transform: 'translateX(-50%)' },
+  { id: 'gloves',   label: 'GLOVES',   icon: 'back_hand',       top: '38%', left: '12%', transform: undefined },
+  { id: 'utility',  label: 'UTILITY',  icon: 'watch',           top: '38%', left: '72%', transform: undefined },
+  { id: 'boots',    label: 'BOOTS',    icon: 'directions_walk', top: '82%', left: '50%', transform: 'translateX(-50%)' },
+]
+
+export const RARITY_COLOR = {
+  COMMON:    '#64748b',
+  UNCOMMON:  '#22c55e',
+  RARE:      '#3b82f6',
+  EPIC:      '#a855f7',
+  LEGENDARY: '#f59e0b',
 }
 
-// ─── Equipment Doll (center silhouette + slots) ────────────────────────────────
-
-const EquipmentDoll = ({ equipped = {}, onSlotClick, selectedSlot }) => {
-  const slots = [
-    { key: 'headgear',  label: 'HEADGEAR', className: 'slot-headgear' },
-    { key: 'gloves_l',  label: 'GLOVES',   className: 'slot-gloves-l' },
-    { key: 'bodygear',  label: '',          className: 'slot-body' },
-    { key: 'gloves_r',  label: 'GLOVES',   className: 'slot-gloves-r' },
-    { key: 'utility',   label: 'UTILITY',  className: 'slot-utility' },
-    { key: 'boots',     label: 'BOOTS',    className: 'slot-boots' },
-  ]
-
+function BenefitText({ text }) {
+  if (!text) return <span>No benefit description.</span>
+  const parts = text.split(/(\+\d+%[^,.]+)/g)
   return (
-        <div className="inv-doll-wrapper">
-        <div className="inv-doll-ring inv-ring-outer" />
-        <div className="inv-doll-ring inv-ring-inner" />
-
-        <div className="inv-doll-silhouette">
-            <span className="material-symbols-outlined inv-doll-icon">person</span>
-        </div>
-
-        {slots.map(({ key, label, className }) => {
-            const item = equipped[key]
-            const isSelected = selectedSlot === key
-            return (
-            <button
-                key={key}
-                className={`inv-slot ${className} ${isSelected ? 'inv-slot--selected' : ''} ${item ? 'inv-slot--equipped' : ''}`}
-                onClick={() => onSlotClick(key)}
-                title={label || key}
-            >
-                <span className="material-symbols-outlined inv-slot-icon">
-                {item?.icon || SLOT_ICON[key] || 'help'}
-                </span>
-                {label && <span className="inv-slot-label">{label}</span>}
-            </button>
-            )
-        })}
-
-        <div className="inv-level-bar">
-            <div className="inv-level-badge">LVL {12}</div>
-            <div className="inv-level-track">
-            <div className="inv-level-fill" style={{ width: '65%' }} />
-            </div>
-            <span className="inv-level-next">65% TO NEXT</span>
-        </div>
-        </div>
+    <>
+      {parts.map((part, i) =>
+        /^\+\d+%/.test(part)
+          ? <strong key={i} className="inv-benefit-highlight">{part}</strong>
+          : part
+      )}
+    </>
   )
 }
 
-// ─── Item Detail Panel ─────────────────────────────────────────────────────────
+export default function Inventory() {
+  const navigate    = useNavigate()
+  const { user }    = useUser()
 
-const ItemDetail = ({ item }) => {
-  if (!item) return (
-    <div className="inv-detail-empty">
-      <span className="material-symbols-outlined">category</span>
-      <p>Select an item to view details</p>
-    </div>
-  )
+  const [tab,           setTab]          = useState('gear')
+  const [selectedItem,  setSelectedItem] = useState(null)
+  const [equippedSlots, setEquippedSlots]= useState({})
+  const [searchQuery,   setSearchQuery]  = useState('')
+  const [userSkills,    setUserSkills]   = useState([])
+  const [allItems,      setAllItems]     = useState([])
+  const [loading,       setLoading]      = useState(true)
 
-  const rarityColor = RARITY_COLOR[item.rarity?.toLowerCase()] || RARITY_COLOR.common
+  const token = localStorage.getItem('token')
 
-  return (
-    <div className="inv-detail-panel">
-      <div className="inv-detail-header">
-        <h3 className="inv-detail-name">{item.name}</h3>
-        <span className="material-symbols-outlined inv-detail-equipped-icon" style={{ color: '#3b82f6' }}>
-          {item.equipped ? 'check_circle' : 'radio_button_unchecked'}
-        </span>
-      </div>
-      <p className="inv-detail-rarity" style={{ color: rarityColor }}>
-        {item.rarity?.toUpperCase()} {item.slot?.toUpperCase()}
-      </p>
-      {item.description && (
-        <p className="inv-detail-desc">"{item.description}"</p>
-      )}
-      {item.realWorldBenefit && (
-        <div className="inv-detail-benefit">
-          <div className="inv-benefit-header">
-            <span className="material-symbols-outlined">rocket_launch</span>
-            <span>REAL WORLD BENEFIT</span>
-          </div>
-          <p>{item.realWorldBenefit}</p>
-        </div>
-      )}
-    </div>
-  )
-}
-
-// ─── Gear Grid (right panel) ────────────────────────────────────────────────────
-
-const GearGrid = ({ items = [], onSelect, selectedId }) => (
-  <div className="inv-gear-grid">
-    {items.map((item) => (
-      <button
-        key={item.id}
-        className={`inv-gear-cell ${selectedId === item.id ? 'inv-gear-cell--active' : ''} ${item.equipped ? 'inv-gear-cell--equipped' : ''}`}
-        onClick={() => onSelect(item)}
-      >
-        <span className="material-symbols-outlined inv-gear-cell-icon">
-          {item.icon || SLOT_ICON[item.slot] || 'help'}
-        </span>
-        {item.rarity && (
-          <div
-            className="inv-gear-rarity-dot"
-            style={{ background: RARITY_COLOR[item.rarity.toLowerCase()] }}
-          />
-        )}
-      </button>
-    ))}
-    {/* Fill empty slots */}
-    {Array.from({ length: Math.max(0, 8 - items.length) }).map((_, i) => (
-      <div key={`empty-${i}`} className="inv-gear-cell inv-gear-cell--empty" />
-    ))}
-  </div>
-)
-
-// ─── Bonus Panel ──────────────────────────────────────────────────────────────
-
-const BonusPanel = ({ stats = [], buffs = [] }) => (
-  <div className="inv-bonus-panel">
-    <div className="inv-bonus-header">
-      <span className="material-symbols-outlined">monitoring</span>
-      <span>BONUS</span>
-    </div>
-    <div className="inv-stats-list">
-      {stats.map((s) => (
-        <div key={s.label} className="inv-stat-row">
-          <span className="material-symbols-outlined inv-stat-icon" style={{ color: s.color }}>{s.icon}</span>
-          <span className="inv-stat-label">{s.label}</span>
-          <span className="inv-stat-value" style={{ color: s.bonus ? '#22c55e' : '#64748b' }}>
-            {s.bonus || 'BASE STAT'}
-          </span>
-        </div>
-      ))}
-    </div>
-    {buffs.length > 0 && (
-      <>
-        <div className="inv-buffs-label">ACTIVE BUFFS</div>
-        <div className="inv-buffs-row">
-          {buffs.map((b) => (
-            <span key={b.label} className={`inv-buff-tag inv-buff-${b.type || 'default'}`}>{b.label}</span>
-          ))}
-        </div>
-      </>
-    )}
-  </div>
-)
-
-// ─── Main Inventory Page ───────────────────────────────────────────────────────
-
-/**
- * InventoryPage props:
- * @param {object}   user         – current user object (level, xp, maxXp, username, avatar, energy, maxEnergy, skills)
- * @param {object}   t            – translation strings
- * @param {number}   questCount   – badge count for Quests nav item
- * @param {object[]} gearItems    – all gear items [{id, name, slot, rarity, icon, description, realWorldBenefit, equipped}]
- * @param {object[]} consumables  – consumable items
- * @param {object[]} stats        – stat rows [{label, icon, color, bonus}]
- * @param {object[]} buffs        – active buffs [{label, type}]
- * @param {string}   searchQuery  – controlled search input value
- * @param {function} onSearch     – search change handler
- * @param {function} onEquip      – called with (item) when slot clicked
- */
-const InventoryPage = ({
-  user = {},
-  t = {},
-  questCount = 0,
-  gearItems = DEFAULT_GEAR,
-  consumables = DEFAULT_CONSUMABLES,
-  stats = DEFAULT_STATS,
-  buffs = DEFAULT_BUFFS,
-  searchQuery = '',
-  onSearch,
-  onEquip,
-}) => {
-  const [activeTab, setActiveTab] = useState('gear')
-  const [selectedItem, setSelectedItem] = useState(null)
-  const [selectedSlot, setSelectedSlot] = useState(null)
-  const [search, setSearch] = useState(searchQuery)
-
-  const items = activeTab === 'gear' ? gearItems : consumables
-  const filteredItems = items.filter(i =>
-    !search || i.name?.toLowerCase().includes(search.toLowerCase())
-  )
-
-  // Build equipped map from gearItems
-  const equipped = {}
-  gearItems.filter(i => i.equipped).forEach(i => {
-    equipped[i.slot] = i
-  })
-
-  // Auto-select equipped bodygear on mount
   useEffect(() => {
-    const body = gearItems.find(i => i.equipped && i.slot === 'bodygear')
-    if (body) setSelectedItem(body)
-  }, [])
+  if (!user?.id) return
+  setLoading(true)
 
-  const handleSlotClick = (slotKey) => {
-    setSelectedSlot(slotKey)
-    const item = equipped[slotKey]
-    if (item) setSelectedItem(item)
+  Promise.all([
+    fetch('http://localhost:3000/api/skills', {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then(r => r.json()),
+    fetch('http://localhost:3000/api/me', {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then(r => r.json()),
+    fetch('http://localhost:3000/api/inventory', {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then(r => r.json()),
+    fetch('http://localhost:3000/api/inventory/equipped', {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then(r => r.json()),
+  ])
+    .then(([allSkills, meData, invData, equippedData]) => {
+      const userSkillsData = meData.user.skills || []
+      const matched = allSkills
+        .filter(s => userSkillsData.some(us => us.skillId === s.id))
+        .map(s => {
+          const us = userSkillsData.find(u => u.skillId === s.id)
+          return {
+            id: s.id,
+            name: s.name,
+            rank: us?.rank ?? 0,
+            ...(SKILL_VISUAL[s.name] || { icon: 'star', color: '#64748b' }),
+          }
+        })
+      setUserSkills(matched)
+
+      const normalizedItems = (invData.items || []).map(item => {
+        const skillName = matched.find(s => s.id === item.skillId)?.name
+        return {
+          ...item,
+          desc: item.description,
+          benefit: item.realWorldBenefit,
+          rarity: item.rarity?.toUpperCase() || 'COMMON',
+          skillRequired: skillName,
+        }
+      })
+      setAllItems(normalizedItems)
+
+      const equippedMap = {}
+      Object.entries(equippedData.equipped || {}).forEach(([slot, item]) => {
+        if (item) {
+          const skillName = matched.find(s => s.id === item.skillId)?.name  // ← idem
+          equippedMap[slot] = {
+            ...item,
+            desc: item.description,
+            benefit: item.realWorldBenefit,
+            rarity: item.rarity?.toUpperCase() || 'COMMON',
+            skillRequired: skillName,
+          }
+        }
+      })
+      setEquippedSlots(equippedMap)
+
+      if (Object.keys(equippedMap).length > 0) {
+        setSelectedItem(Object.values(equippedMap)[0])
+      } else if (normalizedItems.length > 0) {
+        setSelectedItem(normalizedItems[0])
+      }
+    })
+    .catch(err => console.error('Inventory load error:', err))
+    .finally(() => setLoading(false))
+}, [user?.id])
+
+  const activeSkillNames = userSkills.map(s => s.name)
+
+  const filteredGear = allItems
+  .filter(item => item.category !== 'consumable')
+  .filter(item =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+  const filteredConsumables = allItems
+    .filter(item => item.category === 'consumable')
+    .filter(c => c.name.toLowerCase().includes(searchQuery.toLowerCase()))
+
+  const skillBonuses = userSkills.map(skill => {
+  const equippedItemsForSkill = Object.values(equippedSlots)
+    .filter(item => item && item.skillId === skill.id)
+
+  const totalBonus = equippedItemsForSkill.reduce((sum, item) => {
+    return sum + (item.effects?.[0]?.value || 0)
+  }, 0)
+
+  return {
+    id: skill.id,
+    name: skill.name,
+    preference: SKILL_PREFERENCE[skill.name],
+    icon: skill.icon,
+    color: skill.color,
+    totalBonus,
+    equippedItems: equippedItemsForSkill,
+  }
+})
+
+  const handleEquip = async (item) => {
+    try {
+      const res = await fetch('http://localhost:3000/api/inventory/equip', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ itemId: item.id }),
+      })
+      if (!res.ok) throw new Error('Failed to equip item')
+      const data = await res.json()
+      const equipped = data.equipped
+      const normalizedEquipped = {
+        ...equipped,
+        desc: equipped.description,
+        benefit: equipped.realWorldBenefit,
+        rarity: equipped.rarity?.toUpperCase() || 'COMMON',
+      }
+      setEquippedSlots(prev => ({ ...prev, [equipped.slot]: normalizedEquipped }))
+      setSelectedItem(normalizedEquipped)
+    } catch (err) {
+      console.error('Equip error:', err)
+    }
   }
 
-  const handleItemSelect = (item) => {
-    setSelectedItem(item)
-    setSelectedSlot(item.slot)
-    onEquip?.(item)
+  const handleUnequip = async (slot) => {
+    try {
+      const res = await fetch('http://localhost:3000/api/inventory/unequip', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ slot }),
+      })
+      if (!res.ok) throw new Error('Failed to unequip item')
+      setEquippedSlots(prev => {
+        const updated = { ...prev }
+        delete updated[slot]
+        return updated
+      })
+      setSelectedItem(null)
+    } catch (err) {
+      console.error('Unequip error:', err)
+    }
   }
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value)
-    onSearch?.(e.target.value)
+  const handleConsume = async (item) => {
+    try {
+      const res = await fetch('http://localhost:3000/api/inventory/consume', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ itemId: item.id }),
+      })
+      if (!res.ok) throw new Error('Failed to consume item')
+      setAllItems(prev => prev.filter(i => i.id !== item.id))
+      setSelectedItem(null)
+    } catch (err) {
+      console.error('Consume error:', err)
+    }
   }
+
+  const getItemQuantity = (itemId) => {
+    const inv = allItems.find(item => item.id === itemId)
+    return inv?.quantity || 0
+  }
+
+  const isItemEquipped = (itemId) => {
+    return Object.values(equippedSlots).some(item => item?.id === itemId)
+  }
+
+  const getEquippedSlot = (itemId) => {
+    return Object.entries(equippedSlots).find(([_, item]) => item?.id === itemId)?.[0]
+  }
+
+  const level = user?.level    ?? 12
+  const xpPct = user?.xpPercent ?? 65
+
+  const currentList = tab === 'gear' ? filteredGear : filteredConsumables
+  const emptyCount  = Math.max(0, 6 - currentList.length)
 
   return (
-    <div className="inv-root">
-      <Sidebar/>
+    <div className="inv-layout">
+      <Sidebar />
 
       <main className="inv-main">
-        {/* Top bar */}
-        <header className="inv-topbar">
-          <div className="inv-topbar-title">
-            <span className="material-symbols-outlined">backpack</span>
-            <h1>INVENTORY COMMAND CENTER</h1>
-          </div>
-          <div className="inv-search-wrapper">
-            <span className="material-symbols-outlined inv-search-icon">search</span>
-            <input
-              className="inv-search-input"
-              placeholder="Search Item …"
-              value={search}
-              onChange={handleSearch}
-            />
-          </div>
-        </header>
+        <div className="inv-bg-grid"/>
 
-        <div className="inv-content">
-          {/* Left: bonus + doll */}
-          <div className="inv-left-col">
-            <BonusPanel stats={stats} buffs={buffs} />
-            <EquipmentDoll
-              equipped={equipped}
-              onSlotClick={handleSlotClick}
-              selectedSlot={selectedSlot}
-            />
+        {loading && (
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            zIndex: 999,
+          }}>
+            <div style={{ color: 'white', fontSize: '18px' }}>Loading inventory...</div>
+          </div>
+        )}
+
+        {/* HEADER */}
+        <div className="inv-topbar">
+          <div className="inv-topbar-left">
+            <div className="inv-topbar-icon">
+              <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '26px' }}>inventory_2</span>
+            </div>
+            <h1 className="inv-topbar-title">INVENTORY COMMAND CENTER</h1>
+          </div>
+        </div>
+
+        <div className="inv-body">
+
+          {/* LEFT: bonus + buffs */}
+          <div className="inv-left">
+            <div className="inv-card">
+              <div className="inv-card-header">
+                <span className="material-symbols-outlined inv-card-icon">bar_chart</span>
+                <h3 className="inv-card-title">BONUS</h3>
+              </div>
+              <div className="inv-bonus-list">
+                {skillBonuses.length > 0 ? skillBonuses.map((s, i) => (
+                <div key={i} className="inv-bonus-row">
+                  <span
+                    className="material-symbols-outlined inv-bonus-skill-icon"
+                    style={{ color: s.color }}
+                  >
+                    {s.icon}
+                  </span>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: '12px', color: '#94a3b8' }}>{s.name}</div>
+                    <div className="inv-bonus-label">{s.preference}</div>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    {s.totalBonus > 0 ? (
+                      <>
+                        <div style={{ fontSize: '12px', color: '#4ade80' }}>+{s.totalBonus}% EXP BONUS</div>
+                        {s.equippedItems.map(item => (
+                          <div key={item.id} style={{ fontSize: '11px', color: '#64748b' }}>
+                            {item.name}
+                          </div>
+                        ))}
+                      </>
+                    ) : (
+                      <div style={{ fontSize: '12px', color: '#475569' }}>—</div>
+                    )}
+                  </div>
+                </div>
+              )) : (
+                <p className="inv-empty-hint">No active skills selected.</p>
+              )}
+              </div>
+            </div>
           </div>
 
-          {/* Right: gear grid + detail */}
-          <div className="inv-right-col">
+          <div className="inv-centre">
+            <div className="inv-mannequin-wrap">
+              <div className="inv-ring inv-ring-outer" />
+              <div className="inv-ring inv-ring-inner" />
+
+              <div className="inv-character">
+                <span className="material-symbols-outlined inv-char-icon">person</span>
+              </div>
+
+              {GEAR_SLOTS.map(slot => {
+                const equipped = equippedSlots[slot.id]
+                return (
+                  <div
+                    key={slot.id}
+                    className={`inv-slot${equipped ? ' inv-slot--equipped' : ''}`}
+                    style={{ top: slot.top, left: slot.left, transform: slot.transform }}
+                    onClick={() => equipped && setSelectedItem(equipped)}
+                    title={slot.label}
+                  >
+                    <span className="material-symbols-outlined inv-slot-icon">
+                      {equipped ? equipped.icon : slot.icon}
+                    </span>
+                    <span className="inv-slot-label">{slot.label}</span>
+                  </div>
+                )
+              })}
+            </div>
+
+            <div className="inv-xp-bar-wrap">
+              <div className="inv-xp-level">LVL {level}</div>
+              <div className="inv-xp-track">
+                <div className="inv-xp-fill" style={{ width: `${xpPct}%` }} />
+              </div>
+              <div className="inv-xp-label">{xpPct}% TO NEXT</div>
+            </div>
+          </div>
+
+          {/* RIGHT: tabs + grid + detail */}
+          <div className="inv-right">
             <div className="inv-tabs">
               <button
-                className={`inv-tab ${activeTab === 'gear' ? 'inv-tab--active' : ''}`}
-                onClick={() => setActiveTab('gear')}
-              >GEAR</button>
+                className={`inv-tab${tab === 'gear' ? ' inv-tab--active' : ''}`}
+                onClick={() => setTab('gear')}
+              >
+                GEAR
+              </button>
               <button
-                className={`inv-tab ${activeTab === 'consumables' ? 'inv-tab--active' : ''}`}
-                onClick={() => setActiveTab('consumables')}
-              >CONSUMABLES</button>
+                className={`inv-tab${tab === 'consumables' ? ' inv-tab--active' : ''}`}
+                onClick={() => setTab('consumables')}
+              >
+                CONSUMABLES
+              </button>
             </div>
-            <GearGrid
-              items={filteredItems}
-              onSelect={handleItemSelect}
-              selectedId={selectedItem?.id}
-            />
-            <ItemDetail item={selectedItem} />
+
+            <div className="inv-grid">
+              {currentList.map(item => (
+                <div
+                  key={item.id}
+                  className={`inv-grid-cell${selectedItem?.id === item.id ? ' inv-grid-cell--active' : ''}`}
+                  onClick={() => setSelectedItem(item)}
+                  style={{ position: 'relative' }}
+                >
+                  <span
+                    className="material-symbols-outlined inv-grid-icon"
+                    style={{ color: RARITY_COLOR[item.rarity] }}
+                  >
+                    {item.icon}
+                  </span>
+                  {item.quantity > 1 && (
+                    <span style={{
+                      position: 'absolute',
+                      bottom: '4px',
+                      right: '4px',
+                      background: 'rgba(0,0,0,0.7)',
+                      color: '#fff',
+                      fontSize: '12px',
+                      padding: '2px 4px',
+                      borderRadius: '3px',
+                      fontWeight: 'bold'
+                    }}>
+                      x{item.quantity}
+                    </span>
+                  )}
+                </div>
+              ))}
+              {Array.from({ length: emptyCount }).map((_, i) => (
+                <div key={`empty-${i}`} className="inv-grid-cell inv-grid-cell--empty" />
+              ))}
+            </div>
+
+            {selectedItem && (
+              <div className="inv-detail">
+                <div className="inv-detail-header">
+                  <div>
+                    <h3 className="inv-detail-name">{selectedItem.name.toUpperCase()}</h3>
+                    <span
+                      className="inv-detail-rarity"
+                      style={{ color: RARITY_COLOR[selectedItem.rarity] }}
+                    >
+                      {selectedItem.rarity}{' '}
+                      {selectedItem.slot?.replace('_l', '').replace('_r', '').toUpperCase()}
+                    </span>
+                  </div>
+                  <span className="material-symbols-outlined inv-detail-check">verified</span>
+                </div>
+
+                <p className="inv-detail-desc">"{selectedItem.desc}"</p>
+
+                {selectedItem.benefit && (
+                  <div className="inv-detail-benefit">
+                    <div className="inv-benefit-header">
+                      <span className="material-symbols-outlined inv-benefit-icon">
+                        {selectedItem.category === 'consumable' ? 'local_bar' : 'shield'}
+                      </span>
+                      <span className="inv-benefit-label">
+                        {selectedItem.category === 'consumable' ? 'EFFECT' : 'BONUS'}
+                      </span>
+                    </div>
+                    <p className="inv-benefit-text">
+                      <BenefitText text={selectedItem.benefit} />
+                    </p>
+                  </div>
+                )}
+
+                {selectedItem.category === 'gear' && (
+                  <button
+                    className="inv-equip-btn"
+                    onClick={() => isItemEquipped(selectedItem.id)
+                      ? handleUnequip(getEquippedSlot(selectedItem.id))
+                      : handleEquip(selectedItem)
+                    }
+                  >
+                    <span className="material-symbols-outlined">
+                      {isItemEquipped(selectedItem.id) ? 'close' : 'shield'}
+                    </span>
+                    {isItemEquipped(selectedItem.id) ? 'UNEQUIP ITEM' : 'EQUIP ITEM'}
+                  </button>
+                )}
+
+                {selectedItem.category === 'consumable' && (
+                  <button className="inv-equip-btn" onClick={() => handleConsume(selectedItem)}>
+                    <span className="material-symbols-outlined">local_bar</span>
+                    CONSUME ({selectedItem.quantity})
+                  </button>
+                )}
+              </div>
+            )}
           </div>
+
         </div>
       </main>
     </div>
   )
 }
-
-export default InventoryPage
-
-// ─── Default mock data (replace with real API data) ───────────────────────────
-
-const DEFAULT_GEAR = [
-  {
-    id: 'shield-1',
-    name: "Iron Resolve",
-    slot: 'bodygear',
-    rarity: 'rare',
-    icon: 'security',
-    equipped: true,
-    description: null,
-    realWorldBenefit: null,
-  },
-  {
-    id: 'masters-plate',
-    name: "Master's Plate",
-    slot: 'bodygear',
-    rarity: 'rare',
-    icon: 'security',
-    equipped: false,
-    description: 'A relic from the ancient Kitchen Wars. It smells faintly of rosemary and discipline.',
-    realWorldBenefit: 'Grants +10% exp Strength for successfully finishing a full week of meal prep. Prevents the "Late Night Takeout" debuff.',
-  },
-  { id: 'g3', name: 'Focus Helm',    slot: 'headgear', rarity: 'uncommon', icon: 'face',          equipped: false, description: null, realWorldBenefit: null },
-  { id: 'g4', name: 'Swift Gloves',  slot: 'gloves_l', rarity: 'common',   icon: 'back_hand',     equipped: false, description: null, realWorldBenefit: null },
-  { id: 'g5', name: 'Data Gauntlet', slot: 'gloves_r', rarity: 'epic',     icon: 'back_hand',     equipped: false, description: null, realWorldBenefit: null },
-  { id: 'g6', name: 'Watch of Hours',slot: 'utility',  rarity: 'rare',     icon: 'watch',         equipped: false, description: null, realWorldBenefit: null },
-]
-
-const DEFAULT_CONSUMABLES = [
-  { id: 'c1', name: 'XP Boost',     slot: 'consumable', rarity: 'uncommon', icon: 'rocket_launch', equipped: false, description: '+20% XP for 1 hour.', realWorldBenefit: null },
-  { id: 'c2', name: 'Energy Drink', slot: 'consumable', rarity: 'common',   icon: 'bolt',          equipped: false, description: 'Restores 5 Energy.',    realWorldBenefit: null },
-]
-
-const DEFAULT_STATS = [
-  { label: 'FOCUS',     icon: 'filter_drama',     color: '#3b82f6', bonus: '+5% EXP BONUS' },
-  { label: 'STRENGTH',  icon: 'fitness_center',   color: '#22c55e', bonus: '+10% EXP BONUS' },
-  { label: 'INTELLECT', icon: 'auto_stories',      color: '#8b5cf6', bonus: '+2% EXP BONUS' },
-  { label: 'CHARISMA',  icon: 'groups',            color: '#f59e0b', bonus: null },
-]
-
-const DEFAULT_BUFFS = [
-  { label: 'WELL RESTED', type: 'default' },
-  { label: 'HYDRATED',    type: 'green' },
-  { label: 'CAFFEINATED', type: 'default' },
-]

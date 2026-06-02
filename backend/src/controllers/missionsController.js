@@ -1,19 +1,16 @@
 import db from '../db.js'
+import { calculateXpBonus } from '../../util/xpCalculator.js'
 
-
-// GET /api/missions — todas as missões disponíveis (templates)
 export const getMissions = async (req, res) => {
   await db.read()
   res.json(db.data.missions)
 }
 
-// GET /api/missions/user — missões do utilizador autenticado
 export const getUserMissions = async (req, res) => {
   await db.read()
 
   const userMissions = db.data.user_missions.filter(um => um.user_id === req.userId)
 
-  // Join com os dados da missão
   const enriched = userMissions.map(um => {
     const mission = db.data.missions.find(m => m.id === um.mission_id)
     const skill   = db.data.skills.find(s => s.id === mission?.skill_id)
@@ -23,7 +20,6 @@ export const getUserMissions = async (req, res) => {
   res.json(enriched)
 }
 
-// POST /api/missions/:missionId/accept — aceitar uma missão
 export const acceptMission = async (req, res) => {
   const { missionId } = req.params
 
@@ -33,7 +29,6 @@ export const acceptMission = async (req, res) => {
   if (!mission)
     return res.status(404).json({ code: 'MISSION_NOT_FOUND' })
 
-  // Verificar se já está ativa
   const alreadyActive = db.data.user_missions.find(
     um => um.user_id === req.userId &&
           um.mission_id === Number(missionId) &&
@@ -61,7 +56,6 @@ export const acceptMission = async (req, res) => {
   res.status(201).json(newUserMission)
 }
 
-// PATCH /api/missions/:userMissionId/objective/:objectiveId — marcar objetivo
 export const toggleObjective = async (req, res) => {
   const { userMissionId, objectiveId } = req.params
 
@@ -83,7 +77,6 @@ export const toggleObjective = async (req, res) => {
 
   obj.completed = !obj.completed
 
-  // Verificar se todos os objetivos estão completos
   const allDone = um.objectives_progress.every(o => o.completed)
 if (allDone) {
   um.status = 'completed'
@@ -95,6 +88,11 @@ if (allDone) {
   if (mission && userIndex !== -1) {
     const user = db.data.users[userIndex]
     user.xp += mission.xp_reward
+
+    const bonusPercent = calculateXpBonus(user, mission, db.data);
+    const finalXp = mission.xp_reward * (1 + bonusPercent / 100);
+    
+    user.xp += finalXp;
 
     // Level up
     const levels = db.data.levels.sort((a, b) => b.level - a.level)
@@ -113,7 +111,6 @@ if (allDone) {
   res.json({ userMission: um, completed: allDone })
 }
 
-// PATCH /api/missions/:userMissionId/abandon — abandonar missão
 export const abandonMission = async (req, res) => {
   const { userMissionId } = req.params
 

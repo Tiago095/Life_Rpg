@@ -47,22 +47,28 @@ export default function Settings() {
   const [saveSuccess, setSaveSuccess]     = useState('')
   const [loading, setLoading]             = useState(false)
 
-  useEffect(() => {
-    if (!user) return
-    // Inicializa os valores quando o user carrega
-    setAlias(user.username || '')
-    setNewEmail(user.email || '')
-    const key = getAvatarKey(user.avatar)
-    setAvatarName(key)
-    setAvatarSrc(avatarMap[key] || null)
-    setHighContrast(user.highContrast ?? false)
-    setTheme(user.theme || 'Cyberpunk Blue (Default)')
-    setLanguage(user.language || 'English [EN-US]')
-    originalHighContrast.current = user.highContrast ?? false
-    if (user.theme) applyTheme(user.theme)
-  }, [user])
+ useEffect(() => {
+  if (!user) return
+  setAlias(user.username || '')
+  setNewEmail(user.email || '')
+  const key = getAvatarKey(user.avatar)
+  setAvatarName(key)
+  setAvatarSrc(avatarMap[key] || null)
+  setHighContrast(user.highContrast ?? false)
+  setTheme(user.theme || 'Cyberpunk Blue (Default)')
+  setLanguage(user.language || 'English [EN-US]')
+  originalHighContrast.current = user.highContrast ?? false
+  if (user.theme) applyTheme(user.theme)
+  document.body.classList.toggle('high-contrast', user.highContrast ?? false)  // ← adiciona isto
+}, [user])
 
   if (!user) return null
+
+  useEffect(() => {
+    return () => {
+      document.body.classList.toggle('high-contrast', originalHighContrast.current)
+    }
+  }, [])
 
   const originalUsername     = user?.username     || ''
   const originalEmail        = user?.email        || ''
@@ -169,6 +175,8 @@ export default function Settings() {
     setSaveSuccess('')
     setTheme(originalTheme)
     applyTheme(originalTheme) 
+    setHighContrast(originalHighContrast.current)
+    document.body.classList.toggle('high-contrast', originalHighContrast.current)
   }
 
   const handleDelete = async () => {

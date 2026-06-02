@@ -28,7 +28,7 @@ export default function Quests() {
   const {t} = useTranslation()
 
   const tabs = [
-    { id: 'inProgress', label: t.inProgress ,   count: questsData.inProgress.length },
+    { id: 'inProgress', label: t.inProgress ,   count: questsData.inProgress.length || null },
     { id: 'available',  label: t.available  ,   count: null },
     { id: 'completed',  label: t.completed  ,   count: null },
   ]
@@ -196,10 +196,10 @@ if (loading)
     <h2 className="qs-detail-title">{selectedQuest.title}</h2>
     <p className="qs-detail-desc">
       {activeTab === 'completed'
-        ? 'Missão concluída com sucesso. Recompensas creditadas na tua conta.'
+        ? t.questDescCompleted
         : activeTab === 'available'
-          ? 'Missão disponível. Prepara-te para iniciar o protocolo.'
-          : 'Missão em curso. Continua o teu progresso.'}
+          ? t.questDescAvailable
+          : t.questDescInProgress}
     </p>
 
     <div className="qs-stats-row">

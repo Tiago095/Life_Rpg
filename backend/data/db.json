@@ -5,9 +5,9 @@
       "username": "Toko",
       "email": "t@gmail.com",
       "password": "$2b$10$oSQnwsByyc2QHPNp30ydseOuIgkJenrKtJjndRPmbwrIbt4W3qOOi",
-      "level": 2,
-      "xp": 150,
-      "avatar": "avatar1",
+      "level": 5,
+      "xp": 1148.6,
+      "avatar": "avatar2",
       "language": "English [EN-US]",
       "theme": "Void Black",
       "highContrast": true,
@@ -22,7 +22,7 @@
         },
         {
           "skillId": 3,
-          "rank": 1
+          "rank": 3
         },
         {
           "skillId": 4,
@@ -49,7 +49,57 @@
           "rank": 32
         }
       ],
-      "skillPoints": 7
+      "skillPoints": 5,
+      "equippedSlots": {
+        "headgear": "2",
+        "utility": "10",
+        "bodygear": "3",
+        "boots": "7",
+        "gloves_l": "6",
+        "gloves": "6"
+      },
+      "inventory": [
+        {
+          "itemId": "1",
+          "quantity": 3
+        },
+        {
+          "itemId": "2",
+          "quantity": 1
+        },
+        {
+          "itemId": "3",
+          "quantity": 1
+        },
+        {
+          "itemId": "4",
+          "quantity": 1
+        },
+        {
+          "itemId": "5",
+          "quantity": 1
+        },
+        {
+          "itemId": "6",
+          "quantity": 1
+        },
+        {
+          "itemId": "7",
+          "quantity": 1
+        },
+        {
+          "itemId": "8",
+          "quantity": 1
+        },
+        {
+          "itemId": "9",
+          "quantity": 1
+        },
+        {
+          "itemId": "10",
+          "quantity": 1
+        }
+      ]
     },
     {
       "id": "55c8c543-ea34-4650-8a6d-062c77055c5b",
@@ -115,7 +165,7 @@
       "avatar": "avatar1",
       "language": "English [EN-US]",
       "theme": "Neon Green",
-      "highContrast": true,
+      "highContrast": false,
       "skills": [
         {
           "skillId": 2,
@@ -127,6 +177,114 @@
         },
         {
           "skillId": 8,
+          "rank": 0
+        }
+      ],
+      "skillPoints": 1
+    },
+    {
+      "id": "4f345fac-4e6f-420f-9030-e1c6b22fa7e1",
+      "username": "adad",
+      "email": "d@gmail.com",
+      "password": "$2b$10$iqMIGSoc8AVDrF6Sn4Y6Dus6V8t5nqHoAIPvOFrWlQn8yXOZtBwZC",
+      "level": 2,
+      "xp": 150,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Cyberpunk Blue (Default)",
+      "highContrast": true,
+      "skills": [
+        {
+          "skillId": 1,
+          "rank": 0
+        },
+        {
+          "skillId": 4,
+          "rank": 0
+        },
+        {
+          "skillId": 5,
+          "rank": 0
+        }
+      ],
+      "skillPoints": 1
+    },
+    {
+      "id": "da7d2492-d6c2-4520-a00c-c552c7b82052",
+      "username": "Diogzz",
+      "email": "dg@gmail.com",
+      "password": "$2b$10$tQstTu7nk1NCaud1SWJSaeftQW7.rXryLPNYyZw6.lxNB31Dbh5Iy",
+      "level": 1,
+      "xp": 0,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Void Black",
+      "highContrast": true,
+      "skills": [
+        {
+          "skillId": 5,
+          "rank": 0
+        },
+        {
+          "skillId": 6,
+          "rank": 0
+        },
+        {
+          "skillId": 7,
+          "rank": 0
+        }
+      ],
+      "skillPoints": 1
+    },
+    {
+      "id": "fd84c9a5-a0b5-4b25-8295-d7924e90c573",
+      "username": "leo",
+      "email": "l@gmail.com",
+      "password": "$2b$10$lrZXBG1BZ/bz8ko5e4pvOuSnYM6wdEOMY.0TQcabkdtHCGyqLIQMm",
+      "level": 1,
+      "xp": 0,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Neon Green",
+      "highContrast": true,
+      "skills": [
+        {
+          "skillId": 4,
+          "rank": 0
+        },
+        {
+          "skillId": 5,
+          "rank": 0
+        },
+        {
+          "skillId": 6,
+          "rank": 0
+        }
+      ],
+      "skillPoints": 1
+    },
+    {
+      "id": "ac3b2499-6e9c-4153-9c2e-48024efd3914",
+      "username": "wer",
+      "email": "w@gmail.com",
+      "password": "$2b$10$Ik.0GLFycP1u77F8GccJWegbtS8gfORUUOHtdlmke7rMfsdlTnjmS",
+      "level": 1,
+      "xp": 0,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Cyberpunk Blue (Default)",
+      "highContrast": true,
+      "skills": [
+        {
+          "skillId": 2,
+          "rank": 0
+        },
+        {
+          "skillId": 3,
+          "rank": 0
+        },
+        {
+          "skillId": 6,
           "rank": 0
         }
       ],
@@ -804,21 +962,21 @@
       "id": "52e07bdc-8b65-4a83-b09c-9b511ba76980",
       "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
       "mission_id": 2,
-      "status": "active",
+      "status": "completed",
       "accepted_at": "2026-05-16T18:41:40.544Z",
-      "completed_at": null,
+      "completed_at": "2026-05-16T21:03:13.253Z",
       "objectives_progress": [
         {
           "objective_id": 1,
-          "completed": false
+          "completed": true
         },
         {
           "objective_id": 2,
-          "completed": false
+          "completed": true
         },
         {
           "objective_id": 3,
-          "completed": false
+          "completed": true
         }
       ]
     },
@@ -843,98 +1001,214 @@
           "completed": false
         }
       ]
+    },
+    {
+      "id": "e7a5607f-6789-4997-a7de-e668652724ac",
+      "user_id": "4f345fac-4e6f-420f-9030-e1c6b22fa7e1",
+      "mission_id": 1,
+      "status": "completed",
+      "accepted_at": "2026-05-16T19:56:00.705Z",
+      "completed_at": "2026-05-16T19:56:14.136Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "6aa3a505-7ede-4d6c-87f1-f46985cc8efd",
+      "user_id": "4f345fac-4e6f-420f-9030-e1c6b22fa7e1",
+      "mission_id": 2,
+      "status": "active",
+      "accepted_at": "2026-05-16T19:58:02.404Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "14b20c1a-d79a-445a-9580-9061d8d4645e",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 3,
+      "status": "completed",
+      "accepted_at": "2026-05-20T14:10:10.021Z",
+      "completed_at": "2026-06-01T18:46:37.347Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "16537fd6-98c0-495f-8e3a-1689032e6159",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 5,
+      "status": "completed",
+      "accepted_at": "2026-06-01T18:47:12.184Z",
+      "completed_at": "2026-06-01T18:48:43.351Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "50fc0956-c771-4a5e-806d-a3fa3c336ad1",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 4,
+      "status": "completed",
+      "accepted_at": "2026-06-01T18:48:53.394Z",
+      "completed_at": "2026-06-01T18:49:30.303Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
     }
   ],
   "items": [
     {
-      "id": "focus-helm",
+      "id": "1",
       "name": "Focus Helm",
       "slot": "headgear",
       "category": "gear",
       "rarity": "uncommon",
       "icon": "face",
       "description": "A lightweight neural helm tuned for uninterrupted concentration.",
-      "realWorldBenefit": "+5% bonus XP when completing study sessions without distractions.",
+      "skillId": 2,
+      "realWorldBenefit": "+5% XP bonus for Studies missions",
       "effects": [
         {
-          "type": "focus_exp_bonus",
+          "type": "studies_exp_bonus",
           "value": 5
         }
       ]
     },
     {
-      "id": "mind-crown",
+      "id": "2",
       "name": "Mind Crown",
       "slot": "headgear",
       "category": "gear",
       "rarity": "epic",
       "icon": "psychology",
       "description": "An experimental cognitive enhancer worn by elite strategists.",
-      "realWorldBenefit": "+15% XP from deep work tasks lasting over 45 minutes.",
+      "skillId": 2,
+      "realWorldBenefit": "+15% XP bonus for Studies missions",
       "effects": [
         {
-          "type": "focus_exp_bonus",
+          "type": "studies_exp_bonus",
           "value": 15
         }
       ]
     },
     {
-      "id": "iron-resolve",
+      "id": "3",
       "name": "Iron Resolve",
       "slot": "bodygear",
       "category": "gear",
       "rarity": "rare",
       "icon": "security",
       "description": "A reinforced combat vest forged through discipline.",
-      "realWorldBenefit": "+10% strength XP after completing physical workouts.",
+      "skillId": 1,
+      "realWorldBenefit": "+10% XP bonus for Exercise missions",
       "effects": [
         {
-          "type": "strength_exp_bonus",
+          "type": "exercise_exp_bonus",
           "value": 10
         }
       ]
     },
     {
-      "id": "masters-plate",
+      "id": "4",
       "name": "Master's Plate",
       "slot": "bodygear",
       "category": "gear",
       "rarity": "epic",
       "icon": "shield",
       "description": "A relic from the ancient Kitchen Wars.",
-      "realWorldBenefit": "Prevents the 'Late Night Takeout' debuff.",
+      "skillId": 8,
+      "realWorldBenefit": "+12% XP bonus for Health missions",
       "effects": [
         {
-          "type": "discipline_bonus",
-          "value": 10
+          "type": "health_exp_bonus",
+          "value": 12
         }
       ]
     },
     {
-      "id": "swift-gloves",
+      "id": "5",
       "name": "Swift Gloves",
       "slot": "gloves",
       "category": "gear",
       "rarity": "common",
       "icon": "back_hand",
       "description": "Light gloves optimized for speed and precision.",
-      "realWorldBenefit": "+5% XP from quick task completion streaks.",
+      "skillId": 4,
+      "realWorldBenefit": "+5% XP bonus for Social missions",
       "effects": [
         {
-          "type": "speed_bonus",
+          "type": "social_exp_bonus",
           "value": 5
         }
       ]
     },
     {
-      "id": "data-gauntlet",
+      "id": "6",
       "name": "Data Gauntlet",
       "slot": "gloves",
       "category": "gear",
       "rarity": "rare",
       "icon": "back_hand",
       "description": "A cybernetic glove infused with processing cores.",
-      "realWorldBenefit": "+10% technical XP from coding tasks.",
+      "skillId": 9,
+      "realWorldBenefit": "+10% XP bonus for Technical missions",
       "effects": [
         {
           "type": "technical_exp_bonus",
@@ -943,78 +1217,83 @@
       ]
     },
     {
-      "id": "pathrunners",
+      "id": "7",
       "name": "Pathrunners",
       "slot": "boots",
       "category": "gear",
       "rarity": "uncommon",
       "icon": "hiking",
       "description": "Adaptive boots designed for relentless movement.",
-      "realWorldBenefit": "+5 energy regeneration daily.",
+      "skillId": 1,
+      "realWorldBenefit": "+5% XP bonus for Exercise missions",
       "effects": [
         {
-          "type": "energy_regen",
+          "type": "exercise_exp_bonus",
           "value": 5
         }
       ]
     },
     {
-      "id": "void-striders",
+      "id": "8",
       "name": "Void Striders",
       "slot": "boots",
       "category": "gear",
       "rarity": "epic",
       "icon": "directions_run",
       "description": "Boots engineered for silent traversal through the unknown.",
-      "realWorldBenefit": "+15% XP from outdoor activities and walks.",
+      "skillId": 1,
+      "realWorldBenefit": "+15% XP bonus for Exercise missions",
       "effects": [
         {
-          "type": "movement_exp_bonus",
+          "type": "exercise_exp_bonus",
           "value": 15
         }
       ]
     },
     {
-      "id": "watch-of-hours",
+      "id": "9",
       "name": "Watch of Hours",
       "slot": "utility",
       "category": "gear",
       "rarity": "rare",
       "icon": "watch",
       "description": "A tactical chronometer used by productivity tacticians.",
-      "realWorldBenefit": "+10% XP from scheduled tasks completed on time.",
+      "skillId": 3,
+      "realWorldBenefit": "+10% XP bonus for Organization missions",
       "effects": [
         {
-          "type": "organization_bonus",
+          "type": "organization_exp_bonus",
           "value": 10
         }
       ]
     },
     {
-      "id": "chrono-module",
+      "id": "10",
       "name": "Chrono Module",
       "slot": "utility",
       "category": "gear",
       "rarity": "legendary",
       "icon": "timer",
       "description": "An unstable temporal core synced to human discipline.",
-      "realWorldBenefit": "Reduces cooldown between focus sessions.",
+      "skillId": 5,
+      "realWorldBenefit": "+20% XP bonus for Mindfulness missions",
       "effects": [
         {
-          "type": "cooldown_reduction",
+          "type": "mindfulness_exp_bonus",
           "value": 20
         }
       ]
     },
     {
-      "id": "xp-boost",
+      "id": "11",
       "name": "XP Boost",
       "slot": "consumable",
       "category": "consumable",
       "rarity": "uncommon",
       "icon": "rocket_launch",
       "description": "A temporary enhancer that accelerates progression.",
-      "realWorldBenefit": "+20% XP gain for 1 hour.",
+      "skillId": null,
+      "realWorldBenefit": "+20% XP gain for all missions (1 hour duration)",
       "effects": [
         {
           "type": "xp_multiplier",
@@ -1023,18 +1302,19 @@
       ]
     },
     {
-      "id": "energy-drink",
+      "id": "12",
       "name": "Energy Drink",
       "slot": "consumable",
       "category": "consumable",
       "rarity": "common",
       "icon": "bolt",
       "description": "A caffeinated stimulant favored by night grinders.",
-      "realWorldBenefit": "Restores 5 energy instantly.",
+      "skillId": 8,
+      "realWorldBenefit": "+8% XP bonus for Health missions",
       "effects": [
         {
-          "type": "energy_restore",
-          "value": 5
+          "type": "health_exp_bonus",
+          "value": 8
         }
       ]
     }

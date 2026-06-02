@@ -22,7 +22,6 @@ useEffect(() => {
       const u = data.user
       setUser({ ...u, avatar: avatarPath(u.avatar) })
 
-      // ← adiciona isto para aplicar o tema no reload
       const themeMap = {
         'Neon Green': 'theme-neon-green',
         'Blood Red':  'theme-blood-red',

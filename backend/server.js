@@ -8,6 +8,7 @@ import userRoutes from './src/routes/user.js'
 import meRoutes from './src/routes/me.js'
 import missionsRouter from './src/routes/missions.js'
 import skillsRouter from './src/routes/skills.js'
+import inventoryRoutes from  './src/routes/inventory.js'
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(cors({
 }))
 app.use(express.json())
 
+
 app.use('/api/reg', regRoutes)
 app.use('/api/preferences', preferencesRoutes)
 app.use('/api/auth', authRoutes)
@@ -23,5 +25,6 @@ app.use('/api/user', userRoutes)
 app.use('/api/me', meRoutes)
 app.use('/api/missions', missionsRouter)
 app.use('/api/skills', skillsRouter)
+app.use('/api/inventory', inventoryRoutes)
 
 app.listen(3000, () => console.log('Servidor em http://localhost:3000'))
