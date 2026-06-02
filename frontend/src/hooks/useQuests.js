@@ -28,9 +28,11 @@ export function useQuests() {
     Promise.all([
       fetch('http://localhost:3000/api/missions',      { headers }).then(r => r.json()),
       fetch('http://localhost:3000/api/missions/user', { headers }).then(r => r.json()),
-    ]).then(([missions, userMissions]) => {
+      fetch('http://localhost:3000/api/skills',        { headers }).then(r => r.json()),
+    ]).then(([missions, userMissions, skills]) => {
 
       const acceptedMissionIds = new Set(userMissions.map(um => um.mission_id))
+      const skillsMap = Object.fromEntries(skills.map(s => [s.id, s.name]))
 
       const transform = (mission, userMission = null) => {
         const progress = userMission
@@ -40,11 +42,13 @@ export function useQuests() {
             )
           : 0
 
+        const skillName = userMission?.skill?.name ?? skillsMap[mission.skill_id] ?? 'Unknown'
+
         return {
           id:          userMission?.id ?? `available-${mission.id}`,
           mission_id:  mission.id,
           ...RANK_BY_XP(mission.xp_reward),
-          category:    userMission?.skill?.name ?? mission.skill_id,
+          category:    skillName,
           title:       mission.title,
           description: mission.description,
           xp:          mission.xp_reward,

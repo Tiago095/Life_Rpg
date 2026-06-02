@@ -289,6 +289,49 @@
         }
       ],
       "skillPoints": 1
+    },
+    {
+      "id": "d3715abb-bb5d-4eee-947f-4a83a7be6d76",
+      "username": "FanaticHero",
+      "email": "p2@gmail.com",
+      "password": "$2b$10$qqzQrv6G/QLe2ObU2P.nzOX1ubbB2uIE3grovR6V7dhPjRxVdp/3u",
+      "level": 4,
+      "xp": 680,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Cyberpunk Blue (Default)",
+      "highContrast": true,
+      "skills": [
+        {
+          "skillId": 1,
+          "rank": 0
+        },
+        {
+          "skillId": 3,
+          "rank": 0
+        },
+        {
+          "skillId": 4,
+          "rank": 0
+        },
+        {
+          "skillId": 5,
+          "rank": 0
+        },
+        {
+          "skillId": 7,
+          "rank": 0
+        },
+        {
+          "skillId": 8,
+          "rank": 0
+        },
+        {
+          "skillId": 9,
+          "rank": 0
+        }
+      ],
+      "skillPoints": 1
     }
   ],
   "skills": [
@@ -1097,6 +1140,116 @@
       "status": "completed",
       "accepted_at": "2026-06-01T18:48:53.394Z",
       "completed_at": "2026-06-01T18:49:30.303Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "ebf558e3-506e-470e-8815-de19c8efbf38",
+      "user_id": "d3715abb-bb5d-4eee-947f-4a83a7be6d76",
+      "mission_id": 1,
+      "status": "completed",
+      "accepted_at": "2026-06-02T13:25:23.925Z",
+      "completed_at": "2026-06-02T13:41:39.255Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "2bf70885-0254-4aec-a905-be6c630f3d7e",
+      "user_id": "d3715abb-bb5d-4eee-947f-4a83a7be6d76",
+      "mission_id": 2,
+      "status": "completed",
+      "accepted_at": "2026-06-02T13:37:19.123Z",
+      "completed_at": "2026-06-02T13:42:22.814Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "646d3ca8-72f0-4368-bbbe-b064681de758",
+      "user_id": "d3715abb-bb5d-4eee-947f-4a83a7be6d76",
+      "mission_id": 3,
+      "status": "completed",
+      "accepted_at": "2026-06-02T13:42:38.450Z",
+      "completed_at": "2026-06-02T13:42:42.285Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "db8ddf14-b441-41cb-8fba-026d75c3a36b",
+      "user_id": "d3715abb-bb5d-4eee-947f-4a83a7be6d76",
+      "mission_id": 4,
+      "status": "completed",
+      "accepted_at": "2026-06-02T13:47:12.096Z",
+      "completed_at": "2026-06-02T13:47:18.919Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "f682b153-a2da-46f4-a6ad-ccbcdbe74aed",
+      "user_id": "d3715abb-bb5d-4eee-947f-4a83a7be6d76",
+      "mission_id": 6,
+      "status": "completed",
+      "accepted_at": "2026-06-02T13:47:41.096Z",
+      "completed_at": "2026-06-02T13:47:45.683Z",
       "objectives_progress": [
         {
           "objective_id": 1,

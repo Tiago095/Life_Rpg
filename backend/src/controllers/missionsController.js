@@ -87,12 +87,15 @@ if (allDone) {
 
   if (mission && userIndex !== -1) {
     const user = db.data.users[userIndex]
-    user.xp += mission.xp_reward
 
-    const bonusPercent = calculateXpBonus(user, mission, db.data);
-    const finalXp = mission.xp_reward * (1 + bonusPercent / 100);
-    
-    user.xp += finalXp;
+    try {
+      const bonusPercent = calculateXpBonus(user, mission, db.data) || 0;
+      const finalXp = mission.xp_reward * (1 + bonusPercent / 100);
+      user.xp += finalXp;
+    } catch (err) {
+      console.error('Erro ao calcular bonus XP:', err);
+      user.xp += mission.xp_reward;
+    }
 
     // Level up
     const levels = db.data.levels.sort((a, b) => b.level - a.level)
