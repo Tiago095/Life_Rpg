@@ -28,9 +28,11 @@ export default function MissionCompletePopup({ isOpen, onClose, onViewLogs, resu
   }
 
   const rarityColor = {
-    common: 'var(--color-primary)',
-    rare:   '#f59e0b',
-    epic:   '#a855f7',
+  common:    '#64748b',
+  uncommon:  '#22c55e',
+  rare:      '#f59e0b',
+  epic:      '#a855f7',
+  legendary: '#f97316',
   }
 
   if (!isOpen || !result) return null
@@ -155,10 +157,15 @@ export default function MissionCompletePopup({ isOpen, onClose, onViewLogs, resu
                 </div>
               )}
               {result.lootDrop && (
-                <div className="mcp-reward-card mcp-reward-loot" style={{ '--loot-color': rarityColor[result.lootDrop.rarity] ?? 'var(--color-primary)' }}>
+                <div className="mcp-reward-card mcp-reward-loot"
+                    style={{ '--loot-color': rarityColor[result.lootDrop.rarity] ?? 'var(--color-primary)' }}>
                   <span className="mcp-rarity-badge">{result.lootDrop.rarity.toUpperCase()}</span>
-                  <span className="material-symbols-outlined mcp-r-icon" style={{ color: 'var(--loot-color)' }}>inventory_2</span>
+                  <span className="material-symbols-outlined mcp-r-icon"
+                        style={{ color: 'var(--loot-color)' }}>
+                    {result.lootDrop.icon ?? 'inventory_2'}          
+                  </span>
                   <div className="mcp-r-val" style={{ fontSize: '13px' }}>{result.lootDrop.name}</div>
+                  
                   <div className="mcp-r-label">{t.lootDrop ?? 'LOOT DROP'}</div>
                 </div>
               )}

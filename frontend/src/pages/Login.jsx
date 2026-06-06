@@ -11,7 +11,7 @@ export default function Login() {
   const [error, setError]               = useState('')
   const [loading, setLoading]           = useState(false)
   const navigate = useNavigate()
-  const { updateUser } = useUser()
+  const { login } = useUser()
 
   const handleLogin = async () => {
     setError('')
@@ -27,24 +27,23 @@ export default function Login() {
       const data = await response.json()
 
       if (response.ok) {
-        localStorage.setItem('token', data.token)
-        updateUser(data.user)
+        login(data.token, data.user)
 
+        document.body.classList.remove('theme-neon-green', 'theme-blood-red', 'theme-void-black', 'high-contrast')
         const themeMap = {
           'Neon Green': 'theme-neon-green',
           'Blood Red':  'theme-blood-red',
           'Void Black': 'theme-void-black',
         }
-        const theme = data.user.theme
-        if (theme && themeMap[theme]) {
-          document.body.classList.add(themeMap[theme])
-        }
-        if (data.user.highContrast) {
+        if (data.user.theme && themeMap[data.user.theme])
+          document.body.classList.add(themeMap[data.user.theme])
+        if (data.user.highContrast)
           document.body.classList.add('high-contrast')
-        }
-        
+
+        await login(data.token, data.user)
+
         navigate('/Dashboard')
-      } 
+      }
       else {
         setError(data.message)
       }

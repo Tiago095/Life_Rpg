@@ -78,6 +78,7 @@ export default function Settings() {
       'Void Black': 'theme-void-black',
     }
     if (themeMap[themeName]) document.body.classList.add(themeMap[themeName])
+    localStorage.setItem('theme', themeName)
     setTheme(themeName)
   }
 
@@ -192,10 +193,9 @@ export default function Settings() {
   }
 
   const handleLogout = () => {
-  logout()
-  document.body.classList.remove('theme-neon-green', 'theme-blood-red', 'theme-void-black')
-  navigate('/')
-}
+    logout()
+    navigate('/')
+  }
 
   return (
     <div className="st-layout">

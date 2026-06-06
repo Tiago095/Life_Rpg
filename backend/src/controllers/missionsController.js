@@ -96,34 +96,61 @@ export const toggleObjective = async (req, res) => {
 
   obj.completed = !obj.completed
 
-  // Verificar se todos os objetivos estão completos
+  let itemAwarded = null
+
   const allDone = um.objectives_progress.every(o => o.completed)
-if (allDone) {
-  um.status = 'completed'
-  um.completed_at = new Date().toISOString()
+  if (allDone) {
+    um.status = 'completed'
+    um.completed_at = new Date().toISOString()
 
-  const mission = db.data.missions.find(m => m.id === um.mission_id)
-  const userIndex = db.data.users.findIndex(u => u.id === req.userId)
+    const mission   = db.data.missions.find(m => m.id === um.mission_id)
+    const userIndex = db.data.users.findIndex(u => u.id === req.userId)
 
-  if (mission && userIndex !== -1) {
-    const user = db.data.users[userIndex]
-    user.xp += mission.xp_reward
+    if (mission && userIndex !== -1) {
+      const user = db.data.users[userIndex]
 
-    // Level up
-    const levels = db.data.levels.sort((a, b) => b.level - a.level)
-    const newLevel = levels.find(l => user.xp >= l.xp_required)
-    if (newLevel && newLevel.level > user.level) {
-      user.level = newLevel.level
+      // XP + level
+      user.xp += mission.xp_reward
+      user.skillPoints = (user.skillPoints ?? 0) + 1
+
+      const levels   = db.data.levels.sort((a, b) => b.level - a.level)
+      const newLevel = levels.find(l => user.xp >= l.xp_required)
+      if (newLevel && newLevel.level > user.level) {
+        user.level = newLevel.level
+      }
+
+      // --- Sorteio de item ---
+      const items = db.data.items
+      const rarityWeights = {
+        common:    50,
+        uncommon:  28,
+        rare:      14,
+        epic:       6,
+        legendary:  2,
+      }
+
+      // Constrói pool ponderada
+      const pool = items.flatMap(item =>
+        Array(rarityWeights[item.rarity] ?? 10).fill(item)
+      )
+      const winner = pool[Math.floor(Math.random() * pool.length)]
+
+      // Adiciona ao inventário do utilizador
+      if (!user.inventory) user.inventory = []
+      user.inventory.push({
+        itemId:      winner.id,
+        acquiredAt:  new Date().toISOString(),
+      })
+
+      itemAwarded = winner   // devolve ao frontend
+      db.data.users[userIndex] = user
     }
-
-    db.data.users[userIndex] = user
   }
-}
 
   db.data.user_missions[umIndex] = um
   await db.write()
 
-  res.json({ userMission: um, completed: allDone })
+  res.json({ userMission: um, completed: allDone, itemAwarded })
 }
 
 // PATCH /api/missions/:userMissionId/abandon — abandonar missão
@@ -188,6 +215,8 @@ export const saveDailyMissions = async (req, res) => {
       description: m.description,
       skill_id: m.skill_id,
       xp_reward: m.xp_reward,
+      estimated_time: m.estimated_time ?? null,   // ← novo
+      success_rate: m.success_rate ?? null,        // ← novo
       objectives,
       daily: true,
       created_by: req.userId

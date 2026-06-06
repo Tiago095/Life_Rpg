@@ -20,7 +20,7 @@ export const login = async (req, res) => {
   const validPassword = await bcrypt.compare(password, user.password)
   if (!validPassword)
     return res.status(400).json({ message: 'Invalid Credentials' })
-  const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '7d' })
+  const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1d' })
   res.json({
     message: 'Login com sucesso',
     token,
@@ -34,7 +34,8 @@ export const login = async (req, res) => {
       avatar:   user.avatar   || null,
       language: user.language || 'English [EN-US]',
       theme:    user.theme    || 'Cyberpunk Blue (Default)',
-      highContrast: user.highContrast ?? false
+      highContrast: user.highContrast ?? false,
+      skills:       user.skills    ?? [],
     }
   })
 }

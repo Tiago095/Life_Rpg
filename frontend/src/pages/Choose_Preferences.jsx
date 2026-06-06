@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useUser } from '../context/UserContext'
 import './Choose_Preferences.css'
 
 const attributes = [
@@ -100,7 +101,8 @@ export default function AttributeSelection() {
   const [toggles, setToggles] = useState(
     Object.fromEntries(attributes.map(a => [a.id, a.active]))
   )
-  const [error, setError] = useState('')  // ✅ novo
+  const [error, setError] = useState('')
+  const { refreshUser } = useUser()
 
   const handleToggle = (id) => {
     setToggles(prev => ({ ...prev, [id]: !prev[id] }))
@@ -140,6 +142,7 @@ const handleConfirm = async () => {
     return
   }
 
+  await refreshUser()
   navigate('/Dashboard')
 }
 

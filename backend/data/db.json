@@ -1,59 +1,204 @@
 {
   "users": [
     {
-      "id": "10d0f414-a0c4-4d0d-822a-5f6217dbd2e5",
-      "username": "Patudo",
-      "email": "teste@gmail.com",
-      "password": "$2b$10$lfglz3UGiTKYi6H2N4Hwo.hcLlB4LGk8xMFsOOPT3LLQJLQAxm6Wy",
-      "level": 1,
-      "xp": 0,
-      "skills": [
-        1,
-        2,
-        3
-      ]
-    },
-    {
-      "id": "99088202-ac62-4743-bf5d-5467c7c99c2c",
-      "username": "IThrapyyyy",
-      "email": "afmarques222@gmail.com",
-      "password": "$2b$10$SJ2UuU9Hew9gUszaQ6LkcO4JkC5/XuxCh4Cfu7TyYS5W1JdaolkbO",
-      "level": 1,
-      "xp": 1000,
-      "maxXp": 1000,
-      "avatar": "avatar3",
-      "language": "Spanish [ES]",
-      "theme": "Cyberpunk Blue (Default)",
-      "highContrast": false
-    },
-    {
-      "id": "1",
-      "username": "IThrapy",
-      "email": "afmarques122@gmail.com",
-      "password": "$2b$10$3aO5JHOf3.yejv0rv4pXhu5NSO7hqBUpSJaYqCPici8I8WLh7vMoG",
-      "level": 1,
-      "xp": 0,
-      "maxXp": 1000,
-      "avatar": "avatar2",
+      "id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "username": "Toko",
+      "email": "t@gmail.com",
+      "password": "$2b$10$oSQnwsByyc2QHPNp30ydseOuIgkJenrKtJjndRPmbwrIbt4W3qOOi",
+      "level": 2,
+      "xp": 150,
+      "avatar": "avatar1",
       "language": "English [EN-US]",
       "theme": "Void Black",
-      "highContrast": true
+      "highContrast": true,
+      "skills": [
+        {
+          "skillId": 1,
+          "rank": 4
+        },
+        {
+          "skillId": 2,
+          "rank": 6
+        },
+        {
+          "skillId": 3,
+          "rank": 1
+        },
+        {
+          "skillId": 4,
+          "rank": 2
+        },
+        {
+          "skillId": 5,
+          "rank": 6
+        },
+        {
+          "skillId": 6,
+          "rank": 1
+        },
+        {
+          "skillId": 7,
+          "rank": 6
+        },
+        {
+          "skillId": 8,
+          "rank": 2
+        },
+        {
+          "skillId": 9,
+          "rank": 32
+        }
+      ],
+      "skillPoints": 7,
+      "inventory": []
     },
     {
-      "id": "8af35343-d66a-458b-a1a6-e047fd46a58e",
-      "username": "Tiago_\"OGRANDE\"",
-      "email": "ogrande@gmail.com",
-      "password": "$2b$10$NS2iJRgFOa6xgFmC9VhXZeiaMkclpLWpYCNtVzpJLSAQ9cdByI0aC",
-      "level": 4,
-      "xp": 570,
-      "avatar": "avatar2",
+      "id": "55c8c543-ea34-4650-8a6d-062c77055c5b",
+      "username": "edu12",
+      "email": "r@gmail.com",
+      "password": "$2b$10$7fg5CDgT7gG/dRt.UNYn9.daxbfjwpKgr99MrRBc.C.hLIJBO3L4q",
+      "level": 1,
+      "xp": 0,
+      "avatar": "avatar1",
       "language": "English [EN-US]",
       "theme": "Cyberpunk Blue (Default)",
-      "highContrast": false,
+      "highContrast": true,
       "skills": [
-        1,
-        2,
-        6
+        {
+          "skillId": 4,
+          "rank": 0
+        },
+        {
+          "skillId": 6,
+          "rank": 0
+        },
+        {
+          "skillId": 9,
+          "rank": 0
+        }
+      ],
+      "skillPoints": 0
+    },
+    {
+      "id": "9a448953-a0fb-4d93-a410-388ea03771de",
+      "username": "pires",
+      "email": "p@gmail.com",
+      "password": "$2b$10$Oo3VuHMBuQOeNuEJuqsd6OruQC3kmH4mc7Gm4hnVX/f6iyqRyHqqq",
+      "level": 1,
+      "xp": 0,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Cyberpunk Blue (Default)",
+      "highContrast": true,
+      "skills": [
+        {
+          "skillId": 3,
+          "rank": 0
+        },
+        {
+          "skillId": 5,
+          "rank": 0
+        },
+        {
+          "skillId": 6,
+          "rank": 0
+        }
+      ],
+      "skillPoints": 1
+    },
+    {
+      "id": "13b740ca-dfe9-43b4-82ff-2ee813dcd415",
+      "username": "gs",
+      "email": "g@gmail.com",
+      "password": "$2b$10$eRCBqycyzlgnm6fD8HQ/cecSUF/r4StrBJJQiouMGJ1g/Mm4j.FUy",
+      "level": 1,
+      "xp": 0,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Neon Green",
+      "highContrast": true,
+      "skills": [
+        {
+          "skillId": 2,
+          "rank": 0
+        },
+        {
+          "skillId": 5,
+          "rank": 0
+        },
+        {
+          "skillId": 8,
+          "rank": 0
+        }
+      ],
+      "skillPoints": 1
+    },
+    {
+      "id": "2958c605-408b-4f45-b2a5-82c5ab890e51",
+      "username": "Ithrapy",
+      "email": "a@gmail.com",
+      "password": "$2b$10$YgLQBjVlOQWC6tNL5ZL4jelddStXN3HZuTAHm3IJdh0k524pxSGP6",
+      "level": 1,
+      "xp": 0,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Cyberpunk Blue (Default)",
+      "highContrast": true,
+      "skills": [
+        {
+          "skillId": 1,
+          "rank": 0
+        },
+        {
+          "skillId": 2,
+          "rank": 0
+        },
+        {
+          "skillId": 3,
+          "rank": 0
+        }
+      ],
+      "skillPoints": 1
+    },
+    {
+      "id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "username": "belo",
+      "email": "b@gmail.com",
+      "password": "$2b$10$ONNMtF6aUPkn4sdpPX3D0OLZaSVBt9DlkCqLl3NQ.ka/MjkdfFwKS",
+      "level": 2,
+      "xp": 150,
+      "avatar": "avatar1",
+      "language": "English [EN-US]",
+      "theme": "Cyberpunk Blue (Default)",
+      "highContrast": true,
+      "skills": [
+        {
+          "skillId": 1,
+          "rank": 0
+        },
+        {
+          "skillId": 2,
+          "rank": 0
+        },
+        {
+          "skillId": 3,
+          "rank": 0
+        }
+      ],
+      "skillPoints": 4,
+      "inventory": [
+        {
+          "itemId": 5,
+          "acquiredAt": "2026-05-29T13:43:10.499Z"
+        },
+        {
+          "itemId": 1,
+          "acquiredAt": "2026-05-29T13:49:52.635Z"
+        },
+        {
+          "itemId": 2,
+          "acquiredAt": "2026-05-29T13:54:10.608Z"
+        }
       ]
     }
   ],
@@ -93,6 +238,260 @@
     {
       "id": 9,
       "name": "Technical"
+    }
+  ],
+  "skillPerks": [
+    {
+      "id": "xp_ex1",
+      "skillId": 1,
+      "effectType": "xp_percent",
+      "value": 15,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_ex2",
+      "skillId": 1,
+      "effectType": "xp_flat",
+      "value": 25,
+      "requiredRank": 3
+    },
+    {
+      "id": "credits_ex",
+      "skillId": 1,
+      "effectType": "credits_percent",
+      "value": 10,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_ex",
+      "skillId": 1,
+      "effectType": "drop_percent",
+      "value": 5,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_std1",
+      "skillId": 2,
+      "effectType": "xp_percent",
+      "value": 20,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_std2",
+      "skillId": 2,
+      "effectType": "xp_flat",
+      "value": 30,
+      "requiredRank": 3
+    },
+    {
+      "id": "credist_std",
+      "skillId": 2,
+      "effectType": "credits_percent",
+      "value": 12,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_std",
+      "skillId": 2,
+      "effectType": "drop_percent",
+      "value": 6,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_org1",
+      "skillId": 3,
+      "effectType": "xp_percent",
+      "value": 15,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_org2",
+      "skillId": 3,
+      "effectType": "xp_flat",
+      "value": 25,
+      "requiredRank": 3
+    },
+    {
+      "id": "credist_org",
+      "skillId": 3,
+      "effectType": "credits_percent",
+      "value": 10,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_org",
+      "skillId": 3,
+      "effectType": "drop_percent",
+      "value": 4,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_soc1",
+      "skillId": 4,
+      "effectType": "xp_percent",
+      "value": 18,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_soc2",
+      "skillId": 4,
+      "effectType": "xp_flat",
+      "value": 20,
+      "requiredRank": 3
+    },
+    {
+      "id": "credist_soc",
+      "skillId": 4,
+      "effectType": "credits_percent",
+      "value": 15,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_soc",
+      "skillId": 4,
+      "effectType": "drop_percent",
+      "value": 5,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_md1",
+      "skillId": 5,
+      "effectType": "xp_percent",
+      "value": 20,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_md2",
+      "skillId": 5,
+      "effectType": "xp_flat",
+      "value": 30,
+      "requiredRank": 3
+    },
+    {
+      "id": "credist_md",
+      "skillId": 5,
+      "effectType": "credits_percent",
+      "value": 8,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_md",
+      "skillId": 5,
+      "effectType": "drop_percent",
+      "value": 7,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_cr1",
+      "skillId": 6,
+      "effectType": "xp_percent",
+      "value": 22,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_cr2",
+      "skillId": 6,
+      "effectType": "xp_flat",
+      "value": 35,
+      "requiredRank": 3
+    },
+    {
+      "id": "credits_cr",
+      "skillId": 6,
+      "effectType": "credits_percent",
+      "value": 12,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_cr",
+      "skillId": 6,
+      "effectType": "drop_percent",
+      "value": 6,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_fin1",
+      "skillId": 7,
+      "effectType": "xp_percent",
+      "value": 15,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_fin2",
+      "skillId": 7,
+      "effectType": "xp_flat",
+      "value": 25,
+      "requiredRank": 3
+    },
+    {
+      "id": "credits_fin",
+      "skillId": 7,
+      "effectType": "credits_percent",
+      "value": 20,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_fin",
+      "skillId": 7,
+      "effectType": "drop_percent",
+      "value": 5,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_hlt1",
+      "skillId": 8,
+      "effectType": "xp_percent",
+      "value": 18,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_hlt2",
+      "skillId": 8,
+      "effectType": "xp_flat",
+      "value": 20,
+      "requiredRank": 3
+    },
+    {
+      "id": "credits_hlt",
+      "skillId": 8,
+      "effectType": "credits_percent",
+      "value": 10,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_hlt",
+      "skillId": 8,
+      "effectType": "drop_percent",
+      "value": 5,
+      "requiredRank": 8
+    },
+    {
+      "id": "xp_tec1",
+      "skillId": 9,
+      "effectType": "xp_percent",
+      "value": 25,
+      "requiredRank": 1
+    },
+    {
+      "id": "xp_tec2",
+      "skillId": 9,
+      "effectType": "xp_flat",
+      "value": 40,
+      "requiredRank": 3
+    },
+    {
+      "id": "credist_tec",
+      "skillId": 9,
+      "effectType": "credits_percent",
+      "value": 15,
+      "requiredRank": 5
+    },
+    {
+      "id": "loot_tec",
+      "skillId": 9,
+      "effectType": "drop_percent",
+      "value": 8,
+      "requiredRank": 8
     }
   ],
   "levels": [
@@ -457,6 +856,1020 @@
       ],
       "daily": true,
       "created_by": "8af35343-d66a-458b-a1a6-e047fd46a58e"
+    },
+    {
+      "id": 1780061547652,
+      "title": "Get Moving",
+      "description": "Start your exercise journey and take the first step towards a healthier you.",
+      "skill_id": 1,
+      "xp_reward": 100,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Complete 5 minutes of stretching daily for 3 days"
+        },
+        {
+          "id": 2,
+          "description": "Take a 10-minute walk after every meal for 2 days"
+        },
+        {
+          "id": 3,
+          "description": "Do 10 push-ups every morning for 2 days"
+        }
+      ],
+      "daily": true,
+      "created_by": "2958c605-408b-4f45-b2a5-82c5ab890e51"
+    },
+    {
+      "id": 1780061551224,
+      "title": "Get Moving",
+      "description": "Start your journey to a healthier you",
+      "skill_id": 1,
+      "xp_reward": 100,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Exercise for 5 minutes a day for 3 days"
+        },
+        {
+          "id": 2,
+          "description": "Drink 8 glasses of water a day for 2 days"
+        },
+        {
+          "id": 3,
+          "description": "Take a 10-minute walk outside after dinner for 1 day"
+        }
+      ],
+      "daily": true,
+      "created_by": "2958c605-408b-4f45-b2a5-82c5ab890e51"
+    },
+    {
+      "id": 1780061546918,
+      "title": "The Scholar's Journey",
+      "description": "Uncover the secrets of the ancient tomes and prove your worth as a studious hero.",
+      "skill_id": 2,
+      "xp_reward": 50,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Read 5 books from the 'Classics' collection"
+        },
+        {
+          "id": 2,
+          "description": "Solve 3 math problems with 90% accuracy"
+        },
+        {
+          "id": 3,
+          "description": "Take detailed notes on a 30-minute lecture on a topic of your choice"
+        }
+      ],
+      "daily": true,
+      "created_by": "2958c605-408b-4f45-b2a5-82c5ab890e51"
+    },
+    {
+      "id": 1780061547118,
+      "title": "Morning Stretch",
+      "description": "Get moving for 10 minutes and feel the energy boost",
+      "skill_id": 1,
+      "xp_reward": 50,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Do 10 jumping jacks"
+        },
+        {
+          "id": 2,
+          "description": "Walk around the block for 2 minutes"
+        },
+        {
+          "id": 3,
+          "description": "Complete the task"
+        }
+      ],
+      "daily": true,
+      "created_by": "2958c605-408b-4f45-b2a5-82c5ab890e51"
+    },
+    {
+      "id": 1780061552674,
+      "title": "Book Review",
+      "description": "Read a book on a topic of your choice and write a short review.",
+      "skill_id": 2,
+      "xp_reward": 50,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Choose a book in 1 minute"
+        },
+        {
+          "id": 2,
+          "description": "Read 2 pages in 2 minutes"
+        },
+        {
+          "id": 3,
+          "description": "Write a 50-word review in 5 minutes"
+        }
+      ],
+      "daily": true,
+      "created_by": "2958c605-408b-4f45-b2a5-82c5ab890e51"
+    },
+    {
+      "id": 1780061555317,
+      "title": "Clear the Clutter",
+      "description": "Clean up your workspace in under 30 minutes",
+      "skill_id": 3,
+      "xp_reward": 50,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Sort papers and files into categories"
+        },
+        {
+          "id": 2,
+          "description": "Put away 5 items in your workspace"
+        },
+        {
+          "id": 3,
+          "description": "Wipe down your desk and chair"
+        }
+      ],
+      "daily": true,
+      "created_by": "2958c605-408b-4f45-b2a5-82c5ab890e51"
+    },
+    {
+      "id": 1780061803651,
+      "title": "Get Moving",
+      "description": "Kickstart your fitness journey with a series of simple exercises",
+      "skill_id": 1,
+      "xp_reward": 50,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Complete 5 minutes of light cardio (jogging, jumping jacks, etc.)"
+        },
+        {
+          "id": 2,
+          "description": "Do 10 push-ups in a row"
+        },
+        {
+          "id": 3,
+          "description": "Walk for 5 minutes without stopping"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780061801851,
+      "title": "Get Moving",
+      "description": "Start your fitness journey with a simple yet impactful challenge",
+      "skill_id": 1,
+      "xp_reward": 50,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Walk 1 mile around the block 3 times a week"
+        },
+        {
+          "id": 2,
+          "description": "Do 10 push-ups, 10 squats, and 10 lunges each day"
+        },
+        {
+          "id": 3,
+          "description": "Take a 10-minute walk break every hour at work"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780061802404,
+      "title": "Tame the Chaos",
+      "description": "Your cluttered workspace is hindering your productivity. Get organized to succeed in this quest.",
+      "skill_id": 3,
+      "xp_reward": 50,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Clear 5 cluttered areas in your workspace"
+        },
+        {
+          "id": 2,
+          "description": "Sort and categorize 10 pieces of paper"
+        },
+        {
+          "id": 3,
+          "description": "Create a to-do list and prioritize 3 tasks"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780061806857,
+      "title": "Morning Stretch",
+      "description": "Get moving for 10 minutes to boost energy and focus.",
+      "skill_id": 1,
+      "xp_reward": 25,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Stand up and stretch for 30 seconds"
+        },
+        {
+          "id": 2,
+          "description": "Walk around the room for 2 minutes"
+        },
+        {
+          "id": 3,
+          "description": "Do 5 jumping jacks"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780061809836,
+      "title": "Study Break",
+      "description": "Quick study session for beginners",
+      "skill_id": 2,
+      "xp_reward": 20,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Study for 5 minutes on a chosen topic"
+        },
+        {
+          "id": 2,
+          "description": "Take 10 notes on a single page"
+        },
+        {
+          "id": 3,
+          "description": "Solve 3 simple math problems"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780061809554,
+      "title": "Clear Clutter",
+      "description": "Quickly clear a cluttered area to improve focus",
+      "skill_id": 3,
+      "xp_reward": 25,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Pick up all trash in the room"
+        },
+        {
+          "id": 2,
+          "description": "Sort items into categories (e.g., books, clothes)"
+        },
+        {
+          "id": 3,
+          "description": "Put away all belongings in their designated spot"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780403878691,
+      "title": "Tame the Chaos",
+      "description": "Clean up your workspace and unlock your full potential.",
+      "skill_id": 3,
+      "xp_reward": 150,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Sort and categorize your desk supplies"
+        },
+        {
+          "id": 2,
+          "description": "Organize your digital files into clear folders"
+        },
+        {
+          "id": 3,
+          "description": "Set aside 15 minutes each day to maintain your newly organized space"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780403877728,
+      "title": "Sweat and Strive",
+      "description": "Get moving and build momentum to tackle the day!",
+      "skill_id": 1,
+      "xp_reward": 100,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Exercise for 10 minutes without stopping"
+        },
+        {
+          "id": 2,
+          "description": "Complete 10 push-ups in a row"
+        },
+        {
+          "id": 3,
+          "description": "Take a 10-minute walk outside"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780403879513,
+      "title": "Cluttered Chaos",
+      "description": "Your living space is a disaster. Time to clean up and get organized.",
+      "skill_id": 3,
+      "xp_reward": 150,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Clear off your desk"
+        },
+        {
+          "id": 2,
+          "description": "Sort and purge your closet"
+        },
+        {
+          "id": 3,
+          "description": "Make your bed every day for a week"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780403876944,
+      "title": "Morning Stretch",
+      "description": "Loosen up and boost your energy level for the day",
+      "skill_id": 1,
+      "xp_reward": 50,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Do 10 jumping jacks"
+        },
+        {
+          "id": 2,
+          "description": "Walk 50 feet around the block"
+        },
+        {
+          "id": 3,
+          "description": "Drink 8 oz of water"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780403872342,
+      "title": "Research Refresh",
+      "description": "Study for 15 minutes and summarize three notes in 30 seconds",
+      "skill_id": 2,
+      "xp_reward": 75,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Find three relevant articles online"
+        },
+        {
+          "id": 2,
+          "description": "Take 15 minutes to read and review each article"
+        },
+        {
+          "id": 3,
+          "description": "Summarize each article in 30 seconds"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780403875402,
+      "title": "Clear Clutter",
+      "description": "Help a busy adventurer organize their gear and workspace",
+      "skill_id": 3,
+      "xp_reward": 100,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Sort through 10 items in your inventory and put away items in their proper place"
+        },
+        {
+          "id": 2,
+          "description": "Organize your equipment into categories and keep them tidy"
+        },
+        {
+          "id": 3,
+          "description": "Clean up any clutter in your room and make your bed"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780407413493,
+      "title": "Unlocking the Artisan's Eye",
+      "description": "Discover the secrets of the masters to unleash your full creative potential",
+      "skill_id": 6,
+      "xp_reward": 100,
+      "estimated_time": "30 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Brainstorm 5 unique solutions to a common problem"
+        },
+        {
+          "id": 2,
+          "description": "Create a new piece of art using only primary colors"
+        },
+        {
+          "id": 3,
+          "description": "Write a short story using only 50 words"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780407409937,
+      "title": "Balancing the Books",
+      "description": "Fix your finances, level 2!",
+      "skill_id": 7,
+      "xp_reward": 100,
+      "estimated_time": "30 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Pay off $100 debt"
+        },
+        {
+          "id": 2,
+          "description": "Create a budget"
+        },
+        {
+          "id": 3,
+          "description": "Build an emergency fund"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780407408081,
+      "title": "Sweat and Recover",
+      "description": "Get your body moving and energize your day",
+      "skill_id": 1,
+      "xp_reward": 120,
+      "estimated_time": "30 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Exercise for 10 minutes without stopping"
+        },
+        {
+          "id": 2,
+          "description": "Drink 8 glasses of water today"
+        },
+        {
+          "id": 3,
+          "description": "Eat 5 servings of fruits and veggies"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780407411799,
+      "title": "Morning Stretch",
+      "description": "Get moving and shake off the sleep!",
+      "skill_id": 1,
+      "xp_reward": 50,
+      "estimated_time": "15 min",
+      "success_rate": 85,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Do 5 jumping jacks"
+        },
+        {
+          "id": 2,
+          "description": "Take 100 steps around the block"
+        },
+        {
+          "id": 3,
+          "description": "Do 2 sets of 10 push-ups"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780407407838,
+      "title": "Study Break",
+      "description": "Re-read a chapter in your favorite book and answer 3 trivia questions",
+      "skill_id": 2,
+      "xp_reward": 100,
+      "estimated_time": "10 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Read chapter 1 of 'The Alchemist' by Paulo Coelho"
+        },
+        {
+          "id": 2,
+          "description": "Answer 2 out of 3 trivia questions on the book"
+        },
+        {
+          "id": 3,
+          "description": "Write a short summary of the chapter"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780407412355,
+      "title": "Tidy Up Your Space",
+      "description": "Clear out clutter and organize your living space in under 30 minutes",
+      "skill_id": 3,
+      "xp_reward": 50,
+      "estimated_time": "15 min",
+      "success_rate": 85,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Pick up all toys and books"
+        },
+        {
+          "id": 2,
+          "description": "Put away all dishes and utensils"
+        },
+        {
+          "id": 3,
+          "description": "Sort mail and papers into categories"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780407408977,
+      "title": "Small Talk",
+      "description": "Engage in brief conversations with 3 NPCs to boost your Social skill.",
+      "skill_id": 4,
+      "xp_reward": 75,
+      "estimated_time": "10 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Talk to the barista for 30 seconds"
+        },
+        {
+          "id": 2,
+          "description": "Engage with the store owner for 45 seconds"
+        },
+        {
+          "id": 3,
+          "description": "Chat with the mailman for 20 seconds"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780407413735,
+      "title": "Breathing Break",
+      "description": "Find a quiet spot and focus on your breath for 5 minutes",
+      "skill_id": 5,
+      "xp_reward": 50,
+      "estimated_time": "10 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Sit comfortably with eyes closed"
+        },
+        {
+          "id": 2,
+          "description": "Focus on your breath for 5 minutes"
+        },
+        {
+          "id": 3,
+          "description": "Notice your body and emotions without judgment"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780407412033,
+      "title": "Quick Spark",
+      "description": "Unleash your inner artist for a quick creative boost",
+      "skill_id": 6,
+      "xp_reward": 75,
+      "estimated_time": "15 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Draw 5 random objects in 5 minutes"
+        },
+        {
+          "id": 2,
+          "description": "Write 2 short poems in 10 minutes"
+        },
+        {
+          "id": 3,
+          "description": "Compose 1 simple melody on an instrument for 10 minutes"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780407408907,
+      "title": "Balance Check",
+      "description": "Quickly review finances to avoid late fees",
+      "skill_id": 7,
+      "xp_reward": 75,
+      "estimated_time": "10 min",
+      "success_rate": 90,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Open your bank statement"
+        },
+        {
+          "id": 2,
+          "description": "Review your recent transactions"
+        },
+        {
+          "id": 3,
+          "description": "Verify your account balance"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780407404226,
+      "title": "Hydrate and Refresh",
+      "description": "Stay healthy and focused for a short while",
+      "skill_id": 8,
+      "xp_reward": 80,
+      "estimated_time": "10 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Drink 2 bottles of water"
+        },
+        {
+          "id": 2,
+          "description": "Eat a small snack"
+        },
+        {
+          "id": 3,
+          "description": "Take a 5-minute walk"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780407404868,
+      "title": "Buggy Code Fix",
+      "description": "Help the IT department debug a simple coding issue",
+      "skill_id": 9,
+      "xp_reward": 80,
+      "estimated_time": "10 min",
+      "success_rate": 90,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Identify the syntax error in the code"
+        },
+        {
+          "id": 2,
+          "description": "Correct the syntax error"
+        },
+        {
+          "id": 3,
+          "description": "Complete the task"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780647887082,
+      "title": "Morning Stretch",
+      "description": "Get moving and loosen up for 15 minutes",
+      "skill_id": 1,
+      "xp_reward": 75,
+      "estimated_time": "15 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Do 5 jumping jacks"
+        },
+        {
+          "id": 2,
+          "description": "Touch your toes 10 times"
+        },
+        {
+          "id": 3,
+          "description": "Take 5 deep breaths"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780647891896,
+      "title": "Study Buddy",
+      "description": "Find a quiet study spot and focus on a single task for 10 minutes.",
+      "skill_id": 2,
+      "xp_reward": 100,
+      "estimated_time": "15 min",
+      "success_rate": 85,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Find a quiet study spot"
+        },
+        {
+          "id": 2,
+          "description": "Focus on a single task for 10 minutes"
+        },
+        {
+          "id": 3,
+          "description": "Complete the task"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780647894437,
+      "title": "Tidy Up",
+      "description": "Clean your living space to boost focus and energy.",
+      "skill_id": 3,
+      "xp_reward": 80,
+      "estimated_time": "10 min",
+      "success_rate": 85,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Pick up toys and books in your room"
+        },
+        {
+          "id": 2,
+          "description": "Complete the task"
+        },
+        {
+          "id": 3,
+          "description": "Complete the task"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780647887413,
+      "title": "Help a Stranger",
+      "description": "Assist a lost traveler and earn some goodwill.",
+      "skill_id": 4,
+      "xp_reward": 100,
+      "estimated_time": "15 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Talk to the traveler and offer assistance."
+        },
+        {
+          "id": 2,
+          "description": "Help the traveler find their way."
+        },
+        {
+          "id": 3,
+          "description": "Provide the traveler with a warm smile."
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780647888736,
+      "title": "A Moment of Calm",
+      "description": "Find a quiet spot and focus on your breath for 5 minutes.",
+      "skill_id": 5,
+      "xp_reward": 50,
+      "estimated_time": "10 min",
+      "success_rate": 90,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Find a quiet spot"
+        },
+        {
+          "id": 2,
+          "description": "Focus on your breath for 5 minutes"
+        },
+        {
+          "id": 3,
+          "description": "Complete the task"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780647892383,
+      "title": "A Quick Spark",
+      "description": "Find a unique object in your home and create a small art piece around it.",
+      "skill_id": 6,
+      "xp_reward": 50,
+      "estimated_time": "15 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Find an object that inspires you"
+        },
+        {
+          "id": 2,
+          "description": "Create a small art piece around the object"
+        },
+        {
+          "id": 3,
+          "description": "Share your art piece with a friend or family member"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780647891440,
+      "title": "Quick Cash Boost",
+      "description": "Help a small business owner organize their finances in 30 minutes",
+      "skill_id": 7,
+      "xp_reward": 25,
+      "estimated_time": "15 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Sort receipts into categories"
+        },
+        {
+          "id": 2,
+          "description": "Create a simple budget"
+        },
+        {
+          "id": 3,
+          "description": "Match income and expenses"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780647887456,
+      "title": "Hydrate and Recharge",
+      "description": "Drink water and rest to regain health.",
+      "skill_id": 8,
+      "xp_reward": 100,
+      "estimated_time": "10 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Drink 1 cup of water"
+        },
+        {
+          "id": 2,
+          "description": "Rest for 5 minutes"
+        },
+        {
+          "id": 3,
+          "description": "Complete the task"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780647889705,
+      "title": "Fixing a Faulty Circuit",
+      "description": "Help a friend fix their home circuit breaker.",
+      "skill_id": 9,
+      "xp_reward": 100,
+      "estimated_time": "10 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Locate the faulty circuit breaker"
+        },
+        {
+          "id": 2,
+          "description": "Identify the blown fuse"
+        },
+        {
+          "id": 3,
+          "description": "Replace the fuse with a new one"
+        }
+      ],
+      "daily": true,
+      "created_by": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580"
+    },
+    {
+      "id": 1780648188265,
+      "title": "Get Moving",
+      "description": "Stay active for 10 minutes and feel the energy boost",
+      "skill_id": 1,
+      "xp_reward": 75,
+      "estimated_time": "10 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Jump up and down for 30 seconds"
+        },
+        {
+          "id": 2,
+          "description": "Do 5 quick squats"
+        },
+        {
+          "id": 3,
+          "description": "Take a 2-minute walk around the block"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780648190483,
+      "title": "Study Buddy",
+      "description": "Help a struggling student with their reading comprehension",
+      "skill_id": 2,
+      "xp_reward": 100,
+      "estimated_time": "15 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Read a short chapter in a given book"
+        },
+        {
+          "id": 2,
+          "description": "Answer 5 multiple-choice questions correctly"
+        },
+        {
+          "id": 3,
+          "description": "Complete the task"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780648190964,
+      "title": "Tidy Up Your Space",
+      "description": "Clean up your digital and physical space to clear your mind",
+      "skill_id": 3,
+      "xp_reward": 100,
+      "estimated_time": "15 min",
+      "success_rate": 90,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Sort and organize your computer files"
+        },
+        {
+          "id": 2,
+          "description": "Put away 5 cluttered items in your living space"
+        },
+        {
+          "id": 3,
+          "description": "Complete the task"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
     }
   ],
   "user_missions": [
@@ -601,6 +2014,936 @@
         {
           "objective_id": 3,
           "completed": false
+        }
+      ]
+    },
+    {
+      "id": "f752cb27-e524-46a1-8334-ab94cb87d685",
+      "user_id": "1",
+      "mission_id": 1,
+      "status": "active",
+      "accepted_at": "2026-05-11T19:43:27.859Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "e2e6ac74-f688-4e51-9fc7-9bb13d5791df",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1,
+      "status": "completed",
+      "accepted_at": "2026-05-11T20:44:42.556Z",
+      "completed_at": "2026-05-12T22:05:16.314Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "52e07bdc-8b65-4a83-b09c-9b511ba76980",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 2,
+      "status": "active",
+      "accepted_at": "2026-05-16T18:41:40.544Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "bb5e2043-5e32-40b9-be7e-ed48fddb6e9e",
+      "user_id": "9dee78db-16c3-4d5c-97b4-b2dbd208c968",
+      "mission_id": 1,
+      "status": "active",
+      "accepted_at": "2026-05-16T18:51:48.284Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "99dda157-4a57-499a-b134-b9ad88fb7f00",
+      "user_id": "2958c605-408b-4f45-b2a5-82c5ab890e51",
+      "mission_id": 1780061547652,
+      "type": "main",
+      "daily_date": "2026-05-29",
+      "status": "active",
+      "accepted_at": "2026-05-29T13:32:25.657Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "846b987c-16b4-4182-b4dc-2dcfedb44b20",
+      "user_id": "2958c605-408b-4f45-b2a5-82c5ab890e51",
+      "mission_id": 1780061551224,
+      "type": "main",
+      "daily_date": "2026-05-29",
+      "status": "active",
+      "accepted_at": "2026-05-29T13:32:25.657Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "eeb58736-a6f3-4361-971e-19f0bda3b36b",
+      "user_id": "2958c605-408b-4f45-b2a5-82c5ab890e51",
+      "mission_id": 1780061546918,
+      "type": "main",
+      "daily_date": "2026-05-29",
+      "status": "active",
+      "accepted_at": "2026-05-29T13:32:25.657Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "87081d34-42d4-4360-a416-085eeca23027",
+      "user_id": "2958c605-408b-4f45-b2a5-82c5ab890e51",
+      "mission_id": 1780061547118,
+      "type": "secondary",
+      "daily_date": "2026-05-29",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "82fb1eaa-443b-42fc-a60e-305f1d06c547",
+      "user_id": "2958c605-408b-4f45-b2a5-82c5ab890e51",
+      "mission_id": 1780061552674,
+      "type": "secondary",
+      "daily_date": "2026-05-29",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "a079decd-23ad-414b-9aa0-200b6cdb5a24",
+      "user_id": "2958c605-408b-4f45-b2a5-82c5ab890e51",
+      "mission_id": 1780061555317,
+      "type": "secondary",
+      "daily_date": "2026-05-29",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "d7f2f5b0-7208-4041-8f8b-a4a2e5f6f720",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780061803651,
+      "type": "main",
+      "daily_date": "2026-05-29",
+      "status": "completed",
+      "accepted_at": "2026-05-29T13:36:41.654Z",
+      "completed_at": "2026-05-29T13:43:10.496Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "00e6b148-5b23-4f82-8946-d1e83aaee342",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780061801851,
+      "type": "main",
+      "daily_date": "2026-05-29",
+      "status": "completed",
+      "accepted_at": "2026-05-29T13:36:41.654Z",
+      "completed_at": "2026-05-29T13:49:52.635Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "c2ddf376-7874-467c-91ef-ea273037c4d1",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780061802404,
+      "type": "main",
+      "daily_date": "2026-05-29",
+      "status": "completed",
+      "accepted_at": "2026-05-29T13:36:41.654Z",
+      "completed_at": "2026-05-29T13:54:10.608Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "1c334e38-f5bb-465b-ae25-7a1fec28ebd7",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780403878691,
+      "type": "main",
+      "daily_date": "2026-06-02",
+      "status": "active",
+      "accepted_at": "2026-06-02T12:37:50.421Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "7aae25a2-9afc-41c8-a865-5febb69b4704",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780403877728,
+      "type": "main",
+      "daily_date": "2026-06-02",
+      "status": "active",
+      "accepted_at": "2026-06-02T12:37:50.422Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "88897356-bd0e-490d-af3e-a204fd66c132",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780403879513,
+      "type": "main",
+      "daily_date": "2026-06-02",
+      "status": "active",
+      "accepted_at": "2026-06-02T12:37:50.422Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "ca46bfa0-5a51-4e8a-a234-965a98b37b6a",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780407413493,
+      "type": "main",
+      "daily_date": "2026-06-02",
+      "status": "active",
+      "accepted_at": "2026-06-02T13:36:43.987Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "7945e5f1-1e87-4d65-b009-64ee221901bd",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780407409937,
+      "type": "main",
+      "daily_date": "2026-06-02",
+      "status": "active",
+      "accepted_at": "2026-06-02T13:36:43.987Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "d437e76e-1880-4485-8455-f71bad6f283c",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780407408081,
+      "type": "main",
+      "daily_date": "2026-06-02",
+      "status": "active",
+      "accepted_at": "2026-06-02T13:36:43.988Z",
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "a8cfdca4-4c6f-4724-aaab-9928ef9ce98c",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780647887082,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "2cb2dcf9-84f6-4e19-bd47-9a100c17ea5c",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780647891896,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "d9d59fe5-d2b4-4562-8ba1-a64ee48bfb0f",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780647894437,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "50bb9933-f70d-4aaa-81ec-dece20520bbb",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780647887413,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "a672ca07-a956-41b7-a53b-f8754c45b816",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780647888736,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "d5c64ccb-ea7b-4393-9636-2f6c37d80cf2",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780647892383,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "2a0b24b6-b76a-4445-96df-4afdd690df65",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780647891440,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "427650bf-1e32-4213-8bcf-69e5d2666a6e",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780647887456,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "6ee83c73-b7c5-46f1-843e-9b30bb81d3de",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 1780647889705,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "14e5be08-69b3-4f7a-beac-308707167e87",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780648188265,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "6b2cd539-4c72-4343-861c-2eac06e55a60",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780648190483,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "eeeefe4b-bf48-49d9-b5c9-8b9beb43d41b",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780648190964,
+      "type": "secondary",
+      "daily_date": "2026-06-05",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "name": "Focus Helm",
+      "slot": "headgear",
+      "category": "gear",
+      "rarity": "uncommon",
+      "icon": "face",
+      "description": "A lightweight neural helm tuned for uninterrupted concentration.",
+      "realWorldBenefit": "+5% bonus XP when completing study sessions without distractions.",
+      "effects": [
+        {
+          "type": "focus_exp_bonus",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Mind Crown",
+      "slot": "headgear",
+      "category": "gear",
+      "rarity": "epic",
+      "icon": "psychology",
+      "description": "An experimental cognitive enhancer worn by elite strategists.",
+      "realWorldBenefit": "+15% XP from deep work tasks lasting over 45 minutes.",
+      "effects": [
+        {
+          "type": "focus_exp_bonus",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Iron Resolve",
+      "slot": "bodygear",
+      "category": "gear",
+      "rarity": "rare",
+      "icon": "security",
+      "description": "A reinforced combat vest forged through discipline.",
+      "realWorldBenefit": "+10% strength XP after completing physical workouts.",
+      "effects": [
+        {
+          "type": "strength_exp_bonus",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Master's Plate",
+      "slot": "bodygear",
+      "category": "gear",
+      "rarity": "epic",
+      "icon": "shield",
+      "description": "A relic from the ancient Kitchen Wars.",
+      "realWorldBenefit": "Prevents the 'Late Night Takeout' debuff.",
+      "effects": [
+        {
+          "type": "discipline_bonus",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Swift Gloves",
+      "slot": "gloves",
+      "category": "gear",
+      "rarity": "common",
+      "icon": "back_hand",
+      "description": "Light gloves optimized for speed and precision.",
+      "realWorldBenefit": "+5% XP from quick task completion streaks.",
+      "effects": [
+        {
+          "type": "speed_bonus",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Data Gauntlet",
+      "slot": "gloves",
+      "category": "gear",
+      "rarity": "rare",
+      "icon": "back_hand",
+      "description": "A cybernetic glove infused with processing cores.",
+      "realWorldBenefit": "+10% technical XP from coding tasks.",
+      "effects": [
+        {
+          "type": "technical_exp_bonus",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Pathrunners",
+      "slot": "boots",
+      "category": "gear",
+      "rarity": "uncommon",
+      "icon": "hiking",
+      "description": "Adaptive boots designed for relentless movement.",
+      "realWorldBenefit": "+5 energy regeneration daily.",
+      "effects": [
+        {
+          "type": "energy_regen",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Void Striders",
+      "slot": "boots",
+      "category": "gear",
+      "rarity": "epic",
+      "icon": "directions_run",
+      "description": "Boots engineered for silent traversal through the unknown.",
+      "realWorldBenefit": "+15% XP from outdoor activities and walks.",
+      "effects": [
+        {
+          "type": "movement_exp_bonus",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Watch of Hours",
+      "slot": "utility",
+      "category": "gear",
+      "rarity": "rare",
+      "icon": "watch",
+      "description": "A tactical chronometer used by productivity tacticians.",
+      "realWorldBenefit": "+10% XP from scheduled tasks completed on time.",
+      "effects": [
+        {
+          "type": "organization_bonus",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Chrono Module",
+      "slot": "utility",
+      "category": "gear",
+      "rarity": "legendary",
+      "icon": "timer",
+      "description": "An unstable temporal core synced to human discipline.",
+      "realWorldBenefit": "Reduces cooldown between focus sessions.",
+      "effects": [
+        {
+          "type": "cooldown_reduction",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "XP Boost",
+      "slot": "consumable",
+      "category": "consumable",
+      "rarity": "uncommon",
+      "icon": "rocket_launch",
+      "description": "A temporary enhancer that accelerates progression.",
+      "realWorldBenefit": "+20% XP gain for 1 hour.",
+      "effects": [
+        {
+          "type": "xp_multiplier",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Energy Drink",
+      "slot": "consumable",
+      "category": "consumable",
+      "rarity": "common",
+      "icon": "bolt",
+      "description": "A caffeinated stimulant favored by night grinders.",
+      "realWorldBenefit": "Restores 5 energy instantly.",
+      "effects": [
+        {
+          "type": "energy_restore",
+          "value": 5
         }
       ]
     }

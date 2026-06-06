@@ -8,7 +8,7 @@ export default function Create_Account() {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' })
   const [error, setError] = useState('')
   const navigate = useNavigate()
-  const { updateUser } = useUser()
+  const { login } = useUser()
 
 const handleSubmit = async () => {
   setError('')
@@ -26,8 +26,7 @@ const handleSubmit = async () => {
     return
   }
 
-  localStorage.setItem('token', data.token) // guarda o token
-  updateUser(data.user) // atualiza o contexto com os dados do user
+  await login(data.token, data.user)
 
   navigate('/Preferences')
 }

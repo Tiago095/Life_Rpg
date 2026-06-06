@@ -8,6 +8,8 @@ Format:
   "title": "string (max 6 words)",
   "description": "string (max 15 words)",
   "xp_reward": number between 50 and 200,
+  "estimated_time": "string (e.g. '15 min', '1 hour')",
+  "success_rate": number between 40 and 95,
   "objectives": [
     { "id": 1, "description": "string" },
     { "id": 2, "description": "string" },
@@ -15,23 +17,49 @@ Format:
   ]
 }`
 
-async function generateOne(engine, skillName, type) {
+async function generateOne(engine, skillName, type, level) {
   const typeHint = type === 'main'
     ? 'a challenging main quest with meaningful objectives'
     : 'a quick side quest that takes less than 30 minutes'
 
-  const reply = await engine.chat.completions.create({
-    messages: [
-      { role: 'system', content: SYSTEM_PROMPT },
-      { role: 'user', content: `Generate ${typeHint} for the skill: ${skillName}` }
-    ],
-    temperature: 0.8,
-    max_tokens: 350,
-    stream: false,
-  })
+  const difficultyHint =
+    level <= 2 ? 'easy difficulty, simple and short objectives' :
+    level <= 4 ? 'medium difficulty, moderately challenging objectives' :
+                 'hard difficulty, demanding and ambitious objectives'
 
-  const text = reply.choices[0].message.content
-  console.log('[LLM] resposta raw:', text)  // ← log da LLM
+  try {
+    const reply = await engine.chat.completions.create({
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content:
+          `Generate ${typeHint} for the skill: ${skillName}. ` +
+          `The player is level ${level}, so use ${difficultyHint}. ` +
+          `Adjust xp_reward accordingly.`
+        }
+      ],
+      temperature: 0.8,
+      max_tokens: 300,
+      stream: false,
+    })
+
+    const text = reply.choices[0].message.content
+    console.log('[LLM] resposta raw:', text)
+
+    // Delay para permitir garbage collection GPU
+    await new Promise(r => setTimeout(r, 300))
+
+    return parseResponse(text)
+  } catch (err) {
+    console.error('[LLM] erro na geração:', err.message)
+    // Se o objeto foi disposto, sinaliza para recriar o engine
+    if (err.message?.includes('disposed')) {
+      throw new Error('ENGINE_DISPOSED')
+    }
+    throw err
+  }
+}
+
+function parseResponse(text) {
 
   const attempts = [
     () => JSON.parse(text),
@@ -51,27 +79,30 @@ async function generateOne(engine, skillName, type) {
   for (const attempt of attempts) {
     try {
       const result = attempt()
-      if (result) {
-        console.log('[LLM] parsed com sucesso:', result)
-        return result
-      }
+      if (result) return result
     } catch { /* tenta o próximo */ }
   }
 
-  console.warn('[LLM] falhou o parse, a tentar novamente')
+  console.warn('[LLM] falhou o parse')
   return null
 }
 
-export function useDailyMissions(user, onDone) {  // ← onDone callback novo
+// Singleton — evita múltiplas instâncias WebGPU
+let enginePromise = null
+
+export function useDailyMissions(user, onDone) {
   const [status, setStatus] = useState('idle')
   const [progress, setProgress] = useState('')
   const hasRun = useRef(false)
 
   useEffect(() => {
+    hasRun.current = false
+  }, [user?.id])
+
+  useEffect(() => {
     if (hasRun.current) return
-    console.log('[DailyMissions] useEffect disparou, user:', user)
-    if (!user) { console.log('[DailyMissions] sem user'); return }
-    if (!user.skills?.length) { console.log('[DailyMissions] sem skills:', user); return }
+    if (!user) return
+    if (!user.skills?.length) return
 
     hasRun.current = true
 
@@ -87,27 +118,29 @@ export function useDailyMissions(user, onDone) {  // ← onDone callback novo
 
       const skillsRes = await fetch('http://localhost:3000/api/skills', { headers })
       const allSkills = await skillsRes.json()
-      const userSkills = allSkills.filter(s => user.skills.includes(s.id))
-      console.log('[DailyMissions] skills:', userSkills.map(s => s.name))
+      const userSkills = allSkills.filter(s => user.skills.some(us => us.skillId === s.id))
 
       const umRes = await fetch('http://localhost:3000/api/missions/user', { headers })
       const userMissions = await umRes.json()
 
       setStatus('loading-model')
       console.log('[DailyMissions] a carregar modelo...')
-      const engine = await CreateMLCEngine(
-        'Llama-3.2-3B-Instruct-q4f16_1-MLC',
-        { initProgressCallback: (p) => {
-          console.log('[DailyMissions] modelo:', p.text)
-          setProgress(p.text)
-        }}
-      )
-      console.log('[DailyMissions] modelo pronto!')
+
+      // Reutiliza a promise se já está a carregar — evita duas instâncias WebGPU
+      if (!enginePromise) {
+        enginePromise = CreateMLCEngine(
+          'Llama-3.2-3B-Instruct-q4f16_1-MLC',
+          { initProgressCallback: (p) => {
+            console.log('[DailyMissions] modelo:', p.text)
+            setProgress(p.text)
+          }}
+        )
+      }
+      let engine = await enginePromise
 
       setStatus('generating')
       const toCreate = []
 
-      // 3 missões principais no total
       const totalActiveMain = userMissions.filter(
         um => um.status === 'active' && um.type === 'main'
       ).length
@@ -117,49 +150,82 @@ export function useDailyMissions(user, onDone) {  // ← onDone callback novo
       for (let i = 0; i < mainNeeded; i++) {
         const randomSkill = userSkills[Math.floor(Math.random() * userSkills.length)]
         setProgress(`Generating main quest ${i + 1}/${mainNeeded}...`)
-        console.log(`[DailyMissions] a gerar principal ${i + 1} para skill: ${randomSkill.name}`)
         let mission = null, tries = 0
         while (!mission && tries < 3) {
-          mission = await generateOne(engine, randomSkill.name, 'main')
-          tries++
+          try {
+            mission = await generateOne(engine, randomSkill.name, 'main', user.level)
+          } catch (err) {
+            if (err.message === 'ENGINE_DISPOSED') {
+              // Recria o engine se foi disposto
+              enginePromise = null
+              enginePromise = CreateMLCEngine(
+                'Llama-3.2-3B-Instruct-q4f16_1-MLC',
+                { initProgressCallback: (p) => console.log('[DailyMissions] modelo:', p.text) }
+              )
+              engine = await enginePromise
+            }
+            tries++
+            if (tries >= 3) throw err
+          }
         }
         if (mission) toCreate.push({ ...mission, skill_id: randomSkill.id, type: 'main' })
+        await new Promise(r => setTimeout(r, 500))  // delay entre quests
       }
 
-      // 1 missão secundária por skill
       for (const skill of userSkills) {
         setProgress(`Generating secondary quest for ${skill.name}...`)
-        console.log(`[DailyMissions] a gerar secundária para skill: ${skill.name}`)
         let mission = null, tries = 0
         while (!mission && tries < 3) {
-          mission = await generateOne(engine, skill.name, 'secondary')
-          tries++
+          try {
+            mission = await generateOne(engine, skill.name, 'secondary', user.level)
+          } catch (err) {
+            if (err.message === 'ENGINE_DISPOSED') {
+              // Recria o engine se foi disposto
+              enginePromise = null
+              enginePromise = CreateMLCEngine(
+                'Llama-3.2-3B-Instruct-q4f16_1-MLC',
+                { initProgressCallback: (p) => console.log('[DailyMissions] modelo:', p.text) }
+              )
+              engine = await enginePromise
+            }
+            tries++
+            if (tries >= 3) throw err
+          }
         }
         if (mission) toCreate.push({ ...mission, skill_id: skill.id, type: 'secondary' })
+        await new Promise(r => setTimeout(r, 500))  // delay entre quests
       }
 
-      console.log('[DailyMissions] a guardar', toCreate.length, 'missões...')
-      const saveRes = await fetch('http://localhost:3000/api/missions/daily', {
+      await fetch('http://localhost:3000/api/missions/daily', {
         method: 'POST',
         headers: { ...headers, 'Content-Type': 'application/json' },
         body: JSON.stringify({ missions: toCreate })
       })
-      console.log('[DailyMissions] guardado, status:', saveRes.status)
+
+      // Cleanup do modelo para liberar memória GPU
+      try {
+        if (engine && engine.unload) {
+          await engine.unload()
+          enginePromise = null
+          console.log('[DailyMissions] modelo descarregado')
+        }
+      } catch (e) {
+        console.warn('[DailyMissions] erro ao descarregar:', e.message)
+      }
 
       setStatus('done')
       setProgress('')
       console.log('[DailyMissions] concluído!')
-
-      // ← notifica o useQuests para refazer o fetch
       if (onDone) onDone()
     }
 
     run().catch(err => {
       console.error('[DailyMissions] ERRO:', err)
+      enginePromise = null  // reset para tentar novamente
       hasRun.current = false
       setStatus('error')
     })
-  }, [user?.id])
+  }, [user?.id, user?.skills?.length])
 
   return { status, progress }
 }

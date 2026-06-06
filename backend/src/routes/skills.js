@@ -1,12 +1,11 @@
 import { Router } from 'express'
 import { requireAuth } from '../middleware/auth.js'
-import db from '../db.js'
+import { getSkills, getSkillPoints, updateUserSkills } from '../controllers/skillsController.js'
 
 const router = Router()
 
-router.get('/', requireAuth, async (req, res) => {
-  await db.read()
-  res.json(db.data.skills)
-})
+router.get('/',       requireAuth, getSkills)
+router.get('/points', requireAuth, getSkillPoints)
+router.put('/',       requireAuth, updateUserSkills)
 
 export default router

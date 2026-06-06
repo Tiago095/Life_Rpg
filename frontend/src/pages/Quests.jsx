@@ -257,8 +257,10 @@ onClick={async () => {
     const result = await toggleObjective(selectedQuest.id, obj.id)
     if (result?.completed) {
       setMissionResult({
-        questTitle: selectedQuest.title,
-        xpGained:   selectedQuest.xp,
+        questTitle:   selectedQuest.title,
+        xpGained:     selectedQuest.xp,
+        skillPoints:  1,                        // ← backend dá sempre +1 SP por missão
+        lootDrop:     result.itemAwarded ?? null,
       })
     }
   }

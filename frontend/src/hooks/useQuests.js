@@ -35,7 +35,7 @@ export function useQuests() {
       const acceptedMissionIds = new Set(userMissions.map(um => um.mission_id))
       const availableTemplates = missions
         .filter(m => !m.daily)
-        .filter(m => user.skills.includes(m.skill_id))
+        .filter(m => user.skills.some(us => us.skillId === m.skill_id))
 
       const transform = (mission, userMission = null) => {
         const progress = userMission
@@ -58,7 +58,11 @@ export function useQuests() {
                        : userMission?.status === 'abandoned' ? 'ABANDONED'
                        : userMission                         ? 'IN PROGRESS'
                        : 'NOT STARTED',
-          ...VISUAL_DEFAULTS,
+          image:       VISUAL_DEFAULTS.image,
+          time:        mission.estimated_time  ?? VISUAL_DEFAULTS.time,
+          successRate: mission.success_rate != null
+                      ? `${mission.success_rate}%`
+                      : VISUAL_DEFAULTS.successRate,
           completedAt: userMission?.completed_at ?? null,
           objectives: mission.objectives.map(obj => {
             const prog = userMission?.objectives_progress.find(p => p.objective_id === obj.id)
@@ -120,7 +124,7 @@ export function useQuests() {
     return true
   }
 
-  const toggleObjective = async (userMissionId, objectiveId) => {
+const toggleObjective = async (userMissionId, objectiveId) => {
   const token = localStorage.getItem('token')
   const res = await fetch(
     `http://localhost:3000/api/missions/${userMissionId}/objective/${objectiveId}`,
@@ -132,19 +136,19 @@ export function useQuests() {
   }
   const data = await res.json()
 
-    // Se a missão foi concluída, atualiza o user (XP + level)
-    if (data.completed) {
-      const meRes = await fetch('http://localhost:3000/api/me', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      if (meRes.ok) {
-        const meData = await meRes.json()
-        updateUser(meData.user)  // ← atualiza o contexto com o novo XP e level
-      }
+  if (data.completed) {
+    const meRes = await fetch('http://localhost:3000/api/me', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    if (meRes.ok) {
+      const meData = await meRes.json()
+      updateUser(meData.user)
     }
+  }
 
   fetchQuests()
-  return data
+  // Devolve completed + itemAwarded para o componente usar
+  return { completed: data.completed, itemAwarded: data.itemAwarded ?? null }
 }
 
   return { quests, loading, acceptMission, toggleObjective, fetchQuests }
