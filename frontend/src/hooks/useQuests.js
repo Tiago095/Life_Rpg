@@ -30,8 +30,6 @@ export function useQuests() {
       fetch('http://localhost:3000/api/missions/user', { headers }).then(r => r.json()),
       fetch('http://localhost:3000/api/skills',        { headers }).then(r => r.json()),
     ]).then(([missions, userMissions, skills]) => {
-      fetch('http://localhost:3000/api/skills',        { headers }).then(r => r.json()),
-    ]).then(([missions, userMissions, skills]) => {
 
       const skillMap = Object.fromEntries(skills.map(s => [s.id, s.name]))
       const acceptedMissionIds = new Set(userMissions.map(um => um.mission_id))
@@ -46,8 +44,6 @@ export function useQuests() {
               userMission.objectives_progress.length * 100
             )
           : 0
-
-        const skillName = userMission?.skill?.name ?? skillsMap[mission.skill_id] ?? 'Unknown'
 
         return {
           id:          userMission?.id ?? `available-${mission.id}`,
@@ -92,12 +88,10 @@ export function useQuests() {
           .filter(Boolean),
 
         available: [
-          // Missões globais que o utilizador nunca aceitou e que correspondem às suas skills
           ...availableTemplates
             .filter(m => !acceptedMissionIds.has(m.id))
             .map(m => transform(m, null)),
 
-          // ← Missões diárias secundárias à espera de ser aceites
           ...userMissions
             .filter(um => um.status === 'available')
             .map(um => transform(um.mission, um))
@@ -128,32 +122,31 @@ export function useQuests() {
     return true
   }
 
-const toggleObjective = async (userMissionId, objectiveId) => {
-  const token = localStorage.getItem('token')
-  const res = await fetch(
-    `http://localhost:3000/api/missions/${userMissionId}/objective/${objectiveId}`,
-    { method: 'PATCH', headers: { Authorization: `Bearer ${token}` } }
-  )
-  if (!res.ok) {
-    console.error('Erro ao atualizar objetivo:', await res.json())
-    return null
-  }
-  const data = await res.json()
-
-  if (data.completed) {
-    const meRes = await fetch('http://localhost:3000/api/me', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    if (meRes.ok) {
-      const meData = await meRes.json()
-      updateUser(meData.user)
+  const toggleObjective = async (userMissionId, objectiveId) => {
+    const token = localStorage.getItem('token')
+    const res = await fetch(
+      `http://localhost:3000/api/missions/${userMissionId}/objective/${objectiveId}`,
+      { method: 'PATCH', headers: { Authorization: `Bearer ${token}` } }
+    )
+    if (!res.ok) {
+      console.error('Erro ao atualizar objetivo:', await res.json())
+      return null
     }
-  }
+    const data = await res.json()
 
-  fetchQuests()
-  // Devolve completed + itemAwarded para o componente usar
-  return { completed: data.completed, itemAwarded: data.itemAwarded ?? null }
-}
+    if (data.completed) {
+      const meRes = await fetch('http://localhost:3000/api/me', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      if (meRes.ok) {
+        const meData = await meRes.json()
+        updateUser(meData.user)
+      }
+    }
+
+    fetchQuests()
+    return { completed: data.completed, itemAwarded: data.itemAwarded ?? null }
+  }
 
   return { quests, loading, acceptMission, toggleObjective, fetchQuests }
 }

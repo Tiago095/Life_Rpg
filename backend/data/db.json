@@ -378,14 +378,14 @@
         },
         {
           "skillId": 2,
-          "rank": 0
+          "rank": 1
         },
         {
           "skillId": 3,
           "rank": 0
         }
       ],
-      "skillPoints": 4,
+      "skillPoints": 3,
       "inventory": [
         {
           "itemId": 5,
@@ -393,13 +393,21 @@
         },
         {
           "itemId": 1,
-          "acquiredAt": "2026-05-29T13:49:52.635Z"
+          "acquiredAt": "2026-05-29T13:49:52.635Z",
+          "quantity": 2
         },
         {
           "itemId": 2,
           "acquiredAt": "2026-05-29T13:54:10.608Z"
+        },
+        {
+          "itemId": 11,
+          "quantity": 1
         }
-      ]
+      ],
+      "equippedSlots": {
+        "headgear": 1
+      }
     }
   ],
   "skills": [
@@ -2070,6 +2078,156 @@
       ],
       "daily": true,
       "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780758662739,
+      "title": "Morning Stretch",
+      "description": "Get moving and loosen up for 15 minutes",
+      "skill_id": 1,
+      "xp_reward": 50,
+      "estimated_time": "15 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Do 10 jumping jacks"
+        },
+        {
+          "id": 2,
+          "description": "Walk around the block 3 times"
+        },
+        {
+          "id": 3,
+          "description": "Touch your toes 5 times"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780758666866,
+      "title": "Study Break",
+      "description": "Quick study session to boost focus and productivity",
+      "skill_id": 2,
+      "xp_reward": 20,
+      "estimated_time": "10 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Read 2 pages of a chosen book"
+        },
+        {
+          "id": 2,
+          "description": "Take 5 minutes to review notes"
+        },
+        {
+          "id": 3,
+          "description": "Complete the task"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780758671362,
+      "title": "Declutter Your Space",
+      "description": "Clean up your living area to clear your mind.",
+      "skill_id": 3,
+      "xp_reward": 50,
+      "estimated_time": "10 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Pick up 5 items that are out of place"
+        },
+        {
+          "id": 2,
+          "description": "Sort 3 pieces of mail"
+        },
+        {
+          "id": 3,
+          "description": "Put away 2 toys or books"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780758752093,
+      "title": "Morning Stroll",
+      "description": "Take a 10-minute walk around the block to boost your mood.",
+      "skill_id": 1,
+      "xp_reward": 75,
+      "estimated_time": "15 min",
+      "success_rate": 90,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Walk for 2 minutes without stopping"
+        },
+        {
+          "id": 2,
+          "description": "Notice at least 3 things you like about your neighborhood"
+        },
+        {
+          "id": 3,
+          "description": "Complete the task"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780758749338,
+      "title": "Study Break",
+      "description": "Stay on top of your schoolwork with a quick study session.",
+      "skill_id": 2,
+      "xp_reward": 50,
+      "estimated_time": "15 min",
+      "success_rate": 85,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Review notes from the past week"
+        },
+        {
+          "id": 2,
+          "description": "Practice 5 math problems"
+        },
+        {
+          "id": 3,
+          "description": "Read 2 chapters of a book"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
+    },
+    {
+      "id": 1780758749989,
+      "title": "Clean Sweep",
+      "description": "Clear your cluttered workspace and organize your digital files",
+      "skill_id": 3,
+      "xp_reward": 75,
+      "estimated_time": "10 min",
+      "success_rate": 80,
+      "objectives": [
+        {
+          "id": 1,
+          "description": "Sort and purge physical papers"
+        },
+        {
+          "id": 2,
+          "description": "Update your digital address book"
+        },
+        {
+          "id": 3,
+          "description": "Organize your computer files into clear folders"
+        }
+      ],
+      "daily": true,
+      "created_by": "80e9a48f-9bad-4e1b-a59d-63621b099812"
     }
   ],
   "user_missions": [
@@ -2575,21 +2733,21 @@
       "mission_id": 1780403879513,
       "type": "main",
       "daily_date": "2026-06-02",
-      "status": "active",
+      "status": "completed",
       "accepted_at": "2026-06-02T12:37:50.422Z",
-      "completed_at": null,
+      "completed_at": "2026-06-06T15:13:14.448Z",
       "objectives_progress": [
         {
           "objective_id": 1,
-          "completed": false
+          "completed": true
         },
         {
           "objective_id": 2,
-          "completed": false
+          "completed": true
         },
         {
           "objective_id": 3,
-          "completed": false
+          "completed": true
         }
       ]
     },
@@ -2902,78 +3060,6 @@
       ]
     },
     {
-      "id": "14e5be08-69b3-4f7a-beac-308707167e87",
-      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
-      "mission_id": 1780648188265,
-      "type": "secondary",
-      "daily_date": "2026-06-05",
-      "status": "available",
-      "accepted_at": null,
-      "completed_at": null,
-      "objectives_progress": [
-        {
-          "objective_id": 1,
-          "completed": false
-        },
-        {
-          "objective_id": 2,
-          "completed": false
-        },
-        {
-          "objective_id": 3,
-          "completed": false
-        }
-      ]
-    },
-    {
-      "id": "6b2cd539-4c72-4343-861c-2eac06e55a60",
-      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
-      "mission_id": 1780648190483,
-      "type": "secondary",
-      "daily_date": "2026-06-05",
-      "status": "available",
-      "accepted_at": null,
-      "completed_at": null,
-      "objectives_progress": [
-        {
-          "objective_id": 1,
-          "completed": false
-        },
-        {
-          "objective_id": 2,
-          "completed": false
-        },
-        {
-          "objective_id": 3,
-          "completed": false
-        }
-      ]
-    },
-    {
-      "id": "eeeefe4b-bf48-49d9-b5c9-8b9beb43d41b",
-      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
-      "mission_id": 1780648190964,
-      "type": "secondary",
-      "daily_date": "2026-06-05",
-      "status": "available",
-      "accepted_at": null,
-      "completed_at": null,
-      "objectives_progress": [
-        {
-          "objective_id": 1,
-          "completed": false
-        },
-        {
-          "objective_id": 2,
-          "completed": false
-        },
-        {
-          "objective_id": 3,
-          "completed": false
-        }
-      ]
-    },
-    {
       "id": "14b20c1a-d79a-445a-9580-9061d8d4645e",
       "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
       "mission_id": 3,
@@ -3146,6 +3232,102 @@
         {
           "objective_id": 3,
           "completed": true
+        }
+      ]
+    },
+    {
+      "id": "896d28a4-4eb6-4575-9ae8-2412b0496b12",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780758671362,
+      "type": "secondary",
+      "daily_date": "2026-06-06",
+      "status": "completed",
+      "accepted_at": "2026-06-06T15:11:49.850Z",
+      "completed_at": "2026-06-06T15:11:53.574Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "8ce19308-2e23-4afc-9459-a24f45dbc8eb",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780758752093,
+      "type": "secondary",
+      "daily_date": "2026-06-06",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "a154065e-b550-4e58-bc91-5500b11b6482",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780758749338,
+      "type": "secondary",
+      "daily_date": "2026-06-06",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "d4f3ea27-abbb-4ed1-b7ec-18c7b4063d86",
+      "user_id": "80e9a48f-9bad-4e1b-a59d-63621b099812",
+      "mission_id": 1780758749989,
+      "type": "secondary",
+      "daily_date": "2026-06-06",
+      "status": "available",
+      "accepted_at": null,
+      "completed_at": null,
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": false
+        },
+        {
+          "objective_id": 2,
+          "completed": false
+        },
+        {
+          "objective_id": 3,
+          "completed": false
         }
       ]
     }
