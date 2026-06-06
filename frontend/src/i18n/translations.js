@@ -80,6 +80,9 @@ export const translations = {
     estimatedTime:       'ESTIMATED TIME',
     successRate:         'SUCCESS RATE',
     supplementalAssets:  'Supplemental Assets',
+    questDescCompleted: 'Mission successfully completed. Rewards have been credited to your account.',
+    questDescAvailable: 'Mission available. Prepare to initiate the protocol.',
+    questDescInProgress: 'Mission in progress. Keep pushing forward.',
 
     // COMING SOON
     systemInitializing:  'SYSTEM INITIALIZING',
@@ -196,6 +199,9 @@ export const translations = {
     estimatedTime:       'TEMPO ESTIMADO',
     successRate:         'TAXA DE SUCESSO',
     supplementalAssets:  'Recursos Suplementares',
+    questDescCompleted: 'Missão concluída com sucesso. Recompensas creditadas na tua conta.',
+    questDescAvailable: 'Missão disponível. Prepara-te para iniciar o protocolo.',
+    questDescInProgress: 'Missão em curso. Continua o teu progresso.',
 
     // COMING SOON
     systemInitializing:  'SISTEMA A INICIALIZAR',

@@ -102,7 +102,7 @@ export default function AttributeSelection() {
     Object.fromEntries(attributes.map(a => [a.id, a.active]))
   )
   const [error, setError] = useState('')
-  const { refreshUser } = useUser()
+  const { refreshUser, user } = useUser()
 
   const handleToggle = (id) => {
     setToggles(prev => ({ ...prev, [id]: !prev[id] }))
@@ -162,17 +162,18 @@ const handleConfirm = async () => {
             <span className="as-nav-sub">Attribute Selection</span>
           </div>
         </div>
-        <div className="as-nav-right">
-          <div className="as-nav-hero">
-            <div className="as-nav-hero-info">
-              <span className="as-nav-hero-name">Hero of Routine</span>
-              <span className="as-nav-hero-level">LEVEL 1</span>
-            </div>
-            <div className="as-nav-avatar">
-              <span className="material-symbols-outlined">person</span>
-            </div>
+        <div className="as-nav-hero">
+          <div className="as-nav-hero-info">
+            <span className="as-nav-hero-name">{user?.username}</span>
+            <span className="as-nav-hero-level">LEVEL {user?.level || 1}</span>
           </div>
-        </div>
+          <div className="as-nav-avatar">
+            {user?.avatar
+              ? <img src={user.avatar} alt="avatar" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+              : <span className="material-symbols-outlined">person</span>
+            }
+          </div>
+      </div>
       </nav>
 
       {/* MAIN CONTENT */}

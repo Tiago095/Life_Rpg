@@ -30,6 +30,8 @@ export function useQuests() {
       fetch('http://localhost:3000/api/missions/user', { headers }).then(r => r.json()),
       fetch('http://localhost:3000/api/skills',        { headers }).then(r => r.json()),
     ]).then(([missions, userMissions, skills]) => {
+      fetch('http://localhost:3000/api/skills',        { headers }).then(r => r.json()),
+    ]).then(([missions, userMissions, skills]) => {
 
       const skillMap = Object.fromEntries(skills.map(s => [s.id, s.name]))
       const acceptedMissionIds = new Set(userMissions.map(um => um.mission_id))
@@ -44,6 +46,8 @@ export function useQuests() {
               userMission.objectives_progress.length * 100
             )
           : 0
+
+        const skillName = userMission?.skill?.name ?? skillsMap[mission.skill_id] ?? 'Unknown'
 
         return {
           id:          userMission?.id ?? `available-${mission.id}`,

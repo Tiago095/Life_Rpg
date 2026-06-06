@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import './Quests.css'
 import { useTranslation } from '../context/UserContext'
@@ -7,17 +7,23 @@ import { useQuests } from '../hooks/useQuests'
 import { useUser } from '../context/UserContext'
 import { useLocation } from 'react-router-dom'
 
-const filterTags = [
-  { id: 'Physical',     icon: 'fitness_center' },
-  { id: 'Mental',       icon: 'psychology' },
-  { id: 'Organization', icon: 'checklist' },
-]
+const filterTags = {
+  'Exercise':     { icon: 'fitness_center'},
+  'Studies':      { icon: 'auto_stories'},
+  'Organization': { icon: 'calendar_month'},
+  'Social':       { icon: 'groups'},
+  'Mindfulness':  { icon: 'self_improvement'},
+  'Creativity':   { icon: 'palette'},
+  'Finance':      { icon: 'savings'},
+  'Health':       { icon: 'favorite'},
+  'Technical':    { icon: 'code'},
+}
 
 export default function Quests() {
   const location = useLocation()
-  const { user } = useUser() 
+  const { user } = useUser()
   const [activeTab, setActiveTab]       = useState(location.state?.tab || 'inProgress')
-  const [activeFilter, setActiveFilter] = useState('Rank S')
+  const [activeFilter, setActiveFilter] = useState(null)
   const [selectedQuestId, setSelectedQuestId] = useState(null)
   const [search, setSearch]             = useState('')
   const { quests: questsData, loading, acceptMission, toggleObjective } = useQuests()
@@ -28,22 +34,39 @@ export default function Quests() {
   const {t} = useTranslation()
 
   const tabs = [
-    { id: 'inProgress', label: t.inProgress ,   count: questsData.inProgress.length },
+    { id: 'inProgress', label: t.inProgress ,   count: questsData.inProgress.length || null },
     { id: 'available',  label: t.available  ,   count: null },
     { id: 'completed',  label: t.completed  ,   count: null },
   ]
 
   const currentQuests = questsData[activeTab] || []
 
-const handleQuestClick = (quest) => {
-  if (selectedQuestId === quest.id) {
-    setSelectedQuestId(null)
-  } else {
-    setSelectedQuestId(quest.id)
+  // Get available skills from current quests
+  const availableSkillsInQuests = new Set(currentQuests.map(q => q.category))
+
+  // Filter tags apenas das skills que existem nas quests atuais
+  const activeFilterTags = Object.entries(filterTags).filter(([skillName]) =>
+    availableSkillsInQuests.has(skillName)
+  ).reduce((acc, [key, val]) => {
+    acc[key] = val
+    return acc
+  }, {})
+
+  // Filtrar quests pela skill selecionada
+  const filteredQuests = activeFilter
+    ? currentQuests.filter(quest => quest.category === activeFilter)
+    : currentQuests
+
+  const handleQuestClick = (quest) => {
+    if (selectedQuestId === quest.id) {
+      setSelectedQuestId(null)
+    } else {
+      setSelectedQuestId(quest.id)
+    }
   }
-}
-if (loading) 
-  return <div className="qs-layout"><Sidebar /><p>Loading...</p></div>
+
+  if (loading)
+    return <div className="qs-layout"><Sidebar /><p>Loading...</p></div>
   return (
     <div className="qs-layout">
       <Sidebar />
@@ -58,16 +81,6 @@ if (loading)
               <span className="material-symbols-outlined" style={{ color: 'var(--color-primary)', fontSize: '26px' }}>history_edu</span>
             </div>
             <h1 className="qs-topbar-title">{t.questCommandCenter}</h1>
-          </div>
-          <div className="qs-search-wrapper">
-            <span className="material-symbols-outlined qs-search-icon">search</span>
-            <input
-              className="qs-search-input"
-              type="text"
-              placeholder= {t.searchQuest}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
           </div>
         </div>
 
@@ -85,6 +98,7 @@ if (loading)
                   onClick={() => {
                     setActiveTab(tab.id)
                     setSelectedQuestId(null)
+                    setActiveFilter(null)
                     }}
                 >
                   {tab.label}
@@ -95,21 +109,28 @@ if (loading)
 
             {/* FILTER TAGS */}
             <div className="qs-filters">
-              {filterTags.map(tag => (
+              <button
+                className={`qs-filter-tag ${activeFilter === null ? 'qs-filter-active' : ''}`}
+                onClick={() => setActiveFilter(null)}
+              >
+                <span className="material-symbols-outlined qs-filter-icon">apps</span>
+                All
+              </button>
+              {Object.entries(activeFilterTags).map(([skillName, data]) => (
                 <button
-                  key={tag.id}
-                  className={`qs-filter-tag ${activeFilter === tag.id ? 'qs-filter-active' : ''}`}
-                  onClick={() => setActiveFilter(tag.id)}
+                  key={skillName}
+                  className={`qs-filter-tag ${activeFilter === skillName ? 'qs-filter-active' : ''}`}
+                  onClick={() => setActiveFilter(skillName)}
                 >
-                  <span className="material-symbols-outlined qs-filter-icon">{tag.icon}</span>
-                  {tag.id}
+                  <span className="material-symbols-outlined qs-filter-icon">{data.icon}</span>
+                  {skillName}
                 </button>
               ))}
             </div>
 
             {/* QUEST LIST */}
             <div className="qs-list">
-              {currentQuests.map(quest => (
+              {filteredQuests.map(quest => (
                 <div
                   key={quest.id}
                   className={`qs-card ${selectedQuest?.id === quest.id ? 'qs-card-selected' : ''}`}
@@ -196,10 +217,10 @@ if (loading)
     <h2 className="qs-detail-title">{selectedQuest.title}</h2>
     <p className="qs-detail-desc">
       {activeTab === 'completed'
-        ? 'Missão concluída com sucesso. Recompensas creditadas na tua conta.'
+        ? t.questDescCompleted
         : activeTab === 'available'
-          ? 'Missão disponível. Prepara-te para iniciar o protocolo.'
-          : 'Missão em curso. Continua o teu progresso.'}
+          ? t.questDescAvailable
+          : t.questDescInProgress}
     </p>
 
     <div className="qs-stats-row">

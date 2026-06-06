@@ -24,28 +24,28 @@ const SKILL_PERKS = {
       name: 'Adrenaline Rush',
       req: 1,
       icon: 'bolt',
-      description: '+15% XP em treinos',
+      description: '+15% XP on workouts',
     },
     {
       id: 'xp_ex2',
       name: 'Marathon Mindset',
       req: 3,
       icon: 'directions_run',
-      description: '+25 XP por streak diário',
+      description: '+25 XP per daily streak',
     },
     {
       id: 'credits_ex',
       name: 'Gym Sponsorship',
       req: 5,
       icon: 'payments',
-      description: '+10% créditos em desafios físicos',
+      description: '+10% credits on physical challenges',
     },
     {
       id: 'loot_ex',
       name: 'Rare Protein Drop',
       req: 8,
       icon: 'inventory_2',
-      description: '+5% chance de drop raro',
+      description: '+5% rare drop chance',
     },
   ],
 
@@ -55,28 +55,28 @@ const SKILL_PERKS = {
       name: 'Fast Learner',
       req: 1,
       icon: 'school',
-      description: '+20% XP em sessões de estudo',
+      description: '+20% XP on study sessions',
     },
     {
       id: 'xp_std2',
       name: 'Night Reader',
       req: 3,
       icon: 'menu_book',
-      description: '+30 XP em tarefas longas',
+      description: '+30 XP on long tasks',
     },
     {
       id: 'credist_std',
       name: 'Scholarship',
       req: 5,
       icon: 'workspace_premium',
-      description: '+12% créditos em exames',
+      description: '+12% credits on exams',
     },
     {
       id: 'loot_std',
       name: 'Ancient Knowledge',
       req: 8,
       icon: 'auto_awesome',
-      description: '+6% chance de drop épico',
+      description: '+6% epic drop chance',
     },
   ],
 
@@ -86,28 +86,28 @@ const SKILL_PERKS = {
       name: 'Efficient Planning',
       req: 1,
       icon: 'event_note',
-      description: '+15% XP em tarefas organizadas',
+      description: '+15% XP on organized tasks',
     },
     {
       id: 'xp_org2',
       name: 'Perfect Schedule',
       req: 3,
       icon: 'schedule',
-      description: '+25 XP por agenda completa',
+      description: '+25 XP per completed schedule',
     },
     {
       id: 'credist_org',
       name: 'Productivity Bonus',
       req: 5,
       icon: 'task_alt',
-      description: '+10% créditos em rotinas',
+      description: '+10% credits on routines',
     },
     {
       id: 'loot_org',
       name: 'Lucky Checklist',
       req: 8,
       icon: 'checklist',
-      description: '+4% chance de item extra',
+      description: '+4% extra item chance',
     },
   ],
 
@@ -117,28 +117,28 @@ const SKILL_PERKS = {
       name: 'People Person',
       req: 1,
       icon: 'forum',
-      description: '+18% XP em atividades sociais',
+      description: '+18% XP on social activities',
     },
     {
       id: 'xp_soc2',
       name: 'Team Spirit',
       req: 3,
       icon: 'groups',
-      description: '+20 XP por interação diária',
+      description: '+20 XP per daily interaction',
     },
     {
       id: 'credist_soc',
       name: 'Networking',
       req: 5,
       icon: 'handshake',
-      description: '+15% créditos em eventos',
+      description: '+15% credits on events',
     },
     {
       id: 'loot_soc',
       name: 'Gifted Speaker',
       req: 8,
       icon: 'record_voice_over',
-      description: '+5% chance de drop social',
+      description: '+5% social drop chance',
     },
   ],
 
@@ -148,28 +148,28 @@ const SKILL_PERKS = {
       name: 'Inner Peace',
       req: 1,
       icon: 'spa',
-      description: '+20% XP em meditação',
+      description: '+20% XP on meditation',
     },
     {
       id: 'xp_md2',
       name: 'Zen Focus',
       req: 3,
       icon: 'self_improvement',
-      description: '+30 XP em streaks calmos',
+      description: '+30 XP on calm streaks',
     },
     {
       id: 'credist_md',
       name: 'Balanced Mind',
       req: 5,
       icon: 'psychology',
-      description: '+8% créditos passivos',
+      description: '+8% passive credits',
     },
     {
       id: 'loot_md',
       name: 'Spirit Reward',
       req: 8,
       icon: 'flare',
-      description: '+7% chance de drop espiritual',
+      description: '+7% spiritual drop chance',
     },
   ],
 
@@ -179,28 +179,28 @@ const SKILL_PERKS = {
       name: 'Creative Flow',
       req: 1,
       icon: 'brush',
-      description: '+22% XP em criação',
+      description: '+22% XP on creation',
     },
     {
       id: 'xp_cr2',
       name: 'Inspiration Burst',
       req: 3,
       icon: 'lightbulb',
-      description: '+35 XP em projetos únicos',
+      description: '+35 XP on unique projects',
     },
     {
       id: 'credits_cr',
       name: 'Art Commission',
       req: 5,
       icon: 'palette',
-      description: '+12% créditos criativos',
+      description: '+12% creative credits',
     },
     {
       id: 'loot_cr',
       name: 'Masterpiece Drop',
       req: 8,
       icon: 'diamond',
-      description: '+6% chance de item raro',
+      description: '+6% rare item chance',
     },
   ],
 
@@ -210,28 +210,28 @@ const SKILL_PERKS = {
       name: 'Money Mindset',
       req: 1,
       icon: 'attach_money',
-      description: '+15% XP em finanças',
+      description: '+15% XP on finance',
     },
     {
       id: 'xp_fin2',
       name: 'Investor Brain',
       req: 3,
       icon: 'trending_up',
-      description: '+25 XP em objetivos financeiros',
+      description: '+25 XP on financial goals',
     },
     {
       id: 'credits_fin',
       name: 'Compound Profit',
       req: 5,
       icon: 'account_balance_wallet',
-      description: '+20% créditos ganhos',
+      description: '+20% credits earned',
     },
     {
       id: 'loot_fin',
       name: 'Golden Ticket',
       req: 8,
       icon: 'stars',
-      description: '+5% chance de drop lendário',
+      description: '+5% legendary drop chance',
     },
   ],
 
@@ -241,28 +241,28 @@ const SKILL_PERKS = {
       name: 'Healthy Routine',
       req: 1,
       icon: 'favorite',
-      description: '+18% XP em hábitos saudáveis',
+      description: '+18% XP on healthy habits',
     },
     {
       id: 'xp_hlt2',
       name: 'Vital Energy',
       req: 3,
       icon: 'monitor_heart',
-      description: '+20 XP por metas concluídas',
+      description: '+20 XP on completed goals',
     },
     {
       id: 'credits_hlt',
       name: 'Medical Support',
       req: 5,
       icon: 'medical_services',
-      description: '+10% créditos em missões health',
+      description: '+10% credits on health missions',
     },
     {
       id: 'loot_hlt',
       name: 'Recovery Pack',
       req: 8,
       icon: 'healing',
-      description: '+5% chance de consumíveis',
+      description: '+5% consumable drop chance',
     },
   ],
 
@@ -272,28 +272,28 @@ const SKILL_PERKS = {
       name: 'Code Mastery',
       req: 1,
       icon: 'terminal',
-      description: '+25% XP em programação',
+      description: '+25% XP on programming',
     },
     {
       id: 'xp_tec2',
       name: 'Debug Genius',
       req: 3,
       icon: 'bug_report',
-      description: '+40 XP em tarefas difíceis',
+      description: '+40 XP on difficult tasks',
     },
     {
       id: 'credist_tec',
       name: 'Freelance Hacker',
       req: 5,
       icon: 'memory',
-      description: '+15% créditos técnicos',
+      description: '+15% technical credits',
     },
     {
       id: 'loot_tec',
       name: 'Loot Compiler',
       req: 8,
       icon: 'developer_board',
-      description: '+8% chance de tech drops',
+      description: '+8% tech drop chance',
     },
   ],
 };
@@ -336,15 +336,12 @@ function StatRing({ skill, value, onChange, canAdd, canSub }) {
             </linearGradient>
           </defs>
 
-          {/* track */}
           <path d={arcPath(100)} fill="none" stroke="var(--color-border)" strokeWidth="5" strokeLinecap="round" />
-          {/* fill */}
           <path d={arcPath(pct)} fill="none" stroke={`url(#${gradId})`} strokeWidth="5" strokeLinecap="round"
             style={{ filter: `drop-shadow(0 0 6px ${visual.color})` }} />
-          {/* glow bg */}
+
           <circle cx="60" cy="60" r="40" fill={visual.color + '12'} />
 
-          {/* número */}
           <text x="60" y="58" textAnchor="middle" className="sk-ring-value"
             style={{ fill: visual.color }}>
             {String(value).padStart(2, '0')}
@@ -386,7 +383,7 @@ function PerkRow({ perk, unlocked, color }) {
         <span className="sk-perk-name">{perk.name}</span>
       </div>
       <div className="sk-perk-req" style={ unlocked ? { color } : {} }>
-        <span className="material-symbols-outlined sk-req-icon">bolt</span>
+        <span>RANK</span>
         <span>{perk.req}</span>
       </div>
       <p className="sk-perk-desc">{perk.description}</p>

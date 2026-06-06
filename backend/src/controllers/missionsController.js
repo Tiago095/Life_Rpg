@@ -1,19 +1,16 @@
 import db from '../db.js'
+import { calculateXpBonus } from '../../util/xpCalculator.js'
 
-
-// GET /api/missions — todas as missões disponíveis (templates)
 export const getMissions = async (req, res) => {
   await db.read()
   res.json(db.data.missions)
 }
 
-// GET /api/missions/user — missões do utilizador autenticado
 export const getUserMissions = async (req, res) => {
   await db.read()
 
   const userMissions = db.data.user_missions.filter(um => um.user_id === req.userId)
 
-  // Join com os dados da missão
   const enriched = userMissions.map(um => {
     const mission = db.data.missions.find(m => m.id === um.mission_id)
     const skill   = db.data.skills.find(s => s.id === mission?.skill_id)
@@ -23,7 +20,6 @@ export const getUserMissions = async (req, res) => {
   res.json(enriched)
 }
 
-// POST /api/missions/:missionId/accept — aceitar uma missão
 export const acceptMission = async (req, res) => {
   const { missionId } = req.params
   await db.read()
@@ -74,7 +70,6 @@ export const acceptMission = async (req, res) => {
   res.status(201).json(newUserMission)
 }
 
-// PATCH /api/missions/:userMissionId/objective/:objectiveId — marcar objetivo
 export const toggleObjective = async (req, res) => {
   const { userMissionId, objectiveId } = req.params
 
@@ -109,9 +104,14 @@ export const toggleObjective = async (req, res) => {
     if (mission && userIndex !== -1) {
       const user = db.data.users[userIndex]
 
-      // XP + level
-      user.xp += mission.xp_reward
+    try {
+      const bonusPercent = calculateXpBonus(user, mission, db.data) || 0;
+      const finalXp = mission.xp_reward * (1 + bonusPercent / 100);
+      user.xp += finalXp;
       user.skillPoints = (user.skillPoints ?? 0) + 1
+    } catch (err) {
+      console.error('Erro ao calcular bonus XP:', err);
+    }
 
       const levels   = db.data.levels.sort((a, b) => b.level - a.level)
       const newLevel = levels.find(l => user.xp >= l.xp_required)
@@ -159,7 +159,6 @@ export const toggleObjective = async (req, res) => {
   res.json({ userMission: um, completed: allDone, itemAwarded })
 }
 
-// PATCH /api/missions/:userMissionId/abandon — abandonar missão
 export const abandonMission = async (req, res) => {
   const { userMissionId } = req.params
 
