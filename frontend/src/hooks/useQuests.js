@@ -161,5 +161,19 @@ export function useQuests() {
     return { completed: data.completed, itemAwarded: data.itemAwarded ?? null }
   }
 
-  return { quests, loading, acceptMission, toggleObjective, fetchQuests }
+  const abandonMission = async (userMissionId) => {
+  const token = localStorage.getItem('token')
+  const res = await fetch(`http://localhost:3000/api/missions/${userMissionId}/abandon`, {
+    method: 'PATCH',
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  if (!res.ok) {
+    console.error('Erro ao abandonar missão:', await res.json())
+    return false
+  }
+  fetchQuests()
+  return true
+}
+
+  return { quests, loading, acceptMission, toggleObjective, fetchQuests, abandonMission }
 }

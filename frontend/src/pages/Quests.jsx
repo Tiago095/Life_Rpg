@@ -26,9 +26,10 @@ export default function Quests() {
   const [activeFilter, setActiveFilter] = useState(null)
   const [selectedQuestId, setSelectedQuestId] = useState(null)
   const [search, setSearch]             = useState('')
-  const { quests: questsData, loading, acceptMission, toggleObjective } = useQuests()
+  const { quests: questsData, loading, acceptMission, abandonMission, toggleObjective } = useQuests()
   const [missionResult, setMissionResult] = useState(null)
   const [confirmAccept, setConfirmAccept] = useState(null)
+  const [confirmAbandon, setConfirmAbandon] = useState(null) // { userMissionId, title }
 
   const selectedQuest = questsData[activeTab]?.find(q => q.id === selectedQuestId) ?? null
 
@@ -302,12 +303,7 @@ onClick={async () => {
   </div>
 ))}
     </div>
-    {activeTab === 'inProgress' && (
-    <button className="qs-btn-primary">
-      <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>play_arrow</span>
-      {t.continueMission}
-    </button>
-  )}
+
 
 {activeTab === 'available' && (
   <button
@@ -332,7 +328,10 @@ onClick={async () => {
 )}
 
   {activeTab === 'inProgress' && (
-    <button className="qs-btn-secondary" onClick={() => setSelectedQuestId(null)}>
+    <button
+      className="qs-btn-secondary"
+      onClick={() => setConfirmAbandon({ userMissionId: selectedQuest.id, title: selectedQuest.title })}
+    >
       {t.abortProtocol}
     </button>
   )}
@@ -369,6 +368,38 @@ onClick={async () => {
           }}
         >
           Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+{confirmAbandon && (
+  <div className="qs-modal-overlay">
+    <div className="qs-modal">
+      <span className="material-symbols-outlined" style={{ fontSize: '36px', color: '#ef4444' }}>
+        dangerous
+      </span>
+      <h3>Abort Mission?</h3>
+      <p>Are you sure you want to abandon this quest? This action cannot be undone.</p>
+      <div className="qs-modal-quest-name" style={{ color: '#ef4444', background: 'rgba(239,68,68,0.1)' }}>
+        "{confirmAbandon.title}"
+      </div>
+      <div className="qs-modal-actions">
+        <button className="qs-btn-secondary" onClick={() => setConfirmAbandon(null)}>
+          Cancel
+        </button>
+        <button
+          className="qs-btn-primary"
+          style={{ background: '#ef4444' }}
+          onClick={async () => {
+            const success = await abandonMission(confirmAbandon.userMissionId)
+            if (success) {
+              setConfirmAbandon(null)
+              setSelectedQuestId(null)
+            }
+          }}
+        >
+          Abandon
         </button>
       </div>
     </div>
