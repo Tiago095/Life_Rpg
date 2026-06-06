@@ -137,10 +137,16 @@ export const toggleObjective = async (req, res) => {
 
       // Adiciona ao inventário do utilizador
       if (!user.inventory) user.inventory = []
-      user.inventory.push({
-        itemId:      winner.id,
-        acquiredAt:  new Date().toISOString(),
-      })
+
+      const existing = user.inventory.find(i => i.itemId === winner.id)
+      if (existing) {
+        existing.quantity = (existing.quantity ?? 1) + 1
+      } else {
+        user.inventory.push({
+          itemId:   winner.id,
+          quantity: 1,
+        })
+      }
 
       itemAwarded = winner   // devolve ao frontend
       db.data.users[userIndex] = user
