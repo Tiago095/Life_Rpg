@@ -6,7 +6,7 @@
       "email": "t@gmail.com",
       "password": "$2b$10$oSQnwsByyc2QHPNp30ydseOuIgkJenrKtJjndRPmbwrIbt4W3qOOi",
       "level": 5,
-      "xp": 1148.6,
+      "xp": 1282.8,
       "avatar": "avatar2",
       "language": "English [EN-US]",
       "theme": "Void Black",
@@ -98,8 +98,30 @@
         {
           "itemId": "10",
           "quantity": 1
+        },
+        {
+          "itemId": "11",
+          "quantity": 2,
+          "charges": 5
+        },
+        {
+          "itemId": "12",
+          "quantity": 1,
+          "charges": 5
         }
-      ]
+      ],
+      "activeConsumables": {
+        "11": {
+          "itemId": "11",
+          "charges": 5,
+          "activatedAt": 1780762772765
+        },
+        "12": {
+          "itemId": "12",
+          "charges": 5,
+          "activatedAt": 1780762758072
+        }
+      }
     },
     {
       "id": "55c8c543-ea34-4650-8a6d-062c77055c5b",
@@ -133,11 +155,11 @@
       "username": "pires",
       "email": "p@gmail.com",
       "password": "$2b$10$Oo3VuHMBuQOeNuEJuqsd6OruQC3kmH4mc7Gm4hnVX/f6iyqRyHqqq",
-      "level": 1,
-      "xp": 0,
+      "level": 4,
+      "xp": 570,
       "avatar": "avatar1",
       "language": "English [EN-US]",
-      "theme": "Cyberpunk Blue (Default)",
+      "theme": "Neon Green",
       "highContrast": true,
       "skills": [
         {
@@ -153,7 +175,64 @@
           "rank": 0
         }
       ],
-      "skillPoints": 1
+      "skillPoints": 1,
+      "inventory": [
+        {
+          "itemId": "1",
+          "quantity": 3
+        },
+        {
+          "itemId": "2",
+          "quantity": 1
+        },
+        {
+          "itemId": "3",
+          "quantity": 1
+        },
+        {
+          "itemId": "4",
+          "quantity": 1
+        },
+        {
+          "itemId": "5",
+          "quantity": 1
+        },
+        {
+          "itemId": "6",
+          "quantity": 1
+        },
+        {
+          "itemId": "7",
+          "quantity": 1
+        },
+        {
+          "itemId": "8",
+          "quantity": 1
+        },
+        {
+          "itemId": "9",
+          "quantity": 1
+        },
+        {
+          "itemId": "10",
+          "quantity": 1
+        },
+        {
+          "itemId": "12",
+          "quantity": 1,
+          "charges": 5
+        }
+      ],
+      "activeConsumables": {
+        "12": {
+          "itemId": "12",
+          "charges": 5,
+          "activatedAt": 1780764209735
+        }
+      },
+      "equippedSlots": {
+        "utility": "10"
+      }
     },
     {
       "id": "13b740ca-dfe9-43b4-82ff-2ee813dcd415",
@@ -296,7 +375,7 @@
       "email": "p2@gmail.com",
       "password": "$2b$10$qqzQrv6G/QLe2ObU2P.nzOX1ubbB2uIE3grovR6V7dhPjRxVdp/3u",
       "level": 4,
-      "xp": 680,
+      "xp": 810,
       "avatar": "avatar1",
       "language": "English [EN-US]",
       "theme": "Cyberpunk Blue (Default)",
@@ -1264,6 +1343,138 @@
           "completed": true
         }
       ]
+    },
+    {
+      "id": "1ddf107f-d2e9-4e3b-be0e-f8bacb64b3b5",
+      "user_id": "d3715abb-bb5d-4eee-947f-4a83a7be6d76",
+      "mission_id": 5,
+      "status": "completed",
+      "accepted_at": "2026-06-02T13:51:08.906Z",
+      "completed_at": "2026-06-02T13:51:12.340Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "03e73ca7-2bec-42a2-9f05-0cc216546e3c",
+      "user_id": "a6f3a5d7-3695-4e4d-bf0d-a77615fe2580",
+      "mission_id": 6,
+      "status": "completed",
+      "accepted_at": "2026-06-06T16:19:55.874Z",
+      "completed_at": "2026-06-06T16:19:59.663Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "abb97be8-91e7-4812-8ff2-abe164f6612c",
+      "user_id": "9a448953-a0fb-4d93-a410-388ea03771de",
+      "mission_id": 1,
+      "status": "completed",
+      "accepted_at": "2026-06-06T16:30:01.300Z",
+      "completed_at": "2026-06-06T16:30:04.217Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "b724725e-d5dc-444a-86eb-d366b06df495",
+      "user_id": "9a448953-a0fb-4d93-a410-388ea03771de",
+      "mission_id": 2,
+      "status": "completed",
+      "accepted_at": "2026-06-06T16:31:55.706Z",
+      "completed_at": "2026-06-06T16:31:58.318Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "28d2ac7b-1bcf-4d91-899b-a67080a1aaee",
+      "user_id": "9a448953-a0fb-4d93-a410-388ea03771de",
+      "mission_id": 3,
+      "status": "completed",
+      "accepted_at": "2026-06-06T16:33:34.295Z",
+      "completed_at": "2026-06-06T16:33:42.022Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "f5070d4e-7e22-49df-880e-44c6ae439731",
+      "user_id": "9a448953-a0fb-4d93-a410-388ea03771de",
+      "mission_id": 4,
+      "status": "completed",
+      "accepted_at": "2026-06-06T16:33:37.406Z",
+      "completed_at": "2026-06-06T16:33:46.191Z",
+      "objectives_progress": [
+        {
+          "objective_id": 1,
+          "completed": true
+        },
+        {
+          "objective_id": 2,
+          "completed": true
+        },
+        {
+          "objective_id": 3,
+          "completed": true
+        }
+      ]
     }
   ],
   "items": [
@@ -1446,7 +1657,8 @@
       "icon": "rocket_launch",
       "description": "A temporary enhancer that accelerates progression.",
       "skillId": null,
-      "realWorldBenefit": "+20% XP gain for all missions (1 hour duration)",
+      "chargesMax": 3,
+      "realWorldBenefit": "+20% XP gain for all missions (3 uses)",
       "effects": [
         {
           "type": "xp_multiplier",
@@ -1463,7 +1675,8 @@
       "icon": "bolt",
       "description": "A caffeinated stimulant favored by night grinders.",
       "skillId": 8,
-      "realWorldBenefit": "+8% XP bonus for Health missions",
+      "chargesMax": 5,
+      "realWorldBenefit": "+8% XP bonus for Health missions (5 uses)",
       "effects": [
         {
           "type": "health_exp_bonus",

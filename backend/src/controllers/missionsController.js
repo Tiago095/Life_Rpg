@@ -89,19 +89,28 @@ if (allDone) {
     const user = db.data.users[userIndex]
 
     try {
-      const bonusPercent = calculateXpBonus(user, mission, db.data) || 0;
-      const finalXp = mission.xp_reward * (1 + bonusPercent / 100);
-      user.xp += finalXp;
+      const bonusPercent = calculateXpBonus(user, mission, db.data) || 0
+      const finalXp = mission.xp_reward * (1 + bonusPercent / 100)
+      user.xp += finalXp
     } catch (err) {
-      console.error('Erro ao calcular bonus XP:', err);
-      user.xp += mission.xp_reward;
+      console.error('Erro ao calcular bonus XP:', err)
+      user.xp += mission.xp_reward
     }
 
-    // Level up
     const levels = db.data.levels.sort((a, b) => b.level - a.level)
     const newLevel = levels.find(l => user.xp >= l.xp_required)
     if (newLevel && newLevel.level > user.level) {
       user.level = newLevel.level
+    }
+
+    if (user.activeConsumables) {
+      for (const [itemId, active] of Object.entries(user.activeConsumables)) {
+        active.charges -= 1
+        if (active.charges <= 0) {
+          delete user.activeConsumables[itemId]
+          user.inventory = (user.inventory || []).filter(i => i.itemId !== itemId)
+        }
+      }
     }
 
     db.data.users[userIndex] = user
