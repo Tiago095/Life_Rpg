@@ -144,21 +144,45 @@ export const toggleObjective = async (req, res) => {
         user.level = newLevel.level
       }
 
-      // --- Sorteio de item ---
-      const items = db.data.items
-      const rarityWeights = {
-        common:    50,
-        uncommon:  28,
-        rare:      14,
-        epic:       6,
-        legendary:  2,
-      }
-
-      // Constrói pool ponderada
-      const pool = items.flatMap(item =>
-        Array(rarityWeights[item.rarity] ?? 10).fill(item)
+    // --- Calcula drop bonus das skills ---
+    const dropBonus = (user.skills ?? []).reduce((total, us) => {
+      const perks = db.data.skillPerks.filter(
+        p => p.skillId === us.skillId &&
+            p.effectType === 'drop_percent' &&
+            us.rank >= p.requiredRank
       )
-      const winner = pool[Math.floor(Math.random() * pool.length)]
+      return total + perks.reduce((sum, p) => sum + p.value, 0)
+    }, 0)
+
+    // --- Sorteio de item ---
+    const items = db.data.items
+
+    // Com dropBonus, tira de common e uncommon e distribui por rare+
+    const baseWeights = {
+      common:    50,
+      uncommon:  28,
+      rare:      14,
+      epic:       6,
+      legendary:  2,
+    }
+
+    // Distribui o bonus proporcionalmente pelas raridades premium (rare, epic, legendary)
+    const premiumTotal = baseWeights.rare + baseWeights.epic + baseWeights.legendary  // 22
+    const bonusCapped = Math.min(dropBonus, 40)  // cap de 40% para não tornar common impossível
+
+    const rarityWeights = {
+      common:    Math.max(5,  baseWeights.common    - bonusCapped * 0.6),
+      uncommon:  Math.max(5,  baseWeights.uncommon  - bonusCapped * 0.4),
+      rare:      baseWeights.rare      + bonusCapped * (baseWeights.rare      / premiumTotal),
+      epic:      baseWeights.epic      + bonusCapped * (baseWeights.epic      / premiumTotal),
+      legendary: baseWeights.legendary + bonusCapped * (baseWeights.legendary / premiumTotal),
+    }
+
+    // Constrói pool ponderada (arredonda para inteiros)
+    const pool = items.flatMap(item =>
+      Array(Math.round(rarityWeights[item.rarity] ?? 10)).fill(item)
+    )
+    const winner = pool[Math.floor(Math.random() * pool.length)]
 
       // Adiciona ao inventário do utilizador
       if (!user.inventory) user.inventory = []
