@@ -16,6 +16,15 @@ const getAvatarKey = (avatar) => {
   return avatar
 }
 
+const XP_LEVELS = [
+  { level: 1, xp_required: 0    },
+  { level: 2, xp_required: 100  },
+  { level: 3, xp_required: 250  },
+  { level: 4, xp_required: 500  },
+  { level: 5, xp_required: 900  },
+  { level: 6, xp_required: 1400 },
+]
+
 const Sidebar = () => {
   const navigate  = useNavigate()
   const location  = useLocation()
@@ -24,7 +33,12 @@ const Sidebar = () => {
 
   const avatarKey = getAvatarKey(user?.avatar)
 
-  const xpPercentage = Math.round((Number(user?.xp ?? 0) / Number(user?.maxXp ?? 1000)) * 100) || 0
+  const current = XP_LEVELS.find(l => l.level === user?.level)
+  const next    = XP_LEVELS.find(l => l.level === (user?.level ?? 1) + 1)
+  const xpPercentage = current && next
+    ? Math.min(100, Math.round(((user.xp - current.xp_required) / (next.xp_required - current.xp_required)) * 100))
+    : 100
+
   const menuItems = [
     { id: 'Dashboard', label: t.dashboard,  icon: 'grid_view',   path: '/Dashboard' },
     { id: 'Skills',    label: t.skills,     icon: 'swords',      path: '/Skills' },
@@ -58,7 +72,7 @@ const Sidebar = () => {
           <div className="sb-xp-bar-bg">
             <div className="sb-xp-bar-fill" style={{ width: `${xpPercentage}%` }} />
           </div>
-          <p className="sb-xp-numbers">{user.xp} / {user.maxXp} XP</p>
+          <p className="sb-xp-numbers">{Math.floor(user.xp)} / {next?.xp_required ?? '—'} XP</p>
         </div>
       </div>
 

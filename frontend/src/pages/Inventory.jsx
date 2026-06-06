@@ -44,6 +44,24 @@ export const RARITY_COLOR = {
   LEGENDARY: '#f59e0b',
 }
 
+const XP_LEVELS = [
+  { level: 1, xp_required: 0    },
+  { level: 2, xp_required: 100  },
+  { level: 3, xp_required: 250  },
+  { level: 4, xp_required: 500  },
+  { level: 5, xp_required: 900  },
+  { level: 6, xp_required: 1400 },
+]
+
+function calcXpPct(xp, level) {
+  const current = XP_LEVELS.find(l => l.level === level)
+  const next    = XP_LEVELS.find(l => l.level === level + 1)
+  if (!current || !next) return 100
+  const progress = xp - current.xp_required
+  const needed   = next.xp_required - current.xp_required
+  return Math.min(100, Math.round((progress / needed) * 100))
+}
+
 function BenefitText({ text }) {
   if (!text) return <span>No benefit description.</span>
   const parts = text.split(/(\+\d+%[^,.]+)/g)
@@ -59,127 +77,132 @@ function BenefitText({ text }) {
 }
 
 export default function Inventory() {
-  const navigate    = useNavigate()
-  const { user }    = useUser()
+  const navigate = useNavigate()
+  const { user } = useUser()
 
-  const [tab,           setTab]          = useState('gear')
-  const [selectedItem,  setSelectedItem] = useState(null)
-  const [equippedSlots, setEquippedSlots]= useState({})
-  const [searchQuery,   setSearchQuery]  = useState('')
-  const [userSkills,    setUserSkills]   = useState([])
-  const [allItems,      setAllItems]     = useState([])
-  const [loading,       setLoading]      = useState(true)
+  const [tab,               setTab]              = useState('gear')
+  const [selectedItem,      setSelectedItem]     = useState(null)
+  const [equippedSlots,     setEquippedSlots]    = useState({})
+  const [searchQuery,       setSearchQuery]      = useState('')
+  const [userSkills,        setUserSkills]       = useState([])
+  const [allItems,          setAllItems]         = useState([])
+  const [activeConsumables, setActiveConsumables]= useState([])
+  const [loading,           setLoading]          = useState(true)
+  const [userStats,         setUserStats]        = useState({ level: 1, xp: 0 })  // ← novo
 
   const token = localStorage.getItem('token')
 
   useEffect(() => {
-  if (!user?.id) return
-  setLoading(true)
+    if (!user?.id) return
+    setLoading(true)
 
-  Promise.all([
-    fetch('http://localhost:3000/api/skills', {
-      headers: { Authorization: `Bearer ${token}` },
-    }).then(r => r.json()),
-    fetch('http://localhost:3000/api/me', {
-      headers: { Authorization: `Bearer ${token}` },
-    }).then(r => r.json()),
-    fetch('http://localhost:3000/api/inventory', {
-      headers: { Authorization: `Bearer ${token}` },
-    }).then(r => r.json()),
-    fetch('http://localhost:3000/api/inventory/equipped', {
-      headers: { Authorization: `Bearer ${token}` },
-    }).then(r => r.json()),
-  ])
-    .then(([allSkills, meData, invData, equippedData]) => {
-      const userSkillsData = meData.user.skills || []
-      const matched = allSkills
-        .filter(s => userSkillsData.some(us => us.skillId === s.id))
-        .map(s => {
-          const us = userSkillsData.find(u => u.skillId === s.id)
-          return {
-            id: s.id,
-            name: s.name,
-            rank: us?.rank ?? 0,
-            ...(SKILL_VISUAL[s.name] || { icon: 'star', color: '#64748b' }),
-          }
+    Promise.all([
+      fetch('http://localhost:3000/api/skills', {
+        headers: { Authorization: `Bearer ${token}` },
+      }).then(r => r.json()),
+      fetch('http://localhost:3000/api/me', {
+        headers: { Authorization: `Bearer ${token}` },
+      }).then(r => r.json()),
+      fetch('http://localhost:3000/api/inventory', {
+        headers: { Authorization: `Bearer ${token}` },
+      }).then(r => r.json()),
+      fetch('http://localhost:3000/api/inventory/equipped', {
+        headers: { Authorization: `Bearer ${token}` },
+      }).then(r => r.json()),
+      fetch('http://localhost:3000/api/inventory/active-consumables', {
+        headers: { Authorization: `Bearer ${token}` },
+      }).then(r => r.json()),
+    ])
+      .then(([allSkills, meData, invData, equippedData, activeData]) => {
+
+        // ← sincroniza level e xp com o servidor
+        setUserStats({
+          level: meData.user.level ?? 1,
+          xp:    meData.user.xp    ?? 0,
         })
-      setUserSkills(matched)
 
-      const normalizedItems = (invData.items || []).map(item => {
-        const skillName = matched.find(s => s.id === item.skillId)?.name
-        return {
-          ...item,
-          desc: item.description,
-          benefit: item.realWorldBenefit,
-          rarity: item.rarity?.toUpperCase() || 'COMMON',
-          skillRequired: skillName,
-        }
-      })
-      setAllItems(normalizedItems)
+        const userSkillsData = meData.user.skills || []
+        const matched = allSkills
+          .filter(s => userSkillsData.some(us => us.skillId === s.id))
+          .map(s => {
+            const us = userSkillsData.find(u => u.skillId === s.id)
+            return {
+              id: s.id,
+              name: s.name,
+              rank: us?.rank ?? 0,
+              ...(SKILL_VISUAL[s.name] || { icon: 'star', color: '#64748b' }),
+            }
+          })
+        setUserSkills(matched)
 
-      const equippedMap = {}
-      Object.entries(equippedData.equipped || {}).forEach(([slot, item]) => {
-        if (item) {
-          const skillName = matched.find(s => s.id === item.skillId)?.name  // ← idem
-          equippedMap[slot] = {
+        const normalizedItems = (invData.items || []).map(item => {
+          const skillName = matched.find(s => s.id === item.skillId)?.name
+          return {
             ...item,
             desc: item.description,
             benefit: item.realWorldBenefit,
             rarity: item.rarity?.toUpperCase() || 'COMMON',
             skillRequired: skillName,
           }
+        })
+        setAllItems(normalizedItems)
+
+        const equippedMap = {}
+        Object.entries(equippedData.equipped || {}).forEach(([slot, item]) => {
+          if (item) {
+            const skillName = matched.find(s => s.id === item.skillId)?.name
+            equippedMap[slot] = {
+              ...item,
+              desc: item.description,
+              benefit: item.realWorldBenefit,
+              rarity: item.rarity?.toUpperCase() || 'COMMON',
+              skillRequired: skillName,
+            }
+          }
+        })
+        setEquippedSlots(equippedMap)
+        setActiveConsumables(activeData.activeConsumables || [])
+
+        if (Object.keys(equippedMap).length > 0) {
+          setSelectedItem(Object.values(equippedMap)[0])
+        } else if (normalizedItems.length > 0) {
+          setSelectedItem(normalizedItems[0])
         }
       })
-      setEquippedSlots(equippedMap)
-
-      if (Object.keys(equippedMap).length > 0) {
-        setSelectedItem(Object.values(equippedMap)[0])
-      } else if (normalizedItems.length > 0) {
-        setSelectedItem(normalizedItems[0])
-      }
-    })
-    .catch(err => console.error('Inventory load error:', err))
-    .finally(() => setLoading(false))
-}, [user?.id])
-
-  const activeSkillNames = userSkills.map(s => s.name)
+      .catch(err => console.error('Inventory load error:', err))
+      .finally(() => setLoading(false))
+  }, [user?.id])
 
   const filteredGear = allItems
-  .filter(item => item.category !== 'consumable')
-  .filter(item =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+    .filter(item => item.category !== 'consumable')
+    .filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
+
   const filteredConsumables = allItems
     .filter(item => item.category === 'consumable')
     .filter(c => c.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
   const skillBonuses = userSkills.map(skill => {
-  const equippedItemsForSkill = Object.values(equippedSlots)
-    .filter(item => item && item.skillId === skill.id)
-
-  const totalBonus = equippedItemsForSkill.reduce((sum, item) => {
-    return sum + (item.effects?.[0]?.value || 0)
-  }, 0)
-
-  return {
-    id: skill.id,
-    name: skill.name,
-    preference: SKILL_PREFERENCE[skill.name],
-    icon: skill.icon,
-    color: skill.color,
-    totalBonus,
-    equippedItems: equippedItemsForSkill,
-  }
-})
+    const equippedItemsForSkill = Object.values(equippedSlots)
+      .filter(item => item && item.skillId === skill.id)
+    const totalBonus = equippedItemsForSkill.reduce((sum, item) => {
+      return sum + (item.effects?.[0]?.value || 0)
+    }, 0)
+    return {
+      id: skill.id,
+      name: skill.name,
+      preference: SKILL_PREFERENCE[skill.name],
+      icon: skill.icon,
+      color: skill.color,
+      totalBonus,
+      equippedItems: equippedItemsForSkill,
+    }
+  })
 
   const handleEquip = async (item) => {
     try {
       const res = await fetch('http://localhost:3000/api/inventory/equip', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ itemId: item.id }),
       })
       if (!res.ok) throw new Error('Failed to equip item')
@@ -202,10 +225,7 @@ export default function Inventory() {
     try {
       const res = await fetch('http://localhost:3000/api/inventory/unequip', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ slot }),
       })
       if (!res.ok) throw new Error('Failed to unequip item')
@@ -224,35 +244,44 @@ export default function Inventory() {
     try {
       const res = await fetch('http://localhost:3000/api/inventory/consume', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ itemId: item.id }),
       })
       if (!res.ok) throw new Error('Failed to consume item')
-      setAllItems(prev => prev.filter(i => i.id !== item.id))
+      const data = await res.json()
+
+      setActiveConsumables(prev => {
+        const existing = prev.find(a => a.id === item.id)
+        if (existing) {
+          return prev.map(a => a.id === item.id
+            ? { ...a, activeCharges: data.activeCharges }
+            : a
+          )
+        }
+        return [...prev, { ...item, activeCharges: data.activeCharges }]
+      })
+
+      setAllItems(prev => prev.map(i => {
+        if (i.id !== item.id) return i
+        const newQty = (i.quantity ?? 1) - 1
+        return newQty <= 0 ? null : { ...i, quantity: newQty }
+      }).filter(Boolean))
+
       setSelectedItem(null)
     } catch (err) {
       console.error('Consume error:', err)
     }
   }
 
-  const getItemQuantity = (itemId) => {
-    const inv = allItems.find(item => item.id === itemId)
-    return inv?.quantity || 0
-  }
+  const isItemEquipped   = (itemId) => Object.values(equippedSlots).some(item => item?.id === itemId)
+  const getEquippedSlot  = (itemId) => Object.entries(equippedSlots).find(([_, item]) => item?.id === itemId)?.[0]
+  const isConsumableActive = (itemId) => activeConsumables.some(a => a.id === itemId)
+  const getActiveCharges   = (itemId) => activeConsumables.find(a => a.id === itemId)?.activeCharges ?? 0
+  const getInventoryQty    = (itemId) => allItems.find(i => i.id === itemId)?.quantity ?? 0
 
-  const isItemEquipped = (itemId) => {
-    return Object.values(equippedSlots).some(item => item?.id === itemId)
-  }
-
-  const getEquippedSlot = (itemId) => {
-    return Object.entries(equippedSlots).find(([_, item]) => item?.id === itemId)?.[0]
-  }
-
-  const level = user?.level    ?? 12
-  const xpPct = user?.xpPercent ?? 65
+  // ← usa userStats em vez de user
+  const level  = userStats.level
+  const xpPct  = calcXpPct(userStats.xp, userStats.level)
 
   const currentList = tab === 'gear' ? filteredGear : filteredConsumables
   const emptyCount  = Math.max(0, 6 - currentList.length)
@@ -266,19 +295,14 @@ export default function Inventory() {
 
         {loading && (
           <div style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            zIndex: 999,
+            position: 'absolute', inset: 0, display: 'flex',
+            alignItems: 'center', justifyContent: 'center',
+            backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 999,
           }}>
             <div style={{ color: 'white', fontSize: '18px' }}>Loading inventory...</div>
           </div>
         )}
 
-        {/* HEADER */}
         <div className="inv-topbar">
           <div className="inv-topbar-left">
             <div className="inv-topbar-icon">
@@ -290,7 +314,6 @@ export default function Inventory() {
 
         <div className="inv-body">
 
-          {/* LEFT: bonus + buffs */}
           <div className="inv-left">
             <div className="inv-card">
               <div className="inv-card-header">
@@ -299,35 +322,54 @@ export default function Inventory() {
               </div>
               <div className="inv-bonus-list">
                 {skillBonuses.length > 0 ? skillBonuses.map((s, i) => (
-                <div key={i} className="inv-bonus-row">
-                  <span
-                    className="material-symbols-outlined inv-bonus-skill-icon"
-                    style={{ color: s.color }}
-                  >
-                    {s.icon}
-                  </span>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: '12px', color: '#94a3b8' }}>{s.name}</div>
-                    <div className="inv-bonus-label">{s.preference}</div>
+                  <div key={i} className="inv-bonus-row">
+                    <span className="material-symbols-outlined inv-bonus-skill-icon" style={{ color: s.color }}>
+                      {s.icon}
+                    </span>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>{s.name}</div>
+                      <div className="inv-bonus-label">{s.preference}</div>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      {s.totalBonus > 0 ? (
+                        <>
+                          <div style={{ fontSize: '12px', color: '#4ade80' }}>+{s.totalBonus}% EXP BONUS</div>
+                          {s.equippedItems.map(item => (
+                            <div key={item.id} style={{ fontSize: '11px', color: 'var(--color-text-dim)' }}>
+                              {item.name}
+                            </div>
+                          ))}
+                        </>
+                      ) : (
+                        <div style={{ fontSize: '12px', color: 'var(--color-text-dim)' }}>—</div>
+                      )}
+                    </div>
                   </div>
-                  <div style={{ textAlign: 'right' }}>
-                    {s.totalBonus > 0 ? (
-                      <>
-                        <div style={{ fontSize: '12px', color: '#4ade80' }}>+{s.totalBonus}% EXP BONUS</div>
-                        {s.equippedItems.map(item => (
-                          <div key={item.id} style={{ fontSize: '11px', color: '#64748b' }}>
-                            {item.name}
+                )) : (
+                  <p className="inv-empty-hint">No active skills selected.</p>
+                )}
+
+                {activeConsumables.length > 0 && (
+                  <>
+                    <div style={{ borderTop: '1px solid var(--color-border)', margin: '12px 0 4px' }} />
+                    {activeConsumables.map((c, i) => (
+                      <div key={i} className="inv-bonus-row">
+                        <span className="material-symbols-outlined inv-bonus-skill-icon" style={{ color: 'var(--color-primary)' }}>
+                          {c.icon || 'local_bar'}
+                        </span>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>{c.name}</div>
+                          <div className="inv-bonus-label">ACTIVE BUFF</div>
+                        </div>
+                        <div style={{ textAlign: 'right' }}>
+                          <div style={{ fontSize: '12px', color: 'var(--color-primary)' }}>
+                            {c.activeCharges} charges
                           </div>
-                        ))}
-                      </>
-                    ) : (
-                      <div style={{ fontSize: '12px', color: '#475569' }}>—</div>
-                    )}
-                  </div>
-                </div>
-              )) : (
-                <p className="inv-empty-hint">No active skills selected.</p>
-              )}
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -336,11 +378,9 @@ export default function Inventory() {
             <div className="inv-mannequin-wrap">
               <div className="inv-ring inv-ring-outer" />
               <div className="inv-ring inv-ring-inner" />
-
               <div className="inv-character">
                 <span className="material-symbols-outlined inv-char-icon">person</span>
               </div>
-
               {GEAR_SLOTS.map(slot => {
                 const equipped = equippedSlots[slot.id]
                 return (
@@ -365,25 +405,20 @@ export default function Inventory() {
               <div className="inv-xp-track">
                 <div className="inv-xp-fill" style={{ width: `${xpPct}%` }} />
               </div>
-              <div className="inv-xp-label">{xpPct}% TO NEXT</div>
+              <div className="inv-xp-label">{Math.floor(userStats.xp)} XP — {xpPct}%</div>
             </div>
           </div>
 
-          {/* RIGHT: tabs + grid + detail */}
           <div className="inv-right">
             <div className="inv-tabs">
               <button
                 className={`inv-tab${tab === 'gear' ? ' inv-tab--active' : ''}`}
                 onClick={() => setTab('gear')}
-              >
-                GEAR
-              </button>
+              >GEAR</button>
               <button
                 className={`inv-tab${tab === 'consumables' ? ' inv-tab--active' : ''}`}
                 onClick={() => setTab('consumables')}
-              >
-                CONSUMABLES
-              </button>
+              >CONSUMABLES</button>
             </div>
 
             <div className="inv-grid">
@@ -400,20 +435,14 @@ export default function Inventory() {
                   >
                     {item.icon}
                   </span>
-                  {item.quantity > 1 && (
-                    <span style={{
-                      position: 'absolute',
-                      bottom: '4px',
-                      right: '4px',
-                      background: 'rgba(0,0,0,0.7)',
-                      color: '#fff',
-                      fontSize: '12px',
-                      padding: '2px 4px',
-                      borderRadius: '3px',
-                      fontWeight: 'bold'
-                    }}>
-                      x{item.quantity}
-                    </span>
+
+                  {item.category === 'consumable' && (
+  <span className="inv-qty-badge">
+    x{item.quantity}
+  </span>
+)}
+                  {item.category !== 'consumable' && item.quantity > 0 && (
+                    <span className="inv-qty-badge">x{item.quantity}</span>
                   )}
                 </div>
               ))}
@@ -427,10 +456,7 @@ export default function Inventory() {
                 <div className="inv-detail-header">
                   <div>
                     <h3 className="inv-detail-name">{selectedItem.name.toUpperCase()}</h3>
-                    <span
-                      className="inv-detail-rarity"
-                      style={{ color: RARITY_COLOR[selectedItem.rarity] }}
-                    >
+                    <span className="inv-detail-rarity" style={{ color: RARITY_COLOR[selectedItem.rarity] }}>
                       {selectedItem.rarity}{' '}
                       {selectedItem.slot?.replace('_l', '').replace('_r', '').toUpperCase()}
                     </span>
@@ -456,6 +482,20 @@ export default function Inventory() {
                   </div>
                 )}
 
+                {selectedItem.category === 'consumable' && isConsumableActive(selectedItem.id) && (
+                  <div className="inv-active-status">
+                    <span className="material-symbols-outlined" style={{ fontSize: '20px', color: 'var(--color-primary)' }}>
+                      bolt
+                    </span>
+                    <div>
+                      <div style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>ACTIVE</div>
+                      <div style={{ fontSize: '14px', fontWeight: 'bold', color: 'var(--color-primary)' }}>
+                        {getActiveCharges(selectedItem.id)} charges remaining
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {selectedItem.category === 'gear' && (
                   <button
                     className="inv-equip-btn"
@@ -472,9 +512,19 @@ export default function Inventory() {
                 )}
 
                 {selectedItem.category === 'consumable' && (
-                  <button className="inv-equip-btn" onClick={() => handleConsume(selectedItem)}>
+                  <button
+                    className="inv-equip-btn"
+                    onClick={() => handleConsume(selectedItem)}
+                    disabled={getInventoryQty(selectedItem.id) <= 0}
+                    style={getInventoryQty(selectedItem.id) <= 0 ? { opacity: 0.45, cursor: 'not-allowed' } : {}}
+                  >
                     <span className="material-symbols-outlined">local_bar</span>
-                    CONSUME ({selectedItem.quantity})
+                    {getInventoryQty(selectedItem.id) <= 0
+                      ? 'OUT OF STOCK'
+                      : isConsumableActive(selectedItem.id)
+                        ? `CONSUME ANOTHER (x${getInventoryQty(selectedItem.id)} left)`
+                        : `CONSUME (x${getInventoryQty(selectedItem.id)} left)`
+                    }
                   </button>
                 )}
               </div>

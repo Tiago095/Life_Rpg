@@ -135,7 +135,7 @@ export const toggleObjective = async (req, res) => {
       user.xp += finalXp;
       user.skillPoints = (user.skillPoints ?? 0) + 1
     } catch (err) {
-      console.error('Erro ao calcular bonus XP:', err);
+      console.error('Erro ao calcular bonus XP:', err)
     }
 
       const levels   = db.data.levels.sort((a, b) => b.level - a.level)
@@ -143,6 +143,15 @@ export const toggleObjective = async (req, res) => {
       if (newLevel && newLevel.level > user.level) {
         user.level = newLevel.level
       }
+if (user.activeConsumables) {
+      for (const [itemId, active] of Object.entries(user.activeConsumables)) {
+        active.charges -= 1
+        if (active.charges <= 0) {
+          delete user.activeConsumables[itemId]
+          user.inventory = (user.inventory || []).filter(i => i.itemId !== itemId)
+        }
+      }
+    }
 
     // --- Calcula drop bonus das skills ---
     const dropBonus = (user.skills ?? []).reduce((total, us) => {

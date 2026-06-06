@@ -14,7 +14,7 @@ export const calculateXpBonus = (user, mission, dbData) => {
     });
   }
 
-  const equippedItemIds = Object.values(user.equippedSlots);
+  const equippedItemIds = Object.values(user.equippedSlots || {});
   
   equippedItemIds.forEach(itemId => {
     const item = dbData.items.find(i => i.id === itemId);
