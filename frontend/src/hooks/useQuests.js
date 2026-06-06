@@ -48,6 +48,7 @@ export function useQuests() {
         return {
           id:          userMission?.id ?? `available-${mission.id}`,
           mission_id:  mission.id,
+          type:        userMission?.type ?? null,
           ...RANK_BY_XP(mission.xp_reward),
           category:    userMission?.skill?.name ?? skillMap[mission.skill_id] ?? mission.skill_id,
           title:       mission.title,
@@ -107,8 +108,19 @@ export function useQuests() {
     if (user) fetchQuests()
   }, [user])
 
-  const acceptMission = async (missionId) => {
+  const acceptMission = async (missionId, force = false) => {
     const token = localStorage.getItem('token')
+
+    if (!force) {
+      const activeSecondary = quests.inProgress.filter(q => q.type === 'secondary')
+      if (activeSecondary.length >= 3) {
+        const oldest = [...activeSecondary].sort((a, b) =>
+          new Date(a.accepted_at) - new Date(b.accepted_at)
+        )[0]
+        return { needsConfirmation: true, oldest }
+      }
+    }
+
     const res = await fetch(`http://localhost:3000/api/missions/${missionId}/accept`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` }
@@ -116,10 +128,11 @@ export function useQuests() {
     if (!res.ok) {
       const err = await res.json()
       console.error('Erro ao aceitar missão:', err)
-      return false
+      return null
     }
+    const data = await res.json()
     fetchQuests()
-    return true
+    return { success: true, data }
   }
 
   const toggleObjective = async (userMissionId, objectiveId) => {

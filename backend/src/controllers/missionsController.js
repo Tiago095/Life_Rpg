@@ -28,7 +28,6 @@ export const acceptMission = async (req, res) => {
   if (!mission)
     return res.status(404).json({ code: 'MISSION_NOT_FOUND' })
 
-  // Verifica se já existe como 'available' (missão secundária diária)
   const existingIndex = db.data.user_missions.findIndex(
     um => um.user_id === req.userId &&
           um.mission_id === Number(missionId) &&
@@ -36,14 +35,25 @@ export const acceptMission = async (req, res) => {
   )
 
   if (existingIndex !== -1) {
-    // Muda de 'available' para 'active'
+    // Limite de missões ativas (também para secundárias diárias)
+    const MAX_ACTIVE = 6
+    const activeMissions = db.data.user_missions
+      .filter(um => um.user_id === req.userId && um.status === 'active')
+      .sort((a, b) => new Date(a.accepted_at) - new Date(b.accepted_at))
+
+    if (activeMissions.length >= MAX_ACTIVE) {
+      const oldest = activeMissions[0]
+      const oldestIndex = db.data.user_missions.findIndex(um => um.id === oldest.id)
+      db.data.user_missions[oldestIndex].status = 'abandoned'
+      db.data.user_missions[oldestIndex].abandoned_reason = 'auto_limit'
+    }
+
     db.data.user_missions[existingIndex].status = 'active'
     db.data.user_missions[existingIndex].accepted_at = new Date().toISOString()
     await db.write()
-    return res.json(db.data.user_missions[existingIndex])
+    return res.json({ ...db.data.user_missions[existingIndex], autoAbandoned: activeMissions.length >= MAX_ACTIVE })
   }
 
-  // Verifica se já está ativa
   const alreadyActive = db.data.user_missions.find(
     um => um.user_id === req.userId &&
           um.mission_id === Number(missionId) &&
@@ -51,6 +61,21 @@ export const acceptMission = async (req, res) => {
   )
   if (alreadyActive)
     return res.status(400).json({ code: 'MISSION_ALREADY_ACTIVE' })
+
+  // Limite de missões ativas
+  const MAX_ACTIVE = 6
+  const activeMissions = db.data.user_missions
+    .filter(um => um.user_id === req.userId && um.status === 'active')
+    .sort((a, b) => new Date(a.accepted_at) - new Date(b.accepted_at))
+
+  let autoAbandoned = null
+  if (activeMissions.length >= MAX_ACTIVE) {
+    const oldest = activeMissions[0]
+    const oldestIndex = db.data.user_missions.findIndex(um => um.id === oldest.id)
+    db.data.user_missions[oldestIndex].status = 'abandoned'
+    db.data.user_missions[oldestIndex].abandoned_reason = 'auto_limit'
+    autoAbandoned = oldest
+  }
 
   const newUserMission = {
     id: crypto.randomUUID(),
@@ -67,7 +92,7 @@ export const acceptMission = async (req, res) => {
 
   db.data.user_missions.push(newUserMission)
   await db.write()
-  res.status(201).json(newUserMission)
+  res.status(201).json({ ...newUserMission, autoAbandoned })
 }
 
 export const toggleObjective = async (req, res) => {

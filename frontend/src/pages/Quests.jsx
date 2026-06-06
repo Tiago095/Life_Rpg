@@ -28,6 +28,7 @@ export default function Quests() {
   const [search, setSearch]             = useState('')
   const { quests: questsData, loading, acceptMission, toggleObjective } = useQuests()
   const [missionResult, setMissionResult] = useState(null)
+  const [confirmAccept, setConfirmAccept] = useState(null)
 
   const selectedQuest = questsData[activeTab]?.find(q => q.id === selectedQuestId) ?? null
 
@@ -312,12 +313,18 @@ onClick={async () => {
   <button
     className="qs-btn-primary"
     onClick={async () => {
-      const success = await acceptMission(selectedQuest.mission_id)
-      if (success) {
-        setSelectedQuestId(null)  // fecha o painel lateral
-        setActiveTab('inProgress')  // vai para a tab de ativas
-      }
-    }}
+    const result = await acceptMission(selectedQuest.mission_id)
+    if (!result) return
+
+    if (result.needsConfirmation) {
+      // Guarda o contexto e mostra o modal
+      setConfirmAccept({ missionId: selectedQuest.mission_id, oldest: result.oldest })
+      return
+    }
+
+    setSelectedQuestId(null)
+    setActiveTab('inProgress')
+  }}
   >
     <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>play_arrow</span>
     {t.startMission ?? 'Start Mission'}
@@ -333,6 +340,40 @@ onClick={async () => {
   )}
         </div>
       </div>
+      {confirmAccept && (
+  <div className="qs-modal-overlay">
+    <div className="qs-modal">
+      <span className="material-symbols-outlined" style={{ fontSize: '36px', color: '#f59e0b' }}>
+        warning
+      </span>
+      <h3>Mission limit reached.</h3>
+      <p>
+        You have 6 active missions. By accepting this mission, the oldest quest will be automatically abandoned.
+      </p>
+      <div className="qs-modal-quest-name">
+        "{confirmAccept.oldest.title}"
+      </div>
+      <div className="qs-modal-actions">
+        <button className="qs-btn-secondary" onClick={() => setConfirmAccept(null)}>
+          Cancel
+        </button>
+        <button
+          className="qs-btn-primary"
+          onClick={async () => {
+            setConfirmAccept(null)
+            const result = await acceptMission(confirmAccept.missionId, true)
+            if (result?.success) {
+              setSelectedQuestId(null)
+              setActiveTab('inProgress')
+            }
+          }}
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+)}
       <MissionCompletePopup
   isOpen={!!missionResult}
   result={missionResult}
