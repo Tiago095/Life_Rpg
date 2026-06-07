@@ -398,7 +398,6 @@ export default function Skills() {
   const [loading,    setLoading]    = useState(true)
   const [draftStats, setDraftStats] = useState({})
   const [sp,         setSp]         = useState(4)
-  const [saved,      setSaved]      = useState({})
   const [savedSp,    setSavedSp]    = useState(4)
   const [activeTab,  setActiveTab]  = useState(null)
   const [originalStats, setOriginalStats] = useState({})
@@ -432,7 +431,6 @@ useEffect(() => {
       const initDraft = {}
       matched.forEach(s => { initDraft[s.id] = s.rank ?? 0 })
       setDraftStats(initDraft)
-      setSaved(initDraft)
       setOriginalStats(initDraft)
       if (matched.length > 0) setActiveTab(matched[0].id)
     })
@@ -473,9 +471,6 @@ useEffect(() => {
   }
 
  const handleReset = () => {
-    const spGasto = Object.keys(originalStats).reduce((acc, id) => {
-      return acc + ((draftStats[id] ?? 0) - (originalStats[id] ?? 0))
-    }, 0)
 
     setDraftStats({ ...originalStats })
     setSp(savedSp)

@@ -27,7 +27,6 @@ export default function Login() {
       const data = await response.json()
 
       if (response.ok) {
-        login(data.token, data.user)
 
         document.body.classList.remove('theme-neon-green', 'theme-blood-red', 'theme-void-black', 'high-contrast')
         const themeMap = {

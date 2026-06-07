@@ -85,7 +85,6 @@ const Sidebar = () => {
           >
             <span className="material-symbols-outlined sb-nav-icon-font">{item.icon}</span>
             <span className="sb-nav-item-label">{item.label}</span>
-            {item.badge && <span className="sb-item-notification-badge">{item.badge}</span>}
           </button>
         ))}
 

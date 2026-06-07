@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import { useUser } from '../context/UserContext'
 import './Inventory.css'
@@ -77,7 +76,6 @@ function BenefitText({ text }) {
 }
 
 export default function Inventory() {
-  const navigate = useNavigate()
   const { user } = useUser()
 
   const [tab,               setTab]              = useState('gear')
@@ -528,7 +526,6 @@ export default function Inventory() {
               </div>
             )}
           </div>
-
         </div>
       </main>
     </div>

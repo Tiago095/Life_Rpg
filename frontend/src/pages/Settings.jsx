@@ -38,7 +38,6 @@ export default function Settings() {
   const [avatarSrc, setAvatarSrc]       = useState(null)
   const [showAvatarModal, setShowAvatarModal] = useState(false)
 
-  const [notifications, setNotifications] = useState(true)
   const [highContrast, setHighContrast]     = useState(false)
   const [theme, setTheme] = useState('Cyberpunk Blue (Default)')
   const [language, setLanguage] = useState('English [EN-US]') 
@@ -115,9 +114,6 @@ export default function Settings() {
 
     const token = localStorage.getItem('token')
     const body = {}
-
-    if (highContrast !== originalHighContrast) 
-      body.highContrast = highContrast
 
     if (language !== originalLanguage) body.language = language
      if (theme !== originalTheme) {
@@ -320,16 +316,6 @@ export default function Settings() {
             <div className="st-section-header">
               <span className="material-symbols-outlined st-section-icon">tune</span>
               <h2 className="st-section-title">{t.userPreferences}</h2>
-            </div>
-
-            <div className="st-toggle-row">
-              <div>
-                <p className="st-toggle-title">{t.neuralNotif}</p>
-                <p className="st-toggle-sub">{t.neuralNotifSub}</p>
-              </div>
-              <button className={`st-toggle ${notifications ? 'st-toggle-on' : ''}`} onClick={() => setNotifications(!notifications)}>
-                <div className="st-toggle-thumb" />
-              </button>
             </div>
 
             <div className="st-toggle-row">

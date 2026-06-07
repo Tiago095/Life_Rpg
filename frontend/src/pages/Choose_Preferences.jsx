@@ -119,7 +119,7 @@ const handleConfirm = async () => {
     .map(([id]) => id)
 
   if (selectedIds.length < 3) {
-    setError('Tens de selecionar pelo menos 3 skills.')
+    setError('You must select at least 3 skills.')
     return
   }
 
@@ -145,7 +145,6 @@ const handleConfirm = async () => {
   navigate('/Dashboard')
 }
 
-  const activeCount = Object.values(toggles).filter(Boolean).length
 
   return (
     <div className="as-wrapper">

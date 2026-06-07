@@ -17,10 +17,6 @@ const SKILL_VISUAL = {
   'Technical':    { icon: 'code',                  color: '#6366f1' },
 }
 
-const mockChatMessages = [
-  { user: 'IronWill',    message: 'Anyone up for a 5 AM focus session?',          color: '#3b82f6' },
-  { user: 'Scholar_Zee', message: 'Just leveled up my Organization skill! Huge!', color: '#8b5cf6' }
-]
 
 const MONTH_NAMES = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
 const DAY_LABELS  = ['M','T','W','T','F','S','S']
@@ -41,7 +37,6 @@ function getCalendarDays(year, month) {
 }
 
 export default function Dashboard() {
-  const [chatInput, setChatInput] = useState('')
   const { t } = useTranslation()
   const { user } = useUser()
   const { quests } = useQuests()
@@ -69,7 +64,6 @@ export default function Dashboard() {
     calYear  === today.getFullYear()
 
   const activeQuests = quests.inProgress.slice(0, 3)
-  const gold = user?.xp ?? 0
 
   useEffect(() => {
     if (!user?.id) return

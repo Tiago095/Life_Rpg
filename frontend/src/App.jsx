@@ -14,6 +14,7 @@ import Skills from './pages/Skills'
 import InventoryPage from './pages/Inventory'
 import { useDailyMissions } from './hooks/useDailyMissions'
 import { useUser } from './context/UserContext'
+import PrivateRoute from './components/PrivateRoute'
 
 function DailyMissionsManager() {
   const { user } = useUser()
@@ -72,15 +73,15 @@ function App() {
         <Route path="/Create_Account" element={<Create_Account />} />
         <Route path="/Login" element={<Login />}/>
         <Route path="/Sidebar" element={<Sidebar />}/>
-        <Route path="/Preferences" element={<Preferences />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="/Quests" element={<Quests />} />
-        <Route path="/Skills"     element={<Skills />} />
-        <Route path="/Inventory"  element={<InventoryPage />} />
-        <Route path="/Trophy"     element={<ComingSoon />} />
-        <Route path="/MarketPlace"  element={<ComingSoon />} />
-        <Route path="/Settings"   element={<Settings />} />
-        <Route path="/Friends"    element={<ComingSoon />} />
+        <Route path="/Preferences" element={<PrivateRoute><Preferences /></PrivateRoute>} />
+        <Route path="/Dashboard"   element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/Quests"      element={<PrivateRoute><Quests /></PrivateRoute>} />
+        <Route path="/Skills"      element={<PrivateRoute><Skills /></PrivateRoute>} />
+        <Route path="/Inventory"   element={<PrivateRoute><InventoryPage /></PrivateRoute>} />
+        <Route path="/Trophy"      element={<PrivateRoute><ComingSoon /></PrivateRoute>} />
+        <Route path="/MarketPlace" element={<PrivateRoute><ComingSoon /></PrivateRoute>} />
+        <Route path="/Settings"    element={<PrivateRoute><Settings /></PrivateRoute>} />
+        <Route path="/Friends"     element={<PrivateRoute><ComingSoon /></PrivateRoute>} />
         <Route path="/MC" element={<MissionCompletePopup/>}/>
       </Routes>
     </BrowserRouter>

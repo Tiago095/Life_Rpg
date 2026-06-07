@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useUser, useTranslation } from '../context/UserContext'
 import './MissionCompletePopup.css'
 
-export default function MissionCompletePopup({ isOpen, onClose, onViewLogs, result, variant }) {
+export default function MissionCompletePopup({ isOpen, onClose, result, variant }) {
   const { user, updateUser } = useUser()
   const { t } = useTranslation()
   const overlayRef = useRef(null)
@@ -18,14 +18,12 @@ export default function MissionCompletePopup({ isOpen, onClose, onViewLogs, resu
     return () => window.removeEventListener('keydown', handleKey)
   }, [isOpen, onClose])
 
-  const handleConfirm = () => {
-    updateUser({
-      xp:      newXpTotal,
-      credits: newCredits,
-      ...(result?.rankedUp && { level: result.newLevel }),
-    })
-    onClose?.()
+const handleConfirm = () => {
+  if (result?.rankedUp) {
+    updateUser({ level: result.newLevel })
   }
+  onClose?.()
+}
 
   const rarityColor = {
   common:    '#64748b',
@@ -165,12 +163,6 @@ export default function MissionCompletePopup({ isOpen, onClose, onViewLogs, resu
               )}
             </div>
             <div className="mcp-btns">
-              {onViewLogs && (
-                <button className="mcp-btn-secondary" onClick={onViewLogs}>
-                  <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>history</span>
-                  {t.missionLogs ?? 'MISSION LOGS'}
-                </button>
-              )}
               <button className="mcp-btn-primary" onClick={handleConfirm}>
                 {t.confirmExit ?? 'CONFIRM & EXIT'}
                 <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>chevron_right</span>

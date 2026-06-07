@@ -25,7 +25,6 @@ export default function Quests() {
   const [activeTab, setActiveTab]       = useState(location.state?.tab || 'inProgress')
   const [activeFilter, setActiveFilter] = useState(null)
   const [selectedQuestId, setSelectedQuestId] = useState(null)
-  const [search, setSearch]             = useState('')
   const { quests: questsData, loading, acceptMission, abandonMission, toggleObjective } = useQuests()
   const [missionResult, setMissionResult] = useState(null)
   const [confirmAccept, setConfirmAccept] = useState(null)

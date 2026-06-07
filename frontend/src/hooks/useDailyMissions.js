@@ -43,7 +43,6 @@ async function generateOne(engine, skillName, type, level) {
     })
 
     const text = reply.choices[0].message.content
-    console.log('[LLM] resposta raw:', text)
 
     await new Promise(r => setTimeout(r, 300))
 
@@ -110,7 +109,6 @@ export function useDailyMissions(user, onDone) {
       setStatus('checking')
       const statusRes = await fetch('http://localhost:3000/api/missions/daily/status', { headers })
       const { generated } = await statusRes.json()
-      console.log('[DailyMissions] já gerado hoje?', generated)
       if (generated) { setStatus('done'); return }
 
       const skillsRes = await fetch('http://localhost:3000/api/skills', { headers })
@@ -121,13 +119,11 @@ export function useDailyMissions(user, onDone) {
       const userMissions = await umRes.json()
 
       setStatus('loading-model')
-      console.log('[DailyMissions] a carregar modelo...')
 
       if (!enginePromise) {
         enginePromise = CreateMLCEngine(
           'Llama-3.2-3B-Instruct-q4f16_1-MLC',
           { initProgressCallback: (p) => {
-            console.log('[DailyMissions] modelo:', p.text)
             setProgress(p.text)
           }}
         )
@@ -155,7 +151,7 @@ export function useDailyMissions(user, onDone) {
               enginePromise = null
               enginePromise = CreateMLCEngine(
                 'Llama-3.2-3B-Instruct-q4f16_1-MLC',
-                { initProgressCallback: (p) => console.log('[DailyMissions] modelo:', p.text) }
+                {}
               )
               engine = await enginePromise
             }
@@ -178,7 +174,7 @@ export function useDailyMissions(user, onDone) {
               enginePromise = null
               enginePromise = CreateMLCEngine(
                 'Llama-3.2-3B-Instruct-q4f16_1-MLC',
-                { initProgressCallback: (p) => console.log('[DailyMissions] modelo:', p.text) }
+                {}
               )
               engine = await enginePromise
             }
@@ -209,7 +205,6 @@ export function useDailyMissions(user, onDone) {
       setStatus('done')
       setProgress('')
       console.log('[DailyMissions] concluído!')
-      if (onDone) onDone()
     }
 
     run().catch(err => {

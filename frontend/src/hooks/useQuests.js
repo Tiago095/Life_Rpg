@@ -1,5 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useUser } from '../context/UserContext'
+import exerciseImg  from '../assets/MissionImage/Exercise.png'
+import focusImg     from '../assets/MissionImage/Focos.png'
+import organizationImg from '../assets/MissionImage/Organization.webp'
+import socialImg from '../assets/MissionImage/Social.webp'
+import creativeImg from '../assets/MissionImage/Creativity.webp'
+import financeImg from '../assets/MissionImage/Finance.webp'
+import healthImg from '../assets/MissionImage/Health.webp'
+import technicalImg from '../assets/MissionImage/Technical.webp'
 
 const RANK_BY_XP = (xp) => {
   if (xp >= 200) return { rank: 'S', rankColor: 'var(--color-primary)' }
@@ -8,11 +16,24 @@ const RANK_BY_XP = (xp) => {
   return { rank: 'C', rankColor: '#64748b' }
 }
 
+const SKILL_IMAGE = {
+  'Exercise':    exerciseImg,
+  'Mindfulness': focusImg,
+  'Studies':     'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&q=80',
+  'Organization': organizationImg,
+  'Social':      socialImg,
+  'Creativity':    creativeImg,
+  'Finance':       financeImg,
+  'Health':        healthImg,
+  'Technical':     technicalImg,
+}
+
 const VISUAL_DEFAULTS = {
   time: '—',
   successRate: '—%',
   image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&q=80',
 }
+
 
 export function useQuests() {
   const { user, updateUser } = useUser()
@@ -36,7 +57,6 @@ export function useQuests() {
       const availableTemplates = missions
         .filter(m => !m.daily)
         .filter(m => user.skills.some(us => us.skillId === m.skill_id))
-
       const transform = (mission, userMission = null) => {
         const progress = userMission
           ? Math.round(
@@ -44,6 +64,8 @@ export function useQuests() {
               userMission.objectives_progress.length * 100
             )
           : 0
+
+          const skillName = userMission?.skill?.name ?? skillMap[mission.skill_id]
 
         return {
           id:          userMission?.id ?? `available-${mission.id}`,
@@ -59,7 +81,7 @@ export function useQuests() {
                        : userMission?.status === 'abandoned' ? 'ABANDONED'
                        : userMission                         ? 'IN PROGRESS'
                        : 'NOT STARTED',
-          image:       VISUAL_DEFAULTS.image,
+          image: SKILL_IMAGE[skillName] ?? VISUAL_DEFAULTS.image,
           time:        mission.estimated_time  ?? VISUAL_DEFAULTS.time,
           successRate: mission.success_rate != null
                       ? `${mission.success_rate}%`
