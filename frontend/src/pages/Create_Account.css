@@ -15,7 +15,6 @@ body {
   justify-content: center;
 }
 
-/* ===== PAGE WRAPPER ===== */
 .page-wrapper {
   position: relative;
   width: 100vw;
@@ -35,7 +34,6 @@ body {
   pointer-events: none;
 }
 
-/* ===== MAIN CONTAINER ===== */
 .main-container {
   position: relative;
   z-index: 1;
@@ -52,7 +50,6 @@ body {
   overflow: hidden;
 }
 
-/* ===== LEFT SIDE ===== */
 .ca-left-side {
   position: relative;
   width: 50%;
@@ -136,7 +133,6 @@ body {
   max-width: 380px;
 }
 
-/* ===== RIGHT SIDE ===== */
 .right-side {
   width: 50%;
   display: flex;
@@ -146,7 +142,6 @@ body {
   background: rgba(15, 23, 42, 0.6);
 }
 
-/* ===== FORM HEADER ===== */
 .form-header {
   padding-bottom: 36px;
 }
@@ -174,7 +169,6 @@ body {
   color: #94A3B8;
 }
 
-/* ===== FORM FIELDS ===== */
 .form-fields {
   display: flex;
   flex-direction: column;
@@ -230,7 +224,6 @@ body {
   box-shadow: 0 0 0 3px rgba(13, 89, 242, 0.15);
 }
 
-/* ===== PASSWORD ===== */
 .password-wrapper {
   position: relative;
 }
@@ -252,7 +245,6 @@ body {
   padding: 0;
 }
 
-/* ===== SUBMIT BUTTON ===== */
 .ca-submit-btn {
   width: 100%;
   height: 56px;
@@ -284,7 +276,6 @@ body {
   transform: translateY(1px);
 }
 
-/* ===== FOOTER ===== */
 .ca-footer-links {
   padding-top: 32px;
   display: flex;
@@ -335,7 +326,6 @@ body {
   opacity: 0.8;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .main-container {
     flex-direction: column;

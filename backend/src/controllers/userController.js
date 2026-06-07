@@ -13,7 +13,6 @@ export const updateProfile = async (req, res) => {
 
   const user = db.data.users[userIndex]
 
-  // verifica username duplicado
   if (username && username !== user.username) {
     const usernameExists = db.data.users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.id !== id)
     if (usernameExists)
@@ -21,7 +20,6 @@ export const updateProfile = async (req, res) => {
     user.username = username
   }
 
-  // verifica email duplicado
   if (email && email !== user.email) {
     const emailExists = db.data.users.find(u => u.email === email && u.id !== id)
     if (emailExists)
@@ -56,7 +54,6 @@ export const updateProfile = async (req, res) => {
   })
 }
 
-// Apagar conta
 export const deleteAccount = async (req, res) => {
   const { id } = req.params
 
@@ -72,7 +69,6 @@ export const deleteAccount = async (req, res) => {
   res.json({ message: 'Account deleted!' })
 }
 
-// Buscar dados do utilizador
 export const getUser = async (req, res) => {
   const { id } = req.params
 

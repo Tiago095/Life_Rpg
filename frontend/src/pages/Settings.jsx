@@ -59,7 +59,7 @@ export default function Settings() {
   setLanguage(user.language || 'English [EN-US]')
   originalHighContrast.current = user.highContrast ?? false
   if (user.theme) applyTheme(user.theme)
-  document.body.classList.toggle('high-contrast', user.highContrast ?? false)  // ← adiciona isto
+  document.body.classList.toggle('high-contrast', user.highContrast ?? false)
 }, [user])
 
   if (!user) return null
@@ -212,7 +212,6 @@ export default function Settings() {
       <div className="st-main">
         <div className="st-bg-grid" />
 
-        {/* TOP BAR */}
         <div className="st-topbar">
           <div className="st-topbar-left">
             <div className="st-topbar-icon">
@@ -227,7 +226,6 @@ export default function Settings() {
 
         <div className="st-scroll">
 
-          {/* ===== OPERADOR IDENTITY ===== */}
           <section className="st-section">
             <div className="st-section-header">
               <span className="material-symbols-outlined st-section-icon">fingerprint</span>
@@ -277,7 +275,6 @@ export default function Settings() {
 
           <div className="st-divider" />
 
-          {/* ===== NEURAL LINK SECURITY ===== */}
           <section className="st-section">
             <div className="st-section-header">
               <span className="material-symbols-outlined st-section-icon">security</span>
@@ -319,7 +316,6 @@ export default function Settings() {
 
           <div className="st-divider" />
 
-          {/* ===== USER PREFERENCES ===== */}
           <section className="st-section">
             <div className="st-section-header">
               <span className="material-symbols-outlined st-section-icon">tune</span>
@@ -365,8 +361,6 @@ export default function Settings() {
                 <div className="st-select-wrapper">
                   <select className="st-select" value={language} onChange={(e) => setLanguage(e.target.value)}>
                       <option value="English [EN-US]">{t.en}</option>
-                      {/*<option value="Portuguese [PT-PT]">{t.pt}</option>*/}
-                      {/*<option value="Spanish [ES]">{t.es}</option> */ }
                   </select>
                   <span className="material-symbols-outlined st-select-icon">expand_more</span>
                 </div>
@@ -376,7 +370,6 @@ export default function Settings() {
 
           <div className="st-divider" />
 
-          {/* ===== DANGER ZONE ===== */}
           <section className="st-section">
             <div className="st-danger-box">
               <div className="st-danger-header">
@@ -393,7 +386,6 @@ export default function Settings() {
             </div>
           </section>
 
-          {/* ===== SAVE / DISCARD / LOGOUT ===== */}
           <div className="st-actions">
             {saveError   && <p className="st-save-error">{saveError}</p>}
             {saveSuccess && <p className="st-save-success">{saveSuccess}</p>}

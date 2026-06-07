@@ -29,11 +29,11 @@ export default function AvatarModal({ currentAvatar, onConfirm, onClose }) {
     const token = localStorage.getItem('token')
 
     try {
-      const response = await fetch(`http://localhost:3000/api/user/${user.id}`, {  // ← user.id do contexto
+      const response = await fetch(`http://localhost:3000/api/user/${user.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`  // ← adiciona
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ avatar: selected })
       })
@@ -55,7 +55,6 @@ export default function AvatarModal({ currentAvatar, onConfirm, onClose }) {
     <div className="av-overlay" onClick={onClose}>
       <div className="av-modal" onClick={(e) => e.stopPropagation()}>
 
-        {/* Header */}
         <div className="av-header">
           <div>
             <p className="av-header-sub">SYNC_SEQUENCE_09</p>
@@ -64,7 +63,6 @@ export default function AvatarModal({ currentAvatar, onConfirm, onClose }) {
           <button className="av-close" onClick={onClose}>✕</button>
         </div>
 
-        {/* Grid */}
         <div className="av-grid">
           {avatars.map((avatar) => (
             <div
@@ -77,7 +75,6 @@ export default function AvatarModal({ currentAvatar, onConfirm, onClose }) {
           ))}
         </div>
 
-        {/* Footer info */}
         <div className="av-footer-info">
           <div className="av-status">
             <span className="av-status-dot" />
@@ -86,7 +83,6 @@ export default function AvatarModal({ currentAvatar, onConfirm, onClose }) {
           <span className="av-encryption">ENCRYPTION: AES-256</span>
         </div>
 
-        {/* Buttons */}
         <button className="av-confirm" onClick={handleConfirm}>
           CONFIRM SELECTION
           <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>sync</span>

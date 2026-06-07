@@ -7,16 +7,13 @@ const JWT_SECRET = 'liferpg-secret-key'
 export const login = async (req, res) => {
   const { email, password } = req.body
 
-
   if (!email || !password)
     return res.status(400).json({ message: 'All fields are required.' })
-
   await db.read()
 
   const user = db.data.users.find(u => u.email === email)
   if (!user)
     return res.status(400).json({ message: 'Invalid Credentials' })
-
   const validPassword = await bcrypt.compare(password, user.password)
   if (!validPassword)
     return res.status(400).json({ message: 'Invalid Credentials' })

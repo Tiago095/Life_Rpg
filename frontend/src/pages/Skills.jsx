@@ -3,7 +3,6 @@ import { useUser, useTranslation } from '../context/UserContext'
 import Sidebar from '../components/Sidebar'
 import './Skills.css'
 
-/* ─── Mapeamento visual das skills ─── */
 const SKILL_VISUAL = {
   'Exercise':     { icon: 'fitness_center',   color: '#3b82f6' },
   'Studies':      { icon: 'auto_stories',     color: '#8b5cf6' },
@@ -16,7 +15,6 @@ const SKILL_VISUAL = {
   'Technical':    { icon: 'code',             color: '#6366f1' },
 }
 
-/* ─── Perks por skill ─── */
 const SKILL_PERKS = {
   Exercise: [
     {
@@ -298,9 +296,8 @@ const SKILL_PERKS = {
   ],
 };
 
-const VISIBLE_COUNT = 3   // quantas rings mostrar de uma vez
+const VISIBLE_COUNT = 3
 
-/* ─── SVG Arc helper ─── */
 const arcPath = (pct, r = 46, cx = 60, cy = 60) => {
   const rad   = (a) => (a * Math.PI) / 180
   const sx    = cx + r * Math.cos(rad(-170))
@@ -311,7 +308,6 @@ const arcPath = (pct, r = 46, cx = 60, cy = 60) => {
   return `M ${sx} ${sy} A ${r} ${r} 0 ${pct > 50 ? 1 : 0} 1 ${ex} ${ey}`
 }
 
-/* ─── StatRing ─── */
 function StatRing({ skill, value, onChange, canAdd, canSub }) {
   const pct    = Math.min((value / 30) * 100, 100)
   const visual = SKILL_VISUAL[skill.name] || { icon: 'star', color: '#64748b' }
@@ -319,7 +315,6 @@ function StatRing({ skill, value, onChange, canAdd, canSub }) {
 
   return (
     <div className="sk-stat-card">
-      {/* ícone watermark — canto direito, mas mais centrado verticalmente */}
       <span
         className="material-symbols-outlined sk-card-watermark"
         style={{ color: visual.color }}
@@ -367,7 +362,6 @@ function StatRing({ skill, value, onChange, canAdd, canSub }) {
   )
 }
 
-/* ─── PerkRow ─── */
 function PerkRow({ perk, unlocked, color }) {
   return (
     <div className={`sk-perk-row ${unlocked ? 'sk-perk-unlocked' : 'sk-perk-locked'}`}>
@@ -409,15 +403,12 @@ export default function Skills() {
   const [activeTab,  setActiveTab]  = useState(null)
   const [originalStats, setOriginalStats] = useState({})
 
-  /* índice do primeiro ring visível no carrossel */
   const [ringOffset, setRingOffset] = useState(0)
 
-  /* ── Fetch skills ── */
 useEffect(() => {
   if (!user) return
   setLoading(true)
 
-  // fetch original das skills — não tocas aqui
   fetch('http://localhost:3000/api/skills', {
     headers: { Authorization: `Bearer ${token}` }
   })
@@ -425,7 +416,6 @@ useEffect(() => {
     .then(allSkills => {
   const userSkillsData = user.skills || []
 
-  // suporta ambos os formatos: [2, 5, 8] ou [{ skillId: 2, rank: 0 }]
   const matched = allSkills
     .filter(skill => userSkillsData.some(us => us.skillId === skill.id))
     .map(skill => {
@@ -449,7 +439,6 @@ useEffect(() => {
     .catch(err => console.error('Erro ao buscar skills:', err))
     .finally(() => setLoading(false))
 
-  // fetch separado para os skill points
   fetch('http://localhost:3000/api/skills/points', {
     headers: { Authorization: `Bearer ${token}` }
   })
@@ -462,7 +451,6 @@ useEffect(() => {
 
 }, [user])
 
-  /* ── Carrossel: skills visíveis ── */
   const visibleSkills  = userSkills.slice(ringOffset, ringOffset + VISIBLE_COUNT)
   const canSlidePrev   = ringOffset > 0
   const canSlideNext   = ringOffset + VISIBLE_COUNT < userSkills.length
@@ -471,7 +459,6 @@ useEffect(() => {
   const slidePrev = () => setRingOffset(o => Math.max(0, o - 1))
   const slideNext = () => setRingOffset(o => Math.min(userSkills.length - VISIBLE_COUNT, o + 1))
 
-  /* ── Handlers ── */
  const handleChange = (skillId, delta) => {
     const current = draftStats[skillId] ?? 0
     const original = originalStats[skillId] ?? 0
@@ -491,7 +478,7 @@ useEffect(() => {
     }, 0)
 
     setDraftStats({ ...originalStats })
-    setSp(savedSp)  // ← usa o savedSp diretamente em vez de calcular
+    setSp(savedSp)
   }
 
  const handleConfirm = async () => {
@@ -522,7 +509,6 @@ useEffect(() => {
     console.error(err)
   }
 }
-  /* ── Perks da tab activa ── */
   const activeSkill = userSkills.find(s => s.id === activeTab)
   const activePerks = activeSkill ? (SKILL_PERKS[activeSkill.name] || []) : []
   const activeRank = draftStats[activeSkill?.id] ?? 0
@@ -536,7 +522,6 @@ useEffect(() => {
 
       <main className="sk-main">
 
-        {/* ── Topbar — estilo Quests ── */}
         <div className="sk-topbar">
           <div className="sk-topbar-left">
             <div className="sk-topbar-icon">
@@ -552,7 +537,6 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* ── Skill Allocation ── */}
         <section className="sk-section">
           <div className="sk-section-head">
             <h2 className="sk-section-title">SKILL ALLOCATION</h2>
@@ -580,7 +564,6 @@ useEffect(() => {
             <p className="sk-loading">No skills activated yet.</p>
           ) : (
             <div className="sk-carousel-wrap">
-              {/* seta esquerda */}
               {showArrows && (
                 <button
                   className={`sk-arrow sk-arrow-left ${!canSlidePrev ? 'sk-arrow-disabled' : ''}`}
@@ -603,7 +586,6 @@ useEffect(() => {
                 ))}
               </div>
 
-              {/* seta direita */}
               {showArrows && (
                 <button
                   className={`sk-arrow sk-arrow-right ${!canSlideNext ? 'sk-arrow-disabled' : ''}`}
@@ -615,7 +597,6 @@ useEffect(() => {
             </div>
           )}
 
-          {/* dots de paginação */}
           {showArrows && (
             <div className="sk-dots">
               {Array.from({ length: userSkills.length - VISIBLE_COUNT + 1 }).map((_, i) => (
@@ -630,7 +611,6 @@ useEffect(() => {
           )}
         </section>
 
-        {/* ── Neural Perks ── */}
         <section className="sk-section">
           <div className="sk-section-head">
             <h2 className="sk-section-title">NEURAL PERKS</h2>
@@ -682,7 +662,6 @@ useEffect(() => {
             </div>
           </div>
         </section>
-
       </main>
     </div>
   )

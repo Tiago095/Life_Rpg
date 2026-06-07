@@ -88,7 +88,7 @@ export default function Inventory() {
   const [allItems,          setAllItems]         = useState([])
   const [activeConsumables, setActiveConsumables]= useState([])
   const [loading,           setLoading]          = useState(true)
-  const [userStats,         setUserStats]        = useState({ level: 1, xp: 0 })  // ← novo
+  const [userStats,         setUserStats]        = useState({ level: 1, xp: 0 })
 
   const token = localStorage.getItem('token')
 
@@ -115,7 +115,6 @@ export default function Inventory() {
     ])
       .then(([allSkills, meData, invData, equippedData, activeData]) => {
 
-        // ← sincroniza level e xp com o servidor
         setUserStats({
           level: meData.user.level ?? 1,
           xp:    meData.user.xp    ?? 0,
@@ -279,7 +278,6 @@ export default function Inventory() {
   const getActiveCharges   = (itemId) => activeConsumables.find(a => a.id === itemId)?.activeCharges ?? 0
   const getInventoryQty    = (itemId) => allItems.find(i => i.id === itemId)?.quantity ?? 0
 
-  // ← usa userStats em vez de user
   const level  = userStats.level
   const xpPct  = calcXpPct(userStats.xp, userStats.level)
 

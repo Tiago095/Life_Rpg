@@ -60,11 +60,9 @@ export default function Login() {
 
       <div className="main-container">
 
-        {/* LEFT SIDE */}
         <div className="lo-left-side">
           <div className="left-overlay" />
 
-          {/* Brand */}
           <div className="left-top">
             <div className="brand-row">
               <div className="brand-icon-box">
@@ -74,17 +72,14 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Bottom text */}
           <div className="left-bottom">
             <h2 className="left-heading">THE WORLD IS YOUR <span className="left-heading-accent">BATTLEFIELD</span></h2>
             <p className="left-desc">Initialize your sequence and dominate the physical-digital frontier.</p>
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
         <div className="right-side">
 
-          {/* Form Header */}
           <div className="form-header">
             <h1 className="form-title">
               Access Your <span className="form-title-accent">Operador</span> Profile
@@ -92,10 +87,8 @@ export default function Login() {
             <p className="form-subtitle">Enter your credentials to re-sync with the simulation.</p>
           </div>
 
-          {/* Fields */}
           <div className="form-fields">
 
-            {/* Email */}
             <div className="field-group">
               <div className="field-label">
                 <span className="label-text">Neural Link Address</span>
@@ -110,7 +103,6 @@ export default function Login() {
               />
             </div>
 
-            {/* Password */}
             <div className="field-group">
               <div className="field-label">
                 <span className="label-text">Encryption Key</span>
@@ -138,14 +130,12 @@ export default function Login() {
 
           </div>
 
-          {/* Forgot password */}
           <div className="forgot-row">
             <a className="forgot-link" href="#">Forgot your encryption key?</a>
           </div>
 
           {error && <p className="lo-error">{error}</p>}
 
-          {/* Submit */}
           <button
             className="lo-submit-btn"
             onClick={handleLogin}
@@ -155,7 +145,6 @@ export default function Login() {
             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>bolt</span>
           </button>
 
-          {/* Footer */}
           <div className="ca-footer-links">
             <div className="footer-text-row">
               <span className="footer-text">New Operador?</span>
@@ -167,7 +156,6 @@ export default function Login() {
               <span className="material-symbols-outlined social-icon">person</span>
             </div>
           </div>
-
         </div>
       </div>
     </div>

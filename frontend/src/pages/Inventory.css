@@ -358,7 +358,6 @@
   margin: 0;
 }
 
-/* Active buffs section */
 .inv-active-buffs {
   border-top: 1px solid var(--color-border);
   margin-top: 12px;
@@ -379,7 +378,6 @@
   color: var(--color-primary);
 }
 
-/* CENTRE */
 .inv-centre {
   display: flex;
   flex-direction: column;
@@ -516,7 +514,6 @@
   letter-spacing: 0.5px;
 }
 
-/* RIGHT */
 .inv-right {
   display: flex;
   flex-direction: column;
@@ -584,7 +581,6 @@
 
 .inv-grid-icon { font-size: 24px; }
 
-/* Quantity / active badge */
 .inv-qty-badge {
   position: absolute;
   bottom: 4px;
@@ -602,7 +598,6 @@
   color: var(--color-bg);
 }
 
-/* Detail panel */
 .inv-detail {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
@@ -684,7 +679,6 @@
   font-weight: 700;
 }
 
-/* Active status box */
 .inv-active-status {
   display: flex;
   align-items: center;
@@ -695,7 +689,6 @@
   border-radius: 6px;
 }
 
-/* Equip / consume button */
 .inv-equip-btn {
   display: flex;
   align-items: center;

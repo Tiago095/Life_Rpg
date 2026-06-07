@@ -43,10 +43,8 @@ export default function Quests() {
 
   const currentQuests = questsData[activeTab] || []
 
-  // Get available skills from current quests
   const availableSkillsInQuests = new Set(currentQuests.map(q => q.category))
 
-  // Filter tags apenas das skills que existem nas quests atuais
   const activeFilterTags = Object.entries(filterTags).filter(([skillName]) =>
     availableSkillsInQuests.has(skillName)
   ).reduce((acc, [key, val]) => {
@@ -54,7 +52,6 @@ export default function Quests() {
     return acc
   }, {})
 
-  // Filtrar quests pela skill selecionada
   const filteredQuests = activeFilter
     ? currentQuests.filter(quest => quest.category === activeFilter)
     : currentQuests
@@ -88,10 +85,8 @@ export default function Quests() {
 
         <div className="qs-content">
 
-          {/* CENTER PANEL */}
           <div className="qs-center">
 
-            {/* TABS */}
             <div className="qs-tabs">
               {tabs.map(tab => (
                 <button
@@ -109,7 +104,6 @@ export default function Quests() {
               ))}
             </div>
 
-            {/* FILTER TAGS */}
             <div className="qs-filters">
               <button
                 className={`qs-filter-tag ${activeFilter === null ? 'qs-filter-active' : ''}`}
@@ -130,7 +124,6 @@ export default function Quests() {
               ))}
             </div>
 
-            {/* QUEST LIST */}
             <div className="qs-list">
               {filteredQuests.map(quest => (
                 <div
@@ -207,7 +200,6 @@ export default function Quests() {
             </div>
           </div>
 
-          {/* RIGHT PANEL — só aparece quando há quest selecionada */}
           {selectedQuest && (
   <div className="qs-right">
     <div className="qs-timer-box">
@@ -238,7 +230,6 @@ export default function Quests() {
       </div>
     </div>
 
-    {/* XP earned — só nas completed */}
     {activeTab === 'completed' && (
       <div className="qs-xp-earned">
         <div>
@@ -254,7 +245,6 @@ export default function Quests() {
       </div>
     )}
 
-    {/* Pré-requisito — só nas locked */}
     {activeTab === 'available' && selectedQuest.locked && (
       <div className="qs-req-box">
         <span className="material-symbols-outlined" style={{ color: '#f59e0b', fontSize: '20px' }}>warning</span>
@@ -282,7 +272,7 @@ onClick={async () => {
       setMissionResult({
         questTitle:   selectedQuest.title,
         xpGained:     selectedQuest.xp,
-        skillPoints:  1,                        // ← backend dá sempre +1 SP por missão
+        skillPoints:  1,
         lootDrop:     result.itemAwarded ?? null,
       })
     }
@@ -313,7 +303,6 @@ onClick={async () => {
     if (!result) return
 
     if (result.needsConfirmation) {
-      // Guarda o contexto e mostra o modal
       setConfirmAccept({ missionId: selectedQuest.mission_id, oldest: result.oldest })
       return
     }

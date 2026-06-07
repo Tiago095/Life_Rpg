@@ -22,9 +22,6 @@ const mockChatMessages = [
   { user: 'Scholar_Zee', message: 'Just leveled up my Organization skill! Huge!', color: '#8b5cf6' }
 ]
 
-// =============================================
-// CALENDAR HELPERS
-// =============================================
 const MONTH_NAMES = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
 const DAY_LABELS  = ['M','T','W','T','F','S','S']
 
@@ -33,7 +30,6 @@ function getCalendarDays(year, month) {
   const daysInMonth    = new Date(year, month + 1, 0).getDate()
   const offset         = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1
 
-  // dias do mês anterior
   const prevMonthDays  = new Date(year, month, 0).getDate()
 
   const days = []
@@ -44,9 +40,6 @@ function getCalendarDays(year, month) {
   return days
 }
 
-// =============================================
-// COMPONENT
-// =============================================
 export default function Dashboard() {
   const [chatInput, setChatInput] = useState('')
   const { t } = useTranslation()
@@ -115,7 +108,6 @@ export default function Dashboard() {
       <main className="db-main">
         <div className="db-bg-grid" />
 
-        {/* HEADER */}
         <div className="db-header">
           <div className="db-header-left">
             <h1 className="db-title">{t.questJournal}</h1>
@@ -125,14 +117,9 @@ export default function Dashboard() {
             <button className="db-icon-btn" onClick={() => navigate('/MarketPlace')}>
               <span className="material-symbols-outlined">shopping_cart</span>
             </button>
-           {/* <div className="db-currency">
-              <span className="material-symbols-outlined db-currency-icon">toll</span>
-              <span className="db-currency-amount">{gold.toLocaleString()} Cr</span> 
-            </div> */}
           </div>
         </div>
 
-        {/* CORE ATTRIBUTES — top 3 by rank */}
         <div className="db-section">
           <div className="db-section-header">
             <div className="db-section-title-row">
@@ -160,7 +147,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* ACTIVE QUESTS */}
         <div className="db-section">
           <div className="db-section-header">
             <div className="db-section-title-row">
@@ -215,10 +201,8 @@ export default function Dashboard() {
 
       </main>
 
-      {/* RIGHT PANEL */}
       <aside className="db-right-panel">
 
-        {/* WORLD CALENDAR */}
         <div className="db-panel-card">
           <div className="db-panel-header">
             <span className="material-symbols-outlined db-panel-icon">calendar_view_week</span>
@@ -253,53 +237,6 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-
-        {/* PARTY FINDER 
-        <div className="db-panel-card">
-          <div className="db-panel-header">
-            <span className="material-symbols-outlined db-panel-icon">group_add</span>
-            <h3 className="db-panel-title">{t.partyFinder}</h3>
-          </div>
-          <div className="db-party-body">
-            <div className="db-party-avatar">
-              <span className="material-symbols-outlined" style={{ fontSize: '36px', color: '#475569' }}>
-                person_add
-              </span>
-            </div>
-            <p className="db-party-text">
-              {t.partyText}
-            </p>
-            <button className="db-invite-btn" onClick={() => navigate('/Friends')}>
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>share</span>
-              {t.inviteFriends}
-            </button>
-          </div>
-        </div> 
-
-        {/* GLOBAL TAVERN CHAT 
-        <div className="db-panel-card db-chat-card">
-          <div className="db-panel-header">
-            <h3 className="db-panel-title">{t.globalChat}</h3>
-            <span className="db-chat-online" />
-          </div>
-          <div className="db-chat-messages">
-            {mockChatMessages.map((msg, i) => (
-              <p key={i} className="db-chat-msg">
-                <span className="db-chat-user" style={{ color: msg.color }}>{msg.user}:</span>
-                {' '}{msg.message}
-              </p>
-            ))}
-          </div>
-          <input
-            className="db-chat-input"
-            placeholder={t.sendMessage}
-            value={chatInput}
-            onChange={(e) => setChatInput(e.target.value)}
-          />
-        </div>
-        */}
-        
-
       </aside>
     </div>
   )

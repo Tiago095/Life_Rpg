@@ -19,7 +19,6 @@ function DailyMissionsManager() {
   const { user } = useUser()
   const { status, progress } = useDailyMissions(user)
 
-  // Mostra loading overlay enquanto gera
   if (status === 'loading-model' || status === 'generating') {
     return (
       <div style={{

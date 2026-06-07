@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import db from '../db.js'
 
-const JWT_SECRET = 'liferpg-secret-key' // usa process.env.JWT_SECRET em produção
+const JWT_SECRET = 'liferpg-secret-key'
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body

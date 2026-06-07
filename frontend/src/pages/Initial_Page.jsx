@@ -6,16 +6,13 @@ export default function LifeRPG() {
   const navigate = useNavigate()  
   return (
     <div className="wrapper cyber-grid">
-      {/* Background overlay */}
       <div className="bg-overlay" />
 
-      {/* Decorative blobs */}
       <div className="deco-blobs">
         <div className="deco-top" />
         <div className="deco-bottom" />
       </div>
 
-        {/* Header */}
         <header className="header">
           <div className="logo">
             <span className="material-symbols-outlined logo-icon">filter_tilt_shift</span>
@@ -28,10 +25,8 @@ export default function LifeRPG() {
           </div>
         </header>
 
-        {/* Main */}
         <main className="main">
           <div className="hero-container">
-            {/* Badge */}
             <div className="badge">
               <span className="ping-wrapper">
                 <span className="ping-outer" />
@@ -40,7 +35,6 @@ export default function LifeRPG() {
               Neural Link Established
             </div>
 
-            {/* Hero Text */}
             <div className="hero-text">
               <h1 className="hero-title">
                 TRANSFORM <br />
@@ -51,7 +45,6 @@ export default function LifeRPG() {
               </p>
             </div>
 
-            {/* Buttons */}
             <div className="btn-group">
               <button className="btn btn-primary glow-effect"
                 onClick={() => navigate('/Login')}>
@@ -69,7 +62,6 @@ export default function LifeRPG() {
           </div>
         </main>
 
-        {/* Footer */}
         <footer className="footer">
           <div className="footer-links">
             <a className="footer-link" href="#">Security Protocol</a>

@@ -45,13 +45,11 @@ async function generateOne(engine, skillName, type, level) {
     const text = reply.choices[0].message.content
     console.log('[LLM] resposta raw:', text)
 
-    // Delay para permitir garbage collection GPU
     await new Promise(r => setTimeout(r, 300))
 
     return parseResponse(text)
   } catch (err) {
     console.error('[LLM] erro na geração:', err.message)
-    // Se o objeto foi disposto, sinaliza para recriar o engine
     if (err.message?.includes('disposed')) {
       throw new Error('ENGINE_DISPOSED')
     }
@@ -80,14 +78,13 @@ function parseResponse(text) {
     try {
       const result = attempt()
       if (result) return result
-    } catch { /* tenta o próximo */ }
+    } catch { }
   }
 
   console.warn('[LLM] falhou o parse')
   return null
 }
 
-// Singleton — evita múltiplas instâncias WebGPU
 let enginePromise = null
 
 export function useDailyMissions(user, onDone) {
@@ -126,7 +123,6 @@ export function useDailyMissions(user, onDone) {
       setStatus('loading-model')
       console.log('[DailyMissions] a carregar modelo...')
 
-      // Reutiliza a promise se já está a carregar — evita duas instâncias WebGPU
       if (!enginePromise) {
         enginePromise = CreateMLCEngine(
           'Llama-3.2-3B-Instruct-q4f16_1-MLC',
@@ -156,7 +152,6 @@ export function useDailyMissions(user, onDone) {
             mission = await generateOne(engine, randomSkill.name, 'main', user.level)
           } catch (err) {
             if (err.message === 'ENGINE_DISPOSED') {
-              // Recria o engine se foi disposto
               enginePromise = null
               enginePromise = CreateMLCEngine(
                 'Llama-3.2-3B-Instruct-q4f16_1-MLC',
@@ -169,7 +164,7 @@ export function useDailyMissions(user, onDone) {
           }
         }
         if (mission) toCreate.push({ ...mission, skill_id: randomSkill.id, type: 'main' })
-        await new Promise(r => setTimeout(r, 500))  // delay entre quests
+        await new Promise(r => setTimeout(r, 500))
       }
 
       for (const skill of userSkills) {
@@ -180,7 +175,6 @@ export function useDailyMissions(user, onDone) {
             mission = await generateOne(engine, skill.name, 'secondary', user.level)
           } catch (err) {
             if (err.message === 'ENGINE_DISPOSED') {
-              // Recria o engine se foi disposto
               enginePromise = null
               enginePromise = CreateMLCEngine(
                 'Llama-3.2-3B-Instruct-q4f16_1-MLC',
@@ -193,7 +187,7 @@ export function useDailyMissions(user, onDone) {
           }
         }
         if (mission) toCreate.push({ ...mission, skill_id: skill.id, type: 'secondary' })
-        await new Promise(r => setTimeout(r, 500))  // delay entre quests
+        await new Promise(r => setTimeout(r, 500))
       }
 
       await fetch('http://localhost:3000/api/missions/daily', {
@@ -202,7 +196,6 @@ export function useDailyMissions(user, onDone) {
         body: JSON.stringify({ missions: toCreate })
       })
 
-      // Cleanup do modelo para liberar memória GPU
       try {
         if (engine && engine.unload) {
           await engine.unload()
@@ -221,7 +214,7 @@ export function useDailyMissions(user, onDone) {
 
     run().catch(err => {
       console.error('[DailyMissions] ERRO:', err)
-      enginePromise = null  // reset para tentar novamente
+      enginePromise = null
       hasRun.current = false
       setStatus('error')
     })

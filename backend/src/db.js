@@ -15,7 +15,7 @@ const defaultData = {
     { id: 8, name: 'Health' },
     { id: 9, name: 'Technical' },
     ]
-} // define os teus modelos
+}
 const db = new Low(adapter, defaultData)
 
 await db.read()

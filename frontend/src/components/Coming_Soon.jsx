@@ -11,19 +11,16 @@ export default function ComingSoon({ pageName = 'This Module' }) {
 
       <div className="cs-main">
 
-        {/* Animated grid background */}
         <div className="cs-bg-grid" />
         <div className="cs-bg-glow" />
 
         <div className="cs-content">
 
-          {/* Badge */}
           <div className="cs-badge">
             <span className="cs-badge-dot" />
             {t.systemInitializing}
           </div>
 
-          {/* Icon Box */}
           <div className="cs-icon-wrapper">
             <div className="cs-icon-outer">
               <div className="cs-icon-inner">
@@ -36,15 +33,12 @@ export default function ComingSoon({ pageName = 'This Module' }) {
             <div className="cs-icon-ring cs-ring-2" />
           </div>
 
-          {/* Text */}
           <h1 className="cs-title">{t.comingSoon}</h1>
           <p className="cs-desc">
             {t.comingSoonDesc}<span className="cs-desc-accent">{t.realityTransform}</span>.
           </p>
-
         </div>
 
-        {/* Bottom bar */}
         <div className="cs-footer">
           <span className="cs-footer-text">SYSTEM_VERSION_4.2.0 // NEON_GLITCH_OS</span>
           <div className="cs-footer-links">

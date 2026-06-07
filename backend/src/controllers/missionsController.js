@@ -35,7 +35,6 @@ export const acceptMission = async (req, res) => {
   )
 
   if (existingIndex !== -1) {
-    // Limite de missões ativas (também para secundárias diárias)
     const MAX_ACTIVE = 6
     const activeMissions = db.data.user_missions
       .filter(um => um.user_id === req.userId && um.status === 'active')
@@ -62,7 +61,6 @@ export const acceptMission = async (req, res) => {
   if (alreadyActive)
     return res.status(400).json({ code: 'MISSION_ALREADY_ACTIVE' })
 
-  // Limite de missões ativas
   const MAX_ACTIVE = 6
   const activeMissions = db.data.user_missions
     .filter(um => um.user_id === req.userId && um.status === 'active')
@@ -153,7 +151,6 @@ if (user.activeConsumables) {
       }
     }
 
-    // --- Calcula drop bonus das skills ---
     const dropBonus = (user.skills ?? []).reduce((total, us) => {
       const perks = db.data.skillPerks.filter(
         p => p.skillId === us.skillId &&
@@ -163,10 +160,8 @@ if (user.activeConsumables) {
       return total + perks.reduce((sum, p) => sum + p.value, 0)
     }, 0)
 
-    // --- Sorteio de item ---
     const items = db.data.items
 
-    // Com dropBonus, tira de common e uncommon e distribui por rare+
     const baseWeights = {
       common:    50,
       uncommon:  28,
@@ -175,9 +170,8 @@ if (user.activeConsumables) {
       legendary:  2,
     }
 
-    // Distribui o bonus proporcionalmente pelas raridades premium (rare, epic, legendary)
-    const premiumTotal = baseWeights.rare + baseWeights.epic + baseWeights.legendary  // 22
-    const bonusCapped = Math.min(dropBonus, 40)  // cap de 40% para não tornar common impossível
+    const premiumTotal = baseWeights.rare + baseWeights.epic + baseWeights.legendary
+    const bonusCapped = Math.min(dropBonus, 40)
 
     const rarityWeights = {
       common:    Math.max(5,  baseWeights.common    - bonusCapped * 0.6),
@@ -187,13 +181,11 @@ if (user.activeConsumables) {
       legendary: baseWeights.legendary + bonusCapped * (baseWeights.legendary / premiumTotal),
     }
 
-    // Constrói pool ponderada (arredonda para inteiros)
     const pool = items.flatMap(item =>
       Array(Math.round(rarityWeights[item.rarity] ?? 10)).fill(item)
     )
     const winner = pool[Math.floor(Math.random() * pool.length)]
 
-      // Adiciona ao inventário do utilizador
       if (!user.inventory) user.inventory = []
 
       const existing = user.inventory.find(i => i.itemId === winner.id)
@@ -206,7 +198,7 @@ if (user.activeConsumables) {
         })
       }
 
-      itemAwarded = winner   // devolve ao frontend
+      itemAwarded = winner
       db.data.users[userIndex] = user
     }
   }
@@ -237,7 +229,6 @@ export const abandonMission = async (req, res) => {
   res.json({ message: 'Missão abandonada.' })
 }
 
-// Verifica se já foram geradas missões hoje
 export const getDailyStatus = async (req, res) => {
   await db.read()
   const today = new Date().toISOString().split('T')[0]
@@ -249,13 +240,11 @@ export const getDailyStatus = async (req, res) => {
   res.json({ generated: todayMissions.length > 0 })
 }
 
-// Guarda as missões diárias geradas pelo WebLLM
 export const saveDailyMissions = async (req, res) => {
   await db.read()
   const today = new Date().toISOString().split('T')[0]
   const { missions } = req.body
 
-  // Apaga missões secundárias disponíveis do dia anterior
   db.data.user_missions = db.data.user_missions.filter(
     um => !(
       um.user_id === req.userId &&
@@ -265,21 +254,19 @@ export const saveDailyMissions = async (req, res) => {
   )
 
   for (const m of missions) {
-    // Garante sempre 3 objetivos
     const objectives = (m.objectives || []).slice(0, 3)
     while (objectives.length < 3) {
       objectives.push({ id: objectives.length + 1, description: 'Complete the task' })
     }
 
-    // Guarda o template
     const newMission = {
       id: Date.now() + Math.floor(Math.random() * 9999),
       title: m.title,
       description: m.description,
       skill_id: m.skill_id,
       xp_reward: m.xp_reward,
-      estimated_time: m.estimated_time ?? null,   // ← novo
-      success_rate: m.success_rate ?? null,        // ← novo
+      estimated_time: m.estimated_time ?? null,
+      success_rate: m.success_rate ?? null,
       objectives,
       daily: true,
       created_by: req.userId
@@ -287,7 +274,6 @@ export const saveDailyMissions = async (req, res) => {
     db.data.missions.push(newMission)
 
     if (m.type === 'main') {
-      // Missões principais são aceites automaticamente
       db.data.user_missions.push({
         id: crypto.randomUUID(),
         user_id: req.userId,
@@ -303,14 +289,13 @@ export const saveDailyMissions = async (req, res) => {
         }))
       })
     } else {
-      // Missões secundárias ficam disponíveis para o utilizador aceitar
       db.data.user_missions.push({
         id: crypto.randomUUID(),
         user_id: req.userId,
         mission_id: newMission.id,
         type: 'secondary',
         daily_date: today,
-        status: 'available',  // ← utilizador tem de aceitar
+        status: 'available',
         accepted_at: null,
         completed_at: null,
         objectives_progress: objectives.map(obj => ({
@@ -320,7 +305,6 @@ export const saveDailyMissions = async (req, res) => {
       })
     }
   }
-
   await db.write()
   res.status(201).json({ created: missions.length })
 }

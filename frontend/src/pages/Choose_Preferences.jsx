@@ -123,15 +123,14 @@ const handleConfirm = async () => {
     return
   }
 
-  const token = localStorage.getItem('token') // busca o token
+  const token = localStorage.getItem('token')
 
   const res = await fetch('http://localhost:3000/api/preferences', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}` // envia no header
+      'Authorization': `Bearer ${token}`
     },
-    // Remove credentials: 'include'
     body: JSON.stringify({ skillIds: selectedIds })
   })
 
@@ -151,7 +150,6 @@ const handleConfirm = async () => {
   return (
     <div className="as-wrapper">
 
-      {/* TOP NAV */}
       <nav className="as-nav">
         <div className="as-nav-left">
           <div className="as-nav-logo">
@@ -176,11 +174,9 @@ const handleConfirm = async () => {
       </div>
       </nav>
 
-      {/* MAIN CONTENT */}
       <main className="as-main">
         <div className="as-container">
 
-          {/* HEADER */}
           <div className="as-header">
             <h1 className="as-title">Choose Your Paths</h1>
             <p className="as-desc">
@@ -190,7 +186,6 @@ const handleConfirm = async () => {
             </p>
           </div>
 
-          {/* GRID */}
           <div className="as-grid">
             {attributes.map((attr, i) => (
               <div
@@ -198,7 +193,6 @@ const handleConfirm = async () => {
                 className={`as-card ${toggles[attr.id] ? 'as-card--active' : ''}`}
                 style={{ animationDelay: `${i * 0.07}s` }}
               >
-                {/* Card Image */}
                 <div className="as-card-image">
                   <img src={attr.image} alt={attr.title} />
                   <div className="as-card-image-overlay" />
@@ -208,7 +202,6 @@ const handleConfirm = async () => {
                   </div>
                 </div>
 
-                {/* Card Body */}
                 <div className="as-card-body">
                   <div className="as-card-title-row">
                     <span className="as-card-title">{attr.title}</span>
@@ -238,7 +231,6 @@ const handleConfirm = async () => {
         </p>
       )}
 
-          {/* BOTTOM BAR */}
           <div className="as-bottom-bar">
             <div className="as-bottom-info">
               <span className="material-symbols-outlined as-bottom-icon">info</span>
@@ -255,7 +247,6 @@ const handleConfirm = async () => {
         </div>
       </main>
 
-      {/* FOOTER STATUS BAR */}
       <footer className="as-statusbar">
         <div className="as-statusbar-left">
           <span className="as-status-dot as-status-dot--green" />

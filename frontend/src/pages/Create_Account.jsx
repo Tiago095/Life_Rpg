@@ -37,7 +37,6 @@ const handleSubmit = async () => {
 
       <div className="main-container">
 
-        {/* LEFT SIDE */}
         <div className="ca-left-side">
           <div className="left-overlay" />
 
@@ -60,7 +59,6 @@ const handleSubmit = async () => {
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
         <div className="right-side">
 
           <div className="form-header">
@@ -72,7 +70,6 @@ const handleSubmit = async () => {
 
           <div className="form-fields">
 
-            {/* Username */}
             <div className="field-group">
               <div className="field-label">
                 <span className="material-symbols-outlined label-icon">emergency</span>
@@ -87,7 +84,6 @@ const handleSubmit = async () => {
               />
             </div>
 
-            {/* Email */}
             <div className="field-group">
               <div className="field-label">
                 <span className="material-symbols-outlined label-icon">alternate_email</span>
@@ -102,7 +98,6 @@ const handleSubmit = async () => {
               />
             </div>
 
-            {/* Password */}
             <div className="field-group">
               <div className="field-label">
                 <span className="material-symbols-outlined label-icon">key</span>
@@ -130,10 +125,8 @@ const handleSubmit = async () => {
 
           </div>
 
-          {/* Erro */}
           {error && <p className="error-message">{error}</p>}
 
-          {/* Submit */}
           <button className="ca-submit-btn" onClick={handleSubmit}>
             Begin Your Journey
             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>bolt</span>

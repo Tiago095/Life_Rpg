@@ -34,7 +34,6 @@
   100% { top: 100%; }
 }
 
-/* HEADER */
 .mcp-header {
   text-align: center;
   padding: 28px 32px 20px;
@@ -77,7 +76,6 @@
   letter-spacing: 1px;
 }
 
-/* BODY */
 .mcp-body {
   padding: 20px 28px;
 }
@@ -138,7 +136,6 @@
   color: var(--color-primary);
 }
 
-/* XP BAR */
 .mcp-xp-bar-bg {
   height: 5px;
   background: var(--color-border-muted);
@@ -169,7 +166,6 @@
 
 .mcp-xp-vals span:last-child { color: #10b981; }
 
-/* REWARDS */
 .mcp-rewards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -228,7 +224,6 @@
   font-weight: 700;
 }
 
-/* BUTTONS */
 .mcp-btns {
   display: flex;
   gap: 10px;
@@ -280,7 +275,6 @@
   color: var(--color-text);
 }
 
-/* FOOTER */
 .mcp-footer {
   display: flex;
   justify-content: center;
@@ -309,7 +303,6 @@
 .mcp-dot-green   { background: #10b981; }
 .mcp-dot-primary { background: var(--color-primary); }
 
-/* ANIMATIONS */
 @keyframes mcpFadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }

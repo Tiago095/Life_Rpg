@@ -45,7 +45,6 @@ export default function MissionCompletePopup({ isOpen, onClose, onViewLogs, resu
 
       <div className={`mcp-scanline ${isFailed ? 'mcp-scanline-red' : ''}`} />
 
-      {/* HEADER */}
       <div className="mcp-header">
         <div className="mcp-status-line">
           <span className={`mcp-dot ${isFailed ? 'mcp-dot-red mcp-dot-blink' : ''}`} />
@@ -62,12 +61,10 @@ export default function MissionCompletePopup({ isOpen, onClose, onViewLogs, resu
         </div>
       </div>
 
-      {/* BODY */}
       <div className="mcp-body">
 
         {isFailed ? (
           <>
-            {/* SIGNAL LOST BOX */}
             <div className="mcp-signal-box">
               <div>
                 <div className="mcp-signal-label">{t.neuralLinkInterrupted ?? 'NEURAL LINK INTERRUPTED'}</div>
@@ -81,7 +78,6 @@ export default function MissionCompletePopup({ isOpen, onClose, onViewLogs, resu
               </div>
             </div>
 
-            {/* FAILED OBJECTIVES + PENALTIES */}
             <div className="mcp-fail-grid">
               <div className="mcp-fail-card">
                 <div className="mcp-fail-card-label">▸ {t.failedObjectives ?? 'FAILED OBJECTIVES'}</div>
@@ -106,7 +102,6 @@ export default function MissionCompletePopup({ isOpen, onClose, onViewLogs, resu
               </div>
             </div>
 
-            {/* BUTTONS */}
             <div className="mcp-btns">
               <button className="mcp-btn-danger" onClick={handleConfirm}>
                 {t.returnToHub ?? 'RETURN TO HUB'}
@@ -116,7 +111,6 @@ export default function MissionCompletePopup({ isOpen, onClose, onViewLogs, resu
           </>
         ) : (
           <>
-            {/* === Drops === */}
             <div className="mcp-lvl-row">
               <div>
                 <div className="mcp-lvl-label">{t.neuralProgression ?? 'NEURAL PROGRESSION'}</div>
@@ -186,7 +180,6 @@ export default function MissionCompletePopup({ isOpen, onClose, onViewLogs, resu
         )}
       </div>
 
-      {/* FOOTER */}
       <div className="mcp-footer">
         {isFailed ? (
           <>
