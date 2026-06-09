@@ -377,8 +377,8 @@
 }
 
 .mcp-fail-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
 }

@@ -352,6 +352,15 @@ onClick={async () => {
             if (result?.success) {
               setSelectedQuestId(null)
               setActiveTab('inProgress')
+              setMissionResult({
+                variant: 'failed',
+                questTitle: confirmAccept.oldest.title,
+                errorCode: 'OV3RLOAD',
+                severity: 'HIGH',
+                failedObjectives: ['Mission limit exceeded — oldest mission auto-abandoned'],
+                creditPenalty: 0,
+                xpPenalty: 0,
+              })
             }
           }}
         >
@@ -384,6 +393,15 @@ onClick={async () => {
             if (success) {
               setConfirmAbandon(null)
               setSelectedQuestId(null)
+              setMissionResult({
+                variant: 'failed',
+                questTitle: confirmAbandon.title,
+                errorCode: 'AB0RT3D',
+                severity: 'MEDIUM',
+                failedObjectives: ['Mission abandoned by operator'],
+                creditPenalty: 0,
+                xpPenalty: 0,
+              })
             }
           }}
         >
@@ -393,9 +411,10 @@ onClick={async () => {
     </div>
   </div>
 )}
-      <MissionCompletePopup
+<MissionCompletePopup
   isOpen={!!missionResult}
   result={missionResult}
+  variant={missionResult?.variant}
   onClose={() => setMissionResult(null)}
 />
     </div>

@@ -76,8 +76,8 @@ const handleConfirm = () => {
               </div>
             </div>
 
-            <div className="mcp-fail-grid">
-              <div className="mcp-fail-card">
+            <div className="mcp-fail-grid" style={{ justifyContent: 'center' }}>
+              <div className="mcp-fail-card" >
                 <div className="mcp-fail-card-label">▸ {t.failedObjectives ?? 'FAILED OBJECTIVES'}</div>
                 {result.failedObjectives?.map((obj, i) => (
                   <div key={i} className="mcp-fail-item">
@@ -85,18 +85,6 @@ const handleConfirm = () => {
                     <span className="mcp-fail-text">{obj}</span>
                   </div>
                 ))}
-              </div>
-              <div className="mcp-penalty-card">
-                <div className="mcp-penalty-label">▸ {t.penalties ?? 'PENALTIES'}</div>
-                {result.creditPenalty > 0 && (
-                  <>
-                    <div className="mcp-penalty-val">-{result.creditPenalty.toLocaleString()}</div>
-                    <div className="mcp-penalty-sub">{t.creditsDeducted ?? 'CREDITS DEDUCTED'}</div>
-                  </>
-                )}
-                {result.xpPenalty > 0 && (
-                  <div className="mcp-penalty-sub" style={{ marginTop: '6px' }}>-{result.xpPenalty} XP</div>
-                )}
               </div>
             </div>
 
