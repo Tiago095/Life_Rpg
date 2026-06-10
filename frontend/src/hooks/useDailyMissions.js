@@ -85,22 +85,18 @@ function parseResponse(text) {
 }
 
 let enginePromise = null
+let isGenerating = false
 
 export function useDailyMissions(user, onDone) {
   const [status, setStatus] = useState('idle')
   const [progress, setProgress] = useState('')
-  const hasRun = useRef(false)
 
   useEffect(() => {
-    hasRun.current = false
-  }, [user?.id])
-
-  useEffect(() => {
-    if (hasRun.current) return
+    if (isGenerating) return
     if (!user) return
     if (!user.skills?.length) return
 
-    hasRun.current = true
+    isGenerating = true
 
     const run = async () => {
       const token = localStorage.getItem('token')
@@ -206,12 +202,13 @@ export function useDailyMissions(user, onDone) {
       setProgress('')
       console.log('[DailyMissions] concluído!')
       window.dispatchEvent(new CustomEvent('daily-missions-ready'))
+      if (onDone) onDone()
     }
 
     run().catch(err => {
       console.error('[DailyMissions] ERRO:', err)
       enginePromise = null
-      hasRun.current = false
+      isGenerating = false
       setStatus('error')
     })
   }, [user?.id, user?.skills?.length])
