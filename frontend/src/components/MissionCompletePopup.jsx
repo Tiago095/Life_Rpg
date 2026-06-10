@@ -2,14 +2,31 @@ import { useEffect, useRef } from 'react'
 import { useUser, useTranslation } from '../context/UserContext'
 import './MissionCompletePopup.css'
 
+const XP_LEVELS = [
+  { level: 1, xp_required: 0    },
+  { level: 2, xp_required: 100  },
+  { level: 3, xp_required: 250  },
+  { level: 4, xp_required: 500  },
+  { level: 5, xp_required: 900  },
+  { level: 6, xp_required: 1400 },
+]
+
 export default function MissionCompletePopup({ isOpen, onClose, result, variant }) {
   const { user, updateUser } = useUser()
   const { t } = useTranslation()
   const overlayRef = useRef(null)
 
-  const newXpTotal  = Number(user?.xp     || 0) + (result?.xpGained    || 0)
-  const newCredits  = Number(user?.credits || 0) + (result?.creditsGained || 0)
-  const xpProgress  = Math.min((newXpTotal / Number(user?.maxXp || 1000)) * 100, 100)
+  const displayLevel = result?.rankedUp ? result.newLevel : (user?.level ?? 1)
+  const newXpTotal   = Number(user?.xp || 0) + (result?.xpGained || 0)
+
+  const currentLevelData = XP_LEVELS.find(l => l.level === displayLevel)
+  const nextLevelData    = XP_LEVELS.find(l => l.level === displayLevel + 1)
+
+  const xpProgress = currentLevelData && nextLevelData
+    ? Math.min(100, ((newXpTotal - currentLevelData.xp_required) / (nextLevelData.xp_required - currentLevelData.xp_required)) * 100)
+    : 100
+
+  const xpParaProximoNivel = nextLevelData?.xp_required ?? null
 
   useEffect(() => {
     if (!isOpen) return
@@ -118,8 +135,8 @@ const handleConfirm = () => {
               <div className="mcp-xp-bar-fill" style={{ '--xp-target': `${xpProgress}%` }} />
             </div>
             <div className="mcp-xp-vals">
-              <span>{t.xpTotal ?? 'XP TOTAL'}: {newXpTotal.toLocaleString()}</span>
-              <span>{t.nextGoal ?? 'NEXT GOAL'}: {Number(user?.maxXp || 1000).toLocaleString()}</span>
+              <span>{t.xpTotal ?? 'XP TOTAL'}: {Math.floor(newXpTotal).toLocaleString()}</span>
+              <span>{t.nextGoal ?? 'NEXT GOAL'}: {xpParaProximoNivel?.toLocaleString() ?? '—'} XP</span>
             </div>
             <div className="mcp-rewards">
               {result.creditsGained > 0 && (
