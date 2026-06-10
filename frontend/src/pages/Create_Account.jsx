@@ -13,6 +13,12 @@ export default function Create_Account() {
 const handleSubmit = async () => {
   setError('')
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(formData.email)) {
+    setError('Please enter a valid email address.')
+    return
+  }
+
   const res = await fetch('http://localhost:3000/api/reg/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

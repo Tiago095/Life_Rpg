@@ -8,7 +8,12 @@ export const register = async (req, res) => {
   const { username, email, password } = req.body
 
   if (!username || !email || !password) {
-    return res.status(400).json({ error: 'Todos os campos são obrigatórios.' })
+    return res.status(400).json({ error: 'All fields are required.' })
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Invalid email format.' })
   }
 
   await db.read()
@@ -17,7 +22,7 @@ export const register = async (req, res) => {
     u => u.email === email || u.username === username
   )
   if (userExists) {
-    return res.status(409).json({ error: 'Username ou email já registado.' })
+    return res.status(409).json({ error: 'Username or email already registered.' })
   }
 
   const hashedPassword = await bcrypt.hash(password, 10)
@@ -39,7 +44,7 @@ export const register = async (req, res) => {
   db.data.users.push(newUser)
   await db.write()
 
- const token = jwt.sign({ userId: newUser.id }, JWT_SECRET, { expiresIn: '7d' })
+ const token = jwt.sign({ userId: newUser.id }, JWT_SECRET, { expiresIn: '1d' })
  const { password: _, ...userSafe } = newUser
-  res.status(201).json({ message: 'Conta criada com sucesso!', user: userSafe, token })
+  res.status(201).json({ message: 'Account created successfully!', user: userSafe, token })
 }

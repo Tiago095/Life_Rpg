@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar'
 import './Dashboard.css'
 import { useTranslation, useUser } from '../context/UserContext'
 import { useQuests } from '../hooks/useQuests'
+import { useDailyMissions } from '../hooks/useDailyMissions'
 
 const SKILL_VISUAL = {
   'Exercise':     { icon: 'fitness_center',       color: '#3b82f6' },
@@ -39,8 +40,10 @@ function getCalendarDays(year, month) {
 export default function Dashboard() {
   const { t } = useTranslation()
   const { user } = useUser()
-  const { quests } = useQuests()
+  const { quests, fetchQuests } = useQuests()
   const navigate = useNavigate()
+
+  useDailyMissions(user, fetchQuests)
 
   const [userSkills, setUserSkills] = useState([])
 

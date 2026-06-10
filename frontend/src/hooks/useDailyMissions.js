@@ -205,6 +205,7 @@ export function useDailyMissions(user, onDone) {
       setStatus('done')
       setProgress('')
       console.log('[DailyMissions] concluído!')
+      window.dispatchEvent(new CustomEvent('daily-missions-ready'))
     }
 
     run().catch(err => {

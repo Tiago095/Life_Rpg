@@ -130,6 +130,12 @@ export function useQuests() {
     if (user) fetchQuests()
   }, [user])
 
+  useEffect(() => {
+  const handler = () => fetchQuests()
+  window.addEventListener('daily-missions-ready', handler)
+  return () => window.removeEventListener('daily-missions-ready', handler)
+  }, [])
+
   const acceptMission = async (missionId, force = false) => {
     const token = localStorage.getItem('token')
 

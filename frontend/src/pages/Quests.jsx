@@ -6,6 +6,7 @@ import MissionCompletePopup from '../components/MissionCompletePopup'
 import { useQuests } from '../hooks/useQuests'
 import { useUser } from '../context/UserContext'
 import { useLocation } from 'react-router-dom'
+import { useDailyMissions } from '../hooks/useDailyMissions'
 
 const filterTags = {
   'Exercise':     { icon: 'fitness_center'},
@@ -25,10 +26,12 @@ export default function Quests() {
   const [activeTab, setActiveTab]       = useState(location.state?.tab || 'inProgress')
   const [activeFilter, setActiveFilter] = useState(null)
   const [selectedQuestId, setSelectedQuestId] = useState(null)
-  const { quests: questsData, loading, acceptMission, abandonMission, toggleObjective } = useQuests()
+  const { quests: questsData, loading, acceptMission, abandonMission, toggleObjective, fetchQuests } = useQuests() 
   const [missionResult, setMissionResult] = useState(null)
   const [confirmAccept, setConfirmAccept] = useState(null)
   const [confirmAbandon, setConfirmAbandon] = useState(null) // { userMissionId, title }
+
+  useDailyMissions(user, fetchQuests)
 
   const selectedQuest = questsData[activeTab]?.find(q => q.id === selectedQuestId) ?? null
 

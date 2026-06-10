@@ -215,9 +215,7 @@ export default function Settings() {
             </div>
             <h1 className="st-topbar-title">{t.profileSettings}</h1>
           </div>
-          <button className="st-notif-btn">
-            <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#64748b' }}>notifications</span>
-          </button>
+          
         </div>
 
         <div className="st-scroll">
