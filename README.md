@@ -17,7 +17,7 @@ Projeto desenvolvido no âmbito da Licenciatura em Engenharia Informática, Esco
 
 ---
 
-## 📖 Sobre o Projeto
+## Sobre o Projeto
 
 A gamificação tem-se mostrado eficaz para aumentar a motivação e o compromisso dos utilizadores em contextos fora do entretenimento (Duolingo, Nike Run Club, LinkedIn, entre outros). O Life RPG explora esta ideia aplicada ao desenvolvimento pessoal: o utilizador escolhe competências que quer desenvolver (exercício, estudo, organização, etc.) e recebe missões diárias personalizadas, geradas por IA, adaptadas ao seu nível atual. Ao completar missões, ganha XP, sobe de nível, desbloqueia perks e recebe loot para o seu inventário.
 
@@ -36,7 +36,7 @@ A identidade visual segue uma estética **cyberpunk**, posicionando o utilizador
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 ### Front-end
 - [React](https://react.dev) + [Vite](https://vitejs.dev)
@@ -179,6 +179,6 @@ A aplicação ficará disponível em `http://localhost:5173` (ou porta indicada 
 
 ---
 
-## 📄 Licença
+## Licença
 
 Projeto académico desenvolvido para a UC de Projeto, Engenharia Informática — UTAD, 2025/26.
