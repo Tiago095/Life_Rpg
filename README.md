@@ -1,3 +1,9 @@
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF6B35,100:FFB86C&height=140&section=header&text=Life%20RPG&fontSize=42&fontColor=0d1117&animation=fadeIn&fontAlignY=45" width="100%"/>
+
+</div>
+
 # Life RPG
 
 **Transforma as tuas tarefas do dia a dia em missões de RPG.**
