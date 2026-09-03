@@ -107,11 +107,11 @@ git clone <url-do-repositorio>
 cd life-rpg
 
 # Instalar dependências do back-end
-cd server
+cd backend
 npm install
 
 # Instalar dependências do front-end
-cd ../client
+cd ../frontend
 npm install
 ```
 
@@ -119,11 +119,11 @@ npm install
 
 ```bash
 # Iniciar o back-end
-cd server
+cd backend
 npm start
 
 # Noutro terminal, iniciar o front-end
-cd client
+cd frontend
 npm run dev
 ```
 
