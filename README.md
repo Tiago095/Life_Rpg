@@ -1,7 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF6B35,100:FFB86C&height=140&section=header&text=Life%20RPG&fontSize=42&fontColor=0d1117&animation=fadeIn&fontAlignY=45" width="100%"/>
-
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:FF6B35,100:FFB86C&height=180&section=header&text=LIFE%20RPG&fontSize=52&fontColor=0d1117&animation=fadeIn&fontAlignY=45&desc=Gamify%20your%20everyday%20life&descAlignY=65&descSize=18" width="100%"/>
 </div>
 
 # Life RPG
