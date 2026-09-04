@@ -1,4 +1,13 @@
-# Life RPG
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:00d9ff&height=200&section=header&text=LIFE%20RPG&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Transforma%20as%20tuas%20tarefas%20em%20miss%C3%B5es&descAlignY=55&descSize=16" width="100%"/>
+
+<div align="center">
+
+![React](https://img.shields.io/badge/React-Vite-00d9ff?logo=react&logoColor=white&labelColor=0f2027)
+![Node.js](https://img.shields.io/badge/Node.js-Express-00d9ff?logo=node.js&logoColor=white&labelColor=0f2027)
+![WebGPU](https://img.shields.io/badge/WebGPU-WebLLM-00d9ff?logo=webgl&logoColor=white&labelColor=0f2027)
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-00d9ff?labelColor=0f2027)
+
+</div>
 
 **Transforma as tuas tarefas do dia a dia em missões de RPG.**
 
@@ -10,10 +19,12 @@ Projeto desenvolvido no âmbito da Licenciatura em Engenharia Informática, Esco
 
 ## Autores
 
-- **Tiago Ribeiro**
-- **André Marques**
+| Nome | GitHub |
+|---|---|
+| Tiago Ribeiro | [@Tiago](https://github.com/Tiago095) |
+| André Marques | [@Andre](https://github.com/andreemarques) |
 
-**Orientador:** Deni Junior — BLIP
+**Orientador:** Deni Junior — BLIP [@Deni](https://github.com/denidiasjr)
 
 ---
 
@@ -23,7 +34,7 @@ A gamificação tem-se mostrado eficaz para aumentar a motivação e o compromis
 
 A identidade visual segue uma estética **cyberpunk**, posicionando o utilizador como um "Operador" numa rede neural digital.
 
-### Principais funcionalidades
+### Principais Funcionalidades
 
 - Autenticação segura (JWT + bcrypt)
 - Criação e gestão de competências pessoais
@@ -39,20 +50,24 @@ A identidade visual segue uma estética **cyberpunk**, posicionando o utilizador
 ## Tecnologias
 
 ### Front-end
-- [React](https://react.dev) + [Vite](https://vitejs.dev)
-- [React Router](https://reactrouter.com) — navegação e rotas protegidas
-- Context API — gestão de estado global
-- CSS puro (sem frameworks)
-- [@mlc-ai/web-llm](https://github.com/mlc-ai/web-llm) — inferência de LLM no browser via WebGPU
+| Tecnologia | Descrição |
+|---|---|
+| [React](https://react.dev) + [Vite](https://vitejs.dev) | Biblioteca e bundler da interface |
+| [React Router](https://reactrouter.com) | Navegação e rotas protegidas |
+| Context API | Gestão de estado global |
+| CSS puro | Estilização (sem frameworks) |
+| [@mlc-ai/web-llm](https://github.com/mlc-ai/web-llm) | Inferência de LLM no browser via WebGPU |
 
 ### Back-end
-- [Node.js](https://nodejs.org) + [Express](https://expressjs.com)
-- [LowDB](https://github.com/typicode/lowdb) — persistência baseada em JSON
-- [JSON Web Tokens (JWT)](https://jwt.io) — autenticação
-- [bcrypt](https://github.com/kelektiv/node.bcrypt.js) — hashing de passwords
+| Tecnologia | Descrição |
+|---|---|
+| [Node.js](https://nodejs.org) + [Express](https://expressjs.com) | Servidor e API REST |
+| [LowDB](https://github.com/typicode/lowdb) | Persistência baseada em JSON |
+| [JSON Web Tokens (JWT)](https://jwt.io) | Autenticação |
+| [bcrypt](https://github.com/kelektiv/node.bcrypt.js) | Hashing de passwords |
 
 ### Modelo de Linguagem
-- **Llama-3.2-3B-Instruct**, executado localmente no navegador via WebGPU (sem dependência de serviços externos, preservando a privacidade dos dados do utilizador)
+**Llama-3.2-3B-Instruct**, executado localmente no navegador via WebGPU (sem dependência de serviços externos, preservando a privacidade dos dados do utilizador).
 
 ---
 
@@ -93,7 +108,7 @@ db.js          # instância partilhada da base de dados (LowDB)
 
 ---
 
-## Como executar o projeto
+## Como Executar o Projeto
 
 ### Pré-requisitos
 - [Node.js](https://nodejs.org) instalado
@@ -103,7 +118,7 @@ db.js          # instância partilhada da base de dados (LowDB)
 
 ```bash
 # Clonar o repositório
-git clone <url-do-repositorio>
+git clone https://github.com/Tiago095/Life_Rpg
 cd life-rpg
 
 # Instalar dependências do back-end
@@ -134,7 +149,7 @@ A aplicação ficará disponível em `http://localhost:5173` (ou porta indicada 
 ## Requisitos Funcionais Implementados
 
 | ID | Descrição |
-|----|-----------|
+|---|---|
 | RF01 | Registo de utilizador |
 | RF02 | Autenticação (login/logout) |
 | RF03 | Gestão de perfil |
@@ -150,6 +165,8 @@ A aplicação ficará disponível em `http://localhost:5173` (ou porta indicada 
 | RF13 | Integração com LLM |
 | RF14 | Persistência de dados |
 | RF15 | Testes end-to-end dos fluxos principais |
+
+---
 
 ## Trabalho Futuro
 
@@ -177,8 +194,5 @@ A aplicação ficará disponível em `http://localhost:5173` (ou porta indicada 
 - Hamari, J. et al. (2014). *Does gamification work? A literature review of empirical studies on gamification*
 - Vaswani, A. et al. (2017). *Attention is all you need*
 
----
 
-## Licença
-
-Projeto académico desenvolvido para a UC de Projeto, Engenharia Informática — UTAD, 2025/26.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:00d9ff&height=100&section=footer&animation=fadeIn&reversal=true" width="100%"/>
