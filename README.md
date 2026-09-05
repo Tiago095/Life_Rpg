@@ -22,7 +22,7 @@ Project developed as part of the Bachelor's Degree in Computer Engineering, Scho
 | Name | GitHub |
 |---|---|
 | Tiago Ribeiro | [@Tiago](https://github.com/Tiago095) |
-| André Marques | [@Andre](https://github.com/andreemarques) |
+| André Marques | [@Andre](https://github.com/andreeemarques) |
 
 **Advisor:** Deni Junior — BLIP [@Deni](https://github.com/denidiasjr)
 
